@@ -16,7 +16,7 @@
         <script>
             document.write(new Date().getFullYear())
         </script>, Made with <i class="material-icons">favorite</i> ,For A Happier    
-        <a href="/">Farmer</a> and A Happier Better Africa.
+        <a href="/" style="color: green">Farmer</a> and A Happier Better Africa.
         </div>
     </div>
 </footer>
