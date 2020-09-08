@@ -2,6 +2,7 @@
 
 namespace App;
 
+<<<<<<< HEAD
 use App\Notifications\Supplier\SupplierResetPassword;
 use App\Notifications\Supplier\SupplierVerifyEmail;
 use Illuminate\Notifications\Notifiable;
@@ -59,4 +60,11 @@ class Supplier extends Authenticatable
         $this->notify(new SupplierVerifyEmail);
     }
 
+=======
+use Illuminate\Database\Eloquent\Model;
+
+class Supplier extends Model
+{
+    //
+>>>>>>> 80895fa376f708a737f2279b2c0880decf25f69c
 }

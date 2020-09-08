@@ -11,6 +11,11 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
+<<<<<<< HEAD
+=======
+    use Notifiable;
+    use HasRoles;
+>>>>>>> 80895fa376f708a737f2279b2c0880decf25f69c
 
     use Notifiable, SoftDeletes, HasRoles;
     /**
