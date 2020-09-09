@@ -70,20 +70,47 @@
                         </el-card>
                     </el-col>
                 </el-row>
+
+                <v-layout row wrap>
+                    <v-flex xs4>
+                        <div>
+                            <line-chart :styles="myStyles" />
+                            <button @click="increase()">Increase height</button>
+                        </div>
+                    </v-flex>
+                </v-layout>
             </v-flex>
         </v-layout>
     </v-container>
 </v-main>
 </template>
+
 <script>
 export default {
     data() {
         return {
-            form: {}
+            form: {},
+            height: 300
+
         }
     },
+
+    methods: {
+        increase() {
+            this.height += 10
+        }
+    },
+    computed: {
+        myStyles() {
+            return {
+                height: `${this.height}px`,
+                position: 'relative'
+            }
+        }
+    }
 }
 </script>
+
 <style scoped>
 .justify-center {
     margin-top: -100px !important;
