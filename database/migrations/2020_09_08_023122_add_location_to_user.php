@@ -14,7 +14,7 @@ class AddLocationToUser extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('location')->after('email');
+            $table->string('location')->after('email')->default('NA');
         });
     }
 
