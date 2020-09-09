@@ -1,5 +1,5 @@
 <template>
-<v-app id="inspire">
+<!-- <v-app id="inspire"> -->
     <v-navigation-drawer v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp" app>
         <v-list dense>
             <template v-for="item in items">
@@ -131,7 +131,7 @@
             </v-card-actions>
         </v-card>
     </v-dialog>
-</v-app>
+<!-- </v-app> -->
 </template>
 
 <script>

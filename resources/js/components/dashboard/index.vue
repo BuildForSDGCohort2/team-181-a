@@ -73,9 +73,21 @@
 
                 <v-layout row wrap>
                     <v-flex xs4>
-                        <div>
-                            <line-chart :styles="myStyles" />
-                            <button @click="increase()">Increase height</button>
+                        <div class="small">
+                            <myChart :chart-data="datacollection" />
+                            <button @click="fillData()">Randomize</button>
+                        </div>
+                    </v-flex>
+                    <v-flex xs4>
+                        <div class="small">
+                            <myChart :chart-data="datacollection" />
+                            <button @click="fillData()">Randomize</button>
+                        </div>
+                    </v-flex>
+                    <v-flex xs4>
+                        <div class="small">
+                            <myChart :chart-data="datacollection" />
+                            <button @click="fillData()">Randomize</button>
                         </div>
                     </v-flex>
                 </v-layout>
@@ -86,11 +98,16 @@
 </template>
 
 <script>
+import myChart from "../charts/chart.js";
 export default {
+    components: {
+        myChart,
+    },
     data() {
         return {
             form: {},
-            height: 300
+            height: 300,
+            datacollection: null
 
         }
     },
@@ -98,7 +115,27 @@ export default {
     methods: {
         increase() {
             this.height += 10
-        }
+        },
+        fillData() {
+            this.datacollection = {
+                labels: [this.getRandomInt(), this.getRandomInt()],
+                datasets: [{
+                    label: 'Data One',
+                    backgroundColor: '#f87979',
+                    data: [this.getRandomInt(), this.getRandomInt()]
+                }, {
+                    label: 'Data One',
+                    backgroundColor: '#f87979',
+                    data: [this.getRandomInt(), this.getRandomInt()]
+                }]
+            }
+        },
+        getRandomInt() {
+            return Math.floor(Math.random() * (50 - 5 + 1)) + 5
+        },
+    },
+    mounted() {
+        this.fillData();
     },
     computed: {
         myStyles() {
@@ -112,6 +149,11 @@ export default {
 </script>
 
 <style scoped>
+.small {
+    max-width: 600px;
+    margin: 150px auto;
+}
+
 .justify-center {
     margin-top: -100px !important;
 }
