@@ -16,7 +16,7 @@
                 <v-card>
                     <router-link to="/" class="v-list-item v-list-item--link theme--light">
                         <div class="v-list__tile__action">
-                            <v-icon>dashboard</v-icon>
+                            <v-icon>mdi-view-dashboard</v-icon>
                         </div>
                         <div class="v-list-item__content">
                             <div class="v-list-item__title">Dashboard</div>
@@ -30,13 +30,51 @@
                             <div class="v-list-item__title">Animals</div>
                         </div>
                     </router-link>
-                    <v-list-group prepend-icon="account_circle">
+
+
+                    <router-link to="/animal-facts" class="v-list-item v-list-item--link theme--light">
+                        <div class="v-list__tile__action">
+                            <v-icon>mdi-pig</v-icon>
+                        </div>
+                        <div class="v-list-item__content">
+                            <div class="v-list-item__title">Animals Facts</div>
+                        </div>
+                    </router-link>
+                    <router-link to="/orders" class="v-list-item v-list-item--link theme--light">
+                        <div class="v-list__tile__action">
+                            <v-icon>mdi-cart</v-icon>
+                        </div>
+                        <div class="v-list-item__content">
+                            <div class="v-list-item__title">Orders</div>
+                        </div>
+                    </router-link>
+
+
+                    <router-link to="/professionals" class="v-list-item v-list-item--link theme--light">
+                        <div class="v-list__tile__action">
+                            <v-icon>mdi-professional-hexagon</v-icon>
+                        </div>
+                        <div class="v-list-item__content">
+                            <div class="v-list-item__title">Professionals</div>
+                        </div>
+                    </router-link>
+                    <router-link to="/expediture" class="v-list-item v-list-item--link theme--light">
+                        <div class="v-list__tile__action">
+                            <v-icon>mdi-briefcase-minus-outline</v-icon>
+                        </div>
+                        <div class="v-list-item__content">
+                            <div class="v-list-item__title">Expediture</div>
+                        </div>
+                    </router-link>
+
+
+                    <v-list-group prepend-icon="mdi-account-circle">
                         <template v-slot:activator>
                             <v-list-item-title>Users</v-list-item-title>
                         </template>
                         <router-link to="/users" class="v-list-item v-list-item--link theme--light">
                             <div class="v-list__tile__action">
-                                <v-icon>people_outline</v-icon>
+                                <v-icon>mdi-account-multiple-plus-outline</v-icon>
                             </div>
                             <div class="v-list-item__content">
                                 <div class="v-list-item__title">Users</div>
@@ -44,7 +82,7 @@
                         </router-link>
                         <router-link to="/roles" class="v-list-item v-list-item--link theme--light">
                             <div class="v-list__tile__action">
-                                <v-icon>gavel</v-icon>
+                                <v-icon>mdi-rotate-left-variant</v-icon>
                             </div>
                             <div class="v-list-item__content">
                                 <div class="v-list-item__title">Roles</div>
@@ -65,16 +103,7 @@
         <LogoutClient :user="user" v-if="user.is_client"></LogoutClient>
         <Logout :user="user"></Logout>
         <!-- <VDivider vertical style="margin-top: 0px;" /> -->
-        <v-badge color="black" right overlap>
-            <template v-slot:badge>
-                {{ notifications.length }}
-            </template>
-            <v-btn icon @click.stop="drawerRight = !drawerRight">
-                <v-icon color="white lighten-1" large>
-                    notifications
-                </v-icon>
-            </v-btn>
-        </v-badge>
+
     </v-app-bar>
 
     <v-snackbar :timeout="timeout" bottom :color="Snackcolor" right v-model="snackbar">
@@ -137,9 +166,6 @@ export default {
         closeFullScreen() {
             this.loading.close();
         },
-        getnotifications() {
-            this.$store.dispatch('getnotifications')
-        }
     },
     created() {
         eventBus.$on("progressEvent", data => {
@@ -171,7 +197,6 @@ export default {
         }
     },
     mounted() {
-        this.getnotifications();
     },
 
 };

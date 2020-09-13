@@ -17,8 +17,7 @@
                     <span v-else-if="props.column.field == 'actions'">
                         <v-tooltip bottom>
                             <v-btn icon class="mx-0" @click="refresh(props.row)" slot="activator">
-                                <v-icon small color="blue darken-2">refresh</v-icon>
-                            </v-btn>
+                                <v-icon small color="blue darken-2">mdi-refresh</v-icon>                            </v-btn>
                             <span>Restore {{ props.row.name }}</span>
                         </v-tooltip>
                         <v-tooltip bottom>

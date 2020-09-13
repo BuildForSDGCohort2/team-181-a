@@ -159,8 +159,7 @@
         </v-toolbar-title>
         <v-tooltip bottom>
             <v-btn icon slot="activator" class="mx-0" @click="getnotifications">
-                <v-icon color="white darken-2" small>refresh</v-icon>
-            </v-btn>
+                <v-icon color="white darken-2" small>mdi-refresh</v-icon>            </v-btn>
             <span>Refresh</span>
         </v-tooltip>
         <VSpacer />

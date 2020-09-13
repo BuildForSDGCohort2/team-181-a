@@ -1,4 +1,7 @@
 export default {
+    page_loader(state) {
+        return state.page_loader
+    },
     loading(state) {
         return state.loading;
     },
@@ -33,5 +36,16 @@ export default {
     },
     deleted_clients(state) {
         return state.deleted_clients
+    },
+
+
+    animals(state) {
+        return state.animals
+    },
+    orders(state) {
+        return state.orders
+    },
+    animal_facts(state) {
+        return state.animal_facts
     },
 }

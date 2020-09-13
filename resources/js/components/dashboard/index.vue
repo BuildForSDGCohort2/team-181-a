@@ -2,18 +2,6 @@
 <v-main style="margin-top: 50px !important;">
     <v-container fluid fill-height>
         <v-layout justify-center align-center wrap>
-            <!-- <v-flex sm6>
-                <el-select v-model="form.country_id" clearable placeholder="Country" style="width: 100%;" >
-                    <el-option v-for="item in countries" :key="item.id" :label="item.name" :value="item.id">
-                    </el-option>
-                </el-select>
-            </v-flex>
-            <v-flex sm6>
-                <el-select v-model="form.year_f" clearable placeholder="Country" style="width: 100%;">
-                    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-                    </el-option>
-                </el-select>
-            </v-flex> -->
             <v-flex sm12>
                 <el-row :gutter="12" style="width: 100%">
                     <el-col :span="4">
@@ -70,27 +58,91 @@
                         </el-card>
                     </el-col>
                 </el-row>
+                <div style="margin: 60px"></div>
 
                 <v-layout row wrap>
                     <v-flex xs4>
-                        <div class="small">
-                            <myChart :chart-data="datacollection" />
-                            <button @click="fillData()">Randomize</button>
+                        <v-card>
+                            <el-card shadow="hover">
+                            <myChart />
+                            </el-card>
+                        </v-card>
                         </div>
                     </v-flex>
                     <v-flex xs4>
-                        <div class="small">
-                            <myChart :chart-data="datacollection" />
-                            <button @click="fillData()">Randomize</button>
+                            <el-card shadow="hover">
+
+                            <myChart2 />
+                            </el-card>
                         </div>
                     </v-flex>
                     <v-flex xs4>
-                        <div class="small">
-                            <myChart :chart-data="datacollection" />
-                            <button @click="fillData()">Randomize</button>
+                            <el-card shadow="hover">
+
+                            <myChart3 />
+                            </el-card>
                         </div>
                     </v-flex>
                 </v-layout>
+
+                <div style="margin: 60px"></div>
+
+                <el-row :gutter="12" style="width: 100%">
+                    <el-col :span="4">
+                        <div style="cursor: pointer">
+                            <el-card shadow="hover">
+                                <div class="text-center">
+                                    <p style="font-size: 36px;color: #1093de;">19</p>
+                                    <h5>Plants</h5>
+                                </div>
+                            </el-card>
+                        </div>
+                    </el-col>
+                    <el-col :span="4">
+                        <div style="cursor: pointer">
+                            <el-card shadow="hover">
+                                <div class="text-center">
+                                    <p style="font-size: 36px;color: #db3f26;">10</p>
+                                    <h5>Customers</h5>
+                                </div>
+                            </el-card>
+                        </div>
+                    </el-col>
+                    <el-col :span="4">
+                        <div style="cursor: pointer">
+                            <el-card shadow="hover">
+                                <div class="text-center">
+                                    <p style="font-size: 36px;color: #388a10;">3</p>
+                                    <h5>Orders</h5>
+                                </div>
+                            </el-card>
+                        </div>
+                    </el-col>
+                    <el-col :span="4">
+                        <div style="cursor: pointer">
+                            <el-card shadow="hover">
+                                <div class="text-center">
+                                    <p style="font-size: 36px;color: #f4a204;">3</p>
+                                    <h5>Plant types</h5>
+                                </div>
+                            </el-card>
+                        </div>
+                    </el-col>
+                    <v-divider vertical></v-divider>
+                    <el-col :span="6">
+                        <el-card shadow="hover">
+                            <div>
+                                <h4>Health plants <span style="float:right;border-left: 1px solid;padding-left: 10px;">17</span> </h4>
+                            </div>
+                        </el-card>
+                        <el-card shadow="hover">
+                            <div>
+                                <h4>Sick plants <span style="float:right;border-left: 1px solid;padding-left: 10px;">1</span> </h4>
+                            </div>
+                        </el-card>
+                    </el-col>
+                </el-row>
+
             </v-flex>
         </v-layout>
     </v-container>
@@ -99,9 +151,13 @@
 
 <script>
 import myChart from "../charts/chart.js";
+import myChart2 from "../charts/chart_2.js";
+import myChart3 from "../charts/chart_3.js";
 export default {
     components: {
         myChart,
+        myChart2,
+        myChart3
     },
     data() {
         return {

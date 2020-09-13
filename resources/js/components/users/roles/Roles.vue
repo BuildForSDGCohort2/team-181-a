@@ -14,8 +14,7 @@
                         <v-tooltip right>
                             <template v-slot:activator="{ on }">
                                 <v-btn icon v-on="on" slot="activator" class="mx-0" @click="getRoles">
-                                    <v-icon color="blue darken-2" small>refresh</v-icon>
-                                </v-btn>
+                                    <v-icon color="blue darken-2" small>mdi-refresh</v-icon>                                </v-btn>
                             </template>
                             <span>Refresh</span>
                         </v-tooltip>

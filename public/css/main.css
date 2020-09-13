@@ -194,3 +194,6 @@ table.vgt-table {
     min-width: 10px !important;
     margin-left: 40% !important;
 }
+.el-loading-mask {
+    height: 100vh !important;
+}

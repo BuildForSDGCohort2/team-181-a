@@ -4,7 +4,7 @@
         <template v-slot:activator="{ on }">
             <v-btn v-on="on" icon slot="activator" dark>
                 <v-icon color="white lighten-1" large>
-                    account_circle
+                    mdi-account-circle
                 </v-icon>
             </v-btn>
         </template>
@@ -46,7 +46,7 @@
                     <v-list-item>
                         <router-link to="/profile" class="v-list-item v-list-item--link theme--light">
                             <div class="v-list__tile__action">
-                                <v-icon>account_circle</v-icon>
+                                <v-icon>mdi-account-circle</v-icon>
                             </div>
                             <div class="v-list-item__content">
                                 <div class="v-list-item__title">My Profile</div>
@@ -65,7 +65,7 @@
                         <template v-slot:activator="{ on }">
 
                             <v-btn v-on="on" text slot="activator" color="primary" icon class="mx-0" type="submit">
-                                <i class="fa fa-user"></i>
+                                <v-icon>mdi-logout</v-icon>
                             </v-btn>
                         </template>
                         <span>Logout from this device</span>
@@ -77,7 +77,7 @@
                     <v-tooltip bottom>
                         <template v-slot:activator="{ on }">
                             <v-btn v-on="on" text slot="activator" color="orange" icon class="mx-0" type="submit">
-                                <i class="fa fa-users"></i>
+                                <v-icon>mdi-routes</v-icon>
                             </v-btn>
                         </template>
                         <span>Logout other devices</span>

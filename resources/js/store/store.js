@@ -16,6 +16,11 @@ export default {
         clientSearch: [],
         deleted_clients: [],
         deleted_users: [],
+
+        animals: [],
+        orders: [],
+        animal_facts: [],
+        page_loader: false
     },
     getters,
     mutations,

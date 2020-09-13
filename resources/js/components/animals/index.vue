@@ -20,8 +20,7 @@
                             <v-tooltip right>
                                 <template v-slot:activator="{ on }">
                                     <v-btn icon v-on="on" slot="activator" class="mx-0" @click="getAnimal">
-                                        <v-icon color="blue darken-2" small>refresh</v-icon>
-                                    </v-btn>
+                                        <v-icon color="blue darken-2" small>mdi-refresh</v-icon>                                    </v-btn>
                                 </template>
                                 <span>Refresh</span>
                             </v-tooltip>
@@ -50,6 +49,7 @@
 <script>
 import Create from "./create";
 import Edit from "./edit";
+import { mapState } from 'vuex';
 
 export default {
     props: ['user'],
@@ -59,19 +59,7 @@ export default {
     },
     data() {
         return {
-            form: {},
-            loader: false,
             search: "",
-            payload: {
-                model: 'animals',
-                update: 'updateAnimalList'
-            },
-            animal_det: {
-                data: []
-            },
-            animal_search: [],
-            temp: "",
-            checkedRows: [],
         };
     },
     methods: {
@@ -110,17 +98,25 @@ export default {
             eventBus.$emit("openShowAnimal", data);
         },
 
+
+        getAnimal() {
+            var payload = {
+                model: 'animals',
+                update: 'updateAnimalsList'
+            }
+            this.$store.dispatch('getItems', payload)
+        },
         next_page(path, page) {
             var payload = {
                 path: path,
                 page: page,
-                update: 'updateCurrenciesList'
+                update: 'updateAnimalsList'
             }
             this.$store.dispatch("nextPage", payload);
         },
     },
     computed: {
-
+        ...mapState(['animals'])
     },
     mounted() {
         // this.$store.dispatch('getAnimal');

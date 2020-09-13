@@ -1,4 +1,7 @@
 export default {
+    page_loader(state, payload) {
+        state.page_loader = payload
+    },
     loading(state, payload) {
         state.loading = payload
     },
@@ -45,5 +48,17 @@ export default {
     },
     updateDeletedUsers(state, payload) {
         state.deleted_users = payload
+    },
+
+
+
+    updateAnimalsList(state, payload) {
+        state.animals = payload
+    },
+    updateOrdersList(state, payload) {
+        state.orders = payload
+    },
+    updateAnimal_facts(state, payload) {
+        state.animal_facts = payload
     },
 }
