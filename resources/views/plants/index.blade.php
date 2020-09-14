@@ -9,7 +9,66 @@
           <div class="card-header card-header-primary">
             <h4 class="card-title ">Plantations On Farm..</h4>
             <p class="card-category"> Showing six (6) Plantations</p>
+            <button type="button" class="btn btn-small btn-warning" data-toggle="modal" data-target="#plant_modal" style="float: right;">Add plantation</button>
+
           </div>
+          <div id="plant_modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+          
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">New Plantation</h4>
+                </div>
+                <div class="modal-body">
+                <form action="{{route('plant.store')}}" method="POST">
+                  @csrf
+                    <div class="first-column" style='width:45%; float: left;'>
+                      <div class="form-group">
+                        <label for="type">Type Of Plant</label>
+                        <input type="text" class="form-control" name='type'id="type" aria-describedby="type" placeholder="Enter plant type">
+                        <small id="type" class="form-text text-muted">Select the Appropriate plant or Enter name.</small>
+                      </div>
+                                             
+                       <div class="form-group">
+                        <label for="strain">Number / Strain</label>
+                        <input type="text" name ='strain'class="form-control" id="strain" aria-describedby="strain" placeholder="Select Strain">
+                        <small id="strain" class="form-text text-muted">Select the Strain</small>
+                      </div>
+
+                      {{-- incremental... will depend on the remaining size of farm --}}
+                   
+
+
+                    </div>
+                    <div class="second-column" style='width:45%; float: right;'>
+                      <div class="form-group">
+                        <label for="size">Size OF Allocation</label>
+                        <input type="text" name ='size'class="form-control" id="size" aria-describedby="size" placeholder="Enter Total Size">
+                        <small id="size" class="form-text text-muted">Enter size of the allocation</small>
+                      </div>  
+
+                      <div class="form-group">
+                        <label for="planting_date">Date Of Planting</label>
+                        <input type="date" class="form-control" name='planting_date' id="planting_date" aria-describedby="planting_date" placeholder="Enter Date of planting">
+                        <small id="planting_date" class="form-text text-muted">Select date time Defaut date is today.</small>
+                      </div>                    
+                                           
+                    
+                    </div>
+                  
+                  
+                  
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-info" value="Submit">Submit</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+              </form>
+              </div>
+          
+            </div>
+          </div>  
           <div class="card-body">
             <div class="table-responsive">
               <table class="table">

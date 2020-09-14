@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'animals-table', 'titlePage' => __('Plants List')])
+@extends('layouts.app', ['activePage' => 'broods-table', 'titlePage' => __('Broods List')])
 
 @section('content')
 <div class="content">
@@ -7,28 +7,46 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-primary">
-            <h4 class="card-title ">Animals List</h4>
-            <p class="card-category"> Here is a subtitle for this table</p>
-            <button type="button" class="btn btn-small btn-warning" data-toggle="modal" data-target="#animal_r_modal" style="float: right;">Register Animal</button>
+            <h4 class="card-title ">Brood List</h4>
+            <p class="card-category">Showing Various Poultry</p>
+            <button type="button" class="btn btn-small btn-warning" data-toggle="modal" data-target="#brood_r_modal" style="float: right;">Register New Brood</button>
           </div>
-          <div id="animal_r_modal" class="modal fade" role="dialog">
+          <div id="brood_r_modal" class="modal fade" role="dialog">
             <div class="modal-dialog">
           
               <!-- Modal content-->
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title">Register Animal</h4>
+                  <h4 class="modal-title">Register Brood</h4>
                 </div>
                 <div class="modal-body">
-                <form action="{{route('animal.store')}}" method="POST">
-                  @csrf
-                    <div class="first-column" style='width:45%; float: left;'>
-                      <div class="form-group">
-                        <label for="name">Name Of Animal</label>
-                        <input type="text" class="form-control" name='name'id="name" aria-describedby="name" placeholder="Enter Name">
-                        <small id="name" class="form-text text-muted">Enter Disired name of animal.</small>
-                      </div>
-                      
+                <form action="{{route('brood.store')}}" method="POST">
+                  @csrf 
+                <div class="first-column" style='width:45%; float: left;'>
+ 
+                  <fieldset> 
+                    
+                    {{-- We coulld use a Dropdown or the user couold input if the brood is not in the list --}}
+                    <label>Species:</label><br>            
+                    <input type = "radio"
+                           name = "species"
+                           id = "turkey"
+                           value = "turkey" />
+                    <label for = "turkey">Turkey</label>
+                  
+                    <input type = "radio"
+                           name = "species"
+                           id = "chicken"
+                           value = "chicken" />
+                    <label for = "chicken">Chicken</label>
+                  
+                    <input type = "radio"
+                           name = "species"
+                           id = "duck"
+                           value = "duck" />
+                    <label for = "duck">Duck</label>
+
+                </fieldset>                    
                       <fieldset>                
                         <label>Gender:</label><br>            
                         <input type = "radio"
@@ -45,26 +63,7 @@
 
                     </fieldset>
 
-                      <fieldset>                
-                           <label>Species:</label><br>            
-                           <input type = "radio"
-                                  name = "species"
-                                  id = "cow"
-                                  value = "cow" />
-                           <label for = "cow">Cow</label>
-                         
-                           <input type = "radio"
-                                  name = "species"
-                                  id = "goat"
-                                  value = "goat" />
-                           <label for = "goat">Goat</label>
-                         
-                           <input type = "radio"
-                                  name = "species"
-                                  id = "sheep"
-                                  value = "sheep" />
-                           <label for = "sheep">Sheep</label>
-                       </fieldset>
+
                        
                        <div class="form-group">
                         <label for="breed">Breed</label>
@@ -73,9 +72,9 @@
                       </div> 
 
                        <div class="form-group">
-                        <label for="name">Animals Age</label>
+                        <label for="name">Broods' Age</label>
                         <input type="text" class="form-control" name='age' id="age" aria-describedby="age" placeholder="Enter age">
-                        <small id="age" class="form-text text-muted">Enter animals age , default is zero.</small>
+                        <small id="age" class="form-text text-muted">Enter Broods age , default is zero.</small>
                       </div>
                       
 
@@ -90,9 +89,9 @@
                       </div>                      
                       
                       <div class="form-group">
-                        <label for="weight">Weight</label>
-                        <input type="text" class="form-control" name='weight' id="weight" aria-describedby="animals_weight" placeholder="Enter Name">
-                        <small id="animals_weight "  class="form-text text-muted">Enter the animals Weight</small>
+                        <label for="number">Number</label>
+                        <input type="text" class="form-control" name='number' id="number" aria-describedby="broods_number" placeholder="Enter Name">
+                        <small id="broods_number "  class="form-text text-muted">Enter the broods number</small>
                       </div>                 
                     </div>               
                 </div>
@@ -113,7 +112,7 @@
                     ID
                   </th>
                   <th>
-                    Name
+                    Type
                   </th>
                   <th>
                     Breed

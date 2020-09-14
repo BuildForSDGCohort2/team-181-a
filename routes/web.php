@@ -29,19 +29,39 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('animal-list', function () {
 		return view('animals.index');
 	})->name('animals_table');
-	// this will display all of the plants planted in the farm
-	Route::get('plants-list', function () {
-		return view('plants.index');
-	})->name('plants_table');
+
+	Route::get('animal-list', function () {
+		return view('animals.index');
+})->name('animals_table');
+
 	// this will contain have the breed id etc
 	Route::get('breed-info', function () {
 		return view('animals.breed');
 	})->name('breed_info');
-	// this will display the info about the plant vareity planted
+
+	Route::get('animalShow',function(){
+		return view('animals.show');
+	})->name('animal_show');
+
+	// this will display all of the plants planted in the farm
+
+	Route::get('plant-table', function () {
+		return view('plants.index');
+	})->name('plants_table');
+
 	Route::get('plant-info', function () {
 		return view('plants.info');
 	})->name('plant_info');
+	
+	Route::get('plantShow',function(){
+		return view('plants.show');
+	})->name('plant_show');
 
+
+// Brood
+	Route::get('brood-list', function () {
+		return view('broods.index');
+	})->name('broods_table');
 
 	Route::get('typography', function () {
 		return view('pages.typography');
@@ -66,12 +86,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('upgrade', function () {
 		return view('pages.upgrade');
 	})->name('upgrade');
-	Route::get('animalShow',function(){
-		return view('animals.show');
-	})->name('animal_show');
-	Route::get('plantShow',function(){
-		return view('plants.show');
-	})->name('plant_show');
+
+
+
 });
 
 Route::group(['middleware' => 'auth'], function () {
@@ -81,3 +98,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 });
 
+Route::resource('/animal', 'AnimalsController', ['except' => ['create','index']]);
+Route::resource('/plant', 'PlantsController', ['except' => ['create','index']]);
+Route::resource('/brood', 'BroodsController', ['except' => ['create','index']]);
