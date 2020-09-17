@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -56,5 +57,17 @@ class User extends Authenticatable implements MustVerifyEmail
     //     return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('D M d Y');
     // }
 
+    public function logged_user()
+    {
+        if (Auth::check()) {
+            return Auth::user();
+        } elseif (Auth::guard('supplier')->check()) {
+            return Auth::guard('supplier')->user();
+        }elseif (Auth::guard('admin')->check()) {
+            return Auth::guard('admin')->user();
+        }elseif (Auth::guard('professional')->check()) {
+            return Auth::guard('professional')->user();
+        }
+    }
 
 }

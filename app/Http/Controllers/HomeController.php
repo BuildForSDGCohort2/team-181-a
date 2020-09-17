@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +18,12 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function logged_user()
+    {
+        $user = new User();
+        return $user->logged_user();
     }
 
     /**
@@ -43,13 +50,13 @@ class HomeController extends Controller
         // 	return $user;
         // });
         // dd(json_decode(json_encode((Auth::user()), false)));
-        $user = Auth::user();
+        $auth_user = $this->logged_user();;
         // $user = $user->append('is_client')->toArray();
         // $user = $user->setAppends(['is_client', 'is_admin'])->toArray();
         // $auth_user = array_prepend($user, $permissions, 'can');
         // $auth_user = Arr::prepend($user->toArray(), $permissions, 'can');
 
-        $auth_user = Auth::user();
-        return view('welcome', compact('auth_user'));
+        // $auth_user = Auth::user();
+        return view('home', compact('auth_user'));
     }
 }
