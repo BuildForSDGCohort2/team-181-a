@@ -1,106 +1,120 @@
-@extends('layouts.auth', ['class' => 'off-canvas-sidebar', 'activePage' => 'register', 'title' => __('Material Dashboard')])
+@extends('layouts.auth', ['class' => 'off-canvas-sidebar', 'activePage' => 'register', 'title' => __('Material
+Dashboard')])
 
 @section('content')
 <div class="container" style="height: auto;">
-  <div class="row align-items-center">
-    <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
-        <form method="POST" action="{{ route('supplier.register') }}" aria-label="{{ __('Register') }}">
-            {{-- <form class="form" method="POST" action="{{ route('register') }}"> --}}
-        @csrf
+    <div class="row align-items-center">
+        <div class="col-lg-8 col-md-8 col-sm-8 ml-auto mr-auto">
+            <div class="card card-register card-hidden mb-3" style="    padding: 30px;">
 
-        <div class="card card-login card-hidden mb-3">
-          <div class="card-header card-header-primary text-center">
-            <h4 class="card-title"><strong>{{ __('Register') }}</strong></h4>
-            <div class="social-line">
-              <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
-                <i class="fa fa-facebook-square"></i>
-              </a>
-              <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
-                <i class="fa fa-twitter"></i>
-              </a>
-              <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
-                <i class="fa fa-google-plus"></i>
-              </a>
-            </div>
-          </div>
-          <div class="card-body ">
-            <p class="card-description text-center">{{ __('Or Be Classical') }}</p>
-            <div class="bmd-form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                      <i class="material-icons">face</i>
-                  </span>
-                </div>
-                <input type="text" name="name" class="form-control" placeholder="{{ __('Name...') }}" value="{{ old('name') }}" required>
-              </div>
-              @if ($errors->has('name'))
+                <form method="POST" action="{{ route('supplier.register') }}" aria-label="{{ __('Register') }}">
+                    {{-- <form class="form" method="POST" action="{{ route('register') }}"> --}}
+                    @csrf
+
+
+        <div class="first-column" style='width:45%; float: left;'>
+            <div class="form-group">
+                <label for="name">Full <span class='text-primary'>business</span> name </label>
+                <input type="text" class="form-control" name='name' id="name" aria-describedby="name"
+                    placeholder="enter business name" required>
+                <small id="type" class="form-text text-muted">Name of business.</small>
+
+
+                @if ($errors->has('name'))
                 <div id="name-error" class="error text-danger pl-3" for="name" style="display: block;">
-                  <strong>{{ $errors->first('name') }}</strong>
+                    <strong>{{ $errors->first('name') }}</strong>
                 </div>
-              @endif
+                @endif
             </div>
-            <div class="bmd-form-group{{ $errors->has('email') ? ' has-danger' : '' }} mt-3">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <i class="material-icons">email</i>
-                  </span>
-                </div>
-                <input type="email" name="email" class="form-control" placeholder="{{ __('Email...') }}" value="{{ old('email') }}" required>
-              </div>
-              @if ($errors->has('email'))
+
+            <div class="form-group">
+                <label for="size">Email</label>
+                <input type="email" name='email' class="form-control" id="email" aria-describedby="mail"
+                    placeholder="abc@xyz.com">
+                <small id="mail" class="form-text text-muted">Enter Email</small>
+
+                @if ($errors->has('email'))
                 <div id="email-error" class="error text-danger pl-3" for="email" style="display: block;">
-                  <strong>{{ $errors->first('email') }}</strong>
+                    <strong>{{ $errors->first('email') }}</strong>
                 </div>
-              @endif
+                @endif
             </div>
-            <div class="bmd-form-group{{ $errors->has('password') ? ' has-danger' : '' }} mt-3">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <i class="material-icons">lock_outline</i>
-                  </span>
-                </div>
-                <input type="password" name="password" id="password" class="form-control" placeholder="{{ __('Password...') }}" required>
-              </div>
-              @if ($errors->has('password'))
-                <div id="password-error" class="error text-danger pl-3" for="password" style="display: block;">
-                  <strong>{{ $errors->first('password') }}</strong>
-                </div>
-              @endif
+
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" name='location' class="form-control" id="location" aria-describedby="loc"
+                    placeholder="eg. Nakuru.." required>
+                <small id="loc" class="form-text text-muted">Enter Location</small>
             </div>
-            <div class="bmd-form-group{{ $errors->has('password_confirmation') ? ' has-danger' : '' }} mt-3">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <i class="material-icons">lock_outline</i>
-                  </span>
-                </div>
-                <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="{{ __('Confirm Password...') }}" required>
-              </div>
-              @if ($errors->has('password_confirmation'))
-                <div id="password_confirmation-error" class="error text-danger pl-3" for="password_confirmation" style="display: block;">
-                  <strong>{{ $errors->first('password_confirmation') }}</strong>
-                </div>
-              @endif
+
+            <div class="form-group">
+                <label for="strain">Phone number</label>
+                <input type="text" name='phone_number' class="form-control" id="phone_number"
+                    aria-describedby="idnumber" placeholder="XXX-XXX" required>
+                <small id="idnnumber" class="form-text text-muted">Enter Phone number</small>
             </div>
-            <div class="form-check mr-auto ml-3 mt-3">
-              <label class="form-check-label">
-                <input class="form-check-input" type="checkbox" id="policy" name="policy" {{ old('policy', 1) ? 'checked' : '' }} >
-                <span class="form-check-sign">
-                  <span class="check"></span>
-                </span>
-                {{ __('I agree with the ') }} <a href="#">{{ __('Privacy Policy') }}</a>
-              </label>
-            </div>
-          </div>
-          <div class="card-footer justify-content-center">
-            <button type="submit" class="btn btn-primary btn-link btn-lg">{{ __('Create account') }}</button>
-          </div>
         </div>
-      </form>
+
+        <div class="second-column" style='width:45%; float: right;'>
+
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+                <label class="custom-file-label" for="validatedCustomFile">Upload <span class="text-danger">KRA</span>
+                    Cert</label>
+                <div class="invalid-feedback">Invalid File</div>
+            </div>
+
+            <fieldset>
+                <label>Specialty:</label><br>
+                {{--  must check on e of these--}}
+                <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="hardware" value="hardware"
+                            name="hardware">
+                        <label class="custom-control-label" for="hardware"> Hardware</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="agrovet" value="agrovet" name="agrovet">
+                        <label class="custom-control-label" for="agrovet"> Agrovet</label>
+                    </div>
+                </div>
+
+            </fieldset>
+
+            {{-- file uploader --}}
+
+
+            <div class="form-group">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" name="transport" class="custom-control-input" id="transport" value="true">
+                    <input type="checkbox" class="custom-control-input" id="transport">
+                    <label class="custom-control-label" for="transport">Can You Provide <span
+                            class="text-warning">Transport</span> ? </label>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" name="agree" class="custom-control-input" id="agree">
+                    <input type="checkbox" class="custom-control-input" id="agree">
+                    <label class="custom-control-label" for="agree"> Agree to <a href="#" class="text-primary">terms and
+                            conditions</a> </label>
+                </div>
+            </div>
+        </div>
+
     </div>
-  </div>
+    <input type="hidden" id="reg_type" name="reg_type" value="suplier">
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-info" value="Submit">Submit</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+    </div>
+    </form>
+</div>
+</div>
+</div>
 </div>
 @endsection

@@ -51,6 +51,9 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
+        'professional.auth' => \App\Http\Middleware\RedirectIfNotProfessional::class,
+        'professional.guest' => \App\Http\Middleware\RedirectIfProfessional::class,
+        'professional.verified' => \App\Http\Middleware\EnsureEmailIsVerifiedOfProfessional::class,
         'supplier.auth' => \App\Http\Middleware\RedirectIfNotSupplier::class,
         'supplier.guest' => \App\Http\Middleware\RedirectIfSupplier::class,
         'supplier.verified' => \App\Http\Middleware\EnsureEmailIsVerifiedOfSupplier::class,

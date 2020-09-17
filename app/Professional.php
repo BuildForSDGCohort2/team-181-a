@@ -2,12 +2,12 @@
 
 namespace App;
 
-use App\Notifications\Supplier\SupplierResetPassword;
-use App\Notifications\Supplier\SupplierVerifyEmail;
+use App\Notifications\Professional\ProfessionalResetPassword;
+use App\Notifications\Professional\ProfessionalVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Supplier extends Authenticatable
+class Professional extends Authenticatable
 {
     use Notifiable;
 
@@ -17,7 +17,7 @@ class Supplier extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'phone_number', 'hardware', 'location'
+        'name', 'email', 'password', 'specialty', 'phone_number', 'id_number', 'exp', 
     ];
 
     /**
@@ -46,7 +46,7 @@ class Supplier extends Authenticatable
      */
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new SupplierResetPassword($token));
+        $this->notify(new ProfessionalResetPassword($token));
     }
 
     /**
@@ -56,7 +56,7 @@ class Supplier extends Authenticatable
      */
     public function sendEmailVerificationNotification()
     {
-        $this->notify(new SupplierVerifyEmail);
+        $this->notify(new ProfessionalVerifyEmail);
     }
 
 }

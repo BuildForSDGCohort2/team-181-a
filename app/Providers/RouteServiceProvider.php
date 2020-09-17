@@ -46,6 +46,8 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
+        $this->mapProfessionalRoutes();
+
         $this->mapSupplierRoutes();
 
         //
@@ -64,7 +66,24 @@ class RouteServiceProvider extends ServiceProvider
              ->middleware(['web'])
              ->namespace($this->namespace)
              ->group(base_path('routes/supplier.php'));
+    }    
+    
+    /**
+     * Define the "professional" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapProfessionalRoutes()
+    {
+        Route::prefix('professional')
+             ->middleware(['web'])
+             ->namespace($this->namespace)
+             ->group(base_path('routes/professional.php'));
     }
+
+
 
 
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Supplier\Auth;
+namespace App\Http\Controllers\Professional\Auth;
 
-use App\Supplier;
+use App\Professional;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/supplier';
+    protected $redirectTo = '/professional';
 
     /**
      * Create a new controller instance.
@@ -38,7 +38,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('supplier.guest:supplier');
+        $this->middleware('professional.guest:professional');
     }
 
     /**
@@ -51,7 +51,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:suppliers',
+            'email' => 'required|email|max:255|unique:professionals',
             // 'password' => 'required|min:6|confirmed',
         ]);
     }
@@ -60,18 +60,17 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param array $data
-     * @return \App\Supplier
+     * @return \App\Professional
      */
     protected function create(array $data)
     {
-        // dd($data);
-        return Supplier::create([
+        return Professional::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'location' => $data['location'],
+            'exp' => $data['exp'],
+            'specialty' => $data['specialty'],
             'phone_number' => $data['phone_number'],
-            'hardware' => $data['hardware'],
-            // 'agrovet' => $data['agrovet'],
+            'id_number' => $data['id_number'],
             'password' => bcrypt(Str::random(10)),
         ]);
     }
@@ -83,7 +82,7 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        return view('supplier.auth.register');
+        return view('professional.auth.register');
     }
 
     /**
@@ -93,7 +92,7 @@ class RegisterController extends Controller
      */
     protected function guard()
     {
-        return Auth::guard('supplier');
+        return Auth::guard('professional');
     }
 
 }
