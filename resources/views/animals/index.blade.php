@@ -1,6 +1,15 @@
 @extends('layouts.app', ['activePage' => 'animals-table', 'titlePage' => __('Plants List')])
 
 @section('content')
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <div class="content">
   <div class="container-fluid">
     <div class="row">
@@ -68,32 +77,71 @@
                        
                        <div class="form-group">
                         <label for="breed">Breed</label>
-                        <input type="text" name ='breed'class="form-control" id="breed" aria-describedby="breedname" placeholder="Select Breed">
+                        <select class="form-control form-control-sm" name="breed_id" required>
+                          <option value="1">Charolais</option>
+                          <option value="2">Merino</option>
+                          
+                        </select>
                         <small id="momsname" class="form-text text-muted">Select the Breed</small>
                       </div> 
 
-                       <div class="form-group">
-                        <label for="name">Animals Age</label>
-                        <input type="text" class="form-control" name='age' id="age" aria-describedby="age" placeholder="Enter age">
-                        <small id="age" class="form-text text-muted">Enter animals age , default is zero.</small>
-                      </div>
+
                       
+                      <div class="form-group">
+                        <label for="mothers_name">Mothers Name/id</label>
+                        <input type="text" class="form-control" name='mothers_name' id="mothers_name" aria-describedby="momsname" placeholder="Enter Name" >
+                        <small id="momsname" class="form-text text-muted">Enter The Mothers Name or id</small>
+                      </div>                        
 
 
                     </div>
                     <div class="second-column" style='width:45%; float: right;'>
-                     
-                      <div class="form-group">
-                        <label for="mothers_name">Mothers Name</label>
-                        <input type="text" class="form-control" name='mothers_name' id="mothers_name" aria-describedby="momsname" placeholder="Enter Name">
-                        <small id="momsname" class="form-text text-muted">Enter The Mothers Name or id</small>
-                      </div>                      
                       
                       <div class="form-group">
+                        <label for="name">Birth-day</label>
+                        <input type="date" class="form-control" name='birthday' id="birthday" aria-describedby="birthday">
+                        <small id="age" class="form-text text-muted">Enter date of birth.</small>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label for="weight">If Not Sure?... </label>
+                        <input type="text" class="form-control" name='approx_age' id="approx_age" aria-describedby="approx_age" placeholder="Approximate Age">
+                        <small id="approx_age "  class="form-text text-muted">Enter Approximate Age</small>
+                      </div>
+                      <label>Approximatin in:</label><br>            
+                      <input type = "radio"
+                             name = "approximation"
+                             id = "months"
+                             value = "months" />
+                      <label for = "months">Months</label>
+                    
+                      <input type = "radio"
+                             name = "approximation"
+                             id = "years"
+                             value = "years" />
+                      <label for = "years">Years</label>
+                                  
+                      <div class="form-group">
                         <label for="weight">Weight</label>
-                        <input type="text" class="form-control" name='weight' id="weight" aria-describedby="animals_weight" placeholder="Enter Name">
+                        <input type="text" class="form-control" name='weight' id="weight" aria-describedby="animals_weight" placeholder="Enter Weight" required>
                         <small id="animals_weight "  class="form-text text-muted">Enter the animals Weight</small>
-                      </div>                 
+                      </div>
+                      
+                      <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="health_status" name="health_status"  >
+                          <label class="custom-control-label" for="health_status"> Is the animal <span class="text-danger">Healthy</span>?</label>
+                        </div>                   
+                      </div>  
+                      
+                      <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="pregnancy_status" name="pregnancy_status"  >
+                          <label class="custom-control-label" for="pregnancy_status"> Is the animal <span class="text-success">Pregnant</span>?</label>
+                        </div>                   
+                      </div>                     
+                
+                    
                     </div>               
                 </div>
                 <div class="modal-footer">

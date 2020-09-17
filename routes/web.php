@@ -30,9 +30,6 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('animals.index');
 	})->name('animals_table');
 
-	Route::get('animal-list', function () {
-		return view('animals.index');
-})->name('animals_table');
 
 	// this will contain have the breed id etc
 	Route::get('breed-info', function () {
@@ -98,6 +95,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 });
 
-Route::resource('/animal', 'AnimalsController', ['except' => ['create','index']]);
-Route::resource('/plant', 'PlantsController', ['except' => ['create','index']]);
-Route::resource('/brood', 'BroodsController', ['except' => ['create','index']]);
+Route::resource('animal', 'AnimalsController', ['except' => ['create','index']]);
+Route::resource('plant', 'PlantsController', ['except' => ['create','index']]);
+Route::resource('brood', 'BroodsController', ['except' => ['create','index']]);
+
+// enrolement
+Route::post('profesionals_enrole','EnrolmentController@profesionals_enrole')->name('profesionals_enrole');
+Route::post('suppliers_enrole','EnrolmentController@suppliers_enrole')->name('suppliers_enrole');
+Route::post('farmers_enrole','EnrolmentController@farmers_enrole')->name('farmers_enrole');

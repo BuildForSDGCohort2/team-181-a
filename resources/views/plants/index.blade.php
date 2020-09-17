@@ -3,6 +3,15 @@
 @section('content')
 <div class="content">
   <div class="container-fluid">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <div class="row">
       <div class="col-md-12">
         <div class="card">
@@ -23,17 +32,18 @@
                 <div class="modal-body">
                 <form action="{{route('plant.store')}}" method="POST">
                   @csrf
+                    
                     <div class="first-column" style='width:45%; float: left;'>
                       <div class="form-group">
-                        <label for="type">Type Of Plant</label>
-                        <input type="text" class="form-control" name='type'id="type" aria-describedby="type" placeholder="Enter plant type">
-                        <small id="type" class="form-text text-muted">Select the Appropriate plant or Enter name.</small>
+                        <label for="species">Type Of Plant</label>
+                        <input type="text" class="form-control" name='species'id="species" aria-describedby="species" placeholder="Enter plant type">
+                        <small id="species" class="form-text text-muted">Select the Appropriate plant or Enter name.</small>
                       </div>
                                              
                        <div class="form-group">
-                        <label for="strain">Number / Strain</label>
-                        <input type="text" name ='strain'class="form-control" id="strain" aria-describedby="strain" placeholder="Select Strain">
-                        <small id="strain" class="form-text text-muted">Select the Strain</small>
+                        <label for="type_id">Number / Strain</label>
+                        <input type="text" name ='type_id'class="form-control" id="type_id" aria-describedby="type_id" placeholder="Select Strain">
+                        <small id="type_id" class="form-text text-muted">Select the type..</small>
                       </div>
 
                       {{-- incremental... will depend on the remaining size of farm --}}
@@ -46,7 +56,26 @@
                         <label for="size">Size OF Allocation</label>
                         <input type="text" name ='size'class="form-control" id="size" aria-describedby="size" placeholder="Enter Total Size">
                         <small id="size" class="form-text text-muted">Enter size of the allocation</small>
-                      </div>  
+                      </div> 
+                      <label>Calibration in:</label><br>            
+                      <input type = "radio"
+                             name = "callibration"
+                             id = "meters"
+                             value = "meters" />
+                      <label for = "meters">Meters &sup2; </label>
+                    
+                      <input type = "radio"
+                             name = "callibration"
+                             id = "acres"
+                             value = "acres" />
+                      <label for = "acres">Acres</label>
+                    
+                      <input type = "radio"
+                             name = "callibration"
+                             id = "hactares"
+                             value = "hactares" />
+                      <label for = "hactares">Hactares</label>
+                  </fieldset> 
 
                       <div class="form-group">
                         <label for="planting_date">Date Of Planting</label>

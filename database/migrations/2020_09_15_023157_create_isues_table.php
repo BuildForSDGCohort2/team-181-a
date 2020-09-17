@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEnrowlmentsTable extends Migration
+class CreateIsuesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateEnrowlmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('enrowlments', function (Blueprint $table) {
+        Schema::create('isues', function (Blueprint $table) {
             $table->id();
+            $table->string('reason');
+            $table->text('information');
+            $table->integer('status');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateEnrowlmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('enrowlments');
+        Schema::dropIfExists('isues');
     }
 }

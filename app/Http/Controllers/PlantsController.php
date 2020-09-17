@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\PlantationRequest;
+use App\Plantation;
+
 
 class PlantsController extends Controller
 {
@@ -32,9 +35,12 @@ class PlantsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PlantationRequest $request,Plantation $plantation)
     {
-        //
+       
+        $validated = $request->validated();
+        $plantation->new_plantation($validated);
+        return 'Success!';
     }
 
     /**

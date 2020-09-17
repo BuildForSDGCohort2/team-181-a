@@ -18,7 +18,7 @@ class CreatePlantFactSheetsTable extends Migration
             $table->timestamps();
             $table->string('species');
             $table->string('type');
-            $table->integer('optimal_conditions');
+            $table->string('optimal_conditions');
             $table->integer('months_to_maturity');
             $table->integer('shelf_life');
             $table->text('storage_meth');

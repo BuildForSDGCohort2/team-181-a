@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFarmersTable extends Migration
+class AddFarmersIdToIssues extends Migration
 {
     /**
      * Run the migrations.
@@ -12,17 +12,10 @@ class CreateFarmersTable extends Migration
      * @return void
      */
     public function up()
-    {   
-        Schema::create('farmers', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+    {
+        Schema::table('isues', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
-            $table->string('location');
-            $table->string('phone_number');
-            $table->string('farm_size');
-            $table->string('email')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
-
 
         });
     }
@@ -34,6 +27,8 @@ class CreateFarmersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('farmers');
+        Schema::table('isues', function (Blueprint $table) {
+            $table->dropColumn('farmer_id');
+        });
     }
 }

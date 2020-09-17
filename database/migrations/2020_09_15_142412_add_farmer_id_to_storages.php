@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddLocationToUser extends Migration
+class AddFarmerIdToStorages extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class AddLocationToUser extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('location')->after('email');
+        Schema::table('storages', function (Blueprint $table) {
+            $table->unsignedBigInteger('farmer_id');
+            $table->foreign('farmer_id')->references('id')->on('farmers');
+
         });
     }
 
@@ -25,8 +27,9 @@ class AddLocationToUser extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('location');
+        Schema::table('storages', function (Blueprint $table) {
+                        $table->dropColumn('farmer_id');
+
         });
     }
 }

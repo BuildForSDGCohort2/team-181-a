@@ -2,6 +2,15 @@
 
 @section('content')
 <div class="content">
+  @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
@@ -31,7 +40,7 @@
                     <input type = "radio"
                            name = "species"
                            id = "turkey"
-                           value = "turkey" />
+                           value = "turkey"  />
                     <label for = "turkey">Turkey</label>
                   
                     <input type = "radio"
@@ -45,9 +54,16 @@
                            id = "duck"
                            value = "duck" />
                     <label for = "duck">Duck</label>
+                    
 
+                    <div class="form-group">
+                      <label for="others">Others</label>
+                      <input type="text" name ='others'class="form-control" id="others" aria-describedby="others" placeholder="Please indicate">
+                      <small id="others" class="form-text text-muted">Please indicate</small>
+                    
+                    </div> 
                 </fieldset>                    
-                      <fieldset>                
+                      <fieldset required>                
                         <label>Gender:</label><br>            
                         <input type = "radio"
                               name = "gender"
@@ -71,11 +87,7 @@
                         <small id="momsname" class="form-text text-muted">Select the Breed</small>
                       </div> 
 
-                       <div class="form-group">
-                        <label for="name">Broods' Age</label>
-                        <input type="text" class="form-control" name='age' id="age" aria-describedby="age" placeholder="Enter age">
-                        <small id="age" class="form-text text-muted">Enter Broods age , default is zero.</small>
-                      </div>
+
                       
 
 
@@ -83,15 +95,22 @@
                     <div class="second-column" style='width:45%; float: right;'>
                      
                       <div class="form-group">
-                        <label for="mothers_name">Mothers Name</label>
-                        <input type="text" class="form-control" name='mothers_name' id="mothers_name" aria-describedby="momsname" placeholder="Enter Name">
-                        <small id="momsname" class="form-text text-muted">Enter The Mothers Name or id</small>
-                      </div>                      
+                        <label for="name">Hatched on...</label>
+                        <input type="date" class="form-control" name='hatch_date' id="age" aria-describedby="hatch_date" required>
+                        <small id="hatch_date" class="form-text text-muted">Enter the Hatching date....</small>
+                      </div>
+                      
                       
                       <div class="form-group">
-                        <label for="number">Number</label>
-                        <input type="text" class="form-control" name='number' id="number" aria-describedby="broods_number" placeholder="Enter Name">
+                        <label for="number">Number of Birds</label>
+                        <input type="text" class="form-control" name='number' id="number" aria-describedby="broods_number" placeholder="Enter Number of Birds" required>
                         <small id="broods_number "  class="form-text text-muted">Enter the broods number</small>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="sellers_name">Sellers Name</label>
+                        <input type="text" class="form-control" name='sellers_name' id="sellers_name" aria-describedby="suppliers_name" placeholder="Enter Name" required>
+                        <small id="suppliers_name" class="form-text text-muted">Enter The Suppliers Name or id</small>
                       </div>                 
                     </div>               
                 </div>
