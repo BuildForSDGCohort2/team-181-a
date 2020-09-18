@@ -41,22 +41,7 @@ class HomeController extends Controller
                 $permissions[$permission->name] = false;
             }
         }
-        // $country = Country::find($user->country_id);
-        // // dd($country);
-        // $user->country_name = $country->country_name;
-        // $users->transform(function ($user, $key) {
-        //     $country = Country::find($user->country_id);
-        //     $user->country_name = $country->name;
-        // 	return $user;
-        // });
-        // dd(json_decode(json_encode((Auth::user()), false)));
-        $auth_user = $this->logged_user();;
-        // $user = $user->append('is_client')->toArray();
-        // $user = $user->setAppends(['is_client', 'is_admin'])->toArray();
-        // $auth_user = array_prepend($user, $permissions, 'can');
-        // $auth_user = Arr::prepend($user->toArray(), $permissions, 'can');
-
-        // $auth_user = Auth::user();
+        $auth_user = $this->logged_user();
         return view('home', compact('auth_user'));
     }
 }

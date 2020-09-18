@@ -31,7 +31,9 @@ export default {
                 reject(error);
                 context.commit('page_loader', false)
                 context.commit('loading', false)
+                context.commit('error', error.response)
                 if (error.response.status === 500) {
+
                     eventBus.$emit('errorEvent', error.response.statusText)
                     return
                 } else if (error.response.status === 401 || error.response.status === 409) {

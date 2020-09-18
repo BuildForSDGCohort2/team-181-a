@@ -197,3 +197,7 @@ table.vgt-table {
 .el-loading-mask {
     height: 100vh !important;
 }
+
+.has-text-danger {
+    color: #f00 !important;
+}

@@ -49,6 +49,7 @@ Vue.use(Chartkick.use(Chart))
 // import myExample from './components/ExampleComponent.vue'
 import myHeader from './components/include/Header'
 import myApp from './components/app.vue'
+import myHome from './components/register'
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -62,6 +63,6 @@ const app = new Vue({
     store,
     vuetify,
     components: {
-        myHeader, myApp
+        myHeader, myApp, myHome
     },
 });

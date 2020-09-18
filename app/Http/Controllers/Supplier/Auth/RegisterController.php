@@ -68,9 +68,9 @@ class RegisterController extends Controller
         return Supplier::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'location' => $data['location'],
-            'phone_number' => $data['phone_number'],
-            'hardware' => $data['hardware'],
+            // 'location' => $data['location'],
+            // 'phone_number' => $data['phone_number'],
+            // 'hardware' => $data['hardware'],
             // 'agrovet' => $data['agrovet'],
             'password' => bcrypt(Str::random(10)),
         ]);
