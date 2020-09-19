@@ -3,99 +3,98 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Http\Requests\UserRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     /**
-     * Display a listing of the users
+     * Display a listing of the resource.
      *
-     * @param  \App\User  $model
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Http\Response
      */
-    public function index(User $model)
+    public function index()
     {
-        return view('users.index', ['users' => $model->paginate(15)]);
+        return User::paginate(500);
     }
 
     /**
-     * Show the form for creating a new user
+     * Store a newly created resource in storage.
      *
-     * @return \Illuminate\View\View
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function store(Request $request)
     {
-    
-        return view('users.create');
-    }
-
-    /**
-     * Store a newly created user in storage
-     *
-     * @param  \App\Http\Requests\UserRequest  $request
-     * @param  \App\User  $model
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(UserRequest $request, User $model)
-    {   
-        $role = $request->input('role');
-        $model->create($request->merge(['password' => Hash::make($request->get('password'))])->all());
-        // $user= User::latest()->first();
-        $user->location=$request->input('location');
-        // $user->assignRole($role); 
-        // $user->save();       
-        return redirect()->route('user.index')->withStatus(__('User successfully created.'));
-    }
-
-    /**
-     * Show the form for editing the specified user
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\View\View
-     */
-    public function edit(User $user)
-    {   
-        $spaces=\App\Space::all()->pluck('location')->toArray();
-       $spaces = array_unique($spaces); 
-        return view('users.edit', compact(['user','spaces']));
-    }
-
-    /**
-     * Update the specified user in storage
-     *
-     * @param  \App\Http\Requests\UserRequest  $request
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(UserRequest $request, User  $user)
-    {   
-        //return $user();
-        $role = $request->input('role');
-        //logic to change the user roles
-        if (isset($role)) {
-            $user->syncRoles([$request->input('role')]);
-        }
-        $hasPassword = $request->get('password');
-        $user->update(
-            $request->merge(['password' => Hash::make($request->get('password'))])
-                ->except([$hasPassword ? '' : 'password']
-        ));
-        $user->location = $request->input('location');
+        // return $request->all();
+        $this->Validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            // 'phone' => 'required',
+        ]);
+        $user = new User;
+        $password = $this->generateRandomString();
+        $password_hash = Hash::make($password);
+        $user->password = $password_hash;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        // $user->phone = $request->phone;
+        // $user->address = $request->address;
+        // $user->city = $request->city;
+        // $user->country_id = $request->country_id;
         $user->save();
-        return redirect()->route('user.index')->withStatus(__('User successfully updated.'));
+        return $user;
     }
 
     /**
-     * Remove the specified user from storage
+     * Display the specified resource.
      *
      * @param  \App\User  $user
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
-    public function destroy(User  $user)
+    public function show($id)
     {
-        $user->delete();
+        return User::find($id);
+    }
 
-        return redirect()->route('user.index')->withStatus(__('User successfully deleted.'));
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $user = User::find($id);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        User::find($id)->delete();
+    }
+
+    public function generateRandomString($length = 10)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
+    public function deletedUsers()
+    {
+        $users = User::onlyTrashed()->get();
+
+        return $users;
     }
 }

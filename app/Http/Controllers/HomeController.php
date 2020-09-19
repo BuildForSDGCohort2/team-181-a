@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Permission;
+
 class HomeController extends Controller
 {
     /**
@@ -14,13 +20,38 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
+    public function logged_user()
+    {
+        $user = new User();
+        return $user->logged_user();
+    }
+
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
-        return view('dashboard');
+        $permissions = [];
+        foreach (Permission::all() as $permission) {
+            if (Auth::user()->can($permission->name)) {
+                $permissions[$permission->name] = true;
+            } else {
+                $permissions[$permission->name] = false;
+            }
+        }
+        $auth_user = $this->logged_user();
+        return view('home', compact('auth_user'));
+    }
+
+    public function supplier_browse()
+    {
+        return view('supplier.browse');
+    }
+
+    public function professional_browse()
+    {
+        return view('professional.browse');
     }
 }

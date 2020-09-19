@@ -36,6 +36,18 @@ return [
     */
 
     'guards' => [
+        'professional' => [
+            'driver'   => 'session',
+            'provider' => 'professionals',
+        ],
+
+        'supplier' => [
+            'driver'   => 'session',
+            'provider' => 'suppliers',
+        ],
+
+        
+
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
@@ -66,6 +78,18 @@ return [
     */
 
     'providers' => [
+        'professionals' => [
+            'driver' => 'eloquent',
+            'model'  => App\Professional::class,
+        ],
+
+        'suppliers' => [
+            'driver' => 'eloquent',
+            'model'  => App\Supplier::class,
+        ],
+
+        
+
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
@@ -93,6 +117,20 @@ return [
     */
 
     'passwords' => [
+        'professionals' => [
+            'provider' => 'professionals',
+            'table'    => 'password_resets',
+            'expire'   => 60,
+        ],
+
+        'suppliers' => [
+            'provider' => 'suppliers',
+            'table'    => 'password_resets',
+            'expire'   => 60,
+        ],
+
+        
+
         'users' => [
             'provider' => 'users',
             'table' => 'password_resets',

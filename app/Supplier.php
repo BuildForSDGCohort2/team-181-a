@@ -2,29 +2,61 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Notifications\Supplier\SupplierResetPassword;
+use App\Notifications\Supplier\SupplierVerifyEmail;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Supplier extends Model
+class Supplier extends Authenticatable
 {
-    public function new_enrolement(array $validated)
-    {
+    use Notifiable;
 
-        $sup = new Supplier;
-        $sup->name = $validated['name'];
-        $sup->email= $validated['email'];
-        $sup->location= $validated['location'];
-        #supus will be zero since he or she has not been vetted and given an account
-        $sup->status=0;
-        $sup->phone= $validated['phone_number'];
-        #supe the one being registerd has never been rated before...
-        $sup->ratings= 0;      
-        if (array_key_exists('hardware',$validated) && array_key_exists('agrovet',$validated) ) {
-            $sup->specialty = 'All';
-        } else {
-            $sup->specialty = (array_key_exists('hardware',$validated) ? 'Hardware' : 'Agrovet');
-        }        
-        $sup->transport =(array_key_exists('transport',$validated) ? 'Able' : 'Unable') ;
-        $sup->ratings = 0;
-        $sup->save();
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'email', 'password', 'phone_number', 'hardware', 'location'
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new SupplierResetPassword($token));
     }
+
+    /**
+     * Send the email verification notification.
+     *
+     * @return void
+     */
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new SupplierVerifyEmail);
+    }
+
 }

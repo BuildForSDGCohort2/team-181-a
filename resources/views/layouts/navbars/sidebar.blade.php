@@ -50,14 +50,7 @@
       <li class="nav-item{{ $activePage == 'plants-table'||$activePage == 'plants-info' ||$activePage == 'plants-show' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('plants_table') }}">
           <i class="fa fa-pagelines "></i>
-          <p>{{ __('My Plantations') }}</p>          
-
-        </a>
-      </li>
-      <li class="nav-item{{ $activePage == 'broods-table'||$activePage == 'broods-info' ||$activePage == 'brood-show' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('broods_table') }}">
-          <i class="fa fa-bold" aria-hidden="true"></i>
-          <p>{{ __('My Broods') }}</p>
+            <p>{{ __('My Plantations') }}</p>
         </a>
       </li>
       <li class="nav-item{{ $activePage == 'notifications' ? ' active' : '' }}">
