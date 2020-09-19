@@ -45,11 +45,11 @@ class AnimalFactsheet_Seeder extends Seeder
         DB::table('animal_fact_sheets')->insert([
             'species' =>'poultry',
             'prime_age' =>0,
-            'reproductive_age' =>0,
-            'maximum_prod_rate' =>0,
-            'maximum_weight' =>0,
-            'maximum_height' =>0,
-            'weight_at_birth' =>0,
+            'reproductive_age' =>2,
+            'maximum_prod_rate' =>1,
+            'maximum_weight' =>6,
+            'maximum_height' =>0.5,
+            'weight_at_birth' =>0.07,
             'breed' =>'kienyeji',
         ]);
     }

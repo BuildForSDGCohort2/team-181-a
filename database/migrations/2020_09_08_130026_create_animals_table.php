@@ -20,10 +20,10 @@ class CreateAnimalsTable extends Migration
             $table->string('name');
             $table->string('species');
             $table->string('gender');
-            $table->dateTime('birthday');
+            $table->date('birthday');
             $table->string('weight');
             // this will be used to check if the animal is pregnant or not
-            $table->string('reproductive_status');
+            $table->integer('reproductive_status');
             // this will be used to check if the animal is healthy(0) or sick(1) or very sick(2)
             $table->integer('health_status');
             $table->unsignedBigInteger('user_id');

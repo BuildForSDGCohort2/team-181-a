@@ -76,7 +76,7 @@ class Animal extends Model
         return date('Y-m-d' ,strtotime($date));
     }
     
-    #What thus Guy Does is calculate the age of the animal..
+    #What thus Guy Does is calculate the age of the animal.. From varios formats
     private function age_calculator(array $validated)
     {   
         $birthDate = Animal::date_of_birth_calculator($validated) ;
@@ -120,16 +120,16 @@ class Animal extends Model
     private function health_checker(array $validated)
     {
         if (array_key_exists('health_status',$validated)) {
-            return 0;
-        }else {
             return 1;
+        }else {
+            return 0;
         }
     }
     
     public function farmer(){
         return $this->belongsTo('App\User');
     }
-    public function animal_fact_sheet(){
+    public function breed(){
         return $this->belongsTo('App\Animal_Fact_sheet');
     }
 

@@ -25,12 +25,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
-	// this will show all of the animals registered
-	Route::get('animal-list', function () {
-		return view('animals.index');
-	})->name('animals_table');
-
-
 	// this will contain have the breed id etc
 	Route::get('breed-info', function () {
 		return view('animals.breed');
@@ -42,9 +36,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 	// this will display all of the plants planted in the farm
 
-	Route::get('plant-table', function () {
-		return view('plants.index');
-	})->name('plants_table');
+	// Route::get('plant-table', function () {
+	// 	return view('plants.index');
+	// })->name('plants_table');
 
 	Route::get('plant-info', function () {
 		return view('plants.info');
@@ -95,9 +89,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 });
 
-Route::resource('animal', 'AnimalsController', ['except' => ['create','index']]);
-Route::resource('plant', 'PlantsController', ['except' => ['create','index']]);
-Route::resource('brood', 'BroodsController', ['except' => ['create','index']]);
+Route::resource('animal', 'AnimalsController', ['except' => ['create']]);
+Route::resource('plant', 'PlantsController', ['except' => ['create']]);
+Route::resource('brood', 'BroodsController', ['except' => ['create']]);
 
 // enrolement
 Route::post('profesionals_enrole','EnrolmentController@profesionals_enrole')->name('profesionals_enrole');

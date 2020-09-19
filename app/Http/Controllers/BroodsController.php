@@ -13,9 +13,12 @@ class BroodsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index(Brood $brood)
+    {   
+        
+        $broods = $brood->all();
+   
+        return view('broods.index') ->with('broods',$broods);
     }
 
     /**
@@ -38,7 +41,7 @@ class BroodsController extends Controller
     {
         $validated = $request->validated();
         $brood->new_brood($validated);
-        return 'Success!';
+        return redirect('brood')->with('success','Animal Records recorded Succesfully');
     }
 
     /**

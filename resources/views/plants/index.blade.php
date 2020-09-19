@@ -11,13 +11,13 @@
             @endforeach
         </ul>
     </div>
-@endif
+    @endif
     <div class="row">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-primary">
             <h4 class="card-title ">Plantations On Farm..</h4>
-            <p class="card-category"> Showing six (6) Plantations</p>
+            <p class="card-category"> Showing  {{count($plantations)}} Plantations</p>
             <button type="button" class="btn btn-small btn-warning" data-toggle="modal" data-target="#plant_modal" style="float: right;">Add plantation</button>
 
           </div>
@@ -119,114 +119,53 @@
                   </th>
                 </thead>
                 <tbody>
+                  @foreach ($plantations as $plantation)
                   <tr>
                     <td>
-                      1
+                      {{$plantation->id}}
                     </td>
                     <td>
-                     Maize <a href="{{route('plant_info')}}"><span style="color: rgb(19, 197, 108)">(Katumani)</span></a>                    
+                      <a data-target="#plant_s_modal" data-toggle="modal" class="MainNavText" id="MainNavHelp" 
+                      href="#plant_s_modal">
+                       <span style="color: rgb(15, 28, 8)">{{$plantation->species}}</span><span style="color: rgb(19, 197, 108)">&nbsp;
+                       
+                        </span>
+                      {{-- </a> --}}
+                      </a>                   
                     </td>
                     <td>                      
-                      10 Acres
+                     {{$plantation->size_of_plantation}} Acres
                     </td>
                     <td>
-                      {{-- will be calclted from thr fact sheet --}}
-                      1 Month 3 Days
+                        {{-- calculate the day to harvest --}}
+                      @php
+                        $age= now()->diff(date_create($plantation->planting_date));
+                        $yrs = ($plantation->plant_fact_sheet->months_to_maturity)/12 -($age->y);
+                        $mnths = ($plantation->plant_fact_sheet->months_to_maturity) -($age->m);
+                        $dys = ($plantation->plant_fact_sheet->months_to_maturity) -($age->d);
+                         
+                      @endphp
+
+                      @if ($dys > 0)                      
+                        {{$yrs <1 ?'':$yrs.'yrs'}}
+                        {{$mnths <1 ?'':$mnths.'mnths'}} 
+                        {{$dys.'days'}} 
+                      @elseif( $dys > -7)
+                        
+                        <button type="button" class="btn btn-outline-warning btn-sm"><span style="color:black;">Ready For</span> harvest
+                      @else
+                          <span class="text-danger">Overdue!</span>
+                      @endif   
                     </td>
                     <td class="text-success">
-                      100 Sacks
+                      @if ($dys> -7)
+                        {{($plantation->plant_fact_sheet->production_rate * $plantation->size_of_plantation)}} Sacks
+                      @else
+                      <span class="text-danger">Spoiling In the Farm </span> 
+                      @endif
                     </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      2
-                    </td>
-                    <td>
-                     Wheat <a href="{{route('plant_info')}}"><span style="color: rgb(19, 197, 108)">(EinKorn)</span></a>                   
-                    </td>
-                    <td>                      
-                      10 Acres
-                    </td>
-                    <td>
-                      {{-- will be calclted from thr fact sheet --}}
-                      1 Month 3 Days
-                    </td>
-                    <td class="text-success">
-                      100 Sacks
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      3
-                    </td>
-                    <td>
-                     Beans <a href="{{route('plant_info')}}"><span style="color: rgb(19, 197, 108)">(Rose Coco)</span></a>                     
-                    </td>
-                    <td>                      
-                      14 Acres
-                    </td>
-                    <td>
-                      {{-- will be calclted from thr fact sheet --}}
-                      <span style="color: red"> Past Due!</span>
-                    </td>
-                    <td class="text-success">
-                      15 Sacks
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      4
-                    </td>
-                    <td>
-                     Tea <a href="{{route('plant_info')}}"><span style="color: rgb(19, 197, 108)">(Purple Tea)</span></a>                     
-                    </td>
-                    <td>                      
-                      14 Acres
-                    </td>
-                    <td>
-                      {{-- will be calclted from thr fact sheet --}}
-                      0 Months 3 Days
-                    </td>
-                    <td class="text-success">
-                      15 Tonnes
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      3
-                    </td>
-                    <td>
-                     Beans <a href="{{route('plant_info')}}"><span style="color: rgb(19, 197, 108)">(Rose Coco)</span></a>                     
-                    </td>
-                    <td>                      
-                      14 Acres
-                    </td>
-                    <td>
-                      {{-- will be calclted from thr fact sheet --}}
-                      <span style="color: rgb(19, 197, 108)">Ready!</span>
-                    </td>
-                    <td class="text-success">
-                      15 Sacks
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      6
-                    </td>
-                    <td>
-                     Grapes <a href="{{route('plant_info')}}"><span style="color: rgb(19, 197, 108)">(Green Grapes)</span></a>                     
-                    </td>
-                    <td>                      
-                      14 Acres
-                    </td>
-                    <td>
-                      {{-- will be calclted from thr fact sheet --}}
-                      0 Months 3 Days
-                    </td>
-                    <td class="text-success">
-                      15 Sacks
-                    </td>
-                  </tr>
+                  </tr>  
+                  @endforeach
                 </tbody>
               </table>
             </div>

@@ -14,9 +14,11 @@ class AnimalsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request , Animal $animal)
     {
-        return $request;
+        $animals = $animal->all();
+        // return $animals;
+        return view('animals.index')->with('animals',$animals);
     }
 
     /**
@@ -40,7 +42,7 @@ class AnimalsController extends Controller
         $validated = $request->validated();
         // return $validated;
         $animal->new_animal($validated);
-        return 'Success!';
+        return redirect('animal')->with('success','Animal Records recorded Succesfully');
     }
 
     /**

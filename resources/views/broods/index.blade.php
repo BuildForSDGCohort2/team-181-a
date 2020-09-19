@@ -131,7 +131,7 @@
                     ID
                   </th>
                   <th>
-                    Type
+                    Name
                   </th>
                   <th>
                     Breed
@@ -140,141 +140,72 @@
                     Age
                   </th>
                   <th>
-                    Info
+                    Number
                   </th>
                   <th>
                     Status
                   </th>
+                  <th class="text-warning">
+                    Actions
+                  </th>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>
-                      1
-                    </td>
-                    <td>
-                      <a href={{route('animal_show')}}> <span style="color: black">Thomas</span><span style="color: rgb(19, 197, 108)">&nbsp;(Bull)</span></a>                      
-                    </td>
-                    <td>
-                      <a href="breed_info"><span style="color: black">Charolais</span></a>                       
-                    </td>
-                    <td>
-                      12
-                    </td>
-                    {{-- The colur of this column sill change acording to the current status of the cow or bull --}}
-                    <td class="text-primary">
-                    <span style="color: rgb(19, 197, 108)">540Kg</span>
-                    </td>
-                    <td>
-                      Healthy
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      2
-                    </td>
-                    <td>
-                      <a href={{route('animal_show')}}> <span style="color: black">Jane</span><span style="color: rgb(19, 197, 108)">&nbsp;(Cow)</span></a>                      
-                    </td>
-                    <td>
-                    <a href="{{route('breed_info')}}"> <span style="color: black">Fresian</span></a>                       
-                    </td>
-                    <td>
-                      12
-                    </td>
-                    <td class="text-primary">
-                    <span style="color: rgb(19, 197, 108)">20lts/day</span>
-                    </td>
-                    <td>
-                      Sick <span style="color: red">&nbsp;(Yellow Fever)</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      3
-                    </td>
-                    <td>
-                      <a href={{route('animal_show')}}> <span style="color: black">Ndun'gu</span><span style="color: rgb(19, 197, 108)">&nbsp;(Billy Goat)</span></a>                      
-                    </td>
-                    <td>
-                      <a href="{{route('breed_info')}}"> <span style="color: black">Saaneen</span></a>                       
-                    </td>
-                    <td>
-                      8
-                    </td>
-                    {{-- The colur of this column sill change acording to the current status of the cow or bull --}}
-                    <td class="text-primary">
-                      <span style="color: rgb(19, 197, 108)">&nbsp;80Kg</span>
-                    </td>
-                    <td>
-                      Healthy <span style="color: rgb(39, 144, 21)">&nbsp;(Prime)</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      4
-                    </td>
-                    <td>
-                      <a href={{route('animal_show')}}> <span style="color: black">Lucka</span><span style="color: rgb(19, 197, 108)">&nbsp;(Ram)</span></a>                      
-                    </td>
-                    <td>
-                      <a href="{{route('breed_info')}}"> <span style="color: black">Merino</span></a>                       
-                    </td>
-                    <td>
-                      8
-                    </td>
-                    {{-- The colur of this column sill change acording to the current status of the cow or bull --}}
-                    <td class="text-primary">
-                      <span style="color: rgb(19, 197, 108)">&nbsp;50Kg</span>
-                    </td>
-                    <td>
-                      Healthy <span style="color: rgb(39, 144, 21)">&nbsp;(Prime)</span>
-                    </td>
-                  </tr>
-                    <td>
-                      5
-                    </td>
-                    <td>
-                      <a href={{route('animal_show')}}> <span style="color: black">Avril</span><span style="color: rgb(19, 197, 108)">&nbsp;(F-Rabit)</span></a>                      
-                    </td>
-                    <td>
-                      <a href="{{route('breed_info')}}"> <span style="color: black">Belgian Hare</span></a>                       
-                    </td>
-                    <td>
-                      3
-                    </td>
-                    {{-- The colur of this column sill change acording to the current status of the cow or bull --}}
-                    <td class="text-primary">
-                      <span style="color: rgb(19, 197, 108)">&nbsp;30kg</span>
-                    </td>
-                    <td>
-                      Healthy
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      6
-                    </td>
-                    <td>
-                      <a href={{route('animal_show')}}> <span style="color: black">Mary</span><span style="color: rgb(19, 197, 108)">&nbsp;(F-Pig)</span></a>                      
-                    </td>
-                    <td>
-                      <a href="{{route('breed_info')}}"> <span style="color: black">Large White</span></a>                       
-                    </td>
-                    <td>
-                      5
-                    </td>
-                    {{-- The colur of this column sill change acording to the current status of the cow or bull --}}
-                    <td class="text-primary">
-                      <span style="color: rgb(19, 197, 108)">&nbsp;340Kg</span>
-                    </td>
-                    <td>
-                      Healthy <span style="color: rgb(39, 144, 21)">&nbsp;(PG)</span>
-                    </td>
-                  </tr>
+                    @foreach ($broods as $brood)
+                    <tr>
+                      <td>
+                        {{$brood->id}}
+                      </td>
+                      <td>
+                        {{-- here is the link to the show modal --}}
+                        <a data-target="#brood_s_modal" data-toggle="modal" class="MainNavText" id="MainNavHelp" 
+                        href="#brood_s_modal">
+                         <span style="color: rgb(15, 28, 8)">{{ ucfirst($brood->species)}}</span><span style="color: rgb(19, 197, 108)">&nbsp;
+                          @if ($brood->species=='chicken' || $brood->species=='turkey')
+                            {{($brood->gender == 'male')? 'Broilers' : 'Layers' }}
+                          @endif                       
+                          </span>
+                        {{-- </a> --}}
+                        </a>                      
+                      </td>
+                      <td>
+                        <a href="breed_info"><span style="color: black">{{$brood->breed->breed}}</span></a>                       
+                      </td>
+                      <td>
+                      {{-- convert the birthday to date object --}}
+                      @php
+                        $age= now()->diff(date_create($brood->date_of_hatching)) 
+                      @endphp
+                        {{$age->y  == 0  ?'':$age->y.'yrs'}}
+                        {{$age->m  == 0 ?'':$age->m.'mnths'}} 
+                        {{$age->d.'days'}}
+                      </td>
+                      {{-- The colur of this column sill change acording to the current status of the cow or bull --}}
+                      <td class="text-primary">
+                      <span style="color: rgb(19, 197, 108)">{{$brood->number}}</span>
+                      </td>
+                      <td>
+                          {{ $age->y == 0 && $age->m < 5 ? 'Maturing':'Mature'}}
+                      </td>
+                      <td>
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            
+                          </button>
+                          <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Sell</a>
+                            @if ($age->y > 0 || $age->m > 4 )                                
+                            <a class="dropdown-item" href="#"><span class="text-primary">View production Records</span>  </a> {{-- the pop up would record the various varibles that would accopany that eg number etc--}}
+                            @endif
+                            <a class="dropdown-item" href="#"><span class="text-danger">Record Death</span>  </a> {{-- the pop up would record the various varibles that would accopany that eg number etc--}}
+
+                          </div>
+                        </div>
+
+                      </td>
+                    </tr>  
+                    @endforeach
                 </tbody>
               </table>
-            </div>
-          </div>
         </div>
       </div>
 

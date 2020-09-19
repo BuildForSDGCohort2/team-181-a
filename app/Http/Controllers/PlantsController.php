@@ -14,9 +14,12 @@ class PlantsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index( Plantation $plantation)
     {
-        //
+        
+            $plantations = $plantation->all();
+            return view('plants.index')->with('plantations',$plantations);
+        
     }
 
     /**
@@ -40,7 +43,7 @@ class PlantsController extends Controller
        
         $validated = $request->validated();
         $plantation->new_plantation($validated);
-        return 'Success!';
+        return redirect('plant')->with('success','Plant Records recorded Succesfully');
     }
 
     /**

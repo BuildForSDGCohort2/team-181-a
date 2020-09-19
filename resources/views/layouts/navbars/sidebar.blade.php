@@ -42,25 +42,25 @@
         </div>
       </li>
       <li class="nav-item{{ $activePage == 'animals-table'||$activePage== 'animal-show'||$activePage== 'animal-show' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('animals_table') }}">
+        <a class="nav-link" href="{{ route('animal.index') }}">
           <i class="material-icons">pets</i>
             <p>{{ __('My Animals') }}</p>
         </a>
       </li>
       <li class="nav-item{{ $activePage == 'plants-table'||$activePage == 'plants-info' ||$activePage == 'plants-show' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('plants_table') }}">
+        <a class="nav-link" href="{{ route('plant.index') }}">
           <i class="fa fa-pagelines "></i>
           <p>{{ __('My Plantations') }}</p>          
 
         </a>
       </li>
       <li class="nav-item{{ $activePage == 'broods-table'||$activePage == 'broods-info' ||$activePage == 'brood-show' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('broods_table') }}">
+        <a class="nav-link" href="{{ route('brood.index') }}">
           <i class="fa fa-bold" aria-hidden="true"></i>
           <p>{{ __('My Broods') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'notifications' ? ' active' : '' }}">
+      {{-- <li class="nav-item{{ $activePage == 'notifications' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('notifications') }}">
           <i class="material-icons">notifications</i>
           <p>{{ __('To Do....') }}</p>
@@ -71,7 +71,7 @@
           <i class="material-icons">language</i>
           <p>{{ __('Support') }}</p>
         </a>
-      </li>
+      </li> --}}
     </ul>
   </div>
 </div>

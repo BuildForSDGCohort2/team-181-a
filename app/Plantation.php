@@ -22,9 +22,15 @@ class Plantation extends Model
         $new_plant->save();
 
     }
-    #issue|recomendations| checker.. would use this object 
+    #issue|recomendations| checker.. would use this object
+
+
+
 
     public function farmer(){
         return $this->belongsTo('App\User');
+    }
+    public function plant_fact_sheet(){
+        return $this->belongsTo('App\Plant_Fact_sheet','type_id');
     }
 }

@@ -12,4 +12,7 @@ class Animal_Fact_sheet extends Model
     public function animal(){
         return $this->hasMany('App\Animal');
     }
+    public function brood(){
+        return $this->hasMany('App\Brood');
+    }
 }
