@@ -48,8 +48,8 @@ class AnimalFactsheet_Seeder extends Seeder
             'reproductive_age' =>2,
             'maximum_prod_rate' =>1,
             'maximum_weight' =>6,
-            'maximum_height' =>0.5,
-            'weight_at_birth' =>0.07,
+            'maximum_height' =>1,
+            'weight_at_birth' =>0,
             'breed' =>'kienyeji',
         ]);
     }
