@@ -11,7 +11,7 @@
         <v-card-text>
             <v-layout row wrap>
 
-                <v-flex sm6>
+                <v-flex sm5 offset-sm1>
                     <div class="form-group">
                         <label for="name">Full <span class='text-primary'>business</span> name </label>
                         <input type="text" class="form-control" v-model='form.name' id="name" aria-describedby="name" placeholder="enter business name" required>
@@ -20,7 +20,7 @@
                     </div>
                 </v-flex>
 
-                <v-flex sm6>
+                <v-flex sm5 offset-sm1>
                     <div class="form-group">
                         <label for="size">Email</label>
                         <input type="email" v-model='form.email' class="form-control" id="email" aria-describedby="mail" placeholder="abc@xyz.com">
@@ -30,7 +30,7 @@
                     </div>
                 </v-flex>
 
-                <v-flex sm6>
+                <v-flex sm5 offset-sm1>
                     <div class="form-group">
                         <label for="location">Location</label>
                         <input type="text" v-model='form.location' class="form-control" id="location" aria-describedby="loc" placeholder="eg. Nakuru.." required>
@@ -39,7 +39,7 @@
                     </div>
                 </v-flex>
 
-                <v-flex sm6>
+                <v-flex sm5 offset-sm1>
                     <div class="form-group">
                         <label for="strain">Phone number</label>
                         <input type="text" v-model='form.phone_number' class="form-control" id="phone_number" aria-describedby="idnumber" placeholder="XXX-XXX" required>
@@ -55,7 +55,7 @@
                     <div class="invalid-feedback">Invalid File</div>
                 </div>
 
-                <v-flex sm6>
+                <v-flex sm5 offset-sm1>
                     <fieldset>
                         <label>Specialty:</label><br>
                         <div class="form-group">
@@ -74,7 +74,7 @@
                     </fieldset>
                 </v-flex>
 
-                <v-flex sm6>
+                <v-flex sm5 offset-sm1>
                     <div class="form-group">
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" v-model="form.transport" class="custom-control-input" id="transport" value="true">
@@ -84,7 +84,7 @@
                     </div>
                 </v-flex>
 
-                <v-flex sm6>
+                <v-flex sm5 offset-sm1>
                     <div class="form-group">
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" v-model="form.agree" class="custom-control-input" id="agree">
