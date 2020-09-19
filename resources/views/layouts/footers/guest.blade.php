@@ -1,6 +1,4 @@
-<footer class="footer" style="position: fixed;
-left: 0;
-bottom: 0;margin-top: 200px">
+<footer class="footer">
     <div class="container">
         <nav class="float-left">
         <ul>
@@ -17,7 +15,7 @@ bottom: 0;margin-top: 200px">
         &copy;
         <script>
             document.write(new Date().getFullYear())
-        </script>, Made with <i class="material-icons">favorite</i> ,For A Happier
+        </script>, Made with <i class="material-icons">favorite</i> ,For A Happier    
         <a href="/" style="color: green">Farmer</a> and A Happier Better Africa.
         </div>
     </div>

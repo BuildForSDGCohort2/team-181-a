@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\BroodStore;
+use App\Brood;
 
 class BroodsController extends Controller
 {
@@ -32,9 +34,11 @@ class BroodsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BroodStore $request , Brood $brood)
     {
-        //
+        $validated = $request->validated();
+        $brood->new_brood($validated);
+        return 'Success!';
     }
 
     /**

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\AnimalStore;
+use App\Animal;
+
 
 class AnimalsController extends Controller
 {
@@ -32,9 +35,12 @@ class AnimalsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AnimalStore $request , Animal $animal)
     {
-        return $request->all();
+        $validated = $request->validated();
+        // return $validated;
+        $animal->new_animal($validated);
+        return 'Success!';
     }
 
     /**

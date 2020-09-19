@@ -37,8 +37,8 @@ export default {
                 labels: this.label,
                 datasets: [
                     {
-                        label: 'Bleeds',
-                        backgroundColor: '#f00',
+                        label: 'Daily Sales',
+                        backgroundColor: '#59a44d',
                         data: this.rows
                     }
                 ]

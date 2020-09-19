@@ -40,8 +40,8 @@
     <meta property="og:image" content="https://s3.amazonaws.com/creativetim_bucket/products/154/opt_md_laravel_thumbnail.jpg"/>
     <meta property="og:description" content="Material Dashboard Laravel is a Free Material Bootstrap Admin Preset for Laravel with a fresh, new design inspired by Google's Material Design." />
     <meta property="og:site_name" content="Creative Tim" />
-    
-    <title>{{ __('Material Dashboard Laravel - Free Frontend Preset for Laravel') }}</title>
+
+    <title>{{ __("The Farmer's Assistant.") }}</title>
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('material') }}/img/apple-icon.png">
     <link rel="icon" type="image/png" href="{{ asset('material') }}/img/favicon.png">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
@@ -72,7 +72,7 @@
             <div class="sidebar" data-color="orange" data-background-color="white" data-image="{{ asset('material') }}/img/sidebar-1.jpg">
               <!--
                   Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-            
+
                   Tip 2: you can also add an image using data-image tag
               -->
               <div class="logo">
@@ -165,7 +165,7 @@
     <a class="navbar-brand" href="#">User Management</a>
   </div>
   <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-    
+
   <span class="sr-only">Toggle navigation</span>
   <span class="navbar-toggler-icon icon-bar"></span>
   <span class="navbar-toggler-icon icon-bar"></span>
@@ -315,16 +315,14 @@
   </nav>
   <div class="copyright float-right">
     ©
-    <script>
-      document.write(new Date().getFullYear())
-    </script>, made with <i class="material-icons">favorite</i> by
+    2020, made with <i class="material-icons">favorite</i> by
     <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> and <a href="https://www.updivision.com" target="_blank">UPDIVISION</a> for a better web.
   </div>
 </div>
 </footer>
 </div>
 </div>
-                      
+
 
         <!--   Core JS Files   -->
         <script src="{{ asset('material') }}/js/core/jquery.min.js"></script>

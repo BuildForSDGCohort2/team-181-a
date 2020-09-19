@@ -4,7 +4,7 @@
         <div class="row justify-content-center" style="margin-top: 100px;">
             <v-card style="width: 80%">
                 <v-card-title>
-                    Suppliers
+                    Professionals
                     <v-spacer></v-spacer>
                     <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details></v-text-field>
                 </v-card-title>
