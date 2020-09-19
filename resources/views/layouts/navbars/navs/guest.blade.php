@@ -14,7 +14,7 @@
       <ul class="navbar-nav">
         <li class="nav-item{{ $activePage == 'login' ? ' active' : '' }}">
           <a href="{{ route('login') }}" class="nav-link">
-            <i class="material-icons">mdi-fingerprint</i> {{ __('Login') }}
+            <i class="material-icons">fingerprint</i> {{ __('Login') }}
           </a>
         </li>
 
