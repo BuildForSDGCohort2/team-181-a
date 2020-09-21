@@ -43,7 +43,7 @@ class UserController extends Controller
         $role = $request->input('role');
         $model->create($request->merge(['password' => Hash::make($request->get('password'))])->all());
         $user= User::latest()->first();
-        $user->location=$request->input('location');
+        // $user->location=$request->input('location');
         $user->assignRole($role); 
         $user->save();       
         return redirect()->route('user.index')->withStatus(__('User successfully created.'));
@@ -73,6 +73,9 @@ class UserController extends Controller
     {   
         //return $user();
         $role = $request->input('role');
+    //    $new_loc = $request->location;
+    //    $request->drop('location');
+    //    return print($request);
         //logic to change the user roles
         if (isset($role)) {
             $user->syncRoles([$request->input('role')]);
@@ -82,7 +85,8 @@ class UserController extends Controller
             $request->merge(['password' => Hash::make($request->get('password'))])
                 ->except([$hasPassword ? '' : 'password']
         ));
-        $user->location = $request->input('location');
+        // $user->location = $request->input('location');
+        
         $user->save();
         return redirect()->route('user.index')->withStatus(__('User successfully updated.'));
     }
