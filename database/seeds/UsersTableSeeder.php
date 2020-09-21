@@ -21,6 +21,7 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'last_login'=>now(),
+            'location'=>'admin'
         ]);
         //farmer
         DB::table('users')->insert([
@@ -31,6 +32,8 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'last_login'=>now(),
+            'location'=>'nakuru'
+
         ]);
         // vet
         DB::table('users')->insert([
@@ -41,6 +44,8 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'last_login'=>now(),
+            'location'=>'nakuru'
+
         ]);
         //feo
         DB::table('users')->insert([
@@ -51,6 +56,8 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'last_login'=>now(),
+            'location'=>'nakuru'
+
         ]);
         //supplier
         DB::table('users')->insert([
@@ -61,6 +68,7 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'last_login'=>now(),
+            'location'=>'nakuru'
         ]);
         //customer
         DB::table('users')->insert([
@@ -71,6 +79,7 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'last_login'=>now(),
+            'location'=>'nakuru'
         ]);
         //admin
         DB::table('model_has_roles')->insert([
