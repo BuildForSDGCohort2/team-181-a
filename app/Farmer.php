@@ -19,7 +19,9 @@ class Farmer extends Model
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
+            'last_login'=> null,
         ]);
+        User::latest()->first()->assignRole('farmer');
         #now the farmer's information
         $new_farmer = new Farmer;
         #we must convert the calibration to acres

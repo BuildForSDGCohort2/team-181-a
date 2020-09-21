@@ -32,26 +32,23 @@
                 <span class="sidebar-normal">{{ __('User profile') }} </span>
               </a>
             </li>
+          @can('admin')
             <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
               <a class="nav-link" href="{{ route('user.index') }}">
                 <span class="sidebar-mini"> UM </span>
                 <span class="sidebar-normal"> {{ __('User Management') }} </span>
               </a>
             </li>
+          @endcan
+
           </ul>
         </div>
       </li>
+      @can('farmer_permisions','vet_permissions')
       <li class="nav-item{{ $activePage == 'animals-table'||$activePage== 'animal-show'||$activePage== 'animal-show' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('animal.index') }}">
           <i class="material-icons">pets</i>
             <p>{{ __('My Animals') }}</p>
-        </a>
-      </li>
-      <li class="nav-item{{ $activePage == 'plants-table'||$activePage == 'plants-info' ||$activePage == 'plants-show' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('plant.index') }}">
-          <i class="fa fa-pagelines "></i>
-          <p>{{ __('My Plantations') }}</p>          
-
         </a>
       </li>
       <li class="nav-item{{ $activePage == 'broods-table'||$activePage == 'broods-info' ||$activePage == 'brood-show' ? ' active' : '' }}">
@@ -60,18 +57,32 @@
           <p>{{ __('My Broods') }}</p>
         </a>
       </li>
-      {{-- <li class="nav-item{{ $activePage == 'notifications' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('notifications') }}">
-          <i class="material-icons">notifications</i>
-          <p>{{ __('To Do....') }}</p>
+      @endcan
+      @can('farmer_permisions','feo_permissions')
+      <li class="nav-item{{ $activePage == 'plants-table'||$activePage == 'plants-info' ||$activePage == 'plants-show' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('plant.index') }}">
+          <i class="fa fa-pagelines "></i>
+          <p>{{ __('My Plantations') }}</p>          
+
         </a>
       </li>
+      @endcan
+
+      <li class="nav-item{{ $activePage == 'notifications' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('notifications') }}">
+          <i class="material-icons">notifications</i>
+          <p>{{ auth()->user()->hasRole('supplier')|| auth()->user()->hasRole('customer')?'My orders':'To Do' }}</p>
+        </a>
+      </li>
+      @can('farmer_permisions')
       <li class="nav-item{{ $activePage == 'language' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('language') }}">
-          <i class="material-icons">language</i>
+          <i class="material-icons">Support</i>
           <p>{{ __('Support') }}</p>
         </a>
-      </li> --}}
+      </li>
+      @endcan
+
     </ul>
   </div>
 </div>

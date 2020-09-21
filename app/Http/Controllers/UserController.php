@@ -26,8 +26,9 @@ class UserController extends Controller
      */
     public function create()
     {
-    
-        return view('users.create');
+        $locations=\App\Farmer::all()->pluck('location')->toArray();
+        $locations = array_unique($locations); 
+        return view('users.create')->with('locations',$locations);
     }
 
     /**
@@ -41,10 +42,10 @@ class UserController extends Controller
     {   
         $role = $request->input('role');
         $model->create($request->merge(['password' => Hash::make($request->get('password'))])->all());
-        // $user= User::latest()->first();
+        $user= User::latest()->first();
         $user->location=$request->input('location');
-        // $user->assignRole($role); 
-        // $user->save();       
+        $user->assignRole($role); 
+        $user->save();       
         return redirect()->route('user.index')->withStatus(__('User successfully created.'));
     }
 
@@ -56,9 +57,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {   
-        $spaces=\App\Space::all()->pluck('location')->toArray();
-       $spaces = array_unique($spaces); 
-        return view('users.edit', compact(['user','spaces']));
+        $locations=\App\Farmer::all()->pluck('location')->toArray();
+       $locations = array_unique($locations); 
+        return view('users.edit', compact(['user','locations']));
     }
 
     /**

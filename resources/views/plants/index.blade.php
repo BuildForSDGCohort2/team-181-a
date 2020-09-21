@@ -146,7 +146,7 @@
                          
                       @endphp
 
-                      @if ($dys > 0)                      
+                      @if ($yrs > 0 || $mnths>0 || $dys> -7)                      
                         {{$yrs <1 ?'':$yrs.'yrs'}}
                         {{$mnths <1 ?'':$mnths.'mnths'}} 
                         {{$dys.'days'}} 
@@ -158,7 +158,7 @@
                       @endif   
                     </td>
                     <td class="text-success">
-                      @if ($dys> -7)
+                      @if ($yrs > 0 || $mnths>0 || $dys> -7)
                         {{($plantation->plant_fact_sheet->production_rate * $plantation->size_of_plantation)}} Sacks
                       @else
                       <span class="text-danger">Spoiling In the Farm </span> 

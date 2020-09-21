@@ -21,6 +21,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        if (auth()->user()->hasRole('admin')) {
+            return view('admin.dash');
+        }elseif (auth()->user()->hasRole('vet')||auth()->user()->hasRole('feo')) {
+            return view('prof.dash');
+        }else {
+            return view('dashboard');
+        }   
+        
     }
 }

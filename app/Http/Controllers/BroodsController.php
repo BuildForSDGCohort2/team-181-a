@@ -17,6 +17,7 @@ class BroodsController extends Controller
     {   
         
         $broods = $brood->all();
+        // return $broods;
    
         return view('broods.index') ->with('broods',$broods);
     }

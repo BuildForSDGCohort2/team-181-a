@@ -37,4 +37,10 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+    function authenticated()
+    {
+        auth()->user()->update([
+            'last_login'=>now(),
+        ]);
+    }
 }

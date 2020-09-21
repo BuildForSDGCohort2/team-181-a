@@ -28,7 +28,7 @@ class RolesAndPermissionsSeeder extends Seeder
         # FEo permission.
         Permission::create(['name' => 'feo_permissions']);
         # Admin permission.
-        Permission::create(['name' => 'all_permissions']);
+        Permission::create(['name' => 'admin']);
 
 
 
@@ -38,7 +38,7 @@ class RolesAndPermissionsSeeder extends Seeder
         // this can be done as separate statements
         #grant admin
         $role = Role::create(['name' => 'admin']);
-        $role->givePermissionTo(Permission::all());
+        $role->givePermissionTo('admin');
         #farmer
         $role = Role::create(['name' => 'farmer']);
         $role->givePermissionTo(['farmer_permisions']);

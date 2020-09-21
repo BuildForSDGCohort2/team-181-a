@@ -355,8 +355,8 @@
                       @php
                         $age= now()->diff(date_create($animal->birthday)) 
                       @endphp
-                      {{$age->y}}yrs
-                      {{$age->m}} mnths  
+                      {{$age->y > 0?$age->y.'yrs':''}}
+                      {{$age->m > 0?$age->m.'mnths ':''}}  
                       {{$age->d}} days                      
                         
                       </td>
@@ -372,13 +372,10 @@
                                 {{-- gender checker --}}
                                 @if ($animal->gender == 'female')
                                   {{-- ternary to check pregnancy --}}
-                                  <span class="text-success">{{$animal->reproductive_status == 2? 'Pregnant & Healthy':'Healthy Adolescent' }}</span>
-                                @else
-                                  {{-- productive male --}}
-                                    <span class="text-success">Healthy Adolescent</span>
+                                  <span class="text-success">{{$animal->reproductive_status == 2? 'Pregnant & Healthy':($animal->age > 2 && $animal->age < 4 ? 'Healthy Adolescent':'Healthy Adult') }}</span>
                                 @endif
                             @else
-                                <span class="text-success">Healthy</span>
+                                <span class="text-success">{{($animal->age > 2 && $animal->age < 4 ? 'Healthy Adolescent':'Healthy Adult') }}<</span>
                             @endif
                         @else
                             <span class="text-danger">Unhealthy</span>
