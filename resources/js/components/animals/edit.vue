@@ -1,107 +1,124 @@
 <template>
-<v-layout row justify-center>
-    <v-dialog v-model="dialog" persistent max-width="800px">
-        <v-card>
-            <v-card-title>
-                <span class="headline text-center" style="margin: auto;">Register Animal</span>
-            </v-card-title>
-            <v-divider></v-divider>
-            <v-card-text>
-                <v-container grid-list-md>
-                    <v-card-text>
-                        <v-layout row wrap>
-                            <v-flex sm6>
-                                <label for="">Animal</label>
-                                <el-input placeholder="" v-model="form.name"></el-input>
-                            </v-flex>
-                            <v-flex sm6>
-                                <label for="">Mother</label>
-                                <el-input placeholder="" v-model="form.mothers_name"></el-input>
-                            </v-flex>
+        <div class="modal-dialog">
 
-                            <v-flex sm6>
-                                <label for="">Gender</label><br>
-                                <el-radio v-model="form.gender" label="male">Male</el-radio>
-                                <el-radio v-model="form.gender" label="female">Female</el-radio>
-                            </v-flex>
-                            <v-flex sm6>
-                                <label for="">Weight</label>
-                                <el-input placeholder="" v-model="form.weight"></el-input>
-                            </v-flex>
-                            <v-flex sm6>
-                                <label for="">Species</label><br>
-                                <el-radio v-model="form.species" label="Cow">Cow</el-radio>
-                                <el-radio v-model="form.species" label="Goat">Goat</el-radio>
-                                <el-radio v-model="form.species" label="Sheep">Sheep</el-radio>
-                            </v-flex>
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Register Animal</h4>
+                </div>
+                <div class="modal-body">
+                        <div class="first-column" style='width:45%; float: left;'>
+                            <div class="form-group">
+                                <label for="name">Name Of Animal</label>
+                                <input type="text" class="form-control" v-model='form.name' id="name" aria-describedby="name" placeholder="Enter Name">
+                                <small id="name" class="form-text text-muted">Enter Disired name of animal.</small>
+                                <small class="has-text-danger" v-if="errors.name">{{ errors.name[0] }}</small>
 
-                            <v-flex sm6>
-                                <label for="">Age</label>
-                                <el-input placeholder="" v-model="form.age"></el-input>
-                            </v-flex>
-                            <v-flex sm6>
-                                <label for="">Reproductive st</label>
-                                <el-input placeholder="" v-model="form.reproductive_st"></el-input>
-                            </v-flex>
-                            <v-flex sm6>
-                                <label for="">Stus</label>
-                                <el-input placeholder="" v-model="form.animal"></el-input>
-                            </v-flex>
-                            <v-flex sm6>
-                                <label for="">Health Animal</label>
-                                <el-input placeholder="" v-model="form.health_animal"></el-input>
-                            </v-flex>
-                            <v-flex sm6>
-                                <label for="">Sale Animal</label>
-                                <el-input placeholder="" v-model="form.sale_animal"></el-input>
-                            </v-flex>
-                            <v-flex sm6>
-                                <label for="">Bleed id</label>
-                                <el-select v-model="form.bleed_id" placeholder="Select" style="width: 100%">
-                                    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-                                    </el-option>
-                                </el-select>
-                            </v-flex>
-                            <v-flex sm6>
-                                <label for="">Farmer</label>
-                                <el-select v-model="form.farmer_id" placeholder="Select" style="width: 100%">
-                                    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-                                    </el-option>
-                                </el-select>
-                            </v-flex>
-                            <v-flex sm6>
-                                <label for="">Mother</label>
-                                <el-select v-model="form.mother_id" placeholder="Select" style="width: 100%">
-                                    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-                                    </el-option>
-                                </el-select>
-                            </v-flex>
-                            <v-flex sm6>
-                                <label for="">Father</label>
-                                <el-select v-model="form.father_id" placeholder="Select" style="width: 100%">
-                                    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-                                    </el-option>
-                                </el-select>
-                            </v-flex>
-                        </v-layout>
-                    </v-card-text>
-                </v-container>
-            </v-card-text>
-            <v-card-actions>
-                <v-btn color="blue darken-1" text @click="close">Close</v-btn>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="save" :loading="loading" :disabled="loading">Save</v-btn>
-            </v-card-actions>
-        </v-card>
-    </v-dialog>
-</v-layout>
+                            </div>
+
+                            <fieldset>
+                                <label>Gender:</label><br>
+                                <input type="radio" v-model="form.gender" id="male" value="male" />
+                                <label for="male">Male</label>
+
+                                <input type="radio" v-model="form.gender" id="female" value="female" />
+                                <label for="female">Female</label>
+
+                            </fieldset>
+
+                            <fieldset>
+                                <label>Species:</label><br>
+                                <input type="radio" v-model="form.species" id="cow" value="cow" />
+                                <label for="cow">Cow</label>
+
+                                <input type="radio" v-model="form.species" id="goat" value="goat" />
+                                <label for="goat">Goat</label>
+
+                                <input type="radio" v-model="form.species" id="sheep" value="sheep" />
+                                <label for="sheep">Sheep</label>
+                            </fieldset>
+
+                            <div class="form-group">
+                                <label for="breed">Breed</label>
+                                <select class="form-control form-control-sm" v-model="form.breed_id" required>
+                                    <option value="1">Charolais</option>
+                                    <option value="2">Merino</option>
+
+                                </select>
+                                <small id="momsname" class="form-text text-muted">Select the Breed</small>
+                                <small class="has-text-danger" v-if="errors.breed_id">{{ errors.breed_id[0] }}</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="mothers_name">Mothers Name/id</label>
+                                <input type="text" class="form-control" v-model='form.mothers_name' id="mothers_name" aria-describedby="momsname" placeholder="Enter Name">
+                                <small id="momsname" class="form-text text-muted">Enter The Mothers Name or id</small>
+                                <small class="has-text-danger" v-if="errors.momsname">{{ errors.momsname[0] }}</small>
+                            </div>
+
+                        </div>
+                        <div class="second-column" style='width:45%; float: right;'>
+
+                            <div class="form-group">
+                                <label for="name">Birth-day</label>
+                                <input type="date" class="form-control" v-model='form.birthday' id="birthday" aria-describedby="birthday">
+                                <small id="age" class="form-text text-muted">Enter date of birth.</small>
+                                <small class="has-text-danger" v-if="errors.birthday">{{ errors.birthday[0] }}</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="weight">If Not Sure?... </label>
+                                <input type="text" class="form-control" v-model='form.approx_age' id="approx_age" aria-describedby="approx_age" placeholder="Approximate Age">
+                                <small id="approx_age " class="form-text text-muted">Enter Approximate Age</small>
+                                <small class="has-text-danger" v-if="errors.approx_age">{{ errors.approx_age[0] }}</small>
+                            </div>
+                            <label>Approximatin in:</label><br>
+                            <input type="radio" v-model="form.approximation" id="months" value="months" />
+                            <label for="months">Months</label>
+
+                            <input type="radio" v-model="form.approximation" id="years" value="years" />
+                            <label for="years">Years</label>
+
+                            <div class="form-group">
+                                <label for="weight">Weight</label>
+                                <input type="text" class="form-control" v-model='form.weight' id="weight" aria-describedby="animals_weight" placeholder="Enter Weight" required>
+                                <small id="animals_weight " class="form-text text-muted">Enter the animals Weight</small>
+                                <small class="has-text-danger" v-if="errors.weight">{{ errors.weight[0] }}</small>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="health_status" v-model="form.health_status">
+                                    <label class="custom-control-label" for="health_status"> Is the animal <span class="text-danger">Healthy</span>?</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="pregnancy_status" v-model="form.pregnancy_status">
+                                    <label class="custom-control-label" for="pregnancy_status"> Is the animal <span class="text-success">Pregnant</span>?</label>
+                                </div>
+                            </div>
+
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button @click="save" class="btn btn-info" value="Submit">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
 </template>
+
 <script>
+import {
+    mapState
+} from 'vuex';
 export default {
     data: () => ({
         dialog: false,
         form: {},
-        errors: {},
         options: [{
             value: 'Option1',
             label: 'Option1'
@@ -143,9 +160,7 @@ export default {
         }
     },
     computed: {
-        loading() {
-            return this.$store.getters.loading;
-        },
+        ...mapState(['loading', 'errors'])
     },
 };
 </script>

@@ -1,62 +1,142 @@
 <template>
-<v-main>
-    <v-container fluid fill-height>
-        <v-layout justify-center align-center wrap>
-            <v-flex sm12>
-                <v-card style="padding: 20px 0;">
-                    <el-breadcrumb separator-class="el-icon-arrow-right">
-                        <el-breadcrumb-item :to="{ path: '/' }">Dashboard</el-breadcrumb-item>
-                        <el-breadcrumb-item>Plantations</el-breadcrumb-item>
-                    </el-breadcrumb>
-                </v-card>
-            </v-flex>
-            <v-flex sm12>
-                <!-- <myFilter :form="form" :user="user" style></myFilter> -->
-            </v-flex>
-            <v-flex sm12>
-                <v-card style="padding: 10px 0;">
-                    <v-layout row>
-                        <v-flex sm1 style="margin-left: 10px;">
-                            <v-tooltip right>
-                                <template v-slot:activator="{ on }">
-                                    <v-btn icon v-on="on" slot="activator" class="mx-0" @click="getPlantation">
-                                        <v-icon color="blue darken-2" small>mdi-refresh</v-icon>
-                                    </v-btn>
-                                </template>
-                                <span>Refresh</span>
-                            </v-tooltip>
-                        </v-flex>
-                        <v-flex sm2>
-                            <h3 style="margin-left: 30px !important;margin-top: 10px;">Plantations</h3>
-                        </v-flex>
-                        <v-flex offset-sm8 sm2>
-                            <v-btn color="info" @click="openCreate" text>Register Plantation</v-btn>
-                        </v-flex>
-                    </v-layout>
-                </v-card>
-            </v-flex>
-            <v-flex sm12>
-                <!-- <v-pagination v-model="plantation.current_page" :length="plantation.last_page" total-visible="5" @input="next_page(plantation.path, plantation.current_page)" circle v-if="plantation.last_page > 1"></v-pagination> -->
-            </v-flex>
-            <v-flex sm12>
-                <v-card>
-                    <v-card-title>
-                        Plantations
-                        <v-spacer></v-spacer>
-                        <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details></v-text-field>
-                    </v-card-title>
-                    <v-data-table :headers="headers" :items="plantation_data" :search="search">
-                        <template v-slot:item.species="{ item }">
-                            <v-btn @click="openEdit(item)" text color="primary">{{ item.species }}</v-btn>
-                        </template>
-                    </v-data-table>
-                </v-card>
-            </v-flex>
-        </v-layout>
-    </v-container>
-    <Create></Create>
-    <Edit></Edit>
-</v-main>
+<div class="card">
+    <div class="card-header card-header-primary">
+        <h4 class="card-title ">Plantations On Farm..</h4>
+        <p class="card-category"> Showing six (6) Plantations</p>
+        <button type="button" class="btn btn-small btn-warning" data-toggle="modal" data-target="#plant_modal" style="float: right;">Add plantation</button>
+
+    </div>
+    <div id="plant_modal" class="modal fade" role="dialog">
+        <Create />
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table">
+                <thead class=" text-success">
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        Species
+                    </th>
+                    <th>
+                        Area Covered
+                    </th>
+                    <th>
+                        Remaining Time To Expected harvest
+                    </th>
+                    <th>
+                        Expected Produce
+                    </th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            Maize <a href="#"><span style="color: rgb(19, 197, 108)">(Katumani)</span></a>
+                        </td>
+                        <td>
+                            10 Acres
+                        </td>
+                        <td>
+                            1 Month 3 Days
+                        </td>
+                        <td class="text-success">
+                            100 Sacks
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            2
+                        </td>
+                        <td>
+                            Wheat <a href="#"><span style="color: rgb(19, 197, 108)">(EinKorn)</span></a>
+                        </td>
+                        <td>
+                            10 Acres
+                        </td>
+                        <td>
+                            1 Month 3 Days
+                        </td>
+                        <td class="text-success">
+                            100 Sacks
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            3
+                        </td>
+                        <td>
+                            Beans <a href="#"><span style="color: rgb(19, 197, 108)">(Rose Coco)</span></a>
+                        </td>
+                        <td>
+                            14 Acres
+                        </td>
+                        <td>
+                            <span style="color: red"> Past Due!</span>
+                        </td>
+                        <td class="text-success">
+                            15 Sacks
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            4
+                        </td>
+                        <td>
+                            Tea <a href="#"><span style="color: rgb(19, 197, 108)">(Purple Tea)</span></a>
+                        </td>
+                        <td>
+                            14 Acres
+                        </td>
+                        <td>
+                            0 Months 3 Days
+                        </td>
+                        <td class="text-success">
+                            15 Tonnes
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            3
+                        </td>
+                        <td>
+                            Beans <a href="#"><span style="color: rgb(19, 197, 108)">(Rose Coco)</span></a>
+                        </td>
+                        <td>
+                            14 Acres
+                        </td>
+                        <td>
+                            <span style="color: rgb(19, 197, 108)">Ready!</span>
+                        </td>
+                        <td class="text-success">
+                            15 Sacks
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            6
+                        </td>
+                        <td>
+                            Grapes <a href="#"><span style="color: rgb(19, 197, 108)">(Green Grapes)</span></a>
+                        </td>
+                        <td>
+                            14 Acres
+                        </td>
+                        <td>
+                            0 Months 3 Days
+                        </td>
+                        <td class="text-success">
+                            15 Sacks
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 </template>
 
 <script>
@@ -205,19 +285,8 @@ export default {
 };
 </script>
 
-<style scoped>
-.el-input--prefix .el-input__inner {
-    border-radius: 50px !important;
-}
-
-.v-toolbar__content,
-.v-toolbar__extension {
-    height: auto !important;
-}
-
-.v-avatar {
-    height: 10px !important;
-    width: 10px !important;
-    margin-left: 40% !important;
+<style>
+.has-text-danger {
+    color: #f00 !important;
 }
 </style>

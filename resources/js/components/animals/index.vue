@@ -1,62 +1,162 @@
 <template>
-<v-main>
-    <v-container fluid fill-height>
-        <v-layout justify-center align-center wrap>
-            <v-flex sm12>
-                <v-card style="padding: 20px 0;">
-                    <el-breadcrumb separator-class="el-icon-arrow-right">
-                        <el-breadcrumb-item :to="{ path: '/' }">Dashboard</el-breadcrumb-item>
-                        <el-breadcrumb-item>Animals</el-breadcrumb-item>
-                    </el-breadcrumb>
-                </v-card>
-            </v-flex>
-            <v-flex sm12>
-                <!-- <myFilter :form="form" :user="user" style></myFilter> -->
-            </v-flex>
-            <v-flex sm12>
-                <v-card style="padding: 10px 0;">
-                    <v-layout row>
-                        <v-flex sm1 style="margin-left: 10px;">
-                            <v-tooltip right>
-                                <template v-slot:activator="{ on }">
-                                    <v-btn icon v-on="on" slot="activator" class="mx-0" @click="getAnimal">
-                                        <v-icon color="blue darken-2" small>mdi-refresh</v-icon>
-                                    </v-btn>
-                                </template>
-                                <span>Refresh</span>
-                            </v-tooltip>
-                        </v-flex>
-                        <v-flex sm2>
-                            <h3 style="margin-left: 30px !important;margin-top: 10px;">Animals</h3>
-                        </v-flex>
-                        <v-flex offset-sm8 sm2>
-                            <v-btn color="info" @click="openCreate" text>Register Animal</v-btn>
-                        </v-flex>
-                    </v-layout>
-                </v-card>
-            </v-flex>
-            <v-flex sm12>
-                <!-- <v-pagination v-model="animal.current_page" :length="animal.last_page" total-visible="5" @input="next_page(animal.path, animal.current_page)" circle v-if="animal.last_page > 1"></v-pagination> -->
-            </v-flex>
-            <v-flex sm12>
-                <v-card>
-                    <v-card-title>
-                        Animals
-                        <v-spacer></v-spacer>
-                        <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details></v-text-field>
-                    </v-card-title>
-                    <v-data-table :headers="headers" :items="animal_data" :search="search">
-                        <template v-slot:item.name="{ item }">
-                            <v-btn @click="openEdit(item)" text color="primary">{{ item.name }}</v-btn>
-                        </template>
-                    </v-data-table>
-                </v-card>
-            </v-flex>
-        </v-layout>
-    </v-container>
-    <Create></Create>
-    <Edit></Edit>
-</v-main>
+<div class="card">
+    <div class="card-header card-header-primary">
+        <h4 class="card-title ">Animals List</h4>
+        <p class="card-category"> Here is a subtitle for this table</p>
+        <button type="button" class="btn btn-small btn-warning" data-toggle="modal" data-target="#animal_r_modal" style="float: right;">Register Animal</button>
+    </div>
+    <div id="animal_r_modal" class="modal fade" role="dialog">
+        <Create />
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table">
+                <thead class=" text-success">
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Breed
+                    </th>
+                    <th>
+                        Age
+                    </th>
+                    <th>
+                        Info
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            <a href="#"> <span style="color: black" @click="openEdit">Thomas</span><span style="color: rgb(19, 197, 108)">&nbsp;(Bull)</span></a>
+                        </td>
+                        <td>
+                            <a href="breed_info"><span style="color: black">Charolais</span></a>
+                        </td>
+                        <td>
+                            12
+                        </td>
+                        <td class="text-primary">
+                            <span style="color: rgb(19, 197, 108)">540Kg</span>
+                        </td>
+                        <td>
+                            Healthy
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            2
+                        </td>
+                        <td>
+                            <a href="#"> <span style="color: black">Jane</span><span style="color: rgb(19, 197, 108)">&nbsp;(Cow)</span></a>
+                        </td>
+                        <td>
+                            <a href="#"> <span style="color: black">Fresian</span></a>
+                        </td>
+                        <td>
+                            12
+                        </td>
+                        <td class="text-primary">
+                            <span style="color: rgb(19, 197, 108)">20lts/day</span>
+                        </td>
+                        <td>
+                            Sick <span style="color: red">&nbsp;(Yellow Fever)</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            3
+                        </td>
+                        <td>
+                            <a href="#"> <span style="color: black">Ndun'gu</span><span style="color: rgb(19, 197, 108)">&nbsp;(Billy Goat)</span></a>
+                        </td>
+                        <td>
+                            <a href="#"> <span style="color: black">Saaneen</span></a>
+                        </td>
+                        <td>
+                            8
+                        </td>
+                        <td class="text-primary">
+                            <span style="color: rgb(19, 197, 108)">&nbsp;80Kg</span>
+                        </td>
+                        <td>
+                            Healthy <span style="color: rgb(39, 144, 21)">&nbsp;(Prime)</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            4
+                        </td>
+                        <td>
+                            <a href="#"> <span style="color: black">Lucka</span><span style="color: rgb(19, 197, 108)">&nbsp;(Ram)</span></a>
+                        </td>
+                        <td>
+                            <a href="#"> <span style="color: black">Merino</span></a>
+                        </td>
+                        <td>
+                            8
+                        </td>
+                        <td class="text-primary">
+                            <span style="color: rgb(19, 197, 108)">&nbsp;50Kg</span>
+                        </td>
+                        <td>
+                            Healthy <span style="color: rgb(39, 144, 21)">&nbsp;(Prime)</span>
+                        </td>
+                    </tr>
+                    <td>
+                        5
+                    </td>
+                    <td>
+                        <a href=#> <span style="color: black">Avril</span><span style="color: rgb(19, 197, 108)">&nbsp;(F-Rabit)</span></a>
+                    </td>
+                    <td>
+                        <a href="#"> <span style="color: black">Belgian Hare</span></a>
+                    </td>
+                    <td>
+                        3
+                    </td>
+                    <td class="text-primary">
+                        <span style="color: rgb(19, 197, 108)">&nbsp;30kg</span>
+                    </td>
+                    <td>
+                        Healthy
+                    </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            6
+                        </td>
+                        <td>
+                            <a href="#"> <span style="color: black">Mary</span><span style="color: rgb(19, 197, 108)">&nbsp;(F-Pig)</span></a>
+                        </td>
+                        <td>
+                            <a href="#"> <span style="color: black">Large White</span></a>
+                        </td>
+                        <td>
+                            5
+                        </td>
+                        <td class="text-primary">
+                            <span style="color: rgb(19, 197, 108)">&nbsp;340Kg</span>
+                        </td>
+                        <td>
+                            Healthy <span style="color: rgb(39, 144, 21)">&nbsp;(PG)</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <Edit />
+</div>
 </template>
 
 <script>
@@ -75,6 +175,7 @@ export default {
     data() {
         return {
             search: "",
+            form: {},
             headers: [{
                 text: 'Id',
                 align: 'start',
@@ -101,7 +202,7 @@ export default {
                 'health_status': 'Health',
                 gender: 'male',
                 species: 'Cow'
-            },{
+            }, {
                 'id': 2,
                 'name': 'Jane',
                 'mother_name': 'Mary',
@@ -110,7 +211,7 @@ export default {
                 'health_status': 'Health',
                 gender: 'Female',
                 species: 'Cow'
-            },{
+            }, {
                 'id': 3,
                 'name': 'Mary',
                 'mother_name': 'P',
@@ -119,7 +220,7 @@ export default {
                 'health_status': 'Unhealthy',
                 gender: 'male',
                 species: 'Goat'
-            },{
+            }, {
                 'id': 4,
                 'name': 'Tom',
                 'mother_name': 'Paul',
@@ -128,7 +229,7 @@ export default {
                 'health_status': 'Health',
                 gender: 'male',
                 species: 'Cow'
-            },{
+            }, {
                 'id': 5,
                 'name': 'Tom',
                 'mother_name': 'Mary',
@@ -191,9 +292,22 @@ export default {
             }
             this.$store.dispatch("nextPage", payload);
         },
+        save() {
+            var payload = {
+                model: 'animal',
+                data: this.form
+            }
+            this.$store.dispatch('postItems', payload)
+                .then(response => {
+                    eventBus.$emit("AnimalEvent")
+                });
+        },
+        close() {
+            this.dialog = false;
+        }
     },
     computed: {
-        ...mapState(['animals'])
+        ...mapState(['animals', 'errors'])
     },
     mounted() {
         // this.$store.dispatch('getAnimal');
@@ -226,8 +340,8 @@ export default {
 };
 </script>
 
-<style scoped>
-.el-input--prefix .el-input__inner {
+<style>
+/* .el-input--prefix .el-input__inner {
     border-radius: 50px !important;
 }
 
@@ -240,5 +354,9 @@ export default {
     height: 10px !important;
     width: 10px !important;
     margin-left: 40% !important;
+} */
+
+.has-text-danger {
+    color: #f00 !important;
 }
 </style>

@@ -55,6 +55,10 @@ import myProfessional from './components/browse/professional'
 
 import myCharts from './components/charts'
 
+
+import myAnimal from "./components/animals";
+import myPlantation from "./components/plantation";
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -70,6 +74,6 @@ const app = new Vue({
     components: {
         // myHeader, myApp,
         mySupplier, myHome, myProfessional,
-        myCharts
+        myCharts, myAnimal, myPlantation
     },
 });
