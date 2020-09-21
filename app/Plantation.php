@@ -31,6 +31,6 @@ class Plantation extends Model
         return $this->belongsTo('App\User');
     }
     public function plant_fact_sheet(){
-        return $this->belongsTo('App\Plant_Fact_sheet','type_id');
+        return $this->belongsTo('App\Plant_fact_sheet','type_id');
     }
 }
