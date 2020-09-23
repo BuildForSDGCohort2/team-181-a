@@ -10,10 +10,10 @@
                 </v-card-title>
                 <v-data-table :headers="headers" :items="supplier_data" :search="search">
                     <template v-slot:item.name="{ item }">
-                            <v-btn @click="openShow(item)" text color="primary">{{ item.name }}</v-btn>
+                            <v-btn @click="openShow(item)" text :color="color">{{ item.name }}</v-btn>
                         </template>
                     <template v-slot:item.rating="{ item }">
-                            <v-rating v-model="item.rating" readonly half-increments></v-rating>
+                            <v-rating v-model="item.rating" readonly half-increments :color="color"></v-rating>
 
                         </template>
                 </v-data-table>
@@ -44,6 +44,7 @@ export default {
     components: {},
     data() {
         return {
+            color: 'rgb(255, 179, 0)',
             search:'',
             headers: [{
                     text: 'Name',

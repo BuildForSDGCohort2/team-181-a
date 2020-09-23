@@ -1,15 +1,14 @@
 <template>
 <v-dialog v-model="dialog" persistent max-width="600px">
     <v-card>
-        <v-card-title primary-title>
-
-                <h4 class="modal-title" style="color: black"> Register as a <span
-                        style="color: rgb(255, 179, 0)">proffessional</span></h4>
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="color: black"> Register as a <span style="color: rgb(255, 179, 0)">proffessional</span></h4>
                 <small class="form-text text-muted">Successful Applicants will Recieve confirmatory email</small>
-        </v-card-title>
-        <VDivider />
-        <v-card-text>
-            <v-layout row wrap>
+
+            </div>
+            <div class="modal-body">
 
                 <div class="first-column" style='width:45%; float: left;'>
                     <div class="form-group">
@@ -23,7 +22,7 @@
                         <label for="strain">Id number</label>
                         <input type="text" v-model='form.id_number' class="form-control" id="id_number" aria-describedby="idnumber" placeholder="XXX-XXX" required>
                         <small id="idnnumber" class="form-text text-muted">Enter Id number</small>
-                        <small class="has-text-danger" v-if="errors.id_number">{{ errors.id_number[0] }}</small>
+                        <small class="has-text-danger" v-if="errors.email">{{ errors.email[0] }}</small>
                     </div>
                     <div class="form-group">
                         <label for="strain">Phone number</label>
@@ -41,15 +40,25 @@
 
                         <input type="radio" v-model="form.specialty" id="other" value="other" />
                         <label for="other">Other</label>
+                        <small class="has-text-danger" v-if="errors.specialty">{{ errors.specialty[0] }}</small>
                     </fieldset>
                     <div class="form-group">
-                        <label for="size">If Other Please Specify</label>
-                        <input type="text" v-model='form.size' class="form-control" id="size" aria-describedby="size" placeholder="Enter The Specialty">
-                        <small id="size" class="form-text text-muted">Please Specify </small>
+                        <label for="other">If Other Please Specify</label>
+                        <input type="text" v-model='form.other' class="form-control" id="other" aria-describedby="other" placeholder="Enter The Specialty">
+                        <small id="other" class="form-text text-muted">Please Specify </small>
+                        <small class="has-text-danger" v-if="errors.other">{{ errors.other[0] }}</small>
                     </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" v-model='form.location' class="form-control" id="location" aria-describedby="loc" placeholder="eg. Nakuru.." required>
+                        <small id="loc" class="form-text text-muted">Enter Location</small>
+                        <small class="has-text-danger" v-if="errors.location">{{ errors.location[0] }}</small>
+                    </div>
+
                 </div>
 
                 <div class="second-column" style='width:45%; float: right;'>
+
                     <div class="form-group">
                         <label for="strain">Id number</label>
                         <input type="text" v-model='form.id_number' class="form-control" id="id_number" aria-describedby="idnumber" placeholder="XXX-XXX" required>
@@ -67,41 +76,42 @@
                     <div class="form-group">
                         <label for="exp">Years Of Expirience</label>
                         <input type="text" class="form-control" v-model='form.exp' id="exp" aria-describedby="expirience" placeholder="0">
-                        <small id="expirience" class="form-text text-muted">Please indicate the Number of years of
-                            Experience .</small>
+                        <small id="expirience" class="form-text text-muted">Please indicate the Number of years of Experience .</small>
                         <small class="has-text-danger" v-if="errors.exp">{{ errors.exp[0] }}</small>
                     </div>
 
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="validatedCustomFile" required>
-                        <label class="custom-file-label" for="validatedCustomFile">Upload CV</label>
+                        <input type="file" class="custom-file-input" name="file" id="file" required>
+                        <label class="custom-file-label" for="file">Upload <span class="text-danger">CV</span> </label>
                         <div class="invalid-feedback">Invalid File</div>
                     </div>
 
                     <div class="form-group">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="agree" v-model="form.agree" required>
-                            <label class="custom-control-label" for="customCheck1"> Agree to <a href="#" class="text-primary">terms and conditions</a> </label>
+                            <input type="checkbox" class="custom-control-input" id="agre" name="agre" required>
+                            <label class="custom-control-label" for="agre"> Agree to <a href="#" class="text-primary">terms and conditions</a> </label>
                         </div>
                     </div>
 
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-info" @click="save">Submit</button>
-                    <button type="button" class="btn btn-default" @click="dialog = false">Cancel</button>
-                </div>
-                <input type="hidden" id="reg_type" v-model="form.reg_type" value="proffessional">
 
-            </v-layout>
+            </div>
+            <div class="modal-footer">
+                <button @click="save" class="btn btn-info" value="Submit">Submit</button>
+                <button type="button" class="btn btn-default" @click="dialog = false">Cancel</button>
+            </div>
+            <input type="hidden" id="reg_type" name="reg_type" value="proffessional">
 
-        </v-card-text>
+        </div>
+
     </v-card>
-
 </v-dialog>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import {
+    mapState
+} from 'vuex';
 export default {
     data() {
         return {
@@ -112,7 +122,7 @@ export default {
     methods: {
         save() {
             var payload = {
-                model: 'professional/register',
+                model: 'profesionals_enrole',
                 data: this.form
             }
             this.$store.dispatch('postItems', payload)

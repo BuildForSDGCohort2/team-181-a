@@ -53,6 +53,9 @@ import myHome from './components/register'
 import mySupplier from './components/browse/supplier'
 import myProfessional from './components/browse/professional'
 
+
+import myRegsupply from './components/register/supplier'
+
 import myCharts from './components/charts'
 
 
@@ -74,6 +77,6 @@ const app = new Vue({
     components: {
         // myHeader, myApp,
         mySupplier, myHome, myProfessional,
-        myCharts, myAnimal, myPlantation
+        myCharts, myAnimal, myPlantation, myRegsupply
     },
 });

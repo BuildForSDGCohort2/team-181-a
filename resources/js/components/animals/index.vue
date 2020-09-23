@@ -161,7 +161,7 @@
 
 <script>
 import Create from "./create";
-import Edit from "./edit";
+// import Edit from "./edit";
 import {
     mapState
 } from 'vuex';
@@ -170,7 +170,7 @@ export default {
     props: ['user'],
     components: {
         Create,
-        Edit,
+        // Edit,
     },
     data() {
         return {
