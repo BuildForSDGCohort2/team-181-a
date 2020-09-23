@@ -108,7 +108,7 @@ class Animal extends Model
     {   
         $age =Animal::age_calculator($validated);
         
-        if ( array_key_exists('pregnancy_status',$validated))  {
+        if ( $validated['gender'] =='female'&& array_key_exists('pregnancy_status',$validated))  {
             return 2; #pregnant
         } elseif ($age > Animal_Fact_sheet::find($validated['breed_id'])->reproductive_age ) {
             return 1;#active
@@ -127,7 +127,7 @@ class Animal extends Model
     }
     
     public function farmer(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User','id');
     }
     public function breed(){
         return $this->belongsTo('App\Animal_Fact_sheet');

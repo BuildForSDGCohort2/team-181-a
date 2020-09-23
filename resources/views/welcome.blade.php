@@ -289,6 +289,9 @@
 
   </div>
 </div>
+
+
+{{--  farmers Modal  --}}
 <div id="farmers_modal" class="modal fade " role="dialog" style="margin-top: 10%; ">
   <div class="modal-dialog">
     <!-- Modal content-->

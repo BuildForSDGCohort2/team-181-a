@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use DB;
 
 
 class Proffesional extends Model
@@ -27,5 +28,15 @@ class Proffesional extends Model
         $prof->exp=$validated['exp'];
         $prof->save();
     }
+    public function pending_requests()
+    {
+        return DB::table('proffesionals')
+                    ->where('status','=',0)
+                    ->get();
+    }
 
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

@@ -69,7 +69,7 @@
       @endcan
 
       <li class="nav-item{{ $activePage == 'notifications' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('notifications') }}">
+        <a class="nav-link" href="{{auth()->user()->hasRole('admin')?route('notifications'):route('issues') }}">
           <i class="material-icons">notifications</i>
           <p>{{ auth()->user()->hasRole('supplier')|| auth()->user()->hasRole('customer')?'My orders':'To Do' }}</p>
         </a>

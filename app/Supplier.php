@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Supplier extends Model
 {
@@ -19,12 +20,22 @@ class Supplier extends Model
         #supe the one being registerd has never been rated before...
         $sup->ratings= 0;      
         if (array_key_exists('hardware',$validated) && array_key_exists('agrovet',$validated) ) {
-            $sup->specialty = 'All';
+            $sup->specialty = 'all';
         } else {
-            $sup->specialty = (array_key_exists('hardware',$validated) ? 'Hardware' : 'Agrovet');
+            $sup->specialty = (array_key_exists('hardware',$validated) ? 'hardware' : 'agrovet');
         }        
-        $sup->transport =(array_key_exists('transport',$validated) ? 'Able' : 'Unable') ;
+        $sup->transport =(array_key_exists('transport',$validated) ? 'able' : 'unable') ;
         $sup->ratings = 0;
         $sup->save();
+    }
+    public function pending_suplier_requests()
+    {
+        return DB::table('suppliers')
+                    ->where('status','=',0)
+                    ->get();
+    }
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 }

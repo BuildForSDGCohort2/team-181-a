@@ -66,9 +66,6 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('pages.map');
 	})->name('map');
 
-	Route::get('notifications', function () {
-		return view('pages.notifications');
-	})->name('notifications');
 
 	Route::get('rtl-support', function () {
 		return view('pages.language');
@@ -87,11 +84,17 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
+	Route::resource('animal', 'AnimalsController', ['except' => ['create']]);
+	Route::resource('plant', 'PlantsController', ['except' => ['create']]);
+	Route::resource('brood', 'BroodsController', ['except' => ['create']]);
+	Route::get('notifications','NotificationsController@notification_selector')->name('notifications');
+	Route::get('pending_suppliers','NotificationsController@get_suppliers')->name('pending_suppliers');
+	Route::get('orders','NotificationsController@get_orders')->name('orders');
+	Route::get('issues','NotificationsController@get_issues')->name('issues');
+
 });
 
-Route::resource('animal', 'AnimalsController', ['except' => ['create']]);
-Route::resource('plant', 'PlantsController', ['except' => ['create']]);
-Route::resource('brood', 'BroodsController', ['except' => ['create']]);
+
 
 // enrolement
 Route::post('profesionals_enrole','EnrolmentController@profesionals_enrole')->name('profesionals_enrole');

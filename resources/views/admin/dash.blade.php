@@ -11,7 +11,7 @@
                 <i class="material-icons">content_copy</i>
               </div>
               <p class="card-category">Tasks</p>
-              <h3 class="card-title">49/50
+              <h3 class="card-title">{{count($proffesionals)+count($suppliers)}}
                 <small>Requests</small>
               </h3>
             </div>
@@ -31,7 +31,8 @@
                 <i class="material-icons">store</i>
               </div>
               <p class="card-category">Revenue</p>
-              <h3 class="card-title">$34,245</h3>
+               {{-- would calculate the number from the confirmed orders --}}
+              <h3 class="card-title">Ksh 34,245</h3>
             </div>
             <div class="card-footer">
               {{-- date of last harvest --}}
@@ -66,7 +67,7 @@
                 <i class="fa fa-handshake-o "></i>
               </div>
               <p class="card-category">On Board</p>
-              <h3 class="card-title">+245</h3>
+            <h3 class="card-title">+{{count($latest_logins)-1}}</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
@@ -151,21 +152,21 @@
                   <span class="nav-tabs-title">Pending Aprovals</span>
                   <ul class="nav nav-tabs" data-tabs="tabs">
                     <li class="nav-item">
-                      <a class="nav-link active" href="#profile" data-toggle="tab">
+                      <a class="nav-link active" href="#vets" data-toggle="tab">
                         <i class="material-icons" >biotech</i>
                         Vets
                         <div class="ripple-container"></div>
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#messages" data-toggle="tab">
+                      <a class="nav-link" href="#feo" data-toggle="tab">
                         <i class="fa fa-pagelines "></i>
                           Field Ext Officers
                         <div class="ripple-container"></div>
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#settings" data-toggle="tab">
+                      <a class="nav-link" href="#supplier" data-toggle="tab">
                         <i class="fa fa-truck" style="font-size:20px;" aria-hidden="true"></i>
                         Suppliers
                         <div class="ripple-container"></div>
@@ -177,213 +178,102 @@
             </div>
             <div class="card-body">
               <div class="tab-content">
-                <div class="tab-pane active" id="profile">
+                <div class="tab-pane active" id="vets">
                   <table class="table">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="" checked>
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Sign contract for "What are conference organizers afraid of?"</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                        </td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="" checked>
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Create 4 Invisible User Experiences you Never Knew About</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
+                    <tbody>                        
+                        @forelse ($proffesionals as $proffesional)
+                        
+                            @if ($proffesional->specialty == 'vet')
+                            <tr>
+                              <td>      
+                                {{'Dr :'}}
+                              </td>
+                                <td>        
+                                  {{$proffesional->name.'  From '.$proffesional->location}} 
+                                </td>
+                                <td class="td-actions text-right">
+                                  <button type="button" rel="tooltip" title="Expirience" class="btn btn-primary btn-link btn-sm">
+                                    @if ($proffesional->exp>0)
+                                      @for ($i = 0; $i < strval($proffesional->exp); $i++)
+                                      <span class="fa fa-star"></span>
+                                      @if ($i == 5)
+                                          @break
+                                      @endif
+                                      @endfor
+                                    @endif
+
+                                  </button>
+                                </td>
+                            </tr>
+                              @else
+                                @continue
+                              @endif
+                            @empty
+                              {{__('No reqyests')}}                     
+                          @endforelse
                     </tbody>
                   </table>
                 </div>
-                <div class="tab-pane" id="messages">
+                <div class="tab-pane" id="feo">
                   <table class="table">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="" checked>
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                        </td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Sign contract for "What are conference organizers afraid of?"</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
+                    <tbody>                        
+                        @forelse ($proffesionals as $proffesional)
+                        
+                            @if ($proffesional->specialty == 'feo')
+                            <tr>
+                              <td>      
+                                {{'Officer :'}}
+                              </td>
+                                <td>        
+                                  {{$proffesional->name.'  From '.$proffesional->location}} 
+                                </td>
+                                <td class="td-actions text-right">
+                                  <button type="button" rel="tooltip" title="Expirience" class="btn btn-primary btn-link btn-sm">
+                                    @if ($proffesional->exp>0)
+                                      @for ($i = 0; $i < strval($proffesional->exp); $i++)
+                                      <span class="fa fa-star"></span>
+                                      @if ($i == 5)
+                                          @break
+                                      @endif
+                                      @endfor
+                                    @endif
+
+                                  </button>
+                                </td>
+                            </tr>
+                              @else
+                                @continue
+                              @endif
+                            @empty
+                              {{__('No reqyests')}}                     
+                          @endforelse
                     </tbody>
                   </table>
                 </div>
-                <div class="tab-pane" id="settings">
+                <div class="tab-pane" id="supplier">
                   <table class="table">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="" checked>
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                        </td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="" checked>
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Sign contract for "What are conference organizers afraid of?"</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
+                    <tbody>                        
+                        @forelse ($suppliers as $supplier)
+                            <tr>
+                              <td>      
+                                {{$supplier->id}}
+                              </td>
+                                <td>        
+                                  {{$supplier->name.'  From '.$supplier->location}} 
+                                </td>
+                                <td class="td-actions text-right">
+                                  <button type="button" rel="tooltip" title="Expirience" class="btn btn-primary btn-link btn-sm">
+                                    @if ($supplier->transport == 'able')
+                                    <i class="fa fa-truck" style="font-size:20px;" aria-hidden="true"></i>
+                                    @endif
+
+                                  </button>
+                                </td>
+                            </tr>
+
+                            @empty
+                              {{__('No reqyests')}}                     
+                          @endforelse
                     </tbody>
                   </table>
                 </div>
@@ -431,34 +321,35 @@
                     <thead class="text-warning">
                       <th>ID</th>
                       <th>Name</th>
-                      <th>Breed</th>
-                      <th>Amount</th>
+                      <th>Location</th>
+                      <th>date</th>
                     </thead>
                     <tbody>
+                      @forelse ($latest_logins as $user)
+                      
+                      @if ($user->hasRole('vet'))
+                          
                       <tr>
-                        <td>1</td>
-                        <td>Dakota Rice</td>
-                        <td>$36,738</td>
-                        <td>Niger</td>
-                      </tr>
+                        <td>{{$user->id}}</td>
+                        <td>{{ucfirst($user->name)}}</td>
+                        <td>{{ucfirst($user->location)}}</td>
+                        @if ( now()->diff(date_create($user->last_login))->d == 0)
+                            <td>{{'Today'}}</td>
+                        @else
+                        <td>{{ now()->diff(date_create($user->last_login))->d.(now()->diff(date_create($user->last_login))->d >1 ?' days ': ' day ').' ago '}}</td>
+                        @endif
+                    </tr>
+
+                      @endif
+  
+                      @empty
                       <tr>
-                        <td>2</td>
-                        <td>Minerva Hooper</td>
-                        <td>$23,789</td>
-                        <td>Curaçao</td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>Sage Rodriguez</td>
-                        <td>$56,142</td>
-                        <td>Netherlands</td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>Philip Chaney</td>
-                        <td>$38,735</td>
-                        <td>Korea, South</td>
-                      </tr>
+                        <td>--</td>
+                        <td>No</td>
+                        <td>Priveous</td>
+                        <td>logins</td>
+                      </tr>                          
+                      @endforelse
                     </tbody>
                   </table>
                 </div>
@@ -466,35 +357,36 @@
                   <table class="table table-hover">
                     <thead class="text-warning">
                       <th>ID</th>
-                      <th>Name/Year/Pereod</th>
-                      <th>Number/Type</th>
-                      <th>Amount</th>
+                      <th>Name</th>
+                      <th>Location</th>
+                      <th>date</th>
                     </thead>
                     <tbody>
+                      @forelse ($latest_logins as $user)
+                      
+                      @if ($user->hasRole('feo'))
+                          
                       <tr>
-                        <td>1</td>
-                        <td>Maize (Jan-Sep-2020)</td>
-                        <td>560A</td>
-                        <td>Ksh. 10,000</td>
-                      </tr>
+                        <td>{{$user->id}}</td>
+                        <td>{{ucfirst($user->name)}}</td>
+                        <td>{{ucfirst($user->location)}}</td>
+                        @if ( now()->diff(date_create($user->last_login))->d == 0)
+                            <td>{{'Today'}}</td>
+                        @else
+                        <td>{{ now()->diff(date_create($user->last_login))->d.(now()->diff(date_create($user->last_login))->d >1 ?' days ': ' day ').' ago '}}</td>
+                        @endif
+                    </tr>
+
+                      @endif
+  
+                      @empty
                       <tr>
-                        <td>8</td>
-                        <td>Beans (Jan-Sep-2019)</td>
-                        <td>Rose Coco</td>
-                        <td>Ksh. 10,000</td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>Sage Rodriguez</td>
-                        <td>$56,142</td>
-                        <td>Netherlands</td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>Philip Chaney</td>
-                        <td>$38,735</td>
-                        <td>Korea, South</td>
-                      </tr>
+                        <td>--</td>
+                        <td>No</td>
+                        <td>Priveous</td>
+                        <td>logins</td>
+                      </tr>                          
+                      @endforelse
                     </tbody>
                   </table>
                 </div>
@@ -502,35 +394,36 @@
                   <table class="table table-hover">
                     <thead class="text-warning">
                       <th>ID</th>
-                      <th>Name Of Custmer</th>
-                      <th>Amount</th>
-                      <th>Location.</th>
+                      <th>Name</th>
+                      <th>Location</th>
+                      <th>date</th>
                     </thead>
                     <tbody>
+                      @forelse ($latest_logins as $user)
+                      
+                      @if ($user->hasRole('farmer'))
+                          
                       <tr>
-                        <td>1</td>
-                        <td>Dakota Rice</td>
-                        <td>$36,738</td>
-                        <td>Niger</td>
+                          <td>{{$user->id}}</td>
+                          <td>{{ucfirst($user->name)}}</td>
+                          <td>{{ucfirst($user->location)}}</td>
+                          @if ( now()->diff(date_create($user->last_login))->d == 0)
+                              <td>{{'Today'}}</td>
+                          @else
+                          <td>{{ now()->diff(date_create($user->last_login))->d.(now()->diff(date_create($user->last_login))->d >1 ?' days': ' day').' ago'}}</td>
+                          @endif
                       </tr>
+
+                      @endif
+  
+                      @empty
                       <tr>
-                        <td>2</td>
-                        <td>Minerva Hooper</td>
-                        <td>$23,789</td>
-                        <td>Curaçao</td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>Sage Rodriguez</td>
-                        <td>$56,142</td>
-                        <td>Netherlands</td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>Philip Chaney</td>
-                        <td>$38,735</td>
-                        <td>Korea, South</td>
-                      </tr>
+                        <td>--</td>
+                        <td>No</td>
+                        <td>Priveous</td>
+                        <td>logins</td>
+                      </tr>                          
+                      @endforelse
                     </tbody>
                   </table>
                 </div>
