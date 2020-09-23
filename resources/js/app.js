@@ -7,32 +7,6 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-window.eventBus = new Vue()
-
-import vuetify from './vuetify'
-import router from './router'
-import store from './vuex'
-
-import ElementUI from 'element-ui';
-import locale from 'element-ui/lib/locale/lang/en'
-import 'element-ui/lib/theme-chalk/index.css';
-// import '../theme/index.css'
-
-// import 'material-design-icons-iconfont/dist/material-design-icons.css'
-
-import VueGoodTablePlugin from 'vue-good-table';
-
-// import the styles
-import 'vue-good-table/dist/vue-good-table.css'
-
-Vue.use(VueGoodTablePlugin);
-
-Vue.use(ElementUI, { locale });
-
-
-import Chartkick from 'vue-chartkick'
-import Chart from 'chart.js'
-Vue.use(Chartkick.use(Chart))
 
 /**
  * The following block of code may be used to automatically register your
@@ -45,24 +19,14 @@ Vue.use(Chartkick.use(Chart))
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-// import myExample from './components/ExampleComponent.vue'
-import myHeader from './components/include/Header'
-import myApp from './components/app.vue'
-import myHome from './components/register'
+Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-
 const app = new Vue({
     el: '#app',
-    router,
-    store,
-    vuetify,
-    components: {
-        myHeader, myApp, myHome
-    },
 });

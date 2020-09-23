@@ -12,15 +12,17 @@ class CreateFarmersTable extends Migration
      * @return void
      */
     public function up()
-    {
+    {   
         Schema::create('farmers', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name');
+            $table->unsignedBigInteger('user_id');
             $table->string('location');
             $table->string('phone_number');
             $table->string('farm_size');
             $table->string('email')->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
+
 
         });
     }

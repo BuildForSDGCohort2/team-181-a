@@ -3,98 +3,104 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the users
      *
-     * @return \Illuminate\Http\Response
+     * @param  \App\User  $model
+     * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(User $model)
     {
-        return User::paginate(500);
+        return view('users.index', ['users' => $model->paginate(15)]);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Show the form for creating a new user
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
-    public function store(Request $request)
+    public function create()
     {
-        // return $request->all();
-        $this->Validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            // 'phone' => 'required',
-        ]);
-        $user = new User;
-        $password = $this->generateRandomString();
-        $password_hash = Hash::make($password);
-        $user->password = $password_hash;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        // $user->phone = $request->phone;
-        // $user->address = $request->address;
-        // $user->city = $request->city;
-        // $user->country_id = $request->country_id;
-        $user->save();
-        return $user;
+        $locations=\App\Farmer::all()->pluck('location')->toArray();
+        $locations = array_unique($locations); 
+        return view('users.create')->with('locations',$locations);
     }
 
     /**
-     * Display the specified resource.
+     * Store a newly created user in storage
+     *
+     * @param  \App\Http\Requests\UserRequest  $request
+     * @param  \App\User  $model
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(UserRequest $request, User $model)
+    {   
+        $role = $request->input('role');
+        $model->create($request->merge(['password' => Hash::make($request->get('password'))])->all());
+        $user= User::latest()->first();
+        // $user->location=$request->input('location');
+        $user->assignRole($role); 
+        $user->save();       
+        return redirect()->route('user.index')->withStatus(__('User successfully created.'));
+    }
+
+    /**
+     * Show the form for editing the specified user
      *
      * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
-    public function show($id)
-    {
-        return User::find($id);
+    public function edit(User $user)
+    {   
+        $locations=\App\Farmer::all()->pluck('location')->toArray();
+       $locations = array_unique($locations); 
+        return view('users.edit', compact(['user','locations']));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified user in storage
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UserRequest  $request
      * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
-    {
-        $user = User::find($id);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        User::find($id)->delete();
-    }
-
-    public function generateRandomString($length = 10)
-    {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
+    public function update(UserRequest $request, User  $user)
+    {   
+        //return $user();
+        $role = $request->input('role');
+    //    $new_loc = $request->location;
+    //    $request->drop('location');
+    //    return print($request);
+        //logic to change the user roles
+        if (isset($role)) {
+            $user->syncRoles([$request->input('role')]);
         }
-        return $randomString;
+        $hasPassword = $request->get('password');
+        $user->update(
+            $request->merge(['password' => Hash::make($request->get('password'))])
+                ->except([$hasPassword ? '' : 'password']
+        ));
+        // $user->location = $request->input('location');
+        
+        $user->save();
+        return redirect()->route('user.index')->withStatus(__('User successfully updated.'));
     }
 
-    public function deletedUsers()
+    /**
+     * Remove the specified user from storage
+     *
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(User  $user)
     {
-        $users = User::onlyTrashed()->get();
+        $user->delete();
 
-        return $users;
+        return redirect()->route('user.index')->withStatus(__('User successfully deleted.'));
     }
 }

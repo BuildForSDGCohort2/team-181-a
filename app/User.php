@@ -2,25 +2,25 @@
 
 namespace App;
 
-use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
+    use Notifiable;
+    use HasRoles;
+    use SoftDeletes;
 
-    use Notifiable, SoftDeletes, HasRoles;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','location','last_login','location'
     ];
 
     /**
@@ -41,33 +41,33 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-
-    /**
-     * Get all user permissions.
-     *
-     * @return bool
-     */
-    public function getAllPermissionsAttribute()
+    //to get the 
+    public function get_prev_logins()
     {
-        return $this->getAllPermissions();
+        return User::orderBy('last_login','desc');
+
     }
 
-    // public function getCreatedAtAttribute($date)
-    // {
-    //     return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('D M d Y');
-    // }
-
-    public function logged_user()
-    {
-        if (Auth::check()) {
-            return Auth::user();
-        } elseif (Auth::guard('supplier')->check()) {
-            return Auth::guard('supplier')->user();
-        }elseif (Auth::guard('admin')->check()) {
-            return Auth::guard('admin')->user();
-        }elseif (Auth::guard('professional')->check()) {
-            return Auth::guard('professional')->user();
-        }
+    public function animal(){
+        return $this->hasMany('App\Animal');
     }
-
+    public function plantation(){
+        return $this->hasMany('App\Plantation');
+    }
+    public function order()
+    {
+        return $this->hasMany('App\Order');
+    }
+    public function proffesional()
+    {
+        return $this->hasOne('App\Proffesional');
+    }
+    public function supplier()
+    {
+        return $this->hasOne('App\Supplier');
+    }
+    public function farmer()
+    {
+        return $this->hasOne('App\Farmer');
+    }
 }

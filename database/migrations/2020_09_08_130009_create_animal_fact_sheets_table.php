@@ -34,6 +34,6 @@ class CreateAnimalFactSheetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('animal__fact_sheets');
+        Schema::dropIfExists('animal_fact_sheets');
     }
 }

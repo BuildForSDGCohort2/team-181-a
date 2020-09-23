@@ -17,8 +17,11 @@ class CreateBroodsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->dateTime('date_of_hatching');
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('breed_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('breed_id')->references('id')->on('animal_fact_sheets');
+
         });
     }
 
