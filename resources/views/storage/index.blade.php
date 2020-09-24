@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'notifications', 'titlePage' => __('Orders')])
+@extends('layouts.app', ['activePage' => 'notifications', 'titlePage' => __('Table List')])
 
 @section('content')
 
@@ -6,57 +6,51 @@
 <div class="content">
 
   <div class="container-fluid">
-    @if (auth()->user()->hasRole('customer'))
-    <div class="row text-primary ">
-      <h3 style="margin-left:20px">Order <span style="color: "> History</span></h3>
-    </div>
-        
-    @else
-        
-    <nav ">
-      <ul class="nav nav-pills">
-      @if (auth()->user()->hasRole('admin'))
-      
+    <nav >
+        @if (auth()->user()->hasRole('admin'))
+        <ul class="nav nav-pills">
           <li class="nav-item">
-            <a class="nav-link " href="{{ route('notifications') }}">Proffesionals</a>
+          <a class="nav-link " href="{{route('notifications')}}">Proffesionals</a>
           </li>
           <li class="nav-item">
           <a class="nav-link" href="{{route('pending_suppliers')}}">Suppliers</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" style="background-color: blueviolet" href="#">Orders</a>
+            <a class="nav-link" href="{{route('orders')}}">Orders</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link "  href="{{route('issues')}}">User Requests</a>
+            <a class="nav-link active" style="background-color: blueviolet" href="#">User Requests</a>
           </li>
+        </ul>
         @else
+        <ul class="nav nav-pills">
+
+
           <li class="nav-item">
-            <a class="nav-link "  href="{{route('issues')}}">issues</a>
+            <a class="nav-link " href="{{route('issues')}}">Issues</a>
           </li>
+          
           @if (auth()->user()->hasRole('farmer'))
-            <li class="nav-item">
-             <a class="nav-link "  href="{{route('storage')}}">Store</a>
+           <li class="nav-item">
+              <a class="nav-link active" style="background-color: blueviolet" href="#">Store</a>
             </li> 
-          @endif  
+         @endif
 
-        <li class="nav-item">
-          <a class="nav-link active" style="background-color: blueviolet" href="#">Orders</a>
-        </li> 
-        
-        @endif
-      
-    </ul>
-  </nav>
-
-    @endif
-    
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('orders')}}">Orders</a>
+          </li>
+        </ul>
+            
+        @endif       
+  
+      </nav>
     
     <div class="row">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-info">
-            <h4 class="card-title ">View the orders placed</h4>
-            <p class="card-category"> Orders</p>
+            <h4 class="card-title ">Pending Professional Requests</h4>
+            <p class="card-category"> Approve or decline Professionals</p>
           </div>
           <div class="card-body">
             <div class="table-responsive">
@@ -66,61 +60,67 @@
                     ID
                   </th>
                   <th>
-                    Customer Name
-                  </th>
-                  <th>
-                    Product
-                  </th>
-                  <th>
-                    Seller
+                    Contents
                   </th>
                   <th>
                     Status
                   </th>
+
+                  <th>
+                    Actions
+                  </th>
                 </thead>
                 <tbody>
 
-                @forelse ($orders as $order)
+                @forelse ($user_items as $item)
                 <tr>
-                    <td>
-                     {{$order->id}}
+                    <td>                    
+                      {{$item->id}}
                     </td>
-                    <td>
-                     {{ucfirst($order->name)}}
-                    </td>
-                    <td>
-                    @if ($order->specialty == 'vet')
-                        <span class="text-primary"> Vet </span>
-                    @else
-                        <span class="text-success"> F.E.O </span>
-                    @endif
-                    </td>
-                    <td>
-                      {{$order->location}}
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#professional_modal">View info</button>
 
+                    <td>
+                     {{ucfirst($item->plantation->species.'('.$item->plantation->plant_fact_sheet->type.')'.$item->sacks.'Scks')}}
+                    </td>
+
+                    <td>
+                        Stored 
+                        @if ($item->sale_status == 0)
+                            -just Stored
+                        @elseif($item->sale_status == 1)
+                            <span class="text-warning">-For Sale</span>
+                        @elseif($item->sale_status == 2)
+                          <span class="text-succes">-booked</span>
+                        @endif
+                    </td>
+                    <td>
+                      <div class="dropdown">
+                        <button class="btn btn-outline-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          ...
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#scheduleHarvest"> Sell</a>
+                          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#harvest">Take</a>
+                        </div>
+                      </div>
                     </td>
                 </tr>
                 @empty
                 <tr>
                   <td>
-                    <span class="text-primary"> No Orders placed</span>
+                    <span class="text-primary"> No items in Storage.</span>
                   </td>
                   <td>
-                    <span class="text-primary"> No Orders placed</span>
+                    <span class="text-primary"> No items in Storage.</span>
                   </td>
                   <td>
-                    <span class="text-primary"> No Orders placed</span>
+                    <span class="text-primary"> No items in Storage.</span>
                   </td>
                   <td>
-                    <span class="text-primary"> No orders placed</span>
+                    <span class="text-primary"> No items in Storage.</span>
                   </td>
-                  <td>
-                    <span class="text-primary"> No Orders placed</span>
-                  </td>
+
                 </tr>
+                    
                 @endforelse
                 </tbody>
               </table>

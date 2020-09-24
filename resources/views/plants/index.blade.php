@@ -150,11 +150,18 @@
                         {{$yrs <1 ?'':$yrs.'yrs'}}
                         {{$mnths <1 ?'':$mnths.'mnths'}} 
                         {{$dys.'days'}} 
-                      @elseif( $dys > -7)
-                        
-                        <button type="button" class="btn btn-outline-warning btn-sm"><span style="color:black;">Ready For</span> harvest
-                      @else
-                          <span class="text-danger">Overdue!</span>
+                      @elseif( $dys < 10 )
+                      <div class="dropdown">
+                        <button class="btn btn-outline-warning btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Access
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#scheduleHarvest"> Schedule Harvest</a>
+                          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#harvest">Harvest</a>
+                        </div>
+                      </div>
+                      
+
                       @endif   
                     </td>
                     <td class="text-success">
@@ -170,6 +177,136 @@
               </table>
             </div>
           </div>
+          <div id="scheduleHarvest" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+          
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Schedule Harvest</h4>
+                </div>
+                <div class="modal-body">
+                <form action="{{route('scheduleharvest',$plantation)}}" method="POST">
+                  @csrf
+                    
+                    <div class="first-column" style='width:45%; float: left;'>
+                      <div class="form-group">
+                        <label for="species">Date</label>
+                        <input type="date" class="form-control" name='scheduled_date'id="scheduled_date" aria-describedby="scheduled_date" required >
+                        <small id="species" class="form-text text-muted">Set harvest Reminder</small>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="schedule_transport" name="schedule_transport"  >
+                          <label class="custom-control-label" for="schedule_transport">Do you need <span class="text-warning"> Transport</span>?</label>
+                        </div>                   
+                      </div>
+
+                      {{-- incremental... will depend on the remaining size of farm --}}
+                   
+
+
+                    </div>
+                    <div class="second-column" style='width:45%; float: right;'>
+                      
+                      <div class="form-group">
+                        <label for="species" ><small>Recommendations</small> </label>
+                        <textarea class="form-control" id="recomendations" rows="3"  readonly>
+                        </textarea>
+                      </div>                                                             
+                                         
+                   </div>
+          
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-info" value="Submit">Submit</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+              </form>
+              </div>         
+            </div>
+          </div> 
+          <div id="harvest" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+          
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Harvest Plantation</h4>
+                </div>
+                <div class="modal-body">
+                <form action="{{route('harvest',$plantation)}}" method="post">
+                  @csrf
+                    
+                    <div class="first-column" style='width:45%; float: left;'>
+                      <div class="form-group">
+                        <label for="sacks">Number of full Sacks</label>
+                        <input type="text" class="form-control" name='sacks'id="sacks" aria-describedby="sacks" placeholder="X sacks">
+                        <small id="sacks" class="form-text text-muted">The number of Sacks.</small>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label for="species" ><small>Recommendations</small> </label>
+                        <textarea class="form-control" id="recomendations" rows="3"  readonly>
+                        </textarea>
+                      </div>
+                      
+                      {{-- incremental... will depend on the remaining size of farm --}}                  
+
+
+                    </div>
+                    <div class="second-column" style='width:45%; float: right;'>
+                      <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="sell" name="sell"  >
+                          <label class="custom-control-label" for="sell">Immediate  <span class="text-success"> Sell</span>?</label>
+                        </div>                   
+                      </div>
+
+                      
+
+                      <div class="form-group">
+                        <label for="price">Price</label>
+                        <input type="text" class="form-control" name='price'id="price" aria-describedby="price" placeholder="Enter the sack price">
+                        <small id="price" class="form-text text-muted">The price Per sack.</small>
+                      </div> 
+                      
+                      <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="sell_all" name="sell_all"  >
+                          <label class="custom-control-label" for="sell_all">All   <span class="text-success"> Sacks</span>?</label>
+                        </div>                   
+                      </div>
+
+                      <div class="form-group">
+                        <label for="amount">Number of Sacks</label>
+                        <input type="text" class="form-control" name='amount'id="amount" aria-describedby="amount" placeholder="Number of sacks">
+                        <small id="amount" class="form-text text-muted">How many sacks Would You like to sell?</small>
+                      </div> 
+                      
+                      <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="harvest_transport" name="harvest_transport"  >
+                          <label class="custom-control-label" for="harvest_transport">Do you need <span class="text-warning"> Transport</span>?</label>
+                        </div>                   
+                      </div>
+                                           
+                    
+                    </div>
+                  
+                  
+                  
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-info" value="Submit">Submit</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+              </form>
+              </div>
+          
+            </div>
+          </div> 
         </div>
       </div>
     </div>

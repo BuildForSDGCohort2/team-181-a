@@ -6,6 +6,9 @@ use App\Proffesional;
 use App\Supplier;
 use App\Order;
 use App\User;
+use App\Animal;
+use App\Storage;
+use App\Sales;
 
 
 class HomeController extends Controller
@@ -25,7 +28,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index(Isues $issue, Proffesional $proffesional,Supplier $supplier,Order $order,User $user )
+    public function index(Isues $issue, Proffesional $proffesional,Supplier $supplier,Order $order,User $user,Animal $animal, Storage $store,Sales $sales )
     {   
 
         if (auth()->user()->hasRole('admin')) {
@@ -47,7 +50,9 @@ class HomeController extends Controller
             return view('dashboard')->with('issues',$issues);
         
         }else {
-            return view('product_dash');
+            // $ani_on_sale = $animal->get_animals_for_sale();
+            $prods_on_sale =$sales->all(); 
+            return view('products_dash')->with('prods_on_sale',$prods_on_sale);
         }   
         
     }

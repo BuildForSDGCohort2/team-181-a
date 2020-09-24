@@ -24,9 +24,18 @@
         </ul>
         @else
         <ul class="nav nav-pills">
+
+
           <li class="nav-item">
             <a class="nav-link active" style="background-color: blueviolet" href="#">Issues</a>
           </li>
+          
+          @if (auth()->user()->hasRole('farmer'))
+           <li class="nav-item">
+              <a class="nav-link "  href="{{route('storage')}}">Store</a>
+            </li> 
+         @endif
+
           <li class="nav-item">
             <a class="nav-link" href="{{route('orders')}}">Orders</a>
           </li>
@@ -66,11 +75,12 @@
                 @forelse ($issues as $issue)
                 <tr>
                   <td>
-                    @if (strpos('PLT',$issue->identifier) !== false)
+                    
+                    @if (in_array('PLT',explode('-',$issue->identifier)))
                       <i class="fa fa-pagelines "></i>
-                    @elseif(strpos('ANML',$issue->identifier)!== false)
+                    @elseif(in_array('ANML',explode('-',$issue->identifier)))
                       <i class="material-icons">pets</i>
-                    @elseif(strpos('POLTR',$issue->identifier)!== false)
+                    @elseif(in_array('POLTR',explode('-',$issue->identifier)))
                       <i class="fa fa-bold" aria-hidden="true"></i>
                     @else
                       <i class="material-icons">api</i>
@@ -82,7 +92,8 @@
                     </td>
 
                     <td>
-                      {{$issue->information}}
+              
+                      {{$issue->information.(in_array('RMNDR',explode('-',$issue->identifier))?now()->diff(date_create($issue->due_date))->d.'days from now':null )}}
                     </td>
                     <td>
                         <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#professional_modal">View info</button>

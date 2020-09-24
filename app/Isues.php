@@ -33,6 +33,18 @@ class Isues extends Model
                 ->get();
         // return Isues::where(['user_id','=',auth()->user()->id],['status','=',0]);
     }
+    public function make_harvest_reminder( $data)
+    {   
+        $identifier = 'RMNDR-HVST-PLT-'.$data->id.'-'.($data->schedule_transport === null? null :'T');
+        Isues::create([
+            'reason'=>'Harvest Reminder',
+            'information'=>'You Scheduled a Harvest  ',
+            'user_id'=> auth()->user()->id,
+            'identifier'=>$identifier,
+            'status'=>0,
+            'due_date'=> $data->scheduled_date,
+        ]);
+    }
 
     public function issue_classifier(Type $var = null)
     {

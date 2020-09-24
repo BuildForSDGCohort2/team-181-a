@@ -30,7 +30,7 @@
           </a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="material-icons">notifications</i>
             <span class="notification">5</span>
             <p class="d-lg-none d-md-block">
@@ -45,6 +45,19 @@
             <a class="dropdown-item" href="#">{{ __('Another One') }}</a>
           </div>
         </li>
+        {{-- shopping Basket.... --}}
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+              <span class="notification">0</span>
+            <p class="d-lg-none d-md-block">
+              {{ __('Some Actions') }}
+            </p>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">{{ __('Your Shopping Basket is empty') }}</a>
+          </div>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="material-icons">person</i>
@@ -54,7 +67,9 @@
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
             <a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Profile') }}</a>
-            <a class="dropdown-item" href="#">{{ __('Settings') }}</a>
+            @if (auth()->user()->hasRole('customer'))
+              <a class="dropdown-item" href="{{route('orders')}}">{{ __('Order History') }}</a>
+            @endif
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Log out') }}</a>
           </div>

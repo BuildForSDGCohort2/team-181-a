@@ -84,6 +84,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
+	Route::get('stores','StorageController@all_items')->name('storage');
+	Route::post('plantation/{id}/schedule_harvest','StorageController@schedule_harvest')->name('scheduleharvest');
+	Route::post('plantation/{id}/harvest','StorageController@harvest')->name('harvest');
 	Route::resource('animal', 'AnimalsController', ['except' => ['create']]);
 	Route::resource('plant', 'PlantsController', ['except' => ['create']]);
 	Route::resource('brood', 'BroodsController', ['except' => ['create']]);

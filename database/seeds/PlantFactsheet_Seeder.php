@@ -19,6 +19,7 @@ class PlantFactsheet_Seeder extends Seeder
             'storage_meth' => 'unknown',
             'shelf_life' => 0,
             'production_rate'=>30,
+            'price_per_bag'=>100,
         ]);
         DB::table('plant_fact_sheets')->insert([
             'type' =>'30A',
@@ -28,6 +29,8 @@ class PlantFactsheet_Seeder extends Seeder
             'storage_meth' => 'Dry And Store in bags',
             'shelf_life' => 00,
             'production_rate'=>30,
+            'price_per_bag'=>1200,
+
         ]);
         DB::table('plant_fact_sheets')->insert([
             'type' =>'rose coco',
@@ -37,6 +40,8 @@ class PlantFactsheet_Seeder extends Seeder
             'storage_meth' => 'Dry and Put in bags',
             'shelf_life' => 0,
             'production_rate'=>30,
+            'price_per_bag'=>2100,
+
         ]);
         DB::table('plant_fact_sheets')->insert([
             'type' =>'purple tea',
@@ -46,6 +51,8 @@ class PlantFactsheet_Seeder extends Seeder
             'storage_meth' => 'Perishable!!',
             'shelf_life' => 0,
             'production_rate'=>30,
+            'price_per_bag'=>100,
+
         ]);
         DB::table('plant_fact_sheets')->insert([
             'type' =>'arabica',
@@ -55,6 +62,8 @@ class PlantFactsheet_Seeder extends Seeder
             'storage_meth' => 'Perishable!!',
             'shelf_life' => 0,
             'production_rate'=>30,
+            'price_per_bag'=>150,
+
         ]);
     }
 }

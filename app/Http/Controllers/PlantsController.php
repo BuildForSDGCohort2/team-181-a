@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\PlantationRequest;
 use App\Plantation;
+use App\Storage;
 
 
 class PlantsController extends Controller
@@ -45,6 +46,7 @@ class PlantsController extends Controller
         $plantation->new_plantation($validated);
         return redirect('plant')->with('success','Plant Records recorded Succesfully');
     }
+
 
     /**
      * Display the specified resource.

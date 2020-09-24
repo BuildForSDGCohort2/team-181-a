@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCategoryToStorage extends Migration
+class AddDateToIssues extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddCategoryToStorage extends Migration
      */
     public function up()
     {
-        Schema::table('storages', function (Blueprint $table) {
-            $table->integer('category')->after('date_of_harvest');
+        Schema::table('isues', function (Blueprint $table) {
+            $table->date('due_date')->after('identifier')->nullable();
         });
     }
 
@@ -25,9 +25,8 @@ class AddCategoryToStorage extends Migration
      */
     public function down()
     {
-        Schema::table('storages', function (Blueprint $table) {
-            $table->dropColumn('category');
-
+        Schema::table('isues', function (Blueprint $table) {
+            $table->dropColumn('due_date');
         });
     }
 }
