@@ -13,19 +13,18 @@ use App\Isues;
 
 class StorageController extends Controller
 {   #h_scheduler is the class resposnible for handling  requests to schedule harests
-    public function schedule_harvest(H_SchedulerRequest $request, Isues $isue)
+    public function schedule_harvest(H_SchedulerRequest $request, Isues $isue,Plantation $plant)
     {   
         // return ($request);
-        $scheduled = $isue->make_harvest_reminder($request);
-        $produce =  $plant->find($request->id);
-        $produce->book_harvest();
+        $isue->make_harvest_reminder($request);
+        $produce =  $plant->find($request->id)->book_harvest();;
         return $produce;
         
 
     }
     public function harvest(StorageRequest $request,Storage $store)
     {   
-        $stored = $store->store($request);
+        $store->store($request);
         return redirect('plant')->with('message','Stored Succesfully');
 
     }

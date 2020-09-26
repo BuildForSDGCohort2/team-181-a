@@ -92,7 +92,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('brood', 'BroodsController', ['except' => ['create']]);
 	Route::get('notifications','NotificationsController@notification_selector')->name('notifications');
 	Route::get('pending_suppliers','NotificationsController@get_suppliers')->name('pending_suppliers');
-	Route::get('orders','NotificationsController@get_orders')->name('orders');
 	Route::get('issues','NotificationsController@get_issues')->name('issues');
 
 });
@@ -103,3 +102,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::post('profesionals_enrole','EnrolmentController@profesionals_enrole')->name('profesionals_enrole');
 Route::post('suppliers_enrole','EnrolmentController@suppliers_enrole')->name('suppliers_enrole');
 Route::post('farmers_enrole','EnrolmentController@farmers_enrole')->name('farmers_enrole');
+
+Route::get('on_sale','OrdersController@for_sale')->name('on_sale');
+Route::get('on_sale/{id}/view','OrdersController@view_prod')->name('viewprod');
+

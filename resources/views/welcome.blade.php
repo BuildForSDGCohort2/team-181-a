@@ -44,7 +44,7 @@
         <h3>Agricultural Products</h3>
         <hr style="height: 1px;background-color: white; border: none;">
         <i class="fa fa-envira" style="font-size: 48px" aria-hidden="true"></i>
-        <a href="{{ route('register') }}">
+        <a href="{{ route('on_sale') }}">
         <button class="btn btn-outline" style="border: 1px solid white; color: white;white-space: normal; "><i class="fa fa-shopping-basket" aria-hidden="true"></i>&nbsp; Browse and buy <span style="color: greenyellow">farmer's Produce</span> </button> 
         </a>
         <p style="padding-top: 20%">
@@ -73,7 +73,9 @@
   </div>
 </div>
 
+
 @endsection
+{{-- supplier --}}
 <div id="supplier_modal" class="modal fade" role="dialog" style="margin-top: 10%">
   <div class="modal-dialog">
 
@@ -172,7 +174,8 @@
     </div>
 
   </div>
-</div> 
+</div>
+ {{--proffesional  --}}
 <div id="professional_modal" class="modal fade" role="dialog" style="margin-top: 10%">
   <div class="modal-dialog">
     <!-- Modal content-->
@@ -289,8 +292,6 @@
 
   </div>
 </div>
-
-
 {{--  farmers Modal  --}}
 <div id="farmers_modal" class="modal fade " role="dialog" style="margin-top: 10%; ">
   <div class="modal-dialog">

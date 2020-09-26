@@ -1,9 +1,14 @@
 
-  @extends('layouts.app', ['activePage' => 'dashboard', 'titlePage' => __('Dashboard')])
+  @extends('layouts.app', ['activePage' => 'onsale', 'titlePage' => __('On Sale')])
 
 @section('content')
   <div class="content">
-    <div class="container-fluid">
+    @if (auth()->user()===null)
+      <div class="container-fluid" style="margin-top:40px;">
+    @else
+       <div class="container-fluid">
+    @endif
+    
       <div class="row justify-content-center">
         @forelse ($prods_on_sale as $prod)
           <div class="card" style="width: 300px;height:400px;margin:10px" >
@@ -22,7 +27,7 @@
                 <small><strong>Weight | Prod rate  </strong>: Quantity</small><br>
                 <small><strong>Location </strong>: Quantity</small><br>
                 <small><strong>Price</strong>: Quantity</small><br>
-              <a href="#!" class="btn btn-primary">Buy</a>
+            <a href="{{route('viewprod',$prod)}}" class="btn btn-primary">Buy</a>
             </div>
           </div> 
         @empty

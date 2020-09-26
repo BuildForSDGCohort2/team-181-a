@@ -24,7 +24,7 @@ class OrderStore extends FormRequest
     public function rules()
     {
         return [
-
+            
         ];
     }
 }
