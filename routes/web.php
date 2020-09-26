@@ -87,6 +87,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('stores','StorageController@all_items')->name('storage');
 	Route::post('plantation/{id}/schedule_harvest','StorageController@schedule_harvest')->name('scheduleharvest');
 	Route::post('plantation/{id}/harvest','StorageController@harvest')->name('harvest');
+	Route::get('orders','OrdersController@my_orders')->name('orders');
 	Route::resource('animal', 'AnimalsController', ['except' => ['create']]);
 	Route::resource('plant', 'PlantsController', ['except' => ['create']]);
 	Route::resource('brood', 'BroodsController', ['except' => ['create']]);

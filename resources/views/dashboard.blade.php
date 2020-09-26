@@ -228,7 +228,7 @@
                 <div class="tab-pane" id="messages">
                   <table class="table">
                     <tbody>
-                      @forelse ($issues->chunk(4)[0] as $issue)
+                      @forelse ($issues as $issue)
                       @if (in_array('PLT' ,explode('-', $issue->identifier)))
                         <tr>
                           <td>
