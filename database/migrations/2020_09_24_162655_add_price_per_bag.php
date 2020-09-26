@@ -14,7 +14,7 @@ class AddPricePerBag extends Migration
     public function up()
     {
         Schema::table('plant_fact_sheets', function (Blueprint $table) {
-            $table->integer('price_per_sack');
+            $table->integer('price_per_bag');
         });
     }
 
@@ -26,7 +26,7 @@ class AddPricePerBag extends Migration
     public function down()
     {
         Schema::table('plant_fact_sheets', function (Blueprint $table) {
-            $table->dropColumn('price_per_sack');
+            $table->dropColumn('price_per_bag');
         });
     }
 }
