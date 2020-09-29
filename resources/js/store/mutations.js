@@ -52,11 +52,17 @@ export default {
 
 
 
+    updatePlantationsList(state, payload) {
+        state.plantations = payload
+    },
     updateAnimalsList(state, payload) {
         state.animals = payload
     },
     updateOrdersList(state, payload) {
         state.orders = payload
+    },
+    updateBroodsList(state, payload) {
+        state.broods = payload
     },
     updateAnimal_facts(state, payload) {
         state.animal_facts = payload

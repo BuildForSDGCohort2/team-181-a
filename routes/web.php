@@ -100,9 +100,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 });
 
-Route::resource('animal', 'AnimalsController', ['except' => ['create','index']]);
-Route::resource('plant', 'PlantsController', ['except' => ['create','index']]);
-Route::resource('brood', 'BroodsController', ['except' => ['create','index']]);
+Route::resource('animal', 'AnimalsController', ['except' => ['create']]);
+Route::resource('plant', 'PlantsController', ['except' => ['create']]);
+Route::resource('brood', 'BroodsController', ['except' => ['create']]);
 
 // enrolement
 Route::post('profesionals_enrole','EnrolmentController@profesionals_enrole')->name('profesionals_enrole');

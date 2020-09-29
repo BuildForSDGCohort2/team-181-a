@@ -1,5 +1,5 @@
 <template>
-<div style="background: linear-gradient(0deg, rgb(0, 0, 0), rgba(12, 12, 12, 0.55)), url(http://team188.jim/material/img/login.jpg);color: #fff !important;padding: 0;background-size: cover; background-position: top center;align-items: center;height: 100vh">
+<div style="background: linear-gradient(0deg, rgb(0, 0, 0), rgba(12, 12, 12, 0.55)), url(/material/img/login.jpg);color: #fff !important;padding: 0;background-size: cover; background-position: top center;align-items: center;height: 100vh">
     <div class="container">
         <div class="row justify-content-center" style="margin-top: 100px;">
             <v-card style="width: 80%">

@@ -48,4 +48,7 @@ export default {
     animal_facts(state) {
         return state.animal_facts
     },
+    plantations(state) {
+        return state.plantations
+    },
 }

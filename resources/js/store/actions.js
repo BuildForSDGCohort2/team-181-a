@@ -163,7 +163,7 @@ export default {
         var model = payload.model
         var data = payload.data
 
-        // console.log(data);
+        console.log(data);
 
         // var data = payload['data']
         // console.log(data);

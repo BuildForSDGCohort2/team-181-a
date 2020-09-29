@@ -20,10 +20,10 @@
                                 <th>Status</th>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td> 1</td>
-                                    <td> <a href="#"  data-toggle="modal" data-target="#brood_r_modal"> <span style="color: black">Thomas</span><span style="color: rgb(19, 197, 108)">&nbsp;(Bull)</span></a></td>
-                                    <td> <a href="breed_info"><span style="color: black">Charolais</span></a></td>
+                                <tr v-for="(brood, index) in broods" :key="brood.id">
+                                    <td> {{ index + 1 }}</td>
+                                    <td> <a href="#" data-toggle="modal" data-target="#brood_r_modal"> <span style="color: black">{{ brood.species }}</span><span style="color: rgb(19, 197, 108)">&nbsp;(Bull)</span></a></td>
+                                    <td> <a href="breed_info"><span style="color: black">{{ brood.breed_id }}</span></a></td>
                                     <td> 12</td>
                                     <td class="text-primary"> <span style="color: rgb(19, 197, 108)">540Kg</span></td>
                                     <td> Healthy</td>
@@ -35,8 +35,18 @@
             </div>
         </div>
     </div>
-<Create />
-<Edit />
+    <Create />
+    <Edit />
+    <div class="text-center ma-2">
+        <v-snackbar v-model="snackbar" right>
+            {{ text }}
+            <template v-slot:action="{ attrs }">
+                <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">
+                    Close
+                </v-btn>
+            </template>
+        </v-snackbar>
+    </div>
 </div>
 <!-- Modal -->
 </template>
@@ -56,6 +66,8 @@ export default {
     },
     data() {
         return {
+            snackbar: false,
+            text: 'Brood Created',
             search: "",
             form: {},
             headers: [{
@@ -161,7 +173,7 @@ export default {
 
         getBrood() {
             var payload = {
-                model: 'broods',
+                model: 'brood',
                 update: 'updateBroodsList'
             }
             this.$store.dispatch('getItems', payload)
@@ -192,12 +204,14 @@ export default {
         ...mapState(['broods', 'errors'])
     },
     mounted() {
+        this.getBrood()
         // this.$store.dispatch('getBrood');
         eventBus.$emit("LoadingEvent");
     },
     created() {
         eventBus.$on("broodEvent", data => {
             this.getBrood();
+            this.snackbar = true
         });
 
         eventBus.$on("responseChooseEvent", data => {

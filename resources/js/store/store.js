@@ -20,7 +20,9 @@ export default {
         animals: [],
         orders: [],
         animal_facts: [],
-        page_loader: false
+        broods: [],
+        plantations: [],
+        page_loader: false,
     },
     getters,
     mutations,

@@ -16,7 +16,8 @@ class AnimalsController extends Controller
      */
     public function index(Request $request)
     {
-        return $request;
+        return Animal::all();
+        // return $request;
     }
 
     /**
@@ -26,7 +27,7 @@ class AnimalsController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -37,6 +38,7 @@ class AnimalsController extends Controller
      */
     public function store(AnimalStore $request , Animal $animal)
     {
+        // return $request->all();
         $validated = $request->validated();
         // return $validated;
         $animal->new_animal($validated);

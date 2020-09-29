@@ -16,7 +16,7 @@ class PlantsController extends Controller
      */
     public function index()
     {
-        //
+        return Plantation::all();
     }
 
     /**
@@ -35,9 +35,9 @@ class PlantsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PlantationRequest $request,Plantation $plantation)
+    public function store(Request $request,Plantation $plantation)
     {
-       
+        return $request->all();
         $validated = $request->validated();
         $plantation->new_plantation($validated);
         return 'Success!';

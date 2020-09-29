@@ -105,7 +105,7 @@ export default {
             }
             this.$store.dispatch('postItems', payload)
                 .then(response => {
-                    eventBus.$emit("PlantationEvent")
+                    eventBus.$emit("plantationEvent")
                 });
         },
         close() {

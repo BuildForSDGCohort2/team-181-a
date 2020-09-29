@@ -15,7 +15,7 @@ class BroodsController extends Controller
      */
     public function index()
     {
-        //
+        return Brood::all();
     }
 
     /**
@@ -36,6 +36,7 @@ class BroodsController extends Controller
      */
     public function store(BroodStore $request , Brood $brood)
     {
+        // return $request->all();
         $validated = $request->validated();
         $brood->new_brood($validated);
         return 'Success!';

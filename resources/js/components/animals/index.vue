@@ -8,160 +8,58 @@
     <div id="animal_r_modal" class="modal fade" role="dialog">
         <Create />
     </div>
+
     <div class="card-body">
         <div class="table-responsive">
             <table class="table">
                 <thead class=" text-success">
-                    <th>
-                        ID
-                    </th>
-                    <th>
-                        Name
-                    </th>
-                    <th>
-                        Breed
-                    </th>
-                    <th>
-                        Age
-                    </th>
-                    <th>
-                        Info
-                    </th>
-                    <th>
-                        Status
-                    </th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Breed</th>
+                    <th>Age</th>
+                    <th>Info</th>
+                    <th>Status</th>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>
-                            1
-                        </td>
-                        <td>
-                            <a href="#"> <span style="color: black" @click="openEdit">Thomas</span><span style="color: rgb(19, 197, 108)">&nbsp;(Bull)</span></a>
-                        </td>
-                        <td>
-                            <a href="breed_info"><span style="color: black">Charolais</span></a>
-                        </td>
-                        <td>
-                            12
-                        </td>
-                        <td class="text-primary">
-                            <span style="color: rgb(19, 197, 108)">540Kg</span>
-                        </td>
-                        <td>
-                            Healthy
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            2
-                        </td>
-                        <td>
-                            <a href="#"> <span style="color: black">Jane</span><span style="color: rgb(19, 197, 108)">&nbsp;(Cow)</span></a>
-                        </td>
-                        <td>
-                            <a href="#"> <span style="color: black">Fresian</span></a>
-                        </td>
-                        <td>
-                            12
-                        </td>
-                        <td class="text-primary">
-                            <span style="color: rgb(19, 197, 108)">20lts/day</span>
-                        </td>
-                        <td>
-                            Sick <span style="color: red">&nbsp;(Yellow Fever)</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            3
-                        </td>
-                        <td>
-                            <a href="#"> <span style="color: black">Ndun'gu</span><span style="color: rgb(19, 197, 108)">&nbsp;(Billy Goat)</span></a>
-                        </td>
-                        <td>
-                            <a href="#"> <span style="color: black">Saaneen</span></a>
-                        </td>
-                        <td>
-                            8
-                        </td>
-                        <td class="text-primary">
-                            <span style="color: rgb(19, 197, 108)">&nbsp;80Kg</span>
-                        </td>
-                        <td>
-                            Healthy <span style="color: rgb(39, 144, 21)">&nbsp;(Prime)</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            4
-                        </td>
-                        <td>
-                            <a href="#"> <span style="color: black">Lucka</span><span style="color: rgb(19, 197, 108)">&nbsp;(Ram)</span></a>
-                        </td>
-                        <td>
-                            <a href="#"> <span style="color: black">Merino</span></a>
-                        </td>
-                        <td>
-                            8
-                        </td>
-                        <td class="text-primary">
-                            <span style="color: rgb(19, 197, 108)">&nbsp;50Kg</span>
-                        </td>
-                        <td>
-                            Healthy <span style="color: rgb(39, 144, 21)">&nbsp;(Prime)</span>
-                        </td>
-                    </tr>
-                    <td>
-                        5
-                    </td>
-                    <td>
-                        <a href=#> <span style="color: black">Avril</span><span style="color: rgb(19, 197, 108)">&nbsp;(F-Rabit)</span></a>
-                    </td>
-                    <td>
-                        <a href="#"> <span style="color: black">Belgian Hare</span></a>
-                    </td>
-                    <td>
-                        3
-                    </td>
-                    <td class="text-primary">
-                        <span style="color: rgb(19, 197, 108)">&nbsp;30kg</span>
-                    </td>
-                    <td>
-                        Healthy
-                    </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            6
-                        </td>
-                        <td>
-                            <a href="#"> <span style="color: black">Mary</span><span style="color: rgb(19, 197, 108)">&nbsp;(F-Pig)</span></a>
-                        </td>
-                        <td>
-                            <a href="#"> <span style="color: black">Large White</span></a>
-                        </td>
-                        <td>
-                            5
-                        </td>
-                        <td class="text-primary">
-                            <span style="color: rgb(19, 197, 108)">&nbsp;340Kg</span>
-                        </td>
-                        <td>
-                            Healthy <span style="color: rgb(39, 144, 21)">&nbsp;(PG)</span>
-                        </td>
+                    <!-- <tr>
+                        <td>1 </td>
+                        <td><a href="#"> <span style="color: black" @click="openEdit">Thomas</span><span style="color: rgb(19, 197, 108)">&nbsp;(Bull)</span></a> </td>
+                        <td><a href="breed_info"><span style="color: black">Charolais</span></a> </td>
+                        <td>12 </td>
+                        <td class="text-primary"><span style="color: rgb(19, 197, 108)">540Kg</span> </td>
+                        <td>Healthy </td>
+                    </tr> -->
+
+                    <tr v-for="(animal, index) in animals" :key="animal.id">
+                        <td> {{ index+1 }}</td>
+                        <td><a href="#"> <span style="color: black" @click="openEdit">{{ animal.name }}</span><span style="color: rgb(19, 197, 108)">&nbsp;({{ animal.species }})</span></a> </td>
+                        <td><a href="breed_info"><span style="color: black"></span></a> </td>
+                        <td>{{ animal.age }} </td>
+                        <td class="text-primary"><span style="color: rgb(19, 197, 108)">{{ animal.weight }}</span> </td>
+                        <td> {{ (animal.health_status) ? 'Health'  : 'Unhealthy' }} </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    <Edit />
+    <!-- <Edit /> -->
+
+    <div class="text-center ma-2">
+        <v-snackbar v-model="snackbar" right>
+            {{ text }}
+            <template v-slot:action="{ attrs }">
+                <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">
+                    Close
+                </v-btn>
+            </template>
+        </v-snackbar>
+    </div>
 </div>
 </template>
 
 <script>
 import Create from "./create";
-// import Edit from "./edit";
+import Edit from "./edit";
 import {
     mapState
 } from 'vuex';
@@ -170,10 +68,12 @@ export default {
     props: ['user'],
     components: {
         Create,
-        // Edit,
+        Edit,
     },
     data() {
         return {
+            snackbar: false,
+            text: 'Animal Created',
             search: "",
             form: {},
             headers: [{
@@ -279,7 +179,7 @@ export default {
 
         getAnimal() {
             var payload = {
-                model: 'animals',
+                model: 'animal',
                 update: 'updateAnimalsList'
             }
             this.$store.dispatch('getItems', payload)
@@ -292,16 +192,6 @@ export default {
             }
             this.$store.dispatch("nextPage", payload);
         },
-        save() {
-            var payload = {
-                model: 'animal',
-                data: this.form
-            }
-            this.$store.dispatch('postItems', payload)
-                .then(response => {
-                    eventBus.$emit("AnimalEvent")
-                });
-        },
         close() {
             this.dialog = false;
         }
@@ -310,12 +200,14 @@ export default {
         ...mapState(['animals', 'errors'])
     },
     mounted() {
+        this.getAnimal()
         // this.$store.dispatch('getAnimal');
         eventBus.$emit("LoadingEvent");
     },
     created() {
         eventBus.$on("animalEvent", data => {
             this.getAnimal();
+            this.snackbar = true
         });
 
         eventBus.$on("responseChooseEvent", data => {

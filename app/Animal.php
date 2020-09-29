@@ -11,12 +11,12 @@ class Animal extends Model
     protected $guarded=[];
 
     public  function new_animal(array $validated,$date=null)
-    {   
-        #calling the functions that will  format the date of birth no matter 
-        $date = (array_key_exists('approx_Age' ,$validated)) 
-        ? Animal::date_of_birth_calculator($validated) 
-        :  Animal::date_formatter(Animal::date_of_birth_calculator($validated)); 
-       
+    {
+        #calling the functions that will  format the date of birth no matter
+        $date = (array_key_exists('approx_Age' ,$validated))
+        ? Animal::date_of_birth_calculator($validated)
+        :  Animal::date_formatter(Animal::date_of_birth_calculator($validated));
+
         Animal::create([
             'name'=>$validated['name'],
             'species'=> $validated['species'],
@@ -30,12 +30,12 @@ class Animal extends Model
             'reproductive_status'=> Animal::reproductivity_checker($validated),
             'health_status'=> Animal::health_checker($validated),
             'father_id'=> 1,
-            
+
         ]);
     }
 
     private function date_of_birth_calculator(array $validated)
-    {    
+    {
          #now to exactly calculate the birthdate incase teh user approximatded
          if (! is_null($validated['approx_age']) && array_key_exists('approximation',$validated) && is_null($validated['birthday'])){
             #if the user approximated in months the months
@@ -58,16 +58,16 @@ class Animal extends Model
                 }elseif (date('m')-$validated['approx_age'] == 0) {
                     $birthday =  ('1'.'/'.date('d').'/'.date('Y'));
                 }else{
-                    $birthday =  (date('m')-$validated['approx_age']).'/'.date('d').'/'.(date('Y'));          
+                    $birthday =  (date('m')-$validated['approx_age']).'/'.date('d').'/'.(date('Y'));
                 }
             #if user approximated in years
             }else {
                 #just subtract the year directly
                 $birthday =  (date('m').'/'.date('d').'/'.(date('Y')-$validated['approx_age']));
-            }          
-        }else {      
+            }
+        }else {
             $birthday =  $validated['birthday'];
-        } 
+        }
         return $birthday;
     }
     // this will convert the Date from string format to a t=format that matches the ones already in the db
@@ -75,12 +75,12 @@ class Animal extends Model
     {
         return date('Y-m-d' ,strtotime($date));
     }
-    
+
     #What thus Guy Does is calculate the age of the animal..
     private function age_calculator(array $validated)
-    {   
+    {
         $birthDate = Animal::date_of_birth_calculator($validated) ;
-        if (! is_null($validated['approx_age']) && array_key_exists('approximation',$validated) 
+        if (! is_null($validated['approx_age']) && array_key_exists('approximation',$validated)
             && is_null($validated['birthday']))
             {
             //explode the date to get month, day and year
@@ -99,15 +99,15 @@ class Animal extends Model
                 : (date("Y") - $birthDate[0]));
             return $age;
         }
-        
+
 
 
     }
-    #from the animals age are we able to find out if 
+    #from the animals age are we able to find out if
     private function reproductivity_checker(array $validated)
-    {   
+    {
         $age =Animal::age_calculator($validated);
-        
+
         if ( array_key_exists('pregnancy_status',$validated))  {
             return 2; #pregnant
         } elseif ($age > Animal_Fact_sheet::find($validated['breed_id'])->reproductive_age ) {
@@ -115,7 +115,7 @@ class Animal extends Model
         } else {
             return 0;#inactive
         }
-        
+
     }
     private function health_checker(array $validated)
     {
@@ -125,7 +125,7 @@ class Animal extends Model
             return 1;
         }
     }
-    
+
     public function farmer(){
         return $this->belongsTo('App\User');
     }

@@ -78,7 +78,6 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
-
     </div>
 </div>
 </template>
@@ -120,12 +119,12 @@ export default {
     methods: {
         save() {
             var payload = {
-                model: 'brood/store',
+                model: 'brood',
                 data: this.form
             }
             this.$store.dispatch('postItems', payload)
                 .then(response => {
-                    eventBus.$emit("BroodEvent")
+                    eventBus.$emit("broodEvent")
                 });
         },
         close() {

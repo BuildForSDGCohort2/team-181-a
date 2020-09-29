@@ -30,111 +30,36 @@
                     </th>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr v-for="(plantation, index) in plantations" :key="plantation.id">
                         <td>
-                            1
+                            {{ index+1 }}
                         </td>
                         <td>
-                            Maize <a href="#"><span style="color: rgb(19, 197, 108)">(Katumani)</span></a>
+                            {{ plantation.species }} <a href="#"><span style="color: rgb(19, 197, 108)">(Katumani)</span></a>
                         </td>
                         <td>
-                            10 Acres
+                            {{ plantation.size_of_plantation }}
                         </td>
                         <td>
-                            1 Month 3 Days
+                            {{ plantation.planting_date }}
                         </td>
                         <td class="text-success">
                             100 Sacks
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            2
-                        </td>
-                        <td>
-                            Wheat <a href="#"><span style="color: rgb(19, 197, 108)">(EinKorn)</span></a>
-                        </td>
-                        <td>
-                            10 Acres
-                        </td>
-                        <td>
-                            1 Month 3 Days
-                        </td>
-                        <td class="text-success">
-                            100 Sacks
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            3
-                        </td>
-                        <td>
-                            Beans <a href="#"><span style="color: rgb(19, 197, 108)">(Rose Coco)</span></a>
-                        </td>
-                        <td>
-                            14 Acres
-                        </td>
-                        <td>
-                            <span style="color: red"> Past Due!</span>
-                        </td>
-                        <td class="text-success">
-                            15 Sacks
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            4
-                        </td>
-                        <td>
-                            Tea <a href="#"><span style="color: rgb(19, 197, 108)">(Purple Tea)</span></a>
-                        </td>
-                        <td>
-                            14 Acres
-                        </td>
-                        <td>
-                            0 Months 3 Days
-                        </td>
-                        <td class="text-success">
-                            15 Tonnes
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            3
-                        </td>
-                        <td>
-                            Beans <a href="#"><span style="color: rgb(19, 197, 108)">(Rose Coco)</span></a>
-                        </td>
-                        <td>
-                            14 Acres
-                        </td>
-                        <td>
-                            <span style="color: rgb(19, 197, 108)">Ready!</span>
-                        </td>
-                        <td class="text-success">
-                            15 Sacks
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            6
-                        </td>
-                        <td>
-                            Grapes <a href="#"><span style="color: rgb(19, 197, 108)">(Green Grapes)</span></a>
-                        </td>
-                        <td>
-                            14 Acres
-                        </td>
-                        <td>
-                            0 Months 3 Days
-                        </td>
-                        <td class="text-success">
-                            15 Sacks
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
+    </div>
+    <div class="text-center ma-2">
+        <v-snackbar v-model="snackbar" right>
+            {{ text }}
+            <template v-slot:action="{ attrs }">
+                <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">
+                    Close
+                </v-btn>
+            </template>
+        </v-snackbar>
     </div>
 </div>
 </template>
@@ -154,6 +79,8 @@ export default {
     },
     data() {
         return {
+            snackbar: false,
+            text: 'plant Created',
             search: "",
             headers: [{
                 text: 'Id',
@@ -237,7 +164,7 @@ export default {
 
         getPlantation() {
             var payload = {
-                model: 'plantations',
+                model: 'plant',
                 update: 'updatePlantationsList'
             }
             this.$store.dispatch('getItems', payload)
@@ -255,12 +182,14 @@ export default {
         ...mapState(['plantations'])
     },
     mounted() {
+        this.getPlantation()
         // this.$store.dispatch('getPlantation');
         eventBus.$emit("LoadingEvent");
     },
     created() {
         eventBus.$on("plantationEvent", data => {
             this.getPlantation();
+            this.snackbar = true
         });
 
         eventBus.$on("responseChooseEvent", data => {
