@@ -26,16 +26,18 @@ class Plantation extends Model
 
 
 
+
     public function book_harvest()
     {
         $this->status= 1;# to be harvested
         $this->save();
     }
-    public function harvest_plantation()
+    public function harvest_plantation($request)
     {
-        $this->status= 2;#harvested
-        $this->size_of_plantation  = 0;#take  revoke the land it was under
-        $this->save();
+        $plantation = $this->find($request->id);
+        $plantation->status= 2;#harvested
+        $plantation->size_of_plantation  = 0;#take  revoke the land it was under
+        $plantation->save();
     }
     
     public function farmer(){

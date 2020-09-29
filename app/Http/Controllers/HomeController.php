@@ -46,7 +46,7 @@ class HomeController extends Controller
             return view('prof.dash');
         
         }elseif(auth()->user()->hasRole('farmer')){
-            $issues = $issue->get_unsolved_issues()->chunk(4)[0];
+            $issues = $issue->get_unsolved_issues();
             return view('dashboard')->with('issues',$issues);
         
         }else {

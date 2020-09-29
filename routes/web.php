@@ -94,6 +94,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('notifications','NotificationsController@notification_selector')->name('notifications');
 	Route::get('pending_suppliers','NotificationsController@get_suppliers')->name('pending_suppliers');
 	Route::get('issues','NotificationsController@get_issues')->name('issues');
+	Route::post('sell/{id}/product','StorageController@sell_from_storage')->name('sell_from_storage');
 
 });
 

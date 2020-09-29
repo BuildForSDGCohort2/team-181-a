@@ -18,7 +18,7 @@ class PlantsController extends Controller
     public function index( Plantation $plantation)
     {
         
-            $plantations = $plantation->all();
+            $plantations = auth()->user()->plantations->filter(function($plantation){ return $plantation->status < 2 ;});
             return view('plants.index')->with('plantations',$plantations);
         
     }

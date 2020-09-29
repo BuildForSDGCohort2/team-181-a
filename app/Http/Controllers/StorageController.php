@@ -22,19 +22,26 @@ class StorageController extends Controller
         
 
     }
-    public function harvest(StorageRequest $request,Storage $store)
+    public function harvest(StorageRequest $request,Storage $store,Plantation $plantation)
     {   
+        $plantation->harvest_plantation($request);
         $store->store($request);
         return redirect('plant')->with('message','Stored Succesfully');
 
     }
-    public function sell()
-    {
-        # code...
-    }
+    public function sell_from_storage( Request $request,Storage $store)
+    {  
+        # get the good from storage
+        $store->decrement_sacks($request);
+        $store->sell_crop_produce($request);
+        #decrement the amount of sacks the user entered
+        #post it 
+        return redirect()->route('storage');
+    } 
     public function all_items()
     {
-        $user_items = auth()->user()->stored_products;
+        $user_items = auth()->user()->stored_products->filter(function($stored){ return $stored->sacks > 0 ;});
         return view('storage.index')->with('user_items',$user_items);
     }
+
 }

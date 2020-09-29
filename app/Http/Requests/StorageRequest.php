@@ -27,7 +27,7 @@ class StorageRequest extends FormRequest
         return [
             'sacks'=>['required','integer'],
             'sell'=>['nullable'],
-            'price'=>['required_with:sell','integer'],
+            'price'=>['nullable','integer'],
             'sell_all'=>['nullable'],
             'amount'=>['nullable','integer'],
             'harvest_transport'=>['nullable']           

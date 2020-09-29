@@ -132,6 +132,10 @@ class Animal extends Model
     public function breed(){
         return $this->belongsTo('App\Animal_Fact_sheet');
     }
+    public function sales()
+    {
+        return $this->hasOne('App\Sales');
+    }
 
 }
 

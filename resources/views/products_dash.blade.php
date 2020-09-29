@@ -27,7 +27,7 @@
                 <small><strong>Weight | Prod rate  </strong>: Quantity</small><br>
                 <small><strong>Location </strong>: Quantity</small><br>
                 <small><strong>Price</strong>: Quantity</small><br>
-            <a href="{{route('viewprod',$prod)}}" class="btn btn-primary">Buy</a>
+            <a href="{{route('viewprod',$prod)}}" class="btn btn-primary">View Product</a>
             </div>
           </div> 
         @empty

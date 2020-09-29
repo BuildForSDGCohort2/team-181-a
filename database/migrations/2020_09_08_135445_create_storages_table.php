@@ -18,7 +18,6 @@ class CreateStoragesTable extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('plantation_id');
             $table->foreign('plantation_id')->references('id')->on('plantations');
-            $table->integer('sale_status');
             $table->integer('sacks');
 
         });
