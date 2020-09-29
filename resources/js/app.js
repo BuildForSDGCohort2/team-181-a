@@ -20,6 +20,10 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 // import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
+// import DashboardPlugin from '@/plugins/blackDashboard'
+
+
+
 import VueGoodTablePlugin from 'vue-good-table';
 
 // import the styles
