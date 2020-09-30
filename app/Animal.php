@@ -3,10 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 use App\Animal_Fact_sheet;
+use App\Isues;
+
 
 class Animal extends Model
 {
+
+    use SoftDeletes;
 
     protected $guarded=[];
 
@@ -103,9 +109,9 @@ class Animal extends Model
 
 
     }
-    #from the animals age are we able to find out if 
-    private function reproductivity_checker(array $validated)
-    {   
+    #from the animals age are we able to find out if  
+    private function reproductivity_checker(array $validated) #there will be a change here .. age will be checked an d the pg table will be used hre
+    {    
         $age =Animal::age_calculator($validated);
         
         if ( $validated['gender'] =='female'&& array_key_exists('pregnancy_status',$validated))  {
@@ -116,6 +122,54 @@ class Animal extends Model
             return 0;#inactive
         }
         
+    }
+    public function death_of_animal( $request)
+    {
+        $animal  = $this->find($request->id);
+        // if (property_exists('call_vet', $request)) {
+            
+        //     Isues::summon_vet(['reason'=>'Death Of Animal']); #check for the animals previous medical records 
+
+        // }else {
+        //     $animal->delete();
+        // }
+        $animal->delete();
+    }
+    public function summon_vet()
+    { 
+        #make an alert to the vet
+        #channgee the animals status to on sale .. awaiting vet
+        
+    }
+    public function put_up_for_sale($request)
+    {        
+        $animal  = $this->find($request->id);
+        // if (property_exists('call_vet', $request)) {
+            
+        // }else {
+
+        // }
+        $animal->sale_status = 1;
+        $animal->save();
+
+        return ['animal'=>$animal, 'price'=>($request->price === null? $animal->breed->price: $request->price)];
+    }
+    public function sell_animal(Array $data)
+    {
+        if ($data['animal']->sales !==null ) {
+            #get the sales record
+            $sale_record = $data['animal']->sale;
+            $sale_record->amount = ($animal->weight);
+            $sale_record->price = $data['price'];
+            $sale_record->save();
+        }else {
+            Sales::create([
+                'prod_id'=>'ANML',
+                'price'=>($data['price']),
+                'amount'=>($data['animal']->weight),
+                'animal_id'=>$data['animal']->id,
+            ]);
+        }
     }
     private function health_checker(array $validated)
     {
@@ -135,6 +189,10 @@ class Animal extends Model
     public function sales()
     {
         return $this->hasOne('App\Sales');
+    }
+    public function pregnant()
+    {
+        return $this->hasMany('App\Pregnant');
     }
 
 }

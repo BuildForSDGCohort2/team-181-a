@@ -20,6 +20,7 @@ class AnimalFactsheet_Seeder extends Seeder
             'maximum_height' =>0,
             'weight_at_birth' =>0,
             'breed' =>'unknown',
+            'price'=>1000,
         ]);
         DB::table('animal_fact_sheets')->insert([
             'species' =>'cow',
@@ -30,6 +31,8 @@ class AnimalFactsheet_Seeder extends Seeder
             'maximum_height' =>0,
             'weight_at_birth' =>30,
             'breed' =>'kienyeji',
+            'price'=>20000,
+
         ]);
         DB::table('animal_fact_sheets')->insert([
             'species' =>'sheep or goat',
@@ -40,6 +43,8 @@ class AnimalFactsheet_Seeder extends Seeder
             'maximum_height' =>0,
             'weight_at_birth' =>9,
             'breed' =>'kienyeji',
+            'price'=>7000,
+
         ]);
 
         DB::table('animal_fact_sheets')->insert([
@@ -51,6 +56,8 @@ class AnimalFactsheet_Seeder extends Seeder
             'maximum_height' =>1,
             'weight_at_birth' =>0,
             'breed' =>'kienyeji',
+            'price'=>1000,
+
         ]);
     }
 }

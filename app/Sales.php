@@ -23,6 +23,11 @@ class Sales extends Model
     {
         return $this->belongsTo('App\Animal');
     }
+    public function brood()
+    {
+        return $this->belongsTo('App\Brood');
+    }
+
 
 
 }

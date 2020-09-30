@@ -30,13 +30,16 @@ class Storage extends Model
 
     }
 
-    #this will decrement the number of sacks
+    #this will decrement the number of sacks while selling
     public function decrement_sacks($request)
     {
         $stored =$this->where('id','=',$request->id)->get()[0];
 
         if ($stored->sacks < $request['sacks_for_sale'] ) {
-            throw ValidationException::withMessages(['Amount' => 'number of sacks Should be less than those in storage']);
+            throw ValidationException::withMessages(['Amount' => 'Number of sacks Should be less than those in storage']);
+        }elseif(property_exists($request,'all')){
+            $stored->sacks = 0;
+            $stored->save();
         }else {
             # code...        
             $stored->sacks = ($stored->sacks)-$request['sacks_for_sale']; #should return errror if number of sacks to sell is more than the ones to be deducted
@@ -48,10 +51,10 @@ class Storage extends Model
     {
         $stored =$this->where('id','=',$data->id)->get()[0];
 
-        if ($stored->has('sales')) {
+        if ($stored->sales !== null ) {
             $sales = $stored->sales;
             $sales->amount +=  $data->sacks_for_sale;
-            $sales->price = $data->price;
+            $sales->price = ($data->price===null?$sales->price:$data->price);
             $sales->save();
         }else {
             Sales::create([

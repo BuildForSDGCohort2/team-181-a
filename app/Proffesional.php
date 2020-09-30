@@ -39,4 +39,8 @@ class Proffesional extends Model
     {
         return $this->belongsTo('App\User');
     }
+    public function pregnant()
+    {
+        return $this->hasMany('App\Pregnant');
+    }
 }

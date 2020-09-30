@@ -115,8 +115,8 @@
                           <div class="first-column" style='width:45%; float: left;'>
                             <div class="form-group">
                               <label for="sacks_for_sale">Number of Sacks</label>
-                              <input type="text" class="form-control" name='sacks_for_sale'id="sacks_for_sale" aria-describedby="sacks_for_sale" placeholder="How many?">
-                              <small id="sacks_for_sale" class="form-text text-muted">The number of Sacks.</small>
+                            <input type="number" class="form-control" name='sacks_for_sale'id="sacks_for_sale" aria-describedby="sacks_for_sale" placeholder="{{$item->sacks}} is the max" min='1' max="{{$item->sacks}}">
+                              <small id="sacks_for_sale" class="form-text text-muted">{{$item->sacks}} Sacks Remaining.</small>
                             </div>
                             <div class="form-group">
                               <div class="custom-control custom-checkbox">
@@ -136,7 +136,7 @@
       
                             <div class="form-group">
                               <label for="price">Price</label>
-                              <input type="text" class="form-control" name='price'id="price" aria-describedby="price" placeholder="Enter the sack price">
+                              <input type="number" class="form-control" name='price'id="price" aria-describedby="price" placeholder="Enter the sack price">
                               <small id="price" class="form-text text-muted">The price Per sack.</small>
                             </div>  
                             <div class="form-group">
@@ -166,67 +166,32 @@
                     <!-- Modal content-->
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h4 class="modal-title">Harvest Plantation</h4>
+                        <h4 class="modal-title">Take From Store</h4>
                       </div>
                       <div class="modal-body">
-                      <form action="" method="post">
+                      <form action="{{route('take_from_storage',$item)}}" method="post">
                         @csrf
                           
-                          <div class="first-column" style='width:45%; float: left;'>
+                          <div class="first-column" >
                             <div class="form-group">
-                              <label for="sacks">Number of full Sacks</label>
-                              <input type="text" class="form-control" name='sacks'id="sacks" aria-describedby="sacks" placeholder="X sacks">
-                              <small id="sacks" class="form-text text-muted">The number of Sacks.</small>
+                              <label for="sacks_for_sale">Number of Sacks</label>
+                            <input type="number" class="form-control" name='sacks_for_sale'id="sacks_for_sale" aria-describedby="sacks_for_sale" placeholder="{{$item->sacks}} is the max" min='1' max="{{$item->sacks}}">
+                              <small id="sacks_for_sale" class="form-text text-muted">{{$item->sacks}} Sacks Remaining.</small>
+                            </div>
+                            <div class="form-group">
+                              <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="all" name="all"  >
+                                <label class="custom-control-label" for="all"><span class="text-success"> Take <span class="text-warning">All</span> </span>?</label>
+                              </div>                   
                             </div>
                             
-                            <div class="form-group">
-                              <label for="species" ><small>Recommendations</small> </label>
-                              <textarea class="form-control" id="recomendations" rows="3"  readonly>
-                              </textarea>
-                            </div>
+                            
                             
                             {{-- incremental... will depend on the remaining size of farm --}}                  
       
       
                           </div>
-                          <div class="second-column" style='width:45%; float: right;'>
-                            <div class="form-group">
-                              <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="sell" name="sell"  >
-                                <label class="custom-control-label" for="sell">Immediate  <span class="text-success"> Sell</span>?</label>
-                              </div>                   
-                            </div>
-      
-                            
-      
-                            <div class="form-group">
-                              <label for="price">Price</label>
-                              <input type="text" class="form-control" name='price'id="price" aria-describedby="price" placeholder="Enter the sack price">
-                              <small id="price" class="form-text text-muted">The price Per sack.</small>
-                            </div> 
-                            
-                            <div class="form-group">
-                              <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="sell_all" name="sell_all"  >
-                                <label class="custom-control-label" for="sell_all">All   <span class="text-success"> Sacks</span>?</label>
-                              </div>                   
-                            </div>
-      
-                            <div class="form-group">
-                              <label for="amount">Number of Sacks</label>
-                              <input type="text" class="form-control" name='amount'id="amount" aria-describedby="amount" placeholder="Number of sacks">
-                              <small id="amount" class="form-text text-muted">How many sacks Would You like to sell?</small>
-                            </div> 
-                            
-                            <div class="form-group">
-                              <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="harvest_transport" name="harvest_transport"  >
-                                <label class="custom-control-label" for="harvest_transport">Do you need <span class="text-warning"> Transport</span>?</label>
-                              </div>                   
-                            </div>
-                                                 
-                          
-                          </div>
+
                         
                         
                         

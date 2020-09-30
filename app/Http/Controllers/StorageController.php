@@ -31,6 +31,7 @@ class StorageController extends Controller
     }
     public function sell_from_storage( Request $request,Storage $store)
     {  
+        // return $request;
         # get the good from storage
         $store->decrement_sacks($request);
         $store->sell_crop_produce($request);
@@ -38,6 +39,12 @@ class StorageController extends Controller
         #post it 
         return redirect()->route('storage');
     } 
+    public function take_from_storage(Request $request,Storage $store)
+    {
+        // return $request;
+        $store->decrement_sacks($request);
+        return redirect()->route('storage');
+    }
     public function all_items()
     {
         $user_items = auth()->user()->stored_products->filter(function($stored){ return $stored->sacks > 0 ;});
