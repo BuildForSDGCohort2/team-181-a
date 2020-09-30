@@ -28,7 +28,7 @@
                 <h3>Agricultural Products</h3>
                 <hr style="height: 1px;background-color: white; border: none;">
                 <i class="fa fa-envira" style="font-size: 48px" aria-hidden="true"></i>
-                <a href="/register">
+                <a href="/on_sale">
                     <button class="btn btn-outline" style="border: 1px solid white; color: white;white-space: normal; "><i class="fa fa-shopping-basket" aria-hidden="true"></i>&nbsp; Browse and buy <span style="color: greenyellow">farmer's Produce</span> </button>
                 </a>
                 <p style="padding-top: 20%">

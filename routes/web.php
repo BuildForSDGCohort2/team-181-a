@@ -17,11 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::get('/supplier-browse', 'HomeController@supplier_browse')->name('supplier_browse');
-Route::get('/professional-browse', 'HomeController@professional_browse')->name('professional_browse');
-
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -30,12 +25,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
-	// this will show all of the animals registered
-	Route::get('animal-list', function () {
-		return view('animals.index');
-	})->name('animals_table');
-
-
 	// this will contain have the breed id etc
 	Route::get('breed-info', function () {
 		return view('animals.breed');
@@ -47,9 +36,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 	// this will display all of the plants planted in the farm
 
-	Route::get('plant-table', function () {
-		return view('plants.index');
-	})->name('plants_table');
+	// Route::get('plant-table', function () {
+	// 	return view('plants.index');
+	// })->name('plants_table');
 
 	Route::get('plant-info', function () {
 		return view('plants.info');
@@ -77,9 +66,6 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('pages.map');
 	})->name('map');
 
-	Route::get('notifications', function () {
-		return view('pages.notifications');
-	})->name('notifications');
 
 	Route::get('rtl-support', function () {
 		return view('pages.language');
@@ -98,13 +84,27 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
+	Route::get('stores','StorageController@all_items')->name('storage');
+	Route::post('plantation/{id}/schedule_harvest','StorageController@schedule_harvest')->name('scheduleharvest');
+	Route::post('plantation/{id}/harvest','StorageController@harvest')->name('harvest');
+	Route::get('orders','OrdersController@my_orders')->name('orders');
+	Route::resource('animal', 'AnimalsController', ['except' => ['create']]);
+	Route::resource('plant', 'PlantsController', ['except' => ['create']]);
+	Route::resource('brood', 'BroodsController', ['except' => ['create']]);
+	Route::get('notifications','NotificationsController@notification_selector')->name('notifications');
+	Route::get('pending_suppliers','NotificationsController@get_suppliers')->name('pending_suppliers');
+	Route::get('issues','NotificationsController@get_issues')->name('issues');
+
 });
 
-Route::resource('animal', 'AnimalsController', ['except' => ['create']]);
-Route::resource('plant', 'PlantsController', ['except' => ['create']]);
-Route::resource('brood', 'BroodsController', ['except' => ['create']]);
+
 
 // enrolement
 Route::post('profesionals_enrole','EnrolmentController@profesionals_enrole')->name('profesionals_enrole');
 Route::post('suppliers_enrole','EnrolmentController@suppliers_enrole')->name('suppliers_enrole');
 Route::post('farmers_enrole','EnrolmentController@farmers_enrole')->name('farmers_enrole');
+
+Route::get('on_sale','OrdersController@for_sale')->name('on_sale');
+Route::get('buy_item','OrdersController@buy_item')->name('buy_item');
+Route::get('on_sale/{id}/view','OrdersController@view_prod')->name('viewprod');
+
