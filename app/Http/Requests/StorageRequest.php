@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class OrderStore extends FormRequest
+class StorageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,8 @@ class OrderStore extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return auth()->check();
+    
     }
 
     /**
@@ -24,7 +25,12 @@ class OrderStore extends FormRequest
     public function rules()
     {
         return [
-            
+            'sacks'=>['required','integer'],
+            'sell'=>['nullable'],
+            'price'=>['nullable','integer'],
+            'sell_all'=>['nullable'],
+            'amount'=>['nullable','integer'],
+            'harvest_transport'=>['nullable']           
         ];
     }
 }

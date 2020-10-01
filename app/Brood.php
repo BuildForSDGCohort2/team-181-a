@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Brood extends Model
 {
     public function new_brood(array $validated)
@@ -17,7 +18,39 @@ class Brood extends Model
         $new_brood->gender = $validated['gender'];
         $new_brood->save();
     }
+    public function deduct_number( $request)
+    {
+        $brood  = $this->find($request->id);
+        $number = $request->birds_for_sell;
+        $brood->number -= $number;
+        $brood->save();
+        return ['brood'=>$brood, 'number'=>$number,'price'=>($request->price === null? $brood->breed->price: $request->price)];
+    }
+    public function sell_bird(Array $data)
+    {   $number = ( $data['number'] === null ? 1 :$data['number']);
+        if ($data['brood']->sales !==null ) {
+            #get the sales record
+            $sale_record = $data['brood']->sales;
+            // return $data['brood'];
+            $sale_record->amount += $number;
+            $sale_record->price = $data['price'];
+            $sale_record->save();
+        }else {
+            Sales::create([
+                'prod_id'=>'POULT',
+                'price'=>($data['price']),
+                'amount'=>$number,
+                'brood_id'=>$data['brood']->id,
+            ]);
+        }
+    }
+    
     public function breed(){
         return $this->belongsTo('App\Animal_Fact_sheet');
     }
+    public function sales()
+    {
+      return $this->hasOne('App\Sales');
+    }
+
 }

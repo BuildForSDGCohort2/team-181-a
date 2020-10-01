@@ -16,28 +16,13 @@ class BroodsController extends Controller
     public function index(Brood $brood)
     {   
         
-        $broods = $brood->all();
+        $broods = $brood->all()->filter(function($brood){ return $brood->number > 0 ;});
         // return $broods;
    
         return view('broods.index') ->with('broods',$broods);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(BroodStore $request , Brood $brood)
     {
         $validated = $request->validated();
@@ -89,4 +74,17 @@ class BroodsController extends Controller
     {
         //
     }
+    public function deduct(Request $request,Brood $brood)
+    {
+        $brood->deduct_number($request);
+        return redirect('brood');
+    }
+    public function sell_bird(Request $request,Brood $brood)
+    {   
+        $data =$brood->deduct_number($request);
+        // return $data;
+        $brood->sell_bird($data);
+        return redirect('brood');
+
+    }   
 }

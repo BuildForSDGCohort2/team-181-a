@@ -27,12 +27,12 @@
 
 
           <li class="nav-item">
-            <a class="nav-link active" style="background-color: blueviolet" href="#">Issues</a>
+            <a class="nav-link " href="{{route('issues')}}">Issues</a>
           </li>
           
           @if (auth()->user()->hasRole('farmer'))
            <li class="nav-item">
-              <a class="nav-link "  href="{{route('storage')}}">Store</a>
+              <a class="nav-link active" style="background-color: blueviolet" href="#">Store</a>
             </li> 
          @endif
 
@@ -60,10 +60,10 @@
                     ID
                   </th>
                   <th>
-                    Reason
+                    Contents
                   </th>
                   <th>
-                    Information
+                    Status
                   </th>
 
                   <th>
@@ -72,51 +72,154 @@
                 </thead>
                 <tbody>
 
-                @forelse ($issues as $issue)
+                @forelse ($user_items as $item)
                 <tr>
-                  <td>
-                    
-                    @if (in_array('PLT',explode('-',$issue->identifier)))
-                      <i class="fa fa-pagelines "></i>
-                    @elseif(in_array('ANML',explode('-',$issue->identifier)))
-                      <i class="material-icons">pets</i>
-                    @elseif(in_array('POLTR',explode('-',$issue->identifier)))
-                      <i class="fa fa-bold" aria-hidden="true"></i>
-                    @else
-                      <i class="material-icons">api</i>
-                    @endif
+                    <td>                    
+                      {{$item->id}}
                     </td>
 
                     <td>
-                     {{ucfirst($issue->reason)}}
+                     {{ucfirst($item->plantation->species.'('.$item->plantation->plant_fact_sheet->type.')'.$item->sacks.'Scks')}}
                     </td>
 
                     <td>
-              
-                      {{$issue->information.(in_array('RMNDR',explode('-',$issue->identifier))?now()->diff(date_create($issue->due_date))->d.'days from now':null )}}
+                        Stored 
+                        @if ($item->has('sales'))
+                    - <span class="text-primary"> {{$item->sales->amount}} put on sale</span>
+                        @endif
                     </td>
                     <td>
-                        <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#professional_modal">View info</button>
-
+                      <div class="dropdown">
+                        <button class="btn btn-outline-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          ...
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#sell"> Sell</a>
+                          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#take">Take</a>
+                        </div>
+                      </div>
                     </td>
                 </tr>
+                <div id="sell" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+                
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Sell</h4>
+                      </div>
+                      <div class="modal-body">
+                      <form action="{{route('sell_from_storage',$item)}}" method="post">
+                        @csrf
+                          
+                          <div class="first-column" style='width:45%; float: left;'>
+                            <div class="form-group">
+                              <label for="sacks_for_sale">Number of Sacks</label>
+                            <input type="number" class="form-control" name='sacks_for_sale'id="sacks_for_sale" aria-describedby="sacks_for_sale" placeholder="{{$item->sacks}} is the max" min='1' max="{{$item->sacks}}">
+                              <small id="sacks_for_sale" class="form-text text-muted">{{$item->sacks}} Sacks Remaining.</small>
+                            </div>
+                            <div class="form-group">
+                              <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="sell_all" name="sell_all"  >
+                                <label class="custom-control-label" for="sell_all"><span class="text-success"> Sell <span class="text-warning">All</span> </span>?</label>
+                              </div>                   
+                            </div>
+                            
+                            
+                            
+                            {{-- incremental... will depend on the remaining size of farm --}}                  
+      
+      
+                          </div>
+                          <div class="second-column" style='width:45%; float: right;'>     
+                            
+      
+                            <div class="form-group">
+                              <label for="price">Price</label>
+                              <input type="number" class="form-control" name='price'id="price" aria-describedby="price" placeholder="Enter the sack price">
+                              <small id="price" class="form-text text-muted">The price Per sack.</small>
+                            </div>  
+                            <div class="form-group">
+                              <label for="species" ><small>Recommendations</small> </label>
+                              <textarea class="form-control" id="recomendations" rows="3"  readonly>
+                              </textarea>
+                            </div>                      
+                  
+                          
+                          </div>
+                        
+                        
+                        
+                      </div>
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn-info" value="Submit">Submit</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                      </div>
+                    </form>
+                    </div>
+                
+                  </div>
+                </div> 
+                <div id="take" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+                
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Take From Store</h4>
+                      </div>
+                      <div class="modal-body">
+                      <form action="{{route('take_from_storage',$item)}}" method="post">
+                        @csrf
+                          
+                          <div class="first-column" >
+                            <div class="form-group">
+                              <label for="sacks_for_sale">Number of Sacks</label>
+                            <input type="number" class="form-control" name='sacks_for_sale'id="sacks_for_sale" aria-describedby="sacks_for_sale" placeholder="{{$item->sacks}} is the max" min='1' max="{{$item->sacks}}">
+                              <small id="sacks_for_sale" class="form-text text-muted">{{$item->sacks}} Sacks Remaining.</small>
+                            </div>
+                            <div class="form-group">
+                              <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="all" name="all"  >
+                                <label class="custom-control-label" for="all"><span class="text-success"> Take <span class="text-warning">All</span> </span>?</label>
+                              </div>                   
+                            </div>
+                            
+                            
+                            
+                            {{-- incremental... will depend on the remaining size of farm --}}                  
+      
+      
+                          </div>
+
+                        
+                        
+                        
+                      </div>
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn-info" value="Submit">Submit</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                      </div>
+                    </form>
+                    </div>
+                
+                  </div>
+                </div> 
                 @empty
                 <tr>
                   <td>
-                    <span class="text-primary"> No Requests</span>
+                    <span class="text-primary"> No items in Storage.</span>
                   </td>
                   <td>
-                    <span class="text-primary"> No Requests</span>
+                    <span class="text-primary"> No items in Storage.</span>
                   </td>
                   <td>
-                    <span class="text-primary"> No Requests</span>
+                    <span class="text-primary"> No items in Storage.</span>
                   </td>
                   <td>
-                    <span class="text-primary"> No Requests</span>
+                    <span class="text-primary"> No items in Storage.</span>
                   </td>
-                  <td>
-                    <span class="text-primary"> No Requests</span>
-                  </td>
+
                 </tr>
                     
                 @endforelse

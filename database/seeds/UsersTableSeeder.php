@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('secret'),
             'created_at' => now(),
             'updated_at' => now(),
-            'last_login'=>now(),
+            'last_login'=>null,
             'location'=>'admin'
         ]);
         //farmer
@@ -31,7 +31,7 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('secret'),
             'created_at' => now(),
             'updated_at' => now(),
-            'last_login'=>now(),
+            'last_login'=>null,
             'location'=>'nakuru'
 
         ]);
@@ -43,7 +43,7 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('secret'),
             'created_at' => now(),
             'updated_at' => now(),
-            'last_login'=>now(),
+            'last_login'=>null,
             'location'=>'nakuru'
 
         ]);
@@ -55,7 +55,7 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('secret'),
             'created_at' => now(),
             'updated_at' => now(),
-            'last_login'=>now(),
+            'last_login'=>null,
             'location'=>'nakuru'
 
         ]);
@@ -67,7 +67,7 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('secret'),
             'created_at' => now(),
             'updated_at' => now(),
-            'last_login'=>now(),
+            'last_login'=>null,
             'location'=>'nakuru'
         ]);
         //customer
@@ -78,7 +78,7 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('secret'),
             'created_at' => now(),
             'updated_at' => now(),
-            'last_login'=>now(),
+            'last_login'=>null,
             'location'=>'nakuru'
         ]);
         //admin

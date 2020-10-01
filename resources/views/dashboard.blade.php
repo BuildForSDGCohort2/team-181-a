@@ -179,7 +179,7 @@
                   <table class="table">
                     <tbody>
                       @forelse ($issues as $issue)
-                      @if ($issue->identifier == 'ANML' ||$issue->identifier == 'POLTR' )
+                      @if (in_array('ANML' ,explode('-', $issue->identifier))||in_array('POLTR' ,explode('-', $issue->identifier)))
                         <tr>
                           <td>
                             <div class="form-check">
@@ -229,7 +229,7 @@
                   <table class="table">
                     <tbody>
                       @forelse ($issues as $issue)
-                      @if ($issue->identifier == 'PLT')
+                      @if (in_array('PLT' ,explode('-', $issue->identifier)))
                         <tr>
                           <td>
                             <div class="form-check">

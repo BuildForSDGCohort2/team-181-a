@@ -150,7 +150,7 @@
                   </th>
                 </thead>
                 <tbody>
-                    @foreach ($broods as $brood)
+                    @forelse ($broods as $brood)
                     <tr>
                       <td>
                         {{$brood->id}}
@@ -192,18 +192,148 @@
                             
                           </button>
                           <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Sell</a>
+                            <a class="dropdown-item" href="#"  data-toggle="modal" data-target="#sell">Sell</a>
                             @if ($age->y > 0 || $age->m > 4 )                                
                             <a class="dropdown-item" href="#"><span class="text-primary">View production Records</span>  </a> {{-- the pop up would record the various varibles that would accopany that eg number etc--}}
                             @endif
-                            <a class="dropdown-item" href="#"><span class="text-danger">Record Death</span>  </a> {{-- the pop up would record the various varibles that would accopany that eg number etc--}}
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#death" ><span class="text-danger">Record Death / Slaughter</span>  </a> {{-- the pop up would record the various varibles that would accopany that eg number etc--}}
 
                           </div>
                         </div>
 
                       </td>
+                      <div id="sell" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                      
+                          <!-- Modal content-->
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h4 class="modal-title">Sell</h4>
+                            </div>
+                            <div class="modal-body">
+                            <form action="{{route('sell_poultry',$brood)}}" method="post">
+                              @csrf
+                                
+                                <div class="first-column" style='width:45%; float: left;'>
+                                  <div class="form-group">
+                                    <label for="birds_for_sell">Number of Birds</label>
+                                  <input type="number" class="form-control" name='birds_for_sell'id="birds_for_sell" aria-describedby="birds_for_sell" placeholder="{{$brood->number}} is the max" min='1' max="{{$brood->number}}">
+                                    <small id="birds_for_sell" class="form-text text-muted">{{$brood->number}} Birds Remaining.</small>
+                                  </div>
+                                  <div class="form-group">
+                                    <div class="custom-control custom-checkbox">
+                                      <input type="checkbox" class="custom-control-input" id="sell_all" name="sell_all"  >
+                                      <label class="custom-control-label" for="sell_all"><span class="text-success"> Sell <span class="text-warning">All</span> </span>?</label>
+                                    </div>                   
+                                  </div>
+                                  
+                                  
+                                  
+                                  {{-- incremental... will depend on the remaining size of farm --}}                  
+            
+            
+                                </div>
+                                <div class="second-column" style='width:45%; float: right;'>     
+                                  
+            
+                                  <div class="form-group">
+                                    <label for="price">Price</label>
+                                    <input type="number" class="form-control" name='price'id="price" aria-describedby="price" placeholder="Enter the bird price">
+                                    <small id="price" class="form-text text-muted">The price Per bird.</small>
+                                  </div>  
+                                  <div class="form-group">
+                                    <label for="species" ><small>Recommendations</small> </label>
+                                    <textarea class="form-control" id="recomendations" rows="3"  readonly>
+                                    </textarea>
+                                  </div>                      
+                        
+                                
+                                </div>
+                              
+                              
+                              
+                            </div>
+                            <div class="modal-footer">
+                              <button type="submit" class="btn btn-info" value="Submit">Submit</button>
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            </div>
+                          </form>
+                          </div>
+                      
+                        </div>
+                      </div> 
+                      <div id="death" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                      
+                          <!-- Modal content-->
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h4 class="modal-title">Record Death</h4>
+                            </div>
+                            <div class="modal-body">
+                            <form action="{{route('deduct_brood_number',$brood)}}" method="post">
+                              @csrf
+                                
+                                <div class="first-column" >
+                                  <div class="form-group">
+                                    <label for="birds_for_sale">Number of birds</label>
+                                  <input type="number" class="form-control" name='birds_for_sale'id="birds_for_sale" aria-describedby="birds_for_sale" placeholder="{{$brood->number}} is the max" min='1' max="{{$brood->number}}">
+                                    <small id="birds_for_sale" class="form-text text-muted">{{$brood->number}} birds Remaining.</small>
+                                  </div>
+                                  <div class="form-group">
+                                    <div class="custom-control custom-checkbox">
+                                      <input type="checkbox" class="custom-control-input" id="all" name="all"  >
+                                      <label class="custom-control-label" for="all"><span class="text-success"> Take <span class="text-warning">All</span> </span>?</label>
+                                    </div>                   
+                                  </div>
+                                  
+                                  
+                                  
+                                  {{-- incremental... will depend on the remaining size of farm --}}                  
+            
+            
+                                </div>
+      
+                              
+                              
+                              
+                            </div>
+                            <div class="modal-footer">
+                              <button type="submit" class="btn btn-info" value="Submit">Submit</button>
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            </div>
+                          </form>
+                          </div>
+                      
+                        </div>
+                      </div> 
                     </tr>  
-                    @endforeach
+                    @empty
+                    <tr>
+                      <td>
+                        0
+                      </td>
+                      <td>
+                        No Broods Registerd
+                      </td>
+                      <td>
+                        No Broods Registerd
+                      </td>
+                      <td>
+                        No Broods Registerd
+                      </td>
+                      <td>
+                        No Broods Registerd
+                      </td>
+                      <td>
+                        No Broods Registerd
+                      </td>
+                      <td>
+                        No Broods Registerd
+                      </td>
+                    </tr>
+
+                    @endforelse
                 </tbody>
               </table>
         </div>

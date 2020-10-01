@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'notifications', 'titlePage' => __('Table List')])
+@extends('layouts.app', ['activePage' => 'notifications', 'titlePage' => __('Orders')])
 
 @section('content')
 
@@ -6,33 +6,51 @@
 <div class="content">
 
   <div class="container-fluid">
-    <nav ">
-        <ul class="nav nav-pills">
-        @if (auth()->user()->hasRole('admin'))
+    @if (auth()->user()->hasRole('customer'))
+    <div class="row text-primary ">
+      <h3 style="margin-left:20px">Order <span style="color: "> History</span></h3>
+    </div>
         
-            <li class="nav-item">
-              <a class="nav-link " href="{{ route('notifications') }}">Proffesionals</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="{{route('pending_suppliers')}}">Suppliers</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" style="background-color: blueviolet" href="#">Orders</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link "  href="{{route('issues')}}">User Requests</a>
-            </li>
-
-        @else
-        <li class="nav-item">
-            <a class="nav-link "  href="{{route('issues')}}">issues</a>
+    @else
+        
+    <nav ">
+      <ul class="nav nav-pills">
+      @if (auth()->user()->hasRole('admin'))
+      
+          <li class="nav-item">
+            <a class="nav-link " href="{{ route('notifications') }}">Proffesionals</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" href="{{route('pending_suppliers')}}">Suppliers</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" style="background-color: blueviolet" href="#">Orders</a>
-          </li> 
+          </li>
+          <li class="nav-item">
+            <a class="nav-link "  href="{{route('issues')}}">User Requests</a>
+          </li>
+        @else
+          <li class="nav-item">
+            <a class="nav-link "  href="{{route('issues')}}">issues</a>
+          </li>
+          @if (auth()->user()->hasRole('farmer'))
+            <li class="nav-item">
+             <a class="nav-link "  href="{{route('storage')}}">Store</a>
+            </li> 
+          @endif  
+
+        <li class="nav-item">
+          <a class="nav-link active" style="background-color: blueviolet" href="#">Orders</a>
+        </li> 
+        
         @endif
+      
     </ul>
-    </nav>
+  </nav>
+
+    @endif
+    
+    
     <div class="row">
       <div class="col-md-12">
         <div class="card">

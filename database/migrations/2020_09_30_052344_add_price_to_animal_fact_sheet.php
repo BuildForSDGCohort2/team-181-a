@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddFarmerIdToStorages extends Migration
+class AddPriceToAnimalFactSheet extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class AddFarmerIdToStorages extends Migration
      */
     public function up()
     {
-        Schema::table('storages', function (Blueprint $table) {
-            $table->unsignedBigInteger('farmer_id');
-            $table->foreign('farmer_id')->references('id')->on('farmers');
-
+        Schema::table('animal_fact_sheets', function (Blueprint $table) {
+            $table->integer('price');
         });
     }
 
@@ -27,9 +25,8 @@ class AddFarmerIdToStorages extends Migration
      */
     public function down()
     {
-        Schema::table('storages', function (Blueprint $table) {
-                        $table->dropColumn('farmer_id');
-
+        Schema::table('animal_fact_sheets', function (Blueprint $table) {
+            $table->dropColumn('price');
         });
     }
 }

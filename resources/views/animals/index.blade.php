@@ -324,7 +324,7 @@
                   </th>
                 </thead>
                 <tbody>
-                    @foreach ($animals as $animal)
+                    @forelse ($animals as $animal)
                     <tr>
                       <td>
                         {{$animal->id}}
@@ -361,8 +361,8 @@
                         
                       </td>
                       {{-- The colur of this column sill change acording to the current status of the cow or bull --}}
-                      <td class="text-primary">
-                      <span style="color: rgb(19, 197, 108)">{{$animal->weight}}</span>
+                      <td class="text-">
+                      <span style="color: rgb(19, 197, 108)">{{$animal->weight}} </span>KG
                       </td>
                       <td>
                         {{-- if the animals healthy --}}
@@ -375,7 +375,7 @@
                                   <span class="text-success">{{$animal->reproductive_status == 2? 'Pregnant & Healthy':($animal->age > 2 && $animal->age < 4 ? 'Healthy Adolescent':'Healthy Adult') }}</span>
                                 @endif
                             @else
-                                <span class="text-success">{{($animal->age > 2 && $animal->age < 4 ? 'Healthy Adolescent':'Healthy Adult') }}<</span>
+                                <span class="text-success">{{($age->y < 2? 'Healthy Child': ($age->y < 4 ? 'Healthy Adolescent':'Healthy Adult')) }}</span>
                             @endif
                         @else
                             <span class="text-danger">Unhealthy</span>
@@ -389,19 +389,213 @@
                                 {{-- gender checker --}}
                                 @if ($animal->gender == 'female' && $animal->reproductive_status >0 )
                                   {{-- ternary to check pregnancy  and summon vet accordingly  will add the time calculator.. time to birth --}}
-                                  @if ($animal->reproductive_status==1)
-                                    <button type="button" class="btn btn-outline-warning btn-sm" style=" white-space: normal;">Summon Vet For Ai Procedure</button>
-                                  @elseif($animal->reproductive_status==2)
-                                    <button type="button" class="btn btn-outline-success btn-sm" style=" white-space: normal;">Summon Vet For Checkup</button> 
-                                  @endif
-                            @endif
-                        @else
-                          <button type="button" class="btn btn-outline-danger btn-sm" style="whitespace:normal;">Summon Vet </button> 
-                        @endif
+                                  <div class="dropdown">
+                                    <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      Action
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#sell_animal">Sell</a>
+                                      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#death">Dead </a>
+                                      @if ($animal->reproductive_status==1)
+                                      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet">Summon Vet For Ai Procedure</a>
+                                    @elseif($animal->reproductive_status==2)
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet">Summon Vet For Checkup</a> 
+                                    @endif
+                                    </div>
+                                  </div> 
+                                 
+                                @else
+                                <div class="dropdown">
+                                  <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Action
+                                  </button>
+                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#sell_animal">Sell</a>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet">Summon Vet</a>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#death">Dead / <span class="text-success">Slaughter</span></a>
+                                  </div>
+                                </div> 
+                                @endif
+                            @else
+                              <button type="button" class="btn btn-outline-danger btn-sm" style="whitespace:normal;">Summon Vet </button> 
+                          @endif
 
                       </td>
-                    </tr>  
-                    @endforeach
+                    </tr> 
+                    <div id="sell_animal" class="modal fade" role="dialog">
+                      <div class="modal-dialog">
+                    
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <div class="modal-header">
+                          <h4 class="modal-title">Sell {{ucfirst($animal->name)}}</h4>
+                          </div>
+                          <div class="modal-body">
+                          <form action="{{route('sell_animal',$animal)}}" method="post">
+                            @csrf
+                              
+                              <div class="first-column">
+                                <div class="form-group">
+                                  <label for="animal_weight">Enter Current Animal Weight</label>
+                                <input type="number" class="form-control" name='animal_weight'id="animal_weight" aria-describedby="animal_weight" placeholder="" min='1'>
+                                  <small id="animal_weight" class="form-text text-muted"> Current Weight.</small>
+                                </div>
+
+                                <div class="form-group">
+                                  <label for="price">Price</label>
+                                <input type="number" class="form-control" name='price'id="price" aria-describedby="price" placeholder="{{$animal->breed->price}} is the Recommended price">
+                                  <small id="price" class="form-text text-muted">Price.</small>
+                                </div>  
+                                <div class="form-group">
+                                  <label for="species" ><small>Recommendations</small> </label>
+                                  <textarea class="form-control" id="recomendations" rows="3"  readonly>
+                                  </textarea>
+                                </div> 
+                                <div class="form-group">
+                                  <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="call_vet" name="call_vet"  >
+                                    <label class="custom-control-label" for="call_vet"><span class=""> Summon the  <span class="text-success">vet</span> </span>?</label><br>
+                                    <label > <small><span class="text-warning"> Recommended * </span></small></label>
+                                  </div>                   
+                                </div>
+                                
+                                
+                                {{-- incremental... will depend on the remaining size of farm --}}                  
+          
+          
+                              </div>
+                                                       
+                            
+                            
+                          </div>
+                          <div class="modal-footer">
+                            <button type="submit" class="btn btn-info" value="Submit">Submit</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                          </div>
+                        </form>
+                        </div>
+                    
+                      </div>
+                    </div> 
+                    <div id="death" class="modal fade" role="dialog">
+                      <div class="modal-dialog">
+                    
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title">Record Death</h4>
+                          </div>
+                          <div class="modal-body">
+                          <form action="{{route('death_of_animal',$animal)}}" method="post">
+                            @csrf
+                              
+                              <div class="first-column" >
+                                <label > Reason...</label> <hr>
+                                <div style="float: left ;width:45%;">
+                                  <div class="form-group">
+                                    <div class="custom-control custom-checkbox">
+                                      <input type="checkbox" class="custom-control-input" id="slaughter" name="all"  >
+                                      <label class="custom-control-label" for="slaughter"><span class="text-"> Personal  <span class="text-success">uses</span> </span>?</label> <br>
+                                      <small class="text-info"> Check this option if you want to use the animal for personal uses.</small>
+
+                                    </div>                   
+                                  </div>
+                                </div>
+                                <div style="float: right; width:45%;">
+                                  <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="summon_vet" name="all"  >
+                                    <label class="custom-control-label" for="summon_vet"><span class="text-success"><span class="text-warning">Sickkness / Accident</span> </span>?</label><br>
+                                    <small class="text-info"> A Local Vet will be automatically be summoned...</small>
+                                  </div> 
+                                </div>
+
+                  
+                                </div>
+                                
+                                
+                                
+                                {{-- incremental... will depend on the remaining size of farm --}}                  
+          
+          
+                              
+    
+                            
+                            
+                            
+                          </div>
+                          <div class="modal-footer">
+                            <button type="submit" class="btn btn-info" value="Submit">Submit</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                          </div>
+                        </form>
+                        </div>
+                    
+                      </div>
+                    </div>
+                    <div id="summon_vet" class="modal fade" role="dialog">
+                      <div class="modal-dialog">
+                    
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title">Sell</h4>
+                          </div>
+                          <div class="modal-body">
+                          <form action="" method="post">
+                            @csrf
+                              
+                              <div class="first-column" style='width:45%; float: left;'>
+                                <div class="form-group">
+                                  <label for="birds_for_sell">Number of Birds</label>
+                                <input type="number" class="form-control" name='birds_for_sell'id="birds_for_sell" aria-describedby="birds_for_sell" placeholder=" is the max" min='1' max="">
+                                  <small id="birds_for_sell" class="form-text text-muted"></small>
+                                </div>
+                                <div class="form-group">
+                                  <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="sell_all" name="sell_all"  >
+                                    <label class="custom-control-label" for="sell_all"><span class="text-success"> Sell <span class="text-warning">All</span> </span>?</label>
+                                  </div>                   
+                                </div>
+                                
+                                
+                                
+                                {{-- incremental... will depend on the remaining size of farm --}}                  
+          
+          
+                              </div>
+                              <div class="second-column" style='width:45%; float: right;'>     
+                                
+          
+                                <div class="form-group">
+                                  <label for="price">Price</label>
+                                  <input type="number" class="form-control" name='price'id="price" aria-describedby="price" placeholder="Enter the bird price">
+                                  <small id="price" class="form-text text-muted">The price Per bird.</small>
+                                </div>  
+                                <div class="form-group">
+                                  <label for="species" ><small>Recommendations</small> </label>
+                                  <textarea class="form-control" id="recomendations" rows="3"  readonly>
+                                  </textarea>
+                                </div>                      
+                      
+                              
+                              </div>
+                            
+                            
+                            
+                          </div>
+                          <div class="modal-footer">
+                            <button type="submit" class="btn btn-info" value="Submit">Submit</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                          </div>
+                        </form>
+                        </div>
+                    
+                      </div>
+                    </div>  
+                    @empty
+                    
+                    
+                    @endforelse
                 </tbody>
               </table>
             </div>

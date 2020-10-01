@@ -46,13 +46,13 @@ class Farmer extends Model
         $checks = array_keys($validated['fields']);
         foreach ($checks as $check) {
             if ($check=='animal') {
-                $identifier='ANML';
+                $identifier='ANML-01';
                 $reason = 'Please Register Your Animals';
             } elseif ($check=='crops') {
-                $identifier='PLT';
+                $identifier='PLT-01';
                 $reason = 'Please Indicate the Size of Land You have Under Crop Farming.';
             }else {
-                $identifier='POLTR';
+                $identifier='POLTR-01';
                 $reason = 'Please Register Your Poultry Broods';
             }
             

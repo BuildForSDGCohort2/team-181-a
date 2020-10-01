@@ -41,6 +41,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+
     //to get the 
     public function get_prev_logins()
     {
@@ -51,7 +53,7 @@ class User extends Authenticatable
     public function animal(){
         return $this->hasMany('App\Animal');
     }
-    public function plantation(){
+    public function plantations(){
         return $this->hasMany('App\Plantation');
     }
     public function order()
@@ -69,5 +71,9 @@ class User extends Authenticatable
     public function farmer()
     {
         return $this->hasOne('App\Farmer');
+    }
+    public function stored_products()
+    {
+        return $this->hasManyThrough('App\Storage','App\Plantation','user_id','plantation_id');
     }
 }
