@@ -18,8 +18,8 @@ class OrdersController extends Controller
     public function view_prod(Request $request, Sales $sale )
     {
         $prod = $sale->get_product($request);
-        return $prod;
-        return view('view_product')->with('prod',$prod);
+        // return $prod;
+        return view('orders.buy_item')->with('prod',$prod);
     }
     #place order
     public function place_order(Sales $sale,Order $order,OrderStore $request)

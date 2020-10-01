@@ -40,7 +40,7 @@ class Plantation extends Model
         $plantation->save();
     }
     
-    public function farmer(){
+    public function user(){
         return $this->belongsTo('App\User');
     }
     public function plant_fact_sheet(){
