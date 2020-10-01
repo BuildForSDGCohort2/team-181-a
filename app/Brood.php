@@ -52,5 +52,8 @@ class Brood extends Model
     {
       return $this->hasOne('App\Sales');
     }
+    public function farmer(){
+        return $this->belongsTo('App\User','id');
+    }
 
 }

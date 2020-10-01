@@ -40,8 +40,8 @@ class Plantation extends Model
         $plantation->save();
     }
     
-    public function user(){
-        return $this->belongsTo('App\User');
+    public function farmer(){
+        return $this->belongsTo('App\User','id');
     }
     public function plant_fact_sheet(){
         return $this->belongsTo('App\Plant_fact_sheet','type_id');

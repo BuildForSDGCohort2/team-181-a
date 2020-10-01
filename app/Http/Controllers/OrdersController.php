@@ -27,12 +27,8 @@ class OrdersController extends Controller
         $sale->place_order($request);
         return view('products_dash')->with('message','Order Placed');
     }
-    #revoke Order
-    public function cancel_order(Request $request ,Sales $sale )
-    {
-        $order->cancel_order($request);
-        return view('products_dash')->with('message','Order Canceled');
-    }
+    #revoke Order 
+
     #view personal orders
     public function my_orders(Order $order)
     {
