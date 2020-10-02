@@ -2,7 +2,7 @@
   @extends('layouts.app', ['activePage' => 'onsale', 'titlePage' => __('On Sale')])
 
   @section('content')
-    <div class="content">
+    <div class="content"">
       @if (auth()->user()===null)
         <div class="container-fluid" style="margin-top:40px;">
       @else
