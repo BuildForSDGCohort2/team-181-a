@@ -44,7 +44,8 @@
 
         </div>
         <div class="col-md-6" style="margin-top: 100px">
-
+          <form action="{{route('place_order',$prod)}}" method="post">
+            @csrf
             <div class="table-responsive">
                 <table class="table table-sm table-borderless mb-0">
                     <tbody>
@@ -96,52 +97,57 @@
                             <td class="pl-0">
                                 <div class="def-number-input number-input safari_only mb-0">
 
-                                    <input class="quantity" min="1" name="quantity" value="1" type="number">
+                                <input class="quantity" min="1" name="quantity" max="{{$prod->amount}}" value="1" type="number">
 
                                 </div>
                             <small >{{$prod->amount.' '.($prod->prod_id=== 'PLT'?'Sacks':'Birds').' are available'}}</small>
                             </td>
 
                         </tr>
-                        <tr>
-                            @if (auth()->user() !== null)
-                                @if (auth()->user()->location === $product_information->farmer->location)
-                                    <th class="pl-0 w-25" scope="row"><small>Free Delivery Available</small></th>
-                                @else
-                                    <th class="pl-0 w-25" scope="row"><small>Free Delivery not Available</small> <br>
-                                        <input type = "radio"
-                                        name = "choice"
-                                        id = "pick"
-                                        value = "pick" />
-                                 <label for = "pick">Pick At your local Station </label> &nbsp;
-                               
-                                 <input type = "radio"
-                                        name = "choice"
-                                        id = "transport"
-                                        value = "transport" />
-                                 <label for = "transport">Home Delivery</label>
-                                    </th>
-                                @endif
-                            @else
-                                <th class="pl-0 w-25" scope="row"><small>Free Delivery in</small></th>
-                                {{-- here.... --}}
 
-                                <td>{{ucfirst($product_information->farmer->location)}}</td>
-                            @endif
-
-                        </tr>
                         
                     </tbody>
                 </table>
             </div>  
             @endif
+            <tr>
+              @if (auth()->user() !== null)
+                  @if (auth()->user()->location === $product_information->farmer->location)
+                      <th class="pl-0 w-25" scope="row"><small>Free Delivery Available</small></th>
+                  @else
+              <th class="pl-0 w-25" scope="row"><small>Free Delivery not Available in <span class="text-primary" >{{ucfirst(auth()->user()->location)}}</span></small> <br>
+                          <input type = "radio"
+                          name = "choice"
+                          id = "pick"
+                          value = "pick" required />
+                   <label for = "pick">Pick At your local Station </label> &nbsp;
+                 
+                   <input type = "radio"
+                          name = "choice"
+                          id = "delivery"
+                          value = "delivery" required />
+                   <label for = "delivery">Home Delivery</label>
+                      </th>
+                  @endif
+              @else
+                  <th class="pl-0 w-25" scope="row"><small>Free Delivery in</small></th>
+                  {{-- here.... --}}
+
+                  <td>{{ucfirst($product_information->farmer->location)}}</td>
+              @endif
+
+          </tr>
             @if (auth()->user() === null)
                 <button type="button" class="btn btn-primary btn-md mr-1 mb-2"  data-toggle="modal" data-target="#register" >Proced to Checkout</button>
             @else
-                <button type="button" class="btn btn-primary btn-md mr-1 mb-2"  data-toggle="modal" data-target="#pay" ><i></i> Proced to Checkout</button>
+                {{-- <button type="button" class="btn btn-primary btn-md mr-1 mb-2"  data-toggle="modal" data-target="#pay" ></i> Proced to Checkout</button> --}}
+                <button type="submitt" value='submitt' class="btn btn-primary btn-md mr-1 mb-2"  ></i> Proced to Checkout</button>
+
             @endif
             <button type="button" class="btn btn-light btn-success"><i class="fa fa-shopping-basket pr-2"></i>Add to Basket</button>
+          </form>
         </div>
+      
     </div>
 
     <div id="register" class="modal fade " role="dialog" style="margin-top: 10%; ">
@@ -236,7 +242,7 @@
             <form action="" method="post">
               @csrf
                 
-                <small> Thou JIM shall add the shoppig basket details here</small>
+                <small> Thou JIM shall add the shopping basket details here</small>
                                          
               
               

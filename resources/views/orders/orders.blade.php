@@ -80,7 +80,7 @@
                 </thead>
                 <tbody>
 
-                @forelse ($orders as $order)
+                @forelse ($myorders as $order)
                 <tr>
                     <td>
                      {{$order->id}}

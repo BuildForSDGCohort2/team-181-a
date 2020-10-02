@@ -21,7 +21,7 @@ class Storage extends Model
 
         if ($data->sell !==null  ) {
             Sales::create([
-                'prod_id'=>'PLT-'.$data->id,
+                'prod_id'=>'PLT',
                 'price'=>($data->price===null?Plantation::find($data->id)->plant_fact_sheet->price_per_bag:$data->price),
                 'amount'=>($data->amount===null?$this->find($data->id)->sacks:$data->amount),
                 'storage_id'=> $new_prod->id,
