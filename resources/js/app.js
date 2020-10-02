@@ -113,13 +113,9 @@ const app = new Vue({
                 });
         },
         checkout(data) {
-            console.log(data);
-
 
             this.text = 'Checkout complete'
             this.snackbar = true
-
-
             var payload = {
                 model: 'checkout',
                 data: this.form,

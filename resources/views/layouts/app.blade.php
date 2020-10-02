@@ -22,7 +22,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
     <body class="{{ $class ?? '' }}">
-        <div id="app" style="background: linear-gradient(0deg, rgb(0, 0, 0), rgba(12, 12, 12, 0.55)) center top / cover, url(/material/img/login.jpg);">
+        <div id="app">
         @auth()
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
