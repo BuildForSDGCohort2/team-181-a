@@ -18,8 +18,8 @@ class OrdersController extends Controller
     public function view_prod(Request $request, Sales $sale )
     {
         $prod = $sale->get_product($request);
-        return $prod;
-        return view('view_product')->with('prod',$prod);
+        // return $prod;
+        return view('orders.buy_item')->with('prod',$prod);
     }
     #place order
     public function place_order(Sales $sale,Order $order,OrderStore $request)
@@ -27,12 +27,8 @@ class OrdersController extends Controller
         $sale->place_order($request);
         return view('products_dash')->with('message','Order Placed');
     }
-    #revoke Order
-    public function cancel_order(Request $request ,Sales $sale )
-    {
-        $order->cancel_order($request);
-        return view('products_dash')->with('message','Order Canceled');
-    }
+    #revoke Order 
+
     #view personal orders
     public function my_orders(Order $order)
     {

@@ -41,7 +41,7 @@ class Plantation extends Model
     }
     
     public function farmer(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User','id');
     }
     public function plant_fact_sheet(){
         return $this->belongsTo('App\Plant_fact_sheet','type_id');

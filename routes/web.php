@@ -85,10 +85,12 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 	Route::get('stores','StorageController@all_items')->name('storage');
+	
 	Route::post('plantation/{id}/schedule_harvest','StorageController@schedule_harvest')->name('scheduleharvest');
 	Route::post('plantation/{id}/harvest','StorageController@harvest')->name('harvest');
 	Route::get('orders','OrdersController@my_orders')->name('orders');
 	Route::resource('plant', 'PlantsController', ['except' => ['create']]);
+	
 	Route::post('deduct/{id}/brood','BroodsController@deduct')->name('deduct_brood_number');
 	Route::post('sell/{id}/brood','BroodsController@sell_bird')->name('sell_poultry');
 	Route::resource('brood', 'BroodsController', ['except' => ['create']]);
@@ -100,6 +102,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('notifications','NotificationsController@notification_selector')->name('notifications');
 	Route::get('pending_suppliers','NotificationsController@get_suppliers')->name('pending_suppliers');
 	Route::get('issues','NotificationsController@get_issues')->name('issues');
+	
 	Route::post('sell/{id}/product','StorageController@sell_from_storage')->name('sell_from_storage');
 	Route::post('take/{id}/product','StorageController@take_from_storage')->name('take_from_storage');
 

@@ -158,8 +158,8 @@ class Animal extends Model
     {
         if ($data['animal']->sales !==null ) {
             #get the sales record
-            $sale_record = $data['animal']->sale;
-            $sale_record->amount = ($animal->weight);
+            $sale_record = $data['animal']->sales;
+            $sale_record->amount = ($data['animal']->weight);
             $sale_record->price = $data['price'];
             $sale_record->save();
         }else {
