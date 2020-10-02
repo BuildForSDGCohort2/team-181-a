@@ -34,7 +34,7 @@ class EnrolmentController extends Controller
     {   
         $validated = $request->validated();
         $farmer->new_enrolement($validated);
-        return 'Sucess!' ;
+        return redirect('login')->with('info','Enter You login Details');
 
     }
     public function customer_enrole(FarmersRequest $request ,Customer $customer )

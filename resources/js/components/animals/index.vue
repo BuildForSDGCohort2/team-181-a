@@ -19,6 +19,7 @@
                     <th>Age</th>
                     <th>Info</th>
                     <th>Status</th>
+                    <th>Actions</th>
                 </thead>
                 <tbody>
                     <!-- <tr>
@@ -37,6 +38,23 @@
                         <td>{{ animal.age }} </td>
                         <td class="text-primary"><span style="color: rgb(19, 197, 108)">{{ animal.weight }}</span> </td>
                         <td> {{ (animal.health_status) ? 'Health'  : 'Unhealthy' }} </td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Action
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#sell_animal"  @click="openSell(animal)">Sell</a>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#death" @click="openSell(animal)">Dead </a>
+                                    <!-- @if ($animal->reproductive_status==1) -->
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet">Summon Vet For Ai Procedure</a>
+                                    <!-- @elseif($animal->reproductive_status==2) -->
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet">Summon Vet For Checkup</a>
+                                    <!-- @endif -->
+                                </div>
+                            </div>
+
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -54,21 +72,25 @@
             </template>
         </v-snackbar>
     </div>
+    <Sell />
+    <Dead />
 </div>
 </template>
 
 <script>
 import Create from "./create";
 import Edit from "./edit";
+import Dead from "./dead";
+import Sell from "./sell";
 import {
     mapState
 } from 'vuex';
 
 export default {
-    props: ['user'],
+    props: ['user', 'animals'],
     components: {
         Create,
-        Edit,
+        Edit,Sell, Dead
     },
     data() {
         return {
@@ -184,6 +206,9 @@ export default {
             }
             this.$store.dispatch('getItems', payload)
         },
+        openSell(animal) {
+            eventBus.$emit("openSellEvent", animal);
+        },
         next_page(path, page) {
             var payload = {
                 path: path,
@@ -197,10 +222,10 @@ export default {
         }
     },
     computed: {
-        ...mapState(['animals', 'errors'])
+        ...mapState(['errors'])
     },
     mounted() {
-        this.getAnimal()
+        // this.getAnimal()
         // this.$store.dispatch('getAnimal');
         eventBus.$emit("LoadingEvent");
     },

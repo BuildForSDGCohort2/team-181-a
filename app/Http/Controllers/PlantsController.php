@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\PlantationRequest;
 use App\Plantation;
+use App\Storage;
 
 
 class PlantsController extends Controller
@@ -14,9 +15,12 @@ class PlantsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index( Plantation $plantation)
     {
-        return Plantation::all();
+        
+            $plantations = auth()->user()->plantations->filter(function($plantation){ return $plantation->status < 2 ;});
+            return view('plants.index')->with('plantations',$plantations);
+        
     }
 
     /**
@@ -35,13 +39,14 @@ class PlantsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,Plantation $plantation)
+    public function store(PlantationRequest $request,Plantation $plantation)
     {
-        return $request->all();
+       
         $validated = $request->validated();
         $plantation->new_plantation($validated);
-        return 'Success!';
+        return redirect('plant')->with('success','Plant Records recorded Succesfully');
     }
+
 
     /**
      * Display the specified resource.

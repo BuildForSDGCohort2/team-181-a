@@ -16,9 +16,9 @@ class CreateStoragesTable extends Migration
         Schema::create('storages', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name');
-            $table->dateTime('date_of_harvest');
-            $table->integer('status');
+            $table->unsignedBigInteger('plantation_id');
+            $table->foreign('plantation_id')->references('id')->on('plantations');
+            $table->integer('sacks');
 
         });
     }

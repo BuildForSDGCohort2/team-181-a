@@ -14,21 +14,14 @@ class AnimalsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request , Animal $animal)
     {
-        return Animal::all();
-        // return $request;
+        $animals = $animal->all();
+        // return $animals;
+        return view('animals.index')->with('animals',$animals);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
 
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -38,11 +31,10 @@ class AnimalsController extends Controller
      */
     public function store(AnimalStore $request , Animal $animal)
     {
-        // return $request->all();
         $validated = $request->validated();
         // return $validated;
         $animal->new_animal($validated);
-        return 'Success!';
+        return redirect('animal')->with('success','Animal Records recorded Succesfully');
     }
 
     /**
@@ -85,8 +77,17 @@ class AnimalsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function death(Request $request,Animal $animal)
     {
-        //
+        $animal->death_of_animal($request);
+        return redirect('animal');
     }
+    public function sell_animal(Request $request,Animal $animal)
+    {   
+        // return $request;
+        $data =$animal->put_up_for_sale($request);
+        $animal->sell_animal($data);
+        return redirect('animal');
+
+    }  
 }

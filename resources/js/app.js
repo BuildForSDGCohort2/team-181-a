@@ -85,4 +85,64 @@ const app = new Vue({
         mySupplier, myHome, myProfessional,
         myCharts, myAnimal, myPlantation, myRegsupply, myBrood
     },
+
+    data: {
+        cart_count: 1,
+        snackbar: false,
+        text: '',
+    },
+
+    methods: {
+        isActive(i) {
+            return this.activeKey === i;
+        },
+        toggleActive(i) {
+            // alert('dwdwdddw');
+            // this.activeKey = this.isActive(i) ? null : i;
+            var payload = {
+                model: 'addCart',
+                data: this.form
+            }
+            this.cart_count += 1
+            this.text = 'Cart update'
+            this.snackbar = true
+            this.$store.dispatch('postItems', payload)
+                .then(response => {
+                    // this.cart_count += 1
+                    // eventBus.$emit("broodEvent")
+                });
+        },
+        checkout(data) {
+            console.log(data);
+
+
+            this.text = 'Checkout complete'
+            this.snackbar = true
+
+
+            var payload = {
+                model: 'checkout',
+                data: this.form,
+                data: this.form
+            }
+            this.cart_count += 1
+            this.text = 'Cart update'
+            this.snackbar = true
+            this.$store.dispatch('patchItems', payload)
+                .then(response => {
+                    // this.cart_count += 1
+                    // eventBus.$emit("broodEvent")
+                });
+
+        },
+
+        reduceCart() {
+            if (this.cart_count > 0) {
+                this.cart_count -= 1
+            }
+        },
+        addCart() {
+            this.cart_count += 1
+        }
+    }
 });

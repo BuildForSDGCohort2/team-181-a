@@ -43,7 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('plant-info', function () {
 		return view('plants.info');
 	})->name('plant_info');
-
+	
 	Route::get('plantShow',function(){
 		return view('plants.show');
 	})->name('plant_show');
@@ -85,15 +85,26 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 	Route::get('stores','StorageController@all_items')->name('storage');
+	
 	Route::post('plantation/{id}/schedule_harvest','StorageController@schedule_harvest')->name('scheduleharvest');
 	Route::post('plantation/{id}/harvest','StorageController@harvest')->name('harvest');
 	Route::get('orders','OrdersController@my_orders')->name('orders');
-	Route::resource('animal', 'AnimalsController', ['except' => ['create']]);
 	Route::resource('plant', 'PlantsController', ['except' => ['create']]);
+	
+	Route::post('deduct/{id}/brood','BroodsController@deduct')->name('deduct_brood_number');
+	Route::post('sell/{id}/brood','BroodsController@sell_bird')->name('sell_poultry');
 	Route::resource('brood', 'BroodsController', ['except' => ['create']]);
+	
+	Route::post('death/{id}/animal','AnimalsController@death')->name('death_of_animal');
+	Route::post('sell/{id}/animal','AnimalsController@sell_animal')->name('sell_animal');
+	Route::resource('animal', 'AnimalsController', ['except' => ['create']]);
+
 	Route::get('notifications','NotificationsController@notification_selector')->name('notifications');
 	Route::get('pending_suppliers','NotificationsController@get_suppliers')->name('pending_suppliers');
 	Route::get('issues','NotificationsController@get_issues')->name('issues');
+	
+	Route::post('sell/{id}/product','StorageController@sell_from_storage')->name('sell_from_storage');
+	Route::post('take/{id}/product','StorageController@take_from_storage')->name('take_from_storage');
 
 });
 
@@ -105,6 +116,5 @@ Route::post('suppliers_enrole','EnrolmentController@suppliers_enrole')->name('su
 Route::post('farmers_enrole','EnrolmentController@farmers_enrole')->name('farmers_enrole');
 
 Route::get('on_sale','OrdersController@for_sale')->name('on_sale');
-Route::get('buy_item','OrdersController@buy_item')->name('buy_item');
 Route::get('on_sale/{id}/view','OrdersController@view_prod')->name('viewprod');
 

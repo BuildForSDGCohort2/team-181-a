@@ -59,7 +59,7 @@ import {
 } from 'vuex';
 
 export default {
-    props: ['user'],
+    props: ['user', 'broods'],
     components: {
         Create,
         Edit
@@ -201,7 +201,7 @@ export default {
         }
     },
     computed: {
-        ...mapState(['broods', 'errors'])
+        ...mapState(['errors'])
     },
     mounted() {
         this.getBrood()

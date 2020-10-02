@@ -19,7 +19,10 @@ class Farmer extends Model
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
+            'last_login'=> null,
+            'location'=>$validated['location']
         ]);
+        User::latest()->first()->assignRole('farmer');
         #now the farmer's information
         $new_farmer = new Farmer;
         #we must convert the calibration to acres
@@ -43,20 +46,30 @@ class Farmer extends Model
         $checks = array_keys($validated['fields']);
         foreach ($checks as $check) {
             if ($check=='animal') {
+                $identifier='ANML-01';
                 $reason = 'Please Register Your Animals';
             } elseif ($check=='crops') {
-                $reason = 'Please Register Your Crop Plantations';
+                $identifier='PLT-01';
+                $reason = 'Please Indicate the Size of Land You have Under Crop Farming.';
             }else {
+                $identifier='POLTR-01';
                 $reason = 'Please Register Your Poultry Broods';
             }
             
+
+            // move to a new model and will be called after successful email verification
             Isues::create([
                 'reason'=>$reason,
                 'information'=>'The Information To submitt will be used to aptly Advice You',
                 'user_id'=> User::latest()->first()->id,
+                'identifier'=>$identifier,
                 'status'=>0,
             ]);
         }
-
+        
+    }
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 }

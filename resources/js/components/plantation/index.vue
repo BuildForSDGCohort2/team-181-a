@@ -72,7 +72,7 @@ import {
 } from 'vuex';
 
 export default {
-    props: ['user'],
+    props: ['user', 'plantations'],
     components: {
         Create,
         Edit,
@@ -179,7 +179,7 @@ export default {
         },
     },
     computed: {
-        ...mapState(['plantations'])
+        ...mapState(['errors'])
     },
     mounted() {
         this.getPlantation()

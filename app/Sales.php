@@ -15,5 +15,19 @@ class Sales extends Model
     {
         #take into account the user could buy a specified amount
     }
+    public function storage()
+    {
+        return $this->belongsTo('App\Storage');
+    }
+    public function animal()
+    {
+        return $this->belongsTo('App\Animal');
+    }
+    public function brood()
+    {
+        return $this->belongsTo('App\Brood');
+    }
+
+
 
 }

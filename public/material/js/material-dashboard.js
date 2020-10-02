@@ -307,14 +307,16 @@ md = {
     }
   },
 
-  initDashboardPageCharts: function(chart_1_label,chart_1_series,chart_2_label,chart_2_series,chart_3_label,chart_3_series) {
+  initDashboardPageCharts: function() {
 
     if ($('#dailySalesChart').length != 0 || $('#completedTasksChart').length != 0 || $('#websiteViewsChart').length != 0) {
       /* ----------==========     Daily Sales Chart initialization    ==========---------- */
 
       dataDailySalesChart = {
-        labels: chart_1_label,
-        series: chart_1_series
+        labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+        series: [
+          [12, 17, 7, 17, 23, 18, 38]
+        ]
       };
 
       optionsDailySalesChart = {
@@ -340,8 +342,10 @@ md = {
       /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
 
       dataCompletedTasksChart = {
-        labels: chart_3_label,
-        series: chart_3_series
+        labels: ['12p', '3p', '6p', '9p', '12p', '3a', '6a', '9a'],
+        series: [
+          [230, 750, 450, 300, 280, 240, 200, 190]
+        ]
       };
 
       optionsCompletedTasksChart = {
@@ -367,8 +371,11 @@ md = {
       /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
 
       var dataWebsiteViewsChart = {
-        labels: chart_2_label,
-        series: chart_2_series
+        labels: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
+        series: [
+          [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
+
+        ]
       };
       var optionsWebsiteViewsChart = {
         axisX: {

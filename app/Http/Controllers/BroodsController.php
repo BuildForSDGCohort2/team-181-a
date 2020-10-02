@@ -13,33 +13,21 @@ class BroodsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return Brood::all();
+    public function index(Brood $brood)
+    {   
+        
+        $broods = $brood->all()->filter(function($brood){ return $brood->number > 0 ;});
+        // return $broods;
+   
+        return view('broods.index') ->with('broods',$broods);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(BroodStore $request , Brood $brood)
     {
-        // return $request->all();
         $validated = $request->validated();
         $brood->new_brood($validated);
-        return 'Success!';
+        return redirect('brood')->with('success','Animal Records recorded Succesfully');
     }
 
     /**
@@ -86,4 +74,17 @@ class BroodsController extends Controller
     {
         //
     }
+    public function deduct(Request $request,Brood $brood)
+    {
+        $brood->deduct_number($request);
+        return redirect('brood');
+    }
+    public function sell_bird(Request $request,Brood $brood)
+    {   
+        $data =$brood->deduct_number($request);
+        // return $data;
+        $brood->sell_bird($data);
+        return redirect('brood');
+
+    }   
 }

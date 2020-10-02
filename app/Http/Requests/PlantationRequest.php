@@ -23,14 +23,14 @@ class PlantationRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {
+    {        
         return [
             'species' => ['required', 'string', 'max:255'],
             'type_id' => ['required', 'integer', ],
             'size' => ['required', 'integer',],
-            // 'callibration' => ['required'],
+            'callibration' => ['required'],
             'planting_date' => ['required',],
         ];
-
+        
     }
 }
