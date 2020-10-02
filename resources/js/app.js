@@ -126,8 +126,6 @@ const app = new Vue({
                 data: this.form
             }
             this.cart_count += 1
-            this.text = 'Cart update'
-            this.snackbar = true
             this.$store.dispatch('patchItems', payload)
                 .then(response => {
                     // this.cart_count += 1
