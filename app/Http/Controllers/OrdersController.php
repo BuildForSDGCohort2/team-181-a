@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Sales;
 use App\Order;
 use App\Isues;
+use App\Users;
 
 class OrdersController extends Controller
 {
@@ -48,7 +49,13 @@ class OrdersController extends Controller
     {
         
         $myorders = $order->get_orders();
-        return view('orders.orders')->with('myorders',$myorders);
+        $sellers = [];
+        if (auth()->user()->hasRole('admin')) {
+            foreach ($myorders as $orders) {
+                
+            }
+        }
+        return view('orders.orders')->with('myorders',$myorders)->with('use');
     }
     
     #order pickup by drivers

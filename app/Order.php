@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Animal;
+use DB;
 
 
 
@@ -40,7 +41,7 @@ class Order extends Model
     public function get_orders()
     {   
         if (auth()->user()->hasRole('admin')) {
-            return $this->all()->get();           
+            return $this->all();           
         } else {
             return $this->where('user_id','=',auth()->user()->id)
                         ->orWhere('seller_id','=',auth()->user()->id)
@@ -55,6 +56,13 @@ class Order extends Model
     public function sales()
     {
        return $this->belongsTo('App\Sales');
+    }
+    public function get_seller($id)
+    {
+       $seller =  DB::table('users')
+                    ->where('id','=',$id)
+                    ->first();
+        return $seller;
     }
 
 }

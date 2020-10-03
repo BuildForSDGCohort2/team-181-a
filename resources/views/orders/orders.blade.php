@@ -70,7 +70,12 @@
                     <th>
                       Customer Name
                     </th>  
-                    @endhasanyrole                  
+                    @endhasanyrole
+                    @can('admin')
+                      <th>
+                        Seller
+                      </th>
+                    @endcan                  
                   <th>
                     Product
                   </th>
@@ -92,7 +97,12 @@
                     <td>
                      {{(auth()->user()->id === $order->user_id? 'Me' : ucfirst($order->user->name))}}
                     </td>
-                    @endhasanyrole                  
+                    @endhasanyrole
+                    @can('admin')
+                    <td>
+                      {{($order->get_seller($order->seller_id)->name)}}
+                    </td>
+                  @endcan                  
                     <td>
                     @if ($order->product_identifier === 'PLT')
                       <i class="fa fa-pagelines "></i>&nbsp; {{$order->quantity.' Sacks of '}}
