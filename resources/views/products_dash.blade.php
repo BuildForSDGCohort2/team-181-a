@@ -2,21 +2,20 @@
   @extends('layouts.app', ['activePage' => 'onsale', 'titlePage' => __('On Sale')])
 
   @section('content')
-    <div class="content"">
+    <div class="content">
       @if (auth()->user()===null)
-        <div class="container-fluid" style="margin-top:40px;">
+        <div class="container-fluid">
       @else
          <div class="container-fluid">
       @endif
 
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" >
           @forelse ($prods_on_sale as $prod)
-            <div class="card" style="width: 300px;height:400px;margin:10px" >
+            <div class="card" style="width: 300px;height:400px;margin:10px;margin-top: 100px !important;" >
               <div class="bg-image hover-overlay ripple" data-ripple-color="light">
                 <img
                   src="{{ asset('material') }}/img/default.jpg"
-                  class="img-fluid" alt="'"
-                />
+                  class="img-fluid" alt=""/>
                 <a href="#!">
                   <div class="mask rgba-white-slight"></div>
                 </a>
@@ -35,7 +34,7 @@
           @endforelse
 
 
-          <div class="card" style="width: 300px;height:400px;margin:10px" >
+          <div class="card" style="width: 300px;height:400px;margin:10px;margin-top: 100px !important;" >
             <div class="bg-image hover-overlay ripple" data-ripple-color="light">
               <img
                 src="{{ asset('material') }}/img/default.jpg"

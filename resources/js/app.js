@@ -73,7 +73,7 @@ import myBrood from "./components/brood";
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
+import { mapState } from "vuex";
 
 const app = new Vue({
     el: '#app',
@@ -90,12 +90,12 @@ const app = new Vue({
         cart_count: 1,
         snackbar: false,
         text: '',
-    },
-
-    methods: {
-        isActive(i) {
-            return this.activeKey === i;
+        form: {
+            weight: 200
         },
+        edit_form: {},
+    },
+    methods: {
         toggleActive(i) {
             // alert('dwdwdddw');
             // this.activeKey = this.isActive(i) ? null : i;
@@ -137,6 +137,39 @@ const app = new Vue({
         },
         addCart() {
             this.cart_count += 1
+        },
+
+        save_item(model) {
+            var payload = {
+                model: model,
+                data: this.form
+            }
+            console.log(payload);
+
+            this.$store.dispatch('postItems', payload)
+                .then(response => {
+                    eventBus.$emit("animalEvent")
+                });
+        },
+        update_item(model) {
+            var payload = {
+                model: model,
+                data: this.edit_form,
+                id: this.edit_form.id,
+            }
+            console.log(payload);
+            this.$store.dispatch('patchItems', payload)
+                .then(response => {
+                    eventBus.$emit("AnimalEvent")
+                });
+        },
+        open_edit(data) {
+            console.log(data);
+            this.edit_form = data
+
         }
-    }
+    },
+    computed: {
+        ...mapState(['errors'])
+    },
 });

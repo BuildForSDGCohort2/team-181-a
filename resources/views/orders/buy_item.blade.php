@@ -168,9 +168,18 @@ $product_information = $prod->storage->plantation;
                     <h4 class="modal-title" style="color: black"> Register </span> </h4>
                     <strong class="form-text text-muted">You must have an <span class="text-warning">Acount</span> To
                         proceed ..</strong>
-
                 </div>
                 <div class="modal-body">
+                        <label for="social">Or Register with </label> <br>
+                        <button type="button" class="btn btn-facebook btn-icon btn-sm">
+                            <span class="btn-inner--icon btn-sm"><i class="fa fa-facebook"></i></span>
+                        </button>
+                        <button type="button" class="btn btn-instagram btn-icon btn-sm"
+                            style="background-color:rgb(242, 70, 99)">
+                            <span class="btn-inner--icon btn-sm"><i class="fa fa-instagram"></i></span>
+                        </button>
+                        <hr>
+
                     <form action="" method="POST">
                         @csrf
                         <div class="first-column" style='width:45%; float: left;margin-right:1%'>
@@ -194,14 +203,6 @@ $product_information = $prod->storage->plantation;
                                     aria-describedby="loc" placeholder="eg. Nakuru.." required>
                                 <small id="loc" class="form-text text-muted">Enter Location</small>
                             </div>
-                            <label for="social">Or Register with </label> <br>
-                            <button type="button" class="btn btn-facebook btn-icon btn-sm">
-                                <span class="btn-inner--icon btn-sm"><i class="fa fa-facebook"></i></span>
-                            </button>
-                            <button type="button" class="btn btn-instagram btn-icon btn-sm"
-                                style="background-color:rgb(242, 70, 99)">
-                                <span class="btn-inner--icon btn-sm"><i class="fa fa-instagram"></i></span>
-                            </button>
                         </div>
 
 
