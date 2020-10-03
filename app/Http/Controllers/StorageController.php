@@ -24,7 +24,9 @@ class StorageController extends Controller
     }
     public function harvest(StorageRequest $request,Storage $store,Plantation $plantation)
     {   
-        $plantation->harvest_plantation($request);
+        // return $request->id;
+        $x= $plantation->harvest_plantation($request);
+        // return $x;
         $store->store($request);
         return redirect('plant')->with('message','Stored Succesfully');
 

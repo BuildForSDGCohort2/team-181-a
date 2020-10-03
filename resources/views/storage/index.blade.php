@@ -84,9 +84,8 @@
 
                     <td>
                         Stored 
-                        @if ($item->has('sales'))
-                    - <span class="text-primary"> {{$item->sales->amount}} put on sale</span>
-                        @endif
+                    - <span class="text-primary"> {{$item->sales->amount?? 0}} put on sale</span>
+                  
                     </td>
                     <td>
                       <div class="dropdown">
