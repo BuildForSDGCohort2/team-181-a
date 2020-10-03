@@ -32,9 +32,7 @@ class Sales extends Model
         $prod->save();
         $order_data = ['quantity'=>$request['quantity'] , 'choice'=>$request['choice'],'product'=>$prod];
         return  $order_data;
-        #alert the supplier to deliver give hime the pick option with in the alert itself
-        #alert the farmer
-        #make an order record
+
     }
 
 

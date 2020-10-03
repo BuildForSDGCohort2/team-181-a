@@ -55,6 +55,10 @@ class Storage extends Model
             $sales = $stored->sales;
             $sales->amount +=  $data->sacks_for_sale;
             $sales->price = ($data->price===null?$sales->price:$data->price);
+            if ($data->sacks_for_sale != null) {
+                #make the sales available again
+                $sales->status = 0;
+            }
             $sales->save();
         }else {
             Sales::create([

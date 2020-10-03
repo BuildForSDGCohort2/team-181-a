@@ -3,6 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Animal;
+
+
 
 class Order extends Model
 {   
@@ -10,6 +13,14 @@ class Order extends Model
     #cant wait to bite into this one
     public function create_order($data)
     {   
+
+        if ($data['product']->prod_id== "ANML") {
+            $product_information = $data['product']->animal;
+        } elseif($data['product']->prod_id== "POULT") {
+            $product_information =$data['product']->brood;
+        }else {
+            $product_information = $data['product']->storage->plantation;
+        }
         $order = new Order;
 
         $order->sales_id = $data['product']->id;
@@ -18,18 +29,22 @@ class Order extends Model
         $order->user_id = auth()->user()->id;
         $order->price = $data['product']->price * $data['quantity'];
         $order->type_of_delivery = $data['choice'];
+        $order->seller_id = $product_information->farmer->id;
+        #animal bug expected
+        $order->quantity= $data['quantity'] ?? 1 ;
         $order ->save();
-
+ 
         return ['quantity'=>$data['quantity'],'order'=>$order]; 
     }
-
 
     public function get_orders()
     {   
         if (auth()->user()->hasRole('admin')) {
-            return $this->all();           
+            return $this->all()->get();           
         } else {
-            return $this->where(['customer_id','=',auth()->user()->id]);
+            return $this->where('user_id','=',auth()->user()->id)
+                        ->orWhere('seller_id','=',auth()->user()->id)
+                        ->get();
         }
 
     }

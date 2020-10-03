@@ -112,23 +112,26 @@
             @endif
             <tr>
               @if (auth()->user() !== null)
+              
                   @if (auth()->user()->location === $product_information->farmer->location)
-                      <th class="pl-0 w-25" scope="row"><small>Free Delivery Available</small></th>
+                      <th class="pl-0 w-25" scope="row"><small>Free Delivery Available</small> <br>
                   @else
-              <th class="pl-0 w-25" scope="row"><small>Free Delivery not Available in <span class="text-primary" >{{ucfirst(auth()->user()->location)}}</span></small> <br>
-                          <input type = "radio"
-                          name = "choice"
-                          id = "pick"
-                          value = "pick" required />
-                   <label for = "pick">Pick At your local Station </label> &nbsp;
-                 
-                   <input type = "radio"
-                          name = "choice"
-                          id = "delivery"
-                          value = "delivery" required />
-                   <label for = "delivery">Home Delivery</label>
-                      </th>
+                  <th class="pl-0 w-25" scope="row"><small>Free Delivery not Available in <span class="text-primary" >{{ucfirst(auth()->user()->location)}}</span></small> <br>
+
+                      
                   @endif
+                  <input type = "radio"
+                  name = "choice"
+                  id = "pick"
+                  value = "pick" required />
+           <label for = "pick">Pick At your local Station </label> &nbsp;
+         
+           <input type = "radio"
+                  name = "choice"
+                  id = "delivery"
+                  value = "delivery" required />
+           <label for = "delivery">Home Delivery</label>
+                  </tr>
               @else
                   <th class="pl-0 w-25" scope="row"><small>Free Delivery in</small></th>
                   {{-- here.... --}}

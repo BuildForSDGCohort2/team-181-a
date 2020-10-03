@@ -140,23 +140,17 @@
                      {{$plantation->size_of_plantation}} Acres
                     </td>
                     <td>
-                        {{-- calculate the day to harvest --}}
-                      @php
-                        $age= now()->diff(date_create($plantation->planting_date));
-                        $yrs = ($plantation->plant_fact_sheet->months_to_maturity)/12 -($age->y);
-                        $mnths = ($plantation->plant_fact_sheet->months_to_maturity) -($age->m);
-                        $dys = ($plantation->plant_fact_sheet->months_to_maturity) -($age->d);
-                         
-                      @endphp
 
-                      @if ($yrs > 0 || $mnths>0 || $dys> -7 )                      
-                        {{$yrs <1 ?'':$yrs.'yrs'}}
-                        {{$mnths <1 ?'':$mnths.'mnths'}} 
-                        {{$dys.'days'}} 
-                      @elseif( $dys < 10 )
+                      @php
+                          $time = $plantation->time_to_harvest()
+                      @endphp
+                       @if ($time > 10 )                  
+                          <span class="text-success">{{substr($time,1)}}</span> Days                            
+                      
+                       @elseif( $time < 10 ) 
                       <div class="dropdown">
-                        <button class="btn btn-outline-warning btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Access
+                      <button class="btn btn-outline-{{$time< 0 ? 'danger':'warning'}} btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Access {{substr($time,1).'Days overdue'}}
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#scheduleHarvest">{{($plantation->status==1?'Reschedule':'Schedule Harvest' )}} </a>
@@ -168,13 +162,11 @@
                       @endif   
                     </td>
                     <td class="text-success">
-                      @if ($yrs > 0 || $mnths>0 || $dys> -7)
+                      
                         {{($plantation->plant_fact_sheet->production_rate * $plantation->size_of_plantation)}} Sacks
-                      @elseif($plantation->status == 1)
-                    <span class="text-success"><a href="{{route('issues')}}">Scheduled </span>
-                      @else
-                      <span class="text-danger">Spoiling In the Farm </span> 
-                      @endif
+                        {{-- @if ($age['days'] < 0 && $age['months'] < 0 && $age['years'] < 0) --}}
+                          <span class="text-danger">Overdue!</span>
+                        {{-- @endif --}}
                     </td>
                   </tr> 
                   <div id="scheduleHarvest" class="modal fade" role="dialog">

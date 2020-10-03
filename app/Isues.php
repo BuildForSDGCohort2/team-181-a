@@ -52,11 +52,12 @@ class Isues extends Model
         $order = $data['order'];
         $origin =($order->sales->prod_id=== 'ANML'?$order->sales->animal:
                     ($order->sales->prod_id === 'POULT'? $order->sales->brood:
-                    ($order->sales->plantation)));
+                    ($order->sales->storage->plantation)));
+                    
         $this->create([
             'reason' => 'Sale ',
-            'information' => 'Sale Of '.($order->sales->prod_id=== 'ANML'?$origin->name.'( The '. $origin->species.')':
-                            ($order->sales->prod_id === 'POULT'?$data['quantity'].' '. $origin->species:
+            'information' => 'Sale Of '.($order->sales->prod_id=== 'ANML'?$origin->name.'( The '. $origin->species.')': 
+                            ($order->sales->prod_id === 'POULT'?$data['quantity'].' '. $origin->species: $data['quantity'].
                             ($order->sales->prod_id=== 'PLT'? 'Sacks Of'.$origin->species:''))),
             'status' => 0 ,
             'user_id' => $origin->farmer->id,

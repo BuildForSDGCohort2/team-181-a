@@ -373,6 +373,8 @@
                                 @if ($animal->gender == 'female')
                                   {{-- ternary to check pregnancy --}}
                                   <span class="text-success">{{$animal->reproductive_status == 2? 'Pregnant & Healthy':($animal->age > 2 && $animal->age < 4 ? 'Healthy Adolescent':'Healthy Adult') }}</span>
+                                @else
+                                  <span class="text-success"> Healthy Male</span>
                                 @endif
                             @else
                                 <span class="text-success">{{($age->y < 2? 'Healthy Child': ($age->y < 4 ? 'Healthy Adolescent':'Healthy Adult')) }}</span>
@@ -380,7 +382,7 @@
                         @else
                             <span class="text-danger">Unhealthy</span>
                         @endif
-
+                        |<span class="text-info"> {{$animal->sale_status > 0 ? 'On-Sale':''}}</span>
                       </td>
                       <td>
                         {{-- if the animals healthy --}}

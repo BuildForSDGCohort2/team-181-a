@@ -29,12 +29,15 @@ class OrdersController extends Controller
     
     
     public function place_order(Request $request,Sales $sale,Order $order,Isues $issue)
-    {
+    {   
+        // return $request;
         $product_for_sale  = $sale->process_order($request);
+        // return $product_for_sale['product'];
         $order_info = $order->create_order($product_for_sale);
+        
         $issue->order_alert($order_info);
-        return $order_info;
-        return view('products_dash')->with('message','Order Placed');
+        // return $order_info;
+        return redirect('on_sale');
     }
     #revoke Order 
 
@@ -43,11 +46,17 @@ class OrdersController extends Controller
     #view personal orders
     public function my_orders(Order $order)
     {
+        
         $myorders = $order->get_orders();
         return view('orders.orders')->with('myorders',$myorders);
     }
     
-    
+    #order pickup by drivers
+    public function order_pick_up()
+    {
+        #change the order statust to in  transit.. only the admin and sellers do see this the customer only sees i progress etc...
+    }
+
     #delivered Close the deal
     public function close_order(Request $request,Order $order)
     {

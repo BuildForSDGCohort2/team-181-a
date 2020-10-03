@@ -181,7 +181,7 @@ class Animal extends Model
     }
     
     public function farmer(){
-        return $this->belongsTo('App\User','id');
+        return $this->belongsTo('App\User','user_id');
     }
     public function breed(){
         return $this->belongsTo('App\Animal_Fact_sheet');
@@ -194,6 +194,7 @@ class Animal extends Model
     {
         return $this->hasMany('App\Pregnant');
     }
+
 
 }
 
