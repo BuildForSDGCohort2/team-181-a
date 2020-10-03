@@ -172,11 +172,11 @@ $product_information = $prod->storage->plantation;
                 <div class="modal-body">
                         <label for="social">Or Register with </label> <br>
                         <button type="button" class="btn btn-facebook btn-icon btn-sm">
-                            <span class="btn-inner--icon btn-sm"><i class="fa fa-facebook"></i></span>
+                            <span class="btn-inner--icon btn-sm"><i class="fab fa-facebook"></i></span>
                         </button>
                         <button type="button" class="btn btn-instagram btn-icon btn-sm"
                             style="background-color:rgb(242, 70, 99)">
-                            <span class="btn-inner--icon btn-sm"><i class="fa fa-instagram"></i></span>
+                            <span class="btn-inner--icon btn-sm"><i class="fab fa-instagram" style="color: #fff"></i></span>
                         </button>
                         <hr>
 
