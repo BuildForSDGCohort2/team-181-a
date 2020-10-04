@@ -49,6 +49,20 @@ class Order extends Model
         }
 
     }
+    public function transit($order_id)
+    {
+        $order = $this->find($order_id);
+        $order->order_status = 1;
+        $order->save;
+    }
+    public function deliver($order_id)
+    {
+        $order = $this->find($order_id);
+        #OR we could use soft delete
+        $order->order_status = 2;
+        $order->save;
+    }
+
     public function user()
     {
        return  $this->belongsTo('App\User');

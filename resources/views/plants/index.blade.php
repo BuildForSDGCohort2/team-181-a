@@ -23,7 +23,7 @@
           </div>
           <div id="plant_modal" class="modal fade" role="dialog">
             <div class="modal-dialog">
-
+          
               <!-- Modal content-->
               <div class="modal-content">
                 <div class="modal-header">
@@ -32,77 +32,72 @@
                 <div class="modal-body">
                 <form action="{{route('plant.store')}}" method="POST">
                   @csrf
-
+                    
                     <div class="first-column" style='width:45%; float: left;'>
                       <div class="form-group">
                         <label for="species">Type Of Plant</label>
-                        <input type="text" class="form-control" v-model='form.species'id="species" aria-describedby="species" placeholder="Enter plant type">
+                        <input type="text" class="form-control" name='species'id="species" aria-describedby="species" placeholder="Enter plant type">
                         <small id="species" class="form-text text-muted">Select the Appropriate plant or Enter name.</small>
-                        <small class="has-text-danger" v-if="errors.species">@{{ errors.species[0] }}</small>
-                    </div>
-
+                      </div>
+                                             
                        <div class="form-group">
                         <label for="type_id">Number / Strain</label>
-                        <input type="text" v-model ='form.type_id'class="form-control" id="type_id" aria-describedby="type_id" placeholder="Select Strain">
+                        <input type="text" name ='type_id'class="form-control" id="type_id" aria-describedby="type_id" placeholder="Select Strain">
                         <small id="type_id" class="form-text text-muted">Select the type..</small>
-                        <small class="has-text-danger" v-if="errors.type_id">@{{ errors.type_id[0] }}</small>
-                    </div>
+                      </div>
 
                       {{-- incremental... will depend on the remaining size of farm --}}
-
+                   
 
 
                     </div>
                     <div class="second-column" style='width:45%; float: right;'>
                       <div class="form-group">
                         <label for="size">Size OF Allocation</label>
-                        <input type="text" v-model ='form.size'class="form-control" id="size" aria-describedby="size" placeholder="Enter Total Size">
+                        <input type="text" name ='size'class="form-control" id="size" aria-describedby="size" placeholder="Enter Total Size">
                         <small id="size" class="form-text text-muted">Enter size of the allocation</small>
-                        <small class="has-text-danger" v-if="errors.size">@{{ errors.size[0] }}</small>
-                    </div>
-                      <label>Calibration in:</label><br>
+                      </div> 
+                      <label>Calibration in:</label><br>            
                       <input type = "radio"
-                             v-model = "form.callibration"
+                             name = "callibration"
                              id = "meters"
                              value = "meters" />
                       <label for = "meters">Meters &sup2; </label>
-
+                    
                       <input type = "radio"
-                             v-model = "form.callibration"
+                             name = "callibration"
                              id = "acres"
                              value = "acres" />
                       <label for = "acres">Acres</label>
-
+                    
                       <input type = "radio"
-                             v-model = "form.callibration"
+                             name = "callibration"
                              id = "hactares"
                              value = "hactares" />
                       <label for = "hactares">Hactares</label>
-                        <small class="has-text-danger" v-if="errors.callibration">@{{ errors.callibration[0] }}</small>
-                    </fieldset>
+                  </fieldset> 
 
                       <div class="form-group">
                         <label for="planting_date">Date Of Planting</label>
-                        <input type="date" class="form-control" v-model='form.planting_date' id="planting_date" aria-describedby="planting_date" placeholder="Enter Date of planting">
+                        <input type="date" class="form-control" name='planting_date' id="planting_date" aria-describedby="planting_date" placeholder="Enter Date of planting">
                         <small id="planting_date" class="form-text text-muted">Select date time Defaut date is today.</small>
-                            <small class="has-text-danger" v-if="errors.planting_date">@{{ errors.planting_date[0] }}</small>
+                      </div>                    
+                                           
+                    
                     </div>
-
-
-                    </div>
-
-
-
+                  
+                  
+                  
                 </div>
                 <div class="modal-footer">
-                  <button @click="save_item('plant')" class="btn btn-info" value="Submit">Submit</button>
+                  <button type="submit" class="btn btn-info" value="Submit">Submit</button>
                   <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                 </div>
               </form>
               </div>
-
+          
             </div>
-          </div>
+          </div>  
           <div class="card-body">
             <div class="table-responsive">
               <table class="table">
@@ -124,7 +119,7 @@
                   </th>
                 </thead>
                 <tbody>
-
+                      
 
                   @forelse ($plantations as $plantation)
 
@@ -133,15 +128,15 @@
                       {{$plantation->id}}
                     </td>
                     <td>
-                      <a data-target="#plant_s_modal" data-toggle="modal" class="MainNavText" id="MainNavHelp"
+                      <a data-target="#plant_s_modal" data-toggle="modal" class="MainNavText" id="MainNavHelp" 
                       href="#plant_s_modal">
                        <span style="color: rgb(15, 28, 8)">{{$plantation->species}}</span><span style="color: rgb(19, 197, 108)">&nbsp;
-
+                       
                         </span>
                       {{-- </a> --}}
-                      </a>
+                      </a>                   
                     </td>
-                    <td>
+                    <td>                      
                      {{$plantation->size_of_plantation}} Acres
                     </td>
                     <td>
@@ -149,10 +144,10 @@
                       @php
                           $time = $plantation->time_to_harvest()
                       @endphp
-                       @if ($time > 10 )
-                          <span class="text-success">{{substr($time,1)}}</span> Days
-
-                       @elseif( $time < 10 )
+                       @if ($time > 10 )                  
+                          <span class="text-success">{{substr($time,1)}}</span> Days                            
+                      
+                       @elseif( $time < 10 ) 
                       <div class="dropdown">
                       <button class="btn btn-outline-{{$time< 0 ? 'danger':'warning'}} btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           Access {{substr($time,1).'Days overdue'}}
@@ -162,159 +157,162 @@
                           <a class="dropdown-item" href="#" data-toggle="modal" data-target="#harvest">Harvest</a>
                         </div>
                       </div>
+                      
 
-
-                      @endif
+                      @endif   
                     </td>
                     <td class="text-success">
-
+                      
                         {{($plantation->plant_fact_sheet->production_rate * $plantation->size_of_plantation)}} Sacks
                         {{-- @if ($age['days'] < 0 && $age['months'] < 0 && $age['years'] < 0) --}}
                           <span class="text-danger">Overdue!</span>
                         {{-- @endif --}}
                     </td>
-                  </tr>
+                  </tr> 
                   <div id="scheduleHarvest" class="modal fade" role="dialog">
                     <div class="modal-dialog">
-
+                  
                       <!-- Modal content-->
                       <div class="modal-content">
                         <div class="modal-header">
                           <h4 class="modal-title">Schedule Harvest</h4>
                         </div>
                         <div class="modal-body">
-                        {{-- <form action="{{route('scheduleharvest',$plantation)}}" method="POST">
-                          @csrf --}}
-
+                        <form action="{{route('scheduleharvest',$plantation)}}" method="POST">
+                          @csrf
+                            
                             <div class="first-column" style='width:45%; float: left;'>
                               <div class="form-group">
                                 <label for="species">Date</label>
-                                <input type="date" class="form-control" v-model='form.scheduled_date'id="scheduled_date" aria-describedby="scheduled_date" required >
+                                <input type="date" class="form-control" name='scheduled_date'id="scheduled_date" aria-describedby="scheduled_date" required >
                                 <small id="species" class="form-text text-muted">Set harvest Reminder</small>
-                            <small class="has-text-danger" v-if="errors.scheduled_date">@{{ errors.scheduled_date[0] }}</small>
-                        </div>
-
+                              </div>
+        
                               <div class="form-group">
                                 <div class="custom-control custom-checkbox">
-                                  <input type="checkbox" class="custom-control-input" id="schedule_transport" v-model="form.schedule_transport"  >
+                                  <input type="checkbox" class="custom-control-input" id="schedule_transport" name="schedule_transport"  >
                                   <label class="custom-control-label" for="schedule_transport">Do you need <span class="text-warning"> Transport</span>?</label>
-                                </div>
+                                </div>                   
                               </div>
-
+        
                               {{-- incremental... will depend on the remaining size of farm --}}
-
-
-
+                           
+        
+        
                             </div>
                             <div class="second-column" style='width:45%; float: right;'>
-
+                              
                               <div class="form-group">
                                 <label for="species" ><small>Recommendations</small> </label>
                                 <textarea class="form-control" id="recomendations" rows="3"  readonly>
                                 </textarea>
-                              </div>
-
+                              </div>                                                             
+                                                 
                            </div>
-
+                  
                         </div>
                         <div class="modal-footer">
-                          <button @click="save_item('plantation/{{$plantation->id}}/schedule_harvest')" class="btn btn-info" value="Submit">Submit</button>
+                          <button type="submit" class="btn btn-info" value="Submit">Submit</button>
                           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                         </div>
-                      {{-- </form> --}}
-                      </div>
+                      </form>
+                      </div>         
                     </div>
-                  </div>
+                  </div> 
                   <div id="harvest" class="modal fade" role="dialog">
                     <div class="modal-dialog">
-
+                  
                       <!-- Modal content-->
                       <div class="modal-content">
                         <div class="modal-header">
                           <h4 class="modal-title">Harvest Plantation</h4>
                         </div>
                         <div class="modal-body">
-                        {{-- <form action="{{route('harvest',$plantation)}}" method="post">
-                          @csrf --}}
-
+                        <form action="{{route('harvest',$plantation)}}" method="post">
+                          @csrf
+                            
                             <div class="first-column" style='width:45%; float: left;'>
                               <div class="form-group">
                                 <label for="sacks">Number of full Sacks</label>
-                                <input type="text" class="form-control" v-model='form.sacks'id="sacks" aria-describedby="sacks" placeholder="X sacks">
+                                <input type="text" class="form-control" name='sacks'id="sacks" aria-describedby="sacks" placeholder="X sacks">
                                 <small id="sacks" class="form-text text-muted">The number of Sacks.</small>
-                            <small class="has-text-danger" v-if="errors.sacks">@{{ errors.sacks[0] }}</small>
-                        </div>
-
+                              </div>
+                              
                               <div class="form-group">
                                 <label for="species" ><small>Recommendations</small> </label>
                                 <textarea class="form-control" id="recomendations" rows="3"  readonly>
                                 </textarea>
                               </div>
-
-                              {{-- incremental... will depend on the remaining size of farm --}}
-
-
+                              
+                              {{-- incremental... will depend on the remaining size of farm --}}                  
+        
+        
                             </div>
                             <div class="second-column" style='width:45%; float: right;'>
                               <div class="form-group">
                                 <div class="custom-control custom-checkbox">
-                                  <input type="checkbox" class="custom-control-input" id="sell" v-model="form.sell"  >
+                                  <input type="checkbox" class="custom-control-input" id="sell" name="sell"  >
                                   <label class="custom-control-label" for="sell">Immediate  <span class="text-success"> Sell</span>?</label>
-                                </div>
+                                </div>                   
                               </div>
-
+        
+                              
+        
                               <div class="form-group">
                                 <label for="price">Price</label>
-                                <input type="text" class="form-control" v-model='form.price'id="price" aria-describedby="price" placeholder="Enter the sack price">
+                                <input type="text" class="form-control" name='price'id="price" aria-describedby="price" placeholder="Enter the sack price">
                                 <small id="price" class="form-text text-muted">The price Per sack.</small>
-                            <small class="has-text-danger" v-if="errors.price">@{{ errors.price[0] }}</small>
-                        </div>
-
+                              </div> 
+                              
                               <div class="form-group">
                                 <div class="custom-control custom-checkbox">
-                                  <input type="checkbox" class="custom-control-input" id="sell_all" v-model="form.sell_all"  >
+                                  <input type="checkbox" class="custom-control-input" id="sell_all" name="sell_all"  >
                                   <label class="custom-control-label" for="sell_all">All   <span class="text-success"> Sacks</span>?</label>
-                                </div>
+                                </div>                   
                               </div>
-
-                              <div class="form-group" v-if="!form.sell_alll">
+        
+                              <div class="form-group">
                                 <label for="amount">Number of Sacks</label>
-                                <input type="text" class="form-control" v-model='form.amount'id="amount" aria-describedby="amount" placeholder="Number of sacks">
+                                <input type="text" class="form-control" name='amount'id="amount" aria-describedby="amount" placeholder="Number of sacks">
                                 <small id="amount" class="form-text text-muted">How many sacks Would You like to sell?</small>
-                            <small class="has-text-danger" v-if="errors.amount">@{{ errors.amount[0] }}</small>
-                        </div>
-
+                              </div> 
+                              
                               <div class="form-group">
                                 <div class="custom-control custom-checkbox">
-                                  <input type="checkbox" class="custom-control-input" id="harvest_transport" v-model="form.harvest_transport"  >
+                                  <input type="checkbox" class="custom-control-input" id="harvest_transport" name="harvest_transport"  >
                                   <label class="custom-control-label" for="harvest_transport">Do you need <span class="text-warning"> Transport</span>?</label>
-                                </div>
+                                </div>                   
                               </div>
+                                                   
+                            
                             </div>
+                          
+                          
+                          
                         </div>
                         <div class="modal-footer">
-                          <button @click="save_item('/plantation/{{$plantation->id}}/harvest')" class="btn btn-info" value="Submit">Submit</button>
+                          <button type="submit" class="btn btn-info" value="Submit">Submit</button>
                           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                         </div>
-                      {{-- </form> --}}
+                      </form>
                       </div>
-
+                  
                     </div>
-                  </div>
+                  </div>  
                   @empty
                     <tr class="text-primary">
                       <td>
-                        No Plantations Registered
-
+                        No Plantations Registered                     
+                        
                       </td>
                       <td>
-                        No Plantations Registered
+                        No Plantations Registered  
                       </td>
                       <td>
-                        No Plantations Registered
+                        No Plantations Registered  
                       </td>
                       <td>
-                        No Plantations Registered
+                        No Plantations Registered  
                       </td>
                       <td>
                         -------------

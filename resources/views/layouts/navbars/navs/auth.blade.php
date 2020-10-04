@@ -47,9 +47,9 @@
         </li>
         {{-- shopping Basket.... --}}
         <li class="nav-item dropdown">
-          <a class="nav-link" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-if="cart_count  > 0">
+          <a class="nav-link" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-              <span class="notification">@{{ cart_count }}</span>
+              <span class="notification">0</span>
             <p class="d-lg-none d-md-block">
               {{ __('Some Actions') }}
             </p>
@@ -76,13 +76,5 @@
         </li>
       </ul>
     </div>
-  <v-snackbar v-model="snackbar">
-    @{{ text }}
-    <template v-slot:action="{ attrs }">
-        <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
-            Close
-        </v-btn>
-    </template>
-</v-snackbar>
   </div>
 </nav>
