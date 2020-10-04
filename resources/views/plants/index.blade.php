@@ -277,7 +277,7 @@
                                 </div>
                               </div>
 
-                              <div class="form-group" v-if="!form.sell_alll">
+                              <div class="form-group" v-if="!form.sell_all">
                                 <label for="amount">Number of Sacks</label>
                                 <input type="text" class="form-control" v-model='form.amount'id="amount" aria-describedby="amount" placeholder="Number of sacks">
                                 <small id="amount" class="form-text text-muted">How many sacks Would You like to sell?</small>
