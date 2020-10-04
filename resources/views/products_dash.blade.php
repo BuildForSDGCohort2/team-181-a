@@ -8,7 +8,7 @@
     @else
        <div class="container-fluid">
     @endif
-    
+
       <div class="row justify-content-center">
         @forelse ($prods_on_sale as $prod)
           @php
@@ -22,10 +22,10 @@
 
           @endphp
 
-          <div class="card" style="width: 300px;height:400px;margin:10px" >
+          <div class="card" style="width: 300px;height:400px;margin:10px;margin-top: 100px;" >
             <div class="bg-image hover-overlay ripple" data-ripple-color="light">
               <img data-size ='34' src="{{ asset('material') }}/img/{{lcfirst($product_information->species)}}.jpg"
-              class="img-fluid z-depth-1" alt="{{ asset('material') }}/img/default.jpg"><br>                                 
+              class="img-fluid z-depth-1" alt="{{ asset('material') }}/img/default.jpg"><br>
 
 
               <a href="#!">
@@ -45,30 +45,30 @@
                       {{($product_information->gender == 'male')? 'Billy-Goat' : 'nanny-goat' }}
                   @else
                     {{($product_information->gender == 'male')? 'Male' : 'Female' }}
-                  @endif)                        
+                  @endif)
                   </span>
               @elseif($prod->prod_id === 'POULT')
               <span style="color: rgb(15, 28, 8)">{{ ucfirst($product_information->species)}}</span><span style="color: rgb(19, 197, 108)">&nbsp;
                   @if ($product_information->species=='chicken' || $product_information->species=='turkey')
                     {{($product_information->gender == 'male')? 'Broiler' : 'Layer' }}
-                  @endif                       
+                  @endif
                   </span>
               @else
-                  {{$product_information->species.'( '.$product_information->plant_fact_sheet->type.' )'}}                                    
+                  {{$product_information->species.'( '.$product_information->plant_fact_sheet->type.' )'}}
               @endif
             </h5>
-                
-            
+
+
           <small><strong>{{$prod->prod_id==='ANML'? 'Weight': 'Number'}}   </strong>: {{$prod->amount}} {{$prod->prod_id === 'PLT'?' Sacks'
             :($prod->prod_id === 'ANML'?' KGS' :'Birds')}}</small><br>
           <small><strong>Location </strong>: {{ucfirst($product_information->farmer->location)}}</small><br>
           <small><strong>Price</strong>: {{$prod->price}} {{($prod->prod_id !== 'ANML'? ($prod->prod_id === 'PLT'? 'Per Sack': 'Per Bird'):'')}}</small><br>
             <a href="{{route('viewprod',$prod)}}" class="btn btn-primary">View Product</a>
             </div>
-          </div> 
+          </div>
         @empty
             <span class="text-primary"><h1>No Products For Sale...</h1></span>
-        @endforelse  
+        @endforelse
       </div>
 
     </div>

@@ -109,14 +109,23 @@ $product_information = $prod->storage->plantation;
                         <tr>
                             <td class="pl-0">
                                 <div class="def-number-input number-input safari_only mb-0">
-                                    <v-btn icon color="primary" @click="reduceCart({{ $prod->id }})">
-                                        <v-icon>mdi-minus</v-icon>
-                                    </v-btn>
-                                    <input class="quantity" min="1" name="quantity" :value="cart_count" type="number" style="width: 40px;">
 
-                                    <v-btn text icon color="primary" @click="addCart({{ $prod->id }})">
-                                        <v-icon>mdi-plus</v-icon>
-                                    </v-btn>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-4 mb-md-0">
+                                            <v-btn icon color="primary" @click="reduceCart({{ $prod->id }})" style="margin-top: -5px;">
+                                                <v-icon>mdi-minus</v-icon>
+                                            </v-btn>
+                                        </div>
+                                        <div class="col-md-4 mb-4 mb-md-0">
+                                            <input class="quantity" min="1" max="{{ $prod->amount }}" name="quantity" :value="cart_count" type="number" style="width: 40px;">
+                                        </div>
+                                        <div class="col-md-4 mb-4 mb-md-0">
+                                            <v-btn text icon color="primary" @click="addCart({{ $prod->id }})" style="margin-top: -5px;">
+                                                <v-icon>mdi-plus</v-icon>
+                                            </v-btn>
+                                        </div>
+                                    </div>
+
                                 </div>
                                 <small>{{$prod->amount.' '.($prod->prod_id=== 'PLT'?'Sacks':'Birds').' are available'}}</small>
                             </td>
@@ -172,11 +181,11 @@ $product_information = $prod->storage->plantation;
                 <div class="modal-body">
                         <label for="social">Or Register with </label> <br>
                         <button type="button" class="btn btn-facebook btn-icon btn-sm">
-                            <span class="btn-inner--icon btn-sm"><i class="fab fa-facebook"></i></span>
+                            <span class="btn-inner--icon btn-sm"><i class="fa fa-facebook"></i></span>
                         </button>
                         <button type="button" class="btn btn-instagram btn-icon btn-sm"
                             style="background-color:rgb(242, 70, 99)">
-                            <span class="btn-inner--icon btn-sm"><i class="fab fa-instagram" style="color: #fff"></i></span>
+                            <span class="btn-inner--icon btn-sm"><i class="fa fa-instagram" style="color: #fff"></i></span>
                         </button>
                         <hr>
 
