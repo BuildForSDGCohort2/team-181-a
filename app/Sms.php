@@ -3,7 +3,6 @@
 namespace App;
 use Twilio\Rest\Client;
 
-
 class Sms
 {
     public function send($message, $recipients)
@@ -14,6 +13,6 @@ class Sms
 
         $client = new Client($account_sid, $auth_token);
         $client->messages->create($recipients, array('from' => $twilio_number, 'body' => $message));
-    } 
+    }
 
 }
