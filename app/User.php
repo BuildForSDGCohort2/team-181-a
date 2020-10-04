@@ -42,7 +42,10 @@ class User extends Authenticatable
     ];
 
 
-
+    public static function  get_available($role,$location)
+    {
+        User::all()->filter(function($user) use ($location,$role) {return $user->hasRole($role) && $user->location=== $location; });
+    }
     //to get the 
     public function get_prev_logins()
     {

@@ -4,6 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Storage;
+use DateTime;
+use DatePeriod;
+use DateInterval;
+
+
 class Plantation extends Model
 {
     protected $guarded=[];
@@ -18,12 +23,19 @@ class Plantation extends Model
         $new_plant->user_id=  auth()->user()->id;
         $new_plant->planting_date= $validated['planting_date'];
         // $new_plant->default Status is not ready for harvest
-        $new_plant->status=0; 
+        $new_plant->status=0;
         $new_plant->save();
 
     }
     #issue|recomendations| checker.. would use this object
+    public function time_to_harvest()
+    {
+        #find interval to the harvest period
+        $time_interval = new DateInterval('P'.$this->plant_fact_sheet->months_to_maturity.'M'); #used the 'P' 'int' 'Abr' method
+        $due =  date_add(date_create($this->planting_date),$time_interval);
+        return now()->diff($due)->format('%R%a');
 
+    }
 
 
 
@@ -38,10 +50,11 @@ class Plantation extends Model
         $plantation->status= 2;#harvested
         $plantation->size_of_plantation  = 0;#take  revoke the land it was under
         $plantation->save();
+        return $plantation;
     }
-    
+
     public function farmer(){
-        return $this->belongsTo('App\User','id');
+        return $this->belongsTo('App\User','user_id');
     }
     public function plant_fact_sheet(){
         return $this->belongsTo('App\Plant_fact_sheet','type_id');

@@ -29,22 +29,22 @@
           <li class="nav-item">
             <a class="nav-link active" style="background-color: blueviolet" href="#">Issues</a>
           </li>
-          
+
           @if (auth()->user()->hasRole('farmer'))
            <li class="nav-item">
               <a class="nav-link "  href="{{route('storage')}}">Store</a>
-            </li> 
+            </li>
          @endif
 
           <li class="nav-item">
             <a class="nav-link" href="{{route('orders')}}">Orders</a>
           </li>
         </ul>
-            
-        @endif       
-  
+
+        @endif
+
       </nav>
-    
+
     <div class="row">
       <div class="col-md-12">
         <div class="card">
@@ -75,7 +75,7 @@
                 @forelse ($issues as $issue)
                 <tr>
                   <td>
-                    
+
                     @if (in_array('PLT',explode('-',$issue->identifier)))
                       <i class="fa fa-pagelines "></i>
                     @elseif(in_array('ANML',explode('-',$issue->identifier)))
@@ -92,12 +92,11 @@
                     </td>
 
                     <td>
-              
+
                       {{$issue->information.(in_array('RMNDR',explode('-',$issue->identifier))?now()->diff(date_create($issue->due_date))->d.'days from now':null )}}
                     </td>
                     <td>
-                        <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#professional_modal">View info</button>
-
+                        <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#professional_modal" @click="open_edit({{ $issue->id }})">View info</button>
                     </td>
                 </tr>
                 @empty
@@ -118,7 +117,7 @@
                     <span class="text-primary"> No Requests</span>
                   </td>
                 </tr>
-                    
+
                 @endforelse
                 </tbody>
               </table>
@@ -136,113 +135,13 @@
         <div class="modal-header">
           <h4 class="modal-title" style="color: black"> Register as a <span style="color: rgb(255, 179, 0)">proffessional</span></h4>
           <small  class="form-text text-muted">Successful Applicants will Recieve confirmatory email</small>
-  
+
         </div>
         <div class="modal-body">
-        <form action="{{route('profesionals_enrole')}}" method="POST">
-          @csrf
-            <div class="first-column" style='width:45%; float: left;'>
-              <div class="form-group">
-                <label for="type">Full Names</label>
-                <input type="text" class="form-control" name='name'id="name" aria-describedby="name" placeholder="Enter Your Full names" required>
-                <small id="type" class="form-text text-muted">As they appear on the id.</small>
-              </div>
-                                     
-               <div class="form-group">
-                <label for="strain">Id number</label>
-                <input type="text" name ='id_number'class="form-control" id="id_number" aria-describedby="idnumber" placeholder="XXX-XXX" required>
-                <small id="idnnumber" class="form-text text-muted">Enter Id number</small>
-              </div>
-              <div class="form-group">
-                <label for="strain">Phone number</label>
-                <input type="text" name ='phone_number'class="form-control" id="phone_number" aria-describedby="phonenumber" placeholder="07XX-XXX-XXX" required>
-                <small id="phonenumber" class="form-text text-muted">Enter Id number</small>
-              </div>
-              <fieldset>                
-                <label>Specialty:</label><br>            
-                <input type = "radio"
-                       name = "specialty"
-                       id = "vet"
-                       value = "vet" />
-                <label for = "vet">Vet</label>
-              
-                <input type = "radio"
-                       name = "specialty"
-                       id = "feo"
-                       value = "feo" />
-                <label for = "feo">Feild Extension Officer</label>
-              
-                <input type = "radio"
-                       name = "specialty"
-                       id = "other"
-                       value = "other" />
-                <label for = "other">Other</label>
-            </fieldset>
-            <div class="form-group">
-              <label for="other">If Other Please Specify</label>
-              <input type="text" name ='other'class="form-control" id="other" aria-describedby="other" placeholder="Enter The Specialty">
-              <small id="other" class="form-text text-muted">Please Specify </small>
-            </div>
-            <div class="form-group">
-              <label for="location">Location</label>
-              <input type="text" name ='location'class="form-control" id="location" aria-describedby="loc" placeholder="eg. Nakuru.." required>
-              <small id="loc" class="form-text text-muted">Enter Location</small>
-            </div>
-  
-  
-            </div>
-           
-            <div class="second-column" style='width:45%; float: right;'>
-  
-            {{-- this input shoulf be inactive if the specialty selected is not other --}}
-  
-              <div class="form-group">
-                <label for="strain">Id number</label>
-                <input type="text" name ='id_number'class="form-control" id="id_number" aria-describedby="idnumber" placeholder="XXX-XXX" required>
-                <small id="idnnumber" class="form-text text-muted">Enter Id number</small>
-              </div>
-  
-              <div class="form-group">
-                <label for="size">Email</label>
-                <input type="email" name ='email'class="form-control" id="email" aria-describedby="mail" placeholder="abc@xyz.com" required>
-                <small id="mail" class="form-text text-muted">Enter Email</small>
-              </div>
-              
-  
-              <div class="form-group">
-                <label for="exp">Years Of Expirience</label>
-                <input type="text" class="form-control" name='exp' id="exp" aria-describedby="expirience" placeholder="0">
-                <small id="expirience" class="form-text text-muted">Please indicate the Number of years of Experience .</small>
-              </div>
-              
-              {{-- file uploader --}}
-              <div class="custom-file">
-                <input type="file" class="custom-file-input"  name="file" id="file" required>
-                <label class="custom-file-label" for="file">Upload <span class="text-danger">CV</span> </label>
-                <div class="invalid-feedback">Invalid File</div>
-              </div>                    
-              
-              <div class="form-group">
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="agre" name="agre"  required>
-                  <label class="custom-control-label" for="agre"> Agree to <a href="#" class="text-primary">terms and conditions</a> </label>
-                </div>                   
-              </div>              
-            
-            </div>
-          
-          
-          
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-info" value="Submit">Submit</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        </div>
-        <input type="hidden" id="reg_type" name="reg_type" value="proffessional"> 
-  
-      </form>
+            @{{ edit_form }}
       </div>
-  
+
     </div>
   </div>
+</div>
 @endsection

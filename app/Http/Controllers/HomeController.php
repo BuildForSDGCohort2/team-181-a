@@ -42,7 +42,7 @@ class HomeController extends Controller
                     ->with('latest_logins',$latest_logins)
                     ->with('proffesionals',$proffesionals);
 
-        }elseif (auth()->user()->hasRole('vet')||auth()->user()->hasRole('feo')) {
+        }elseif (auth()->user()->hasRole('vet')||auth()->user()->hasRole('feo')||auth()->user()->hasRole('supplier')) {
             return view('prof.dash');
         
         }elseif(auth()->user()->hasRole('farmer')){

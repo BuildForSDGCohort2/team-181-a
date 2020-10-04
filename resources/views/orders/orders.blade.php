@@ -63,16 +63,24 @@
               <table class="table">
                 <thead class=" ">
                   <th>
-                    ID
+                    Id
                   </th>
-                  <th>
-                    Customer Name
-                  </th>
+                  
+                    @hasanyrole('admin|farmer|supplier|vet|feo')
+                    <th>
+                      Customer Name
+                    </th>  
+                    @endhasanyrole
+                    @can('admin')
+                      <th>
+                        Seller
+                      </th>
+                    @endcan                  
                   <th>
                     Product
                   </th>
                   <th>
-                    Seller
+                    Price
                   </th>
                   <th>
                     Status
@@ -80,23 +88,40 @@
                 </thead>
                 <tbody>
 
-                @forelse ($orders as $order)
+                @forelse ($myorders as $order)
                 <tr>
                     <td>
                      {{$order->id}}
                     </td>
+                    @hasanyrole('admin|farmer|supplier|vet|feo')
                     <td>
-                     {{ucfirst($order->name)}}
+                     {{(auth()->user()->id === $order->user_id? 'Me' : ucfirst($order->user->name))}}
                     </td>
+                    @endhasanyrole
+                    @can('admin')
                     <td>
-                    @if ($order->specialty == 'vet')
-                        <span class="text-primary"> Vet </span>
+                      {{($order->get_seller($order->seller_id)->name)}}
+                    </td>
+                  @endcan                  
+                    <td>
+                    @if ($order->product_identifier === 'PLT')
+                      <i class="fa fa-pagelines "></i>&nbsp; {{$order->quantity.' Sacks of '}}
+                      {{$order->sales->storage->plantation->species}} {{auth()->user()->id === $order->user_id ? 'From' : 'To'}} {{ucfirst($order->sales->storage->plantation->farmer->location)}}
+
+                    @elseif($order->product_identifier == 'ANML') 
+                    <i class="material-icons">pets</i> The
+                    {{$order->sales->animal->species}} {{auth()->user()->id === $order->user_id ? 'From' : 'To'}}  {{ucfirst($order->sales->animal->farmer->location)}}
+
+                    @elseif($order->product_identifier == 'POULT')
+                    <i class="fa fa-bold" aria-hidden="true"></i>&nbsp;{{$order->quantity}} &nbsp;
+                    {{$order->sales->brood->species}}&nbsp; {{auth()->user()->id === $order->user_id ? 'From' : 'To'}} {{ucfirst($order->sales->brood->farmer->location)}}                    
+
                     @else
-                        <span class="text-success"> F.E.O </span>
+                    <i class="material-icons">api</i>
                     @endif
                     </td>
                     <td>
-                      {{$order->location}}
+                      KSH &nbsp; {{$order->price}}
                     </td>
                     <td>
                         <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#professional_modal">View info</button>
@@ -105,6 +130,11 @@
                 </tr>
                 @empty
                 <tr>
+                  @hasanyrole('admin|farmer|supplier|vet|feo')
+                  <td>
+                    <span class="text-primary"> No Orders placed</span>
+                  </td>
+                  @endhasanyrole  
                   <td>
                     <span class="text-primary"> No Orders placed</span>
                   </td>

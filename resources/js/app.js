@@ -16,13 +16,6 @@ import store from './vuex'
 import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/en'
 import 'element-ui/lib/theme-chalk/index.css';
-// import '../theme/index.css'
-
-// import 'material-design-icons-iconfont/dist/material-design-icons.css'
-
-// import DashboardPlugin from '@/plugins/blackDashboard'
-
-
 
 import VueGoodTablePlugin from 'vue-good-table';
 
@@ -38,18 +31,6 @@ import Chartkick from 'vue-chartkick'
 import Chart from 'chart.js'
 Vue.use(Chartkick.use(Chart))
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 // import myExample from './components/ExampleComponent.vue'
 // import myHeader from './components/include/Header'
 // import myApp from './components/app.vue'
@@ -68,11 +49,7 @@ import myPlantation from "./components/plantation";
 
 import myBrood from "./components/brood";
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+
 import { mapState } from "vuex";
 
 const app = new Vue({
@@ -87,11 +64,12 @@ const app = new Vue({
     },
 
     data: {
-        cart_count: 1,
+        cart_count: 0,
         snackbar: false,
         text: '',
         form: {
-            weight: 200
+            weight: '',
+            approximation: 'months'
         },
         edit_form: {},
     },
@@ -139,6 +117,19 @@ const app = new Vue({
             this.cart_count += 1
         },
 
+        get_items(model, update) {
+            var payload = {
+                model: model,
+                data: this.form,
+                update: update
+            }
+            console.log(payload);
+
+            this.$store.dispatch('getItems', payload)
+                .then(response => {
+                    // eventBus.$emit("pushEvent", response)
+                });
+        },
         save_item(model) {
             var payload = {
                 model: model,
@@ -148,7 +139,8 @@ const app = new Vue({
 
             this.$store.dispatch('postItems', payload)
                 .then(response => {
-                    eventBus.$emit("animalEvent")
+                    this.success('Created')
+                    eventBus.$emit("pushEvent", response)
                 });
         },
         update_item(model) {
@@ -160,16 +152,40 @@ const app = new Vue({
             console.log(payload);
             this.$store.dispatch('patchItems', payload)
                 .then(response => {
-                    eventBus.$emit("AnimalEvent")
+                    this.success('Updated')
+                    eventBus.$emit("pushEvent", response)
                 });
         },
         open_edit(data) {
             console.log(data);
             this.edit_form = data
 
+        },
+        birth_day(data) {
+            var diff = Math.floor(( Date.parse(new Date()) - Date.parse(this.form.birthday) ) / 86400000);
+            console.log(data);
+
+            if (data) {
+                var approx = data
+            } else {
+                var approx = this.form.approximation
+            }
+            if (approx == "months") {
+                console.log('months');
+
+                diff = parseInt(diff) / 30
+            } else if(approx == "years") {
+                console.log('years');
+                diff = parseInt(diff) / 365
+            }
+            this.form.approx_age = parseFloat(diff).toFixed(1)
+        },
+        success(text) {
+            this.text = text
+            this.snackbar = true
         }
     },
     computed: {
-        ...mapState(['errors'])
+        ...mapState(['errors', 'loading']),
     },
 });
