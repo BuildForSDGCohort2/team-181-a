@@ -53,14 +53,42 @@ class OrdersController extends Controller
     }
     
     #order pickup by drivers
-    public function order_pick_up()
+    public function order_pick_up($request,Order $order,Isues $issue)
     {
         #change the order statust to in  transit.. only the admin and sellers do see this the customer only sees i progress etc...
+        foreach ($request as $location) {
+            foreach ($location as $loc_order) {
+                $order->transit($loc_order->id);
+            }
+        }
+        #now alert the customer
+        foreach ($request as $location) {
+            foreach ($location as $loc_order) {
+                $issue->in_transit_alert($loc_order->id);
+            }
+        }
+
+    }
+    public function order_delivery($request,Order $order,Isues $issue)
+    {
+        foreach ($request as $location) {
+            foreach ($location as $loc_order) {
+                $order->deliver($loc_order->id);
+            }
+        }
+        #now alert the customer
+        foreach ($request as $location) {
+            foreach ($location as $loc_order) {
+                $issue->delivery_alert($loc_order->id);
+            }
+        }
+        
     }
 
     public function dispatch_orders(Order $order)
     {   
         #here we wont use the all clause we will take up undelivered ones only
+
         $grouped_orders = $order->all()->groupBy(function($order){
             return $order->get_seller($order->seller_id)->location;
         });

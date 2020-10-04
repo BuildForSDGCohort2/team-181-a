@@ -79,14 +79,32 @@ class Isues extends Model
 
 
     }
-    public function issue_classifier(Type $var = null)
+    public function in_transit_alert($order)
     {
-        #This will get to classifie various isues or reminders the the user 
-        #will bee geting maybe automatically generated or from the other users
-        #ANM- this wll be a n animal issue identifier
-        #PLNT- will be for plantation
-        #POULT- will be a poultry 
-        #INF- This will be information needed to complete ones profile in the system  
+        $this->create([
+            'reason' => 'Order Transit',
+
+            'information' => 'Your Order  Of '.($order->sales->prod_id=== 'ANML'?$origin->name.'( The '. $origin->species.')':
+                ($order->sales->prod_id === 'POULT'?$data['quantity'].' '. $origin->species:
+                ($order->sales->prod_id=== 'PLT'? 'Sacks Of'.$origin->species:''))).'is in Transit',
+            'status' => 0 ,
+            'user_id' => $order->user_id,
+            'identifier' => 'TRA',   
+        ]);
+    }
+    public function delivery_alert($order)
+    {
+        $this->create([
+            'reason' => 'Order Delivered',
+
+            'information' => 'Your Order  Of '.($order->sales->prod_id=== 'ANML'?$origin->name.'( The '. $origin->species.')':
+                ($order->sales->prod_id === 'POULT'?$data['quantity'].' '. $origin->species:
+                ($order->sales->prod_id=== 'PLT'? 'Sacks Of'.$origin->species:''))).'Has Been Delivered',
+            'status' => 0 ,
+            'user_id' => $order->user_id,
+            'identifier' => 'DELIVERY',   
+        ]);
+
     }
 
 }
