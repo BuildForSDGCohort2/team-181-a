@@ -120,3 +120,5 @@ Route::post('farmers_enrole','EnrolmentController@farmers_enrole')->name('farmer
 Route::get('on_sale','OrdersController@for_sale')->name('on_sale');
 Route::get('on_sale/{id}/view','OrdersController@view_prod')->name('viewprod');
 
+
+Route::get('search_brood/{search}','BroodsController@search_brood')->name('search_brood');

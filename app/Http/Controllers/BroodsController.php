@@ -14,11 +14,11 @@ class BroodsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Brood $brood)
-    {   
-        
+    {
+
         $broods = $brood->all()->filter(function($brood){ return $brood->number > 0 ;});
         // return $broods;
-   
+
         return view('broods.index') ->with('broods',$broods);
     }
 
@@ -80,11 +80,16 @@ class BroodsController extends Controller
         return redirect('brood');
     }
     public function sell_bird(Request $request,Brood $brood)
-    {   
+    {
         $data =$brood->deduct_number($request);
         // return $data;
         $brood->sell_bird($data);
         return redirect('brood');
 
-    }   
+    }
+
+    public function search_brood($search)
+    {
+        return Brood::where('species', 'LIKE', "%{$search}%")->get();
+    }
 }

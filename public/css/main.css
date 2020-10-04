@@ -1,3 +1,9 @@
 .page-header:after, .page-header:before {
     position: relative !important;
 }
+.select2-container {
+    width: 90% !important;
+}
+.has-text-danger {
+    color: red;
+}

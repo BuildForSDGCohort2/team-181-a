@@ -17,38 +17,39 @@ import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/en'
 import 'element-ui/lib/theme-chalk/index.css';
 
-import VueGoodTablePlugin from 'vue-good-table';
+// import VueGoodTablePlugin from 'vue-good-table';
 
 // import the styles
-import 'vue-good-table/dist/vue-good-table.css'
+// import 'vue-good-table/dist/vue-good-table.css'
 
-Vue.use(VueGoodTablePlugin);
+// Vue.use(VueGoodTablePlugin);
 
 Vue.use(ElementUI, { locale });
 
 
-import Chartkick from 'vue-chartkick'
-import Chart from 'chart.js'
-Vue.use(Chartkick.use(Chart))
+// import Chartkick from 'vue-chartkick'
+// import Chart from 'chart.js'
+// Vue.use(Chartkick.use(Chart))
 
 // import myExample from './components/ExampleComponent.vue'
 // import myHeader from './components/include/Header'
 // import myApp from './components/app.vue'
-import myHome from './components/register'
-import mySupplier from './components/browse/supplier'
-import myProfessional from './components/browse/professional'
+// import myHome from './components/register'
+// import mySupplier from './components/browse/supplier'
+// import myProfessional from './components/browse/professional'
 
 
-import myRegsupply from './components/register/supplier'
+// import myRegsupply from './components/register/supplier'
 
-import myCharts from './components/charts'
+// import myCharts from './components/charts'
 
 
-import myAnimal from "./components/animals";
-import myPlantation from "./components/plantation";
+// import myAnimal from "./components/animals";
+// import myPlantation from "./components/plantation";
 
-import myBrood from "./components/brood";
+// import myBrood from "./components/brood";
 
+import moment from 'vue-moment'
 
 import { mapState } from "vuex";
 
@@ -59,8 +60,8 @@ const app = new Vue({
     vuetify,
     components: {
         // myHeader, myApp,
-        mySupplier, myHome, myProfessional,
-        myCharts, myAnimal, myPlantation, myRegsupply, myBrood
+        // mySupplier, myHome, myProfessional,
+        // myCharts, myAnimal, myPlantation, myRegsupply, myBrood
     },
 
     data: {
@@ -69,9 +70,20 @@ const app = new Vue({
         text: '',
         form: {
             weight: '',
-            approximation: 'months'
+            approximation: 'months',
+            birthday: '',
         },
+
+        options: [
+            {
+                lable: 'Charolais',
+                value: '1',
+            }, {
+                lable: 'Merino',
+                value: '2',
+            }],
         edit_form: {},
+        load_data: false
     },
     methods: {
         toggleActive(i) {
@@ -130,6 +142,29 @@ const app = new Vue({
                     // eventBus.$emit("pushEvent", response)
                 });
         },
+        search_item(data) {
+            console.log(data);
+            var payload = {
+                model: 'search_brood',
+                update: 'updateBroodsList',
+                search: data
+            }
+            console.log(payload);
+            this.options = [
+                {
+                    value: 'Charolais',
+                }, {
+                    value: 'Merino',
+                }
+            ]
+            return
+
+            this.$store.dispatch('searchItems', payload)
+                .then(response => {
+                    this.success('Created')
+                    eventBus.$emit("pushEvent", response)
+                });
+        },
         save_item(model) {
             var payload = {
                 model: model,
@@ -141,6 +176,7 @@ const app = new Vue({
                 .then(response => {
                     this.success('Created')
                     eventBus.$emit("pushEvent", response)
+                    window.location.reload()
                 });
         },
         update_item(model) {
@@ -154,6 +190,7 @@ const app = new Vue({
                 .then(response => {
                     this.success('Updated')
                     eventBus.$emit("pushEvent", response)
+                    window.location.reload()
                 });
         },
         open_edit(data) {
@@ -162,7 +199,7 @@ const app = new Vue({
 
         },
         birth_day(data) {
-            var diff = Math.floor(( Date.parse(new Date()) - Date.parse(this.form.birthday) ) / 86400000);
+            var diff = Math.floor((Date.parse(new Date()) - Date.parse(this.form.birthday)) / 86400000);
             console.log(data);
 
             if (data) {
@@ -174,18 +211,43 @@ const app = new Vue({
                 console.log('months');
 
                 diff = parseInt(diff) / 30
-            } else if(approx == "years") {
+            } else if (approx == "years") {
                 console.log('years');
                 diff = parseInt(diff) / 365
             }
             this.form.approx_age = parseFloat(diff).toFixed(1)
         },
+        birth_calc(data) {
+            console.log(data.data);
+
+            var d = new Date();
+            this.form.birthday = d.setDate(d.getDate()-5).toLocaleString();
+
+// var month=last.getMonth()+1;
+// var year=last.getFullYear();
+        },
         success(text) {
             this.text = text
             this.snackbar = true
+        },
+        parse_data(update, data) {
+            console.log(data);
+            this.load_data = true
+
+            var payload = {
+                data: data,
+                update: update,
+            }
+            console.log(payload);
+            this.$store.dispatch('updateData', payload)
+                .then(response => {
+                    // this.success('Updated')
+                    // eventBus.$emit("pushEvent", response)
+                });
+
         }
     },
     computed: {
-        ...mapState(['errors', 'loading']),
+        ...mapState(['errors', 'loading', 'animals']),
     },
 });

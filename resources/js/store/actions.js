@@ -315,4 +315,8 @@ export default {
             })
         });
     },
+
+    updateData(context, payload) {
+        context.commit(payload.update, payload.data)
+    }
 }

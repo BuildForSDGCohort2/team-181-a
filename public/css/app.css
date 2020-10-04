@@ -18079,17 +18079,13 @@ html.overflow-y-hidden {
 .v-icon--disabled {
   pointer-events: none;
 }
-.v-icon--is-component {
-  height: 24px;
-  width: 24px;
+.v-icon--dense--is-component {
+  height: 20px;
 }
-.v-icon--svg {
+.v-icon__svg {
   height: 24px;
   width: 24px;
   fill: currentColor;
-}
-.v-icon--dense--is-component {
-  height: 20px;
 }
 .v-btn:not(.v-btn--outlined).primary, .v-btn:not(.v-btn--outlined).secondary, .v-btn:not(.v-btn--outlined).accent, .v-btn:not(.v-btn--outlined).success, .v-btn:not(.v-btn--outlined).error, .v-btn:not(.v-btn--outlined).warning, .v-btn:not(.v-btn--outlined).info {
   color: #FFFFFF;
@@ -22421,11 +22417,11 @@ html.overflow-y-hidden {
   box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2), 0px 0px 0px 0px rgba(0, 0, 0, 0.14), 0px 0px 0px 0px rgba(0, 0, 0, 0.12) !important;
 }
 
-.v-card--hover {
+.v-sheet.v-card--hover {
   cursor: pointer;
   transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
-.v-card--hover:hover, .v-card--hover:focus {
+.v-sheet.v-card--hover:hover, .v-sheet.v-card--hover:focus {
   box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
@@ -22810,6 +22806,7 @@ html.overflow-y-hidden {
 }
 .theme--light.v-color-picker .v-color-picker__input input {
   border: thin solid rgba(0, 0, 0, 0.12);
+  color: rgba(0, 0, 0, 0.87);
 }
 .theme--light.v-color-picker span {
   color: rgba(0, 0, 0, 0.6);
@@ -22820,6 +22817,7 @@ html.overflow-y-hidden {
 
 .theme--dark.v-color-picker .v-color-picker__input input {
   border: thin solid rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
 }
 .theme--dark.v-color-picker span {
   color: rgba(255, 255, 255, 0.7);
@@ -24346,6 +24344,7 @@ html.overflow-y-hidden {
 .v-file-input input[type=file] {
   left: 0;
   opacity: 0;
+  pointer-events: none;
   position: absolute;
   max-width: 0;
   width: 0;
@@ -28790,6 +28789,7 @@ html.overflow-y-hidden {
 .v-time-picker-clock__container {
   display: flex;
   flex-direction: column;
+  flex-basis: 290px;
   justify-content: center;
   padding: 10px;
 }

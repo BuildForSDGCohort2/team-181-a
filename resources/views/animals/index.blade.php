@@ -18,7 +18,7 @@
           <div class="card-header card-header-primary">
             <h4 class="card-title ">Animals List</h4>
             <p class="card-category"> Here is a subtitle for this table</p>
-            <button type="button" class="btn btn-small btn-warning" data-toggle="modal" data-target="#animal_r_modal" style="float: right;">Register Animal</button>
+            <button type="button" class="btn btn-small btn-warning" data-toggle="modal" data-target="#animal_r_modal" style="float: right;" >Register Animal</button>
           </div>
           {{--                Add Animal modal                          --}}
           <div id="animal_r_modal" class="modal fade " role="dialog">
@@ -61,11 +61,16 @@
 
                         <div class="form-group">
                             <label for="breed">Breed</label>
-                            <select class="form-control form-control-sm" v-model="form.breed_id" required>
+                            <br>
+                            {{-- <select class="form-control form-control-sm" v-model="form.breed_id" required>
                                 <option value="1">Charolais</option>
                                 <option value="2">Merino</option>
 
-                            </select>
+                            </select> --}}
+                            <el-select v-model="form.breed_id" filterable placeholder="select a breed"  style="width: 100%;">
+                                <el-option v-for="(item, index) in options" :key="index" :label="item.lable" :value="item.value">
+                                </el-option>
+                            </el-select>
                             <small id="momsname" class="form-text text-muted">Select the Breed</small>
                             <small class="has-text-danger" v-if="errors.breed_id">@{{ errors.breed_id[0] }}</small>
                         </div>
@@ -89,7 +94,7 @@
 
                         <div class="form-group">
                             <label for="weight">If Not Sure?... </label>
-                            <input type="text" class="form-control" v-model='form.approx_age' id="approx_age" aria-describedby="approx_age" placeholder="Approximate Age">
+                            <input type="text" class="form-control" v-model='form.approx_age' id="approx_age" aria-describedby="approx_age" placeholder="Approximate Age" @input="birth_calc">
                             <small id="approx_age " class="form-text text-muted">Enter Approximate Age</small>
                             <small class="has-text-danger" v-if="errors.approx_age">@{{ errors.approx_age[0] }}</small>
                         </div>
