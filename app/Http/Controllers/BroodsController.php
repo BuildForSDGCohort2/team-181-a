@@ -3,38 +3,31 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\AnimalStore;
-use App\Animal;
+use App\Http\Requests\BroodStore;
+use App\Brood;
 
-
-class AnimalsController extends Controller
+class BroodsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request , Animal $animal)
-    {
-        $animals = $animal->all();
-        // return $animals;
-        return view('animals.index')->with('animals',$animals);
+    public function index(Brood $brood)
+    {   
+        
+        $broods = $brood->all()->filter(function($brood){ return $brood->number > 0 ;});
+        // return $broods;
+   
+        return view('broods.index') ->with('broods',$broods);
     }
 
 
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(AnimalStore $request , Animal $animal)
+    public function store(BroodStore $request , Brood $brood)
     {
         $validated = $request->validated();
-        // return $validated;
-        $animal->new_animal($validated);
-        return redirect('animal')->with('success','Animal Records recorded Succesfully');
+        $brood->new_brood($validated);
+        return redirect('brood')->with('success','Animal Records recorded Succesfully');
     }
 
     /**
@@ -77,17 +70,21 @@ class AnimalsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function death(Request $request,Animal $animal)
+    public function destroy($id)
     {
-        $animal->death_of_animal($request);
-        return redirect('animal');
+        //
     }
-    public function sell_animal(Request $request,Animal $animal)
+    public function deduct(Request $request,Brood $brood)
     {
-        // return $request;
-        $data =$animal->put_up_for_sale($request);
-        $animal->sell_animal($data);
-        return redirect('animal');
+        $brood->deduct_number($request);
+        return redirect('brood');
+    }
+    public function sell_bird(Request $request,Brood $brood)
+    {   
+        $data =$brood->deduct_number($request);
+        // return $data;
+        $brood->sell_bird($data);
+        return redirect('brood');
 
-    }
+    }   
 }

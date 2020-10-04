@@ -83,11 +83,11 @@ class AnimalsController extends Controller
         return redirect('animal');
     }
     public function sell_animal(Request $request,Animal $animal)
-    {
+    {   
         // return $request;
         $data =$animal->put_up_for_sale($request);
         $animal->sell_animal($data);
         return redirect('animal');
 
-    }
+    }  
 }
