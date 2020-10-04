@@ -25,10 +25,14 @@
           </li>
           <li class="nav-item">
             <a class="nav-link active" style="background-color: blueviolet" href="#">Orders</a>
+          </li>          
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('dispatch')}}">Dispatch</a>
           </li>
           <li class="nav-item">
             <a class="nav-link "  href="{{route('issues')}}">User Requests</a>
           </li>
+
         @else
           <li class="nav-item">
             <a class="nav-link "  href="{{route('issues')}}">issues</a>
@@ -106,15 +110,15 @@
                     <td>
                     @if ($order->product_identifier === 'PLT')
                       <i class="fa fa-pagelines "></i>&nbsp; {{$order->quantity.' Sacks of '}}
-                      {{$order->sales->storage->plantation->species}} {{auth()->user()->id === $order->user_id ? 'From' : 'To'}} {{ucfirst($order->sales->storage->plantation->farmer->location)}}
+                      {{$order->sales->storage->plantation->species}} {{auth()->user()->id === $order->user_id ? 'From' : 'To'}} {{ucfirst($order->user->location)}}
 
                     @elseif($order->product_identifier == 'ANML') 
                     <i class="material-icons">pets</i> The
-                    {{$order->sales->animal->species}} {{auth()->user()->id === $order->user_id ? 'From' : 'To'}}  {{ucfirst($order->sales->animal->farmer->location)}}
+                    {{$order->sales->animal->species}} {{auth()->user()->id === $order->user_id ? 'From' : 'To'}}  {{ucfirst($order->user->location)}}
 
                     @elseif($order->product_identifier == 'POULT')
                     <i class="fa fa-bold" aria-hidden="true"></i>&nbsp;{{$order->quantity}} &nbsp;
-                    {{$order->sales->brood->species}}&nbsp; {{auth()->user()->id === $order->user_id ? 'From' : 'To'}} {{ucfirst($order->sales->brood->farmer->location)}}                    
+                    {{$order->sales->brood->species}}&nbsp; {{auth()->user()->id === $order->user_id ? 'From' : 'To'}} {{ucfirst($order->user->location)}}                    
 
                     @else
                     <i class="material-icons">api</i>

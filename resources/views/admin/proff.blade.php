@@ -19,6 +19,9 @@
           <a class="nav-link" href="{{route('orders')}}">Orders</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="{{route('dispatch')}}">Dispatch</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link "  href="{{route('issues')}}">User Requests</a>
         </li>
       </ul>

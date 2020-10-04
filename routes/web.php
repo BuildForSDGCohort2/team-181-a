@@ -107,6 +107,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('take/{id}/product','StorageController@take_from_storage')->name('take_from_storage');
 
 	Route::post('order/{id}/product','OrdersController@place_order')->name('place_order');
+	Route::get('order/dispatch','OrdersController@dispatch_orders')->name('dispatch');
 
 });
 
