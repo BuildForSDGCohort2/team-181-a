@@ -379,7 +379,7 @@
                                     Action
                                   </button>
                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#sell_animal">Sell</a>
+                                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#sell_animal" @click="open_edit({{ $animal }})">Sell</a>
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet">Summon Vet</a>
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#death">Dead / <span class="text-success">Slaughter</span></a>
                                   </div>
@@ -436,7 +436,7 @@
 
                           </div>
                           <div class="modal-footer">
-                            <button @click="save_item('/sell/{{ $animal->id }}/animal')" class="btn btn-info" value="Submit">Submit</button>
+                            <button @click="save_item('/sell/' + edit_form.id  + '/animal')" class="btn btn-info" value="Submit">Submit</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                           </div>
                         </div>

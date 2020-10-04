@@ -194,7 +194,7 @@ $product_information = $prod->storage->plantation;
                         <div class="first-column" style='width:45%; float: left;margin-right:1%'>
                             <div class="form-group">
                                 <label for="type">Full Names</label>
-                                <input type="text" class="form-control" name='name' id="name" aria-describedby="name"
+                                <input type="text" class="form-control" v-model='form.name' id="name" aria-describedby="name"
                                     placeholder="Enter Your Full names" required>
                                 <small id="type" class="form-text text-muted">As they appear on the id.</small>
                             </div>
@@ -202,13 +202,13 @@ $product_information = $prod->storage->plantation;
 
                             <div class="form-group">
                                 <label for="strain">Phone number</label>
-                                <input type="text" name='phone_number' class="form-control" id="phone_number"
+                                <input type="text" v-model='form.phone_number' class="form-control" id="phone_number"
                                     aria-describedby="phonenumber" placeholder="07XX-XXX-XXX" required>
                                 <small id="phonenumber" class="form-text text-muted">Enter Phone number</small>
                             </div>
                             <div class="form-group">
                                 <label for="location">Location</label>
-                                <input type="text" name='location' class="form-control" id="location"
+                                <input type="text" v-model='form.location' class="form-control" id="location"
                                     aria-describedby="loc" placeholder="eg. Nakuru.." required>
                                 <small id="loc" class="form-text text-muted">Enter Location</small>
                             </div>
@@ -218,7 +218,7 @@ $product_information = $prod->storage->plantation;
                         <div class="second-column" style='width:45%; float: right;margin-right:1%'>
                             <div class="form-group">
                                 <label for="size">Email</label>
-                                <input type="email" name='email' class="form-control" id="email" aria-describedby="mail"
+                                <input type="email" v-model='form.email' class="form-control" id="email" aria-describedby="mail"
                                     placeholder="abc@xyz.com" required>
                                 <small id="mail" class="form-text text-muted">Enter Email</small>
                             </div>
@@ -226,7 +226,7 @@ $product_information = $prod->storage->plantation;
 
                             <div class="form-group">
                                 <label for="exp">Password..</label>
-                                <input type="password" class="form-control" name='password' id="password"
+                                <input type="password" class="form-control" v-model='form.password' id="password"
                                     aria-describedby="password" placeholder="password" required>
                                 <small id="expirience" class="form-text text-muted">Password</small>
                             </div>
@@ -234,7 +234,7 @@ $product_information = $prod->storage->plantation;
                             {{-- file uploader --}}
                             <div class="form-group">
                                 <label for="password">Confirm Password..</label>
-                                <input type="password" class="form-control" name='conf_password' id="conf_password"
+                                <input type="password" class="form-control" v-model='form.conf_password' id="conf_password"
                                     aria-describedby="conf_password" placeholder="password" required>
                                 <small id="password" class="form-text text-muted"> Confirm Password</small>
                             </div>
@@ -251,7 +251,7 @@ $product_information = $prod->storage->plantation;
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-info" value="Submit">Submit</button>
+                    <button @click="save_items" class="btn btn-info" value="Submit">Submit</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                 </div>
                 <input type="hidden" id="reg_type" name="reg_type" value="farmer">
