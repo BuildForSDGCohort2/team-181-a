@@ -17,8 +17,8 @@
         "laravel/framework": "^7.24",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.2",
-        "twilio/sdk": "^6.9",
-        "spatie/laravel-permission": "^3.16"
+        "spatie/laravel-permission": "^3.16",
+        "twilio/sdk": "^6.9"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
