@@ -7,7 +7,7 @@ use App\Isues;
 use App\Proffesional;
 use App\Supplier;
 use App\Order;
-
+use DB;
 
 class NotificationsController extends Controller
 {
@@ -38,6 +38,11 @@ class NotificationsController extends Controller
         $issues  = $issue->get_unsolved_issues();
         // return (($issues));
         return view('pages.issues')->with('issues',$issues);
+    }
+
+    public function show_issue(Isues $issue, $id)
+    {
+        return $issue->get_issue($id);
     }
 }
 

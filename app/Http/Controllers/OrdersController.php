@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Sales;
 use App\Order;
 use App\Isues;
-use App\Users;
+use App\User;
 
 class OrdersController extends Controller
 {
@@ -49,19 +49,54 @@ class OrdersController extends Controller
     {
         
         $myorders = $order->get_orders();
-        $sellers = [];
-        if (auth()->user()->hasRole('admin')) {
-            foreach ($myorders as $orders) {
-                
-            }
-        }
-        return view('orders.orders')->with('myorders',$myorders)->with('use');
+        return view('orders.orders')->with('myorders',$myorders);
     }
     
     #order pickup by drivers
-    public function order_pick_up()
+    public function order_pick_up(Request $request,Order $order,Isues $issue)
     {
+
+        // return $request;
         #change the order statust to in  transit.. only the admin and sellers do see this the customer only sees i progress etc...
+        foreach ($request as $location) {
+            foreach ($location as $loc_order) {
+                $order->transit($loc_order->id);
+            }
+        }
+        #now alert the customer
+        foreach ($request as $location) {
+            foreach ($location as $loc_order) {
+                $issue->in_transit_alert($loc_order->id);
+            }
+        }
+
+    }
+    public function order_delivery($request,Order $order,Isues $issue)
+    {
+        return $request;
+        foreach ($request as $location) {
+            foreach ($location as $loc_order) {
+                $order->deliver($loc_order->id);
+            }
+        }
+        #now alert the customer
+        foreach ($request as $location) {
+            foreach ($location as $loc_order) {
+                $issue->delivery_alert($loc_order->id);
+            }
+        }
+        
+    }
+
+    public function dispatch_orders(Order $order)
+    {   
+        #here we wont use the all clause we will take up undelivered ones only
+
+        $grouped_orders = $order->all()->groupBy(function($order){
+            return $order->get_seller($order->seller_id)->location;
+        });
+        // return $grouped_orders;
+        return view('orders.dispatch')->with('grouped_orders',$grouped_orders);
     }
 
     #delivered Close the deal

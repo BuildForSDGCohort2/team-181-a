@@ -104,16 +104,16 @@ const app = new Vue({
         },
         checkout(data) {
 
-            this.text = 'Checkout complete'
-            this.snackbar = true
             var payload = {
-                model: 'checkout',
-                data: this.form,
+                model: '/order/' + data + '/product',
                 data: this.form
+                // data: this.form
             }
-            this.cart_count += 1
-            this.$store.dispatch('patchItems', payload)
+            this.$store.dispatch('postItems', payload)
                 .then(response => {
+                    this.text = 'Checkout complete'
+                    this.snackbar = true
+                    this.cart_count = 0
                     // this.cart_count += 1
                     // eventBus.$emit("broodEvent")
                 });
@@ -129,7 +129,7 @@ const app = new Vue({
 
             if (qty > this.cart_count) {
                 this.cart_count += 1
-            } else{
+            } else {
                 this.snackbar = true
                 this.text = 'No more in stock'
             }
@@ -227,10 +227,10 @@ const app = new Vue({
             console.log(data.data);
 
             var d = new Date();
-            this.form.birthday = d.setDate(d.getDate()-5).toLocaleString();
+            this.form.birthday = d.setDate(d.getDate() - 5).toLocaleString();
 
-// var month=last.getMonth()+1;
-// var year=last.getFullYear();
+            // var month=last.getMonth()+1;
+            // var year=last.getFullYear();
         },
         success(text) {
             this.text = text
@@ -251,9 +251,24 @@ const app = new Vue({
                     // eventBus.$emit("pushEvent", response)
                 });
 
+        },
+        open_issue(id){
+            console.log(id);
+
+            var payload = {
+                update: 'updateIssue',
+                id: id,
+                model: 'show_issue'
+            }
+            console.log(payload);
+            this.$store.dispatch('showItem', payload)
+                .then(response => {
+                    // this.success('Updated')
+                    // eventBus.$emit("pushEvent", response)
+                });
         }
     },
     computed: {
-        ...mapState(['errors', 'loading', 'animals']),
+        ...mapState(['errors', 'loading', 'animals', 'issues_show']),
     },
 });

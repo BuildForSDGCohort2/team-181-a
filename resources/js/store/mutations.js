@@ -64,7 +64,7 @@ export default {
     updateBroodsList(state, payload) {
         state.broods = payload
     },
-    updateAnimal_facts(state, payload) {
-        state.animal_facts = payload
+    updateIssue(state, payload) {
+        state.issues_show = payload
     },
 }

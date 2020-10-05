@@ -9,11 +9,11 @@ use DB;
 
 
 class Order extends Model
-{
+{   
     protected $guarded = [];
     #cant wait to bite into this one
     public function create_order($data)
-    {
+    {   
 
         if ($data['product']->prod_id== "ANML") {
             $product_information = $data['product']->animal;
@@ -34,14 +34,14 @@ class Order extends Model
         #animal bug expected
         $order->quantity= $data['quantity'] ?? 1 ;
         $order ->save();
-
-        return ['quantity'=>$data['quantity'],'order'=>$order];
+ 
+        return ['quantity'=>$data['quantity'],'order'=>$order]; 
     }
 
     public function get_orders()
-    {
+    {   
         if (auth()->user()->hasRole('admin')) {
-            return $this->all();
+            return $this->all();           
         } else {
             return $this->where('user_id','=',auth()->user()->id)
                         ->orWhere('seller_id','=',auth()->user()->id)
@@ -49,6 +49,20 @@ class Order extends Model
         }
 
     }
+    public function transit($order_id)
+    {
+        $order = $this->find($order_id);
+        $order->order_status = 1;
+        $order->save;
+    }
+    public function deliver($order_id)
+    {
+        $order = $this->find($order_id);
+        #OR we could use soft delete
+        $order->order_status = 2;
+        $order->save;
+    }
+
     public function user()
     {
        return  $this->belongsTo('App\User');

@@ -107,6 +107,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('take/{id}/product','StorageController@take_from_storage')->name('take_from_storage');
 
 	Route::post('order/{id}/product','OrdersController@place_order')->name('place_order');
+	Route::get('order/dispatch','OrdersController@dispatch_orders')->name('dispatch');
+	Route::get('order/{orders}/dispatch','OrdersController@order_pick_up')->name('transit');
+
+
 
 });
 
@@ -131,3 +135,4 @@ Route::get('/login/{social}/callback','Auth\LoginController@handleProviderCallba
 Route::get('login/instagram', 'Auth\LoginController@redirectToInstagramProvider')->name('instagram.login');
 
 Route::get('login/instagram/callback', 'Auth\LoginController@instagramProviderCallback')->name('instagram.login.callback');
+Route::get('show_issue/{id}','NotificationsController@show_issue')->name('show_issue');

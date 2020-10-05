@@ -96,7 +96,7 @@
                       {{$issue->information.(in_array('RMNDR',explode('-',$issue->identifier))?now()->diff(date_create($issue->due_date))->d.'days from now':null )}}
                     </td>
                     <td>
-                        <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#professional_modal" @click="open_edit({{ $issue->id }})">View info</button>
+                        <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#professional_modal" @click="open_issue({{ $issue->id }})">View info</button>
                     </td>
                 </tr>
                 @empty
@@ -133,12 +133,18 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" style="color: black"> Register as a <span style="color: rgb(255, 179, 0)">proffessional</span></h4>
-          <small  class="form-text text-muted">Successful Applicants will Recieve confirmatory email</small>
+          <h4 class="modal-title" style="color: black"> Issue <span style="color: rgb(255, 179, 0)">@{{ issues_show.identifier }}</span></h4>
+          {{-- <small  class="form-text text-muted">Successful Applicants will Recieve confirmatory email</small> --}}
 
         </div>
         <div class="modal-body">
-            @{{ edit_form }}
+            <ul class="list-group">
+                <li class="list-group-item"><b>Information:</b> <span style="margin-left: 30px">@{{ issues_show.information }}</span></li>
+                <li class="list-group-item"><b>Reason:</b> <span style="margin-left: 30px">@{{ issues_show.reason }}</span></li>
+              </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-outline-info">Mark as read</button>
       </div>
 
     </div>

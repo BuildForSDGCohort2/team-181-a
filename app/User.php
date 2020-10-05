@@ -79,4 +79,9 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough('App\Storage','App\Plantation','user_id','plantation_id');
     }
+    public function pregnant()
+    {
+        return $this->hasMany('App\Pregnant');
+    }
+
 }

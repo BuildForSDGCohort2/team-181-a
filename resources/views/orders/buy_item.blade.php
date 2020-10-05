@@ -136,10 +136,10 @@ $product_information = $prod->storage->plantation;
                             <th class="pl-0 w-25" scope="row"><small>Free Delivery Available</small></th>
                             @else
                             <th class="pl-0 w-25" scope="row"><small>Free Delivery not Available</small> <br>
-                                <input type="radio" name="choice" id="pick" value="pick" />
+                                <input type="radio" v-model="form.choice" id="pick" value="pick" />
                                 <label for="pick">Pick At your local Station </label> &nbsp;
 
-                                <input type="radio" name="choice" id="transport" value="transport" />
+                                <input type="radio" v-model="form.choice" id="transport" value="transport" />
                                 <label for="transport">Home Delivery</label>
                             </th>
                             @endif
@@ -160,8 +160,7 @@ $product_information = $prod->storage->plantation;
             <button type="button" class="btn btn-primary btn-md mr-1 mb-2" data-toggle="modal"
                 data-target="#register">Proced to Checkout</button>
             @else
-            <button type="button" class="btn btn-primary btn-md mr-1 mb-2" data-toggle="modal"
-                data-target="#pay"><i></i> Proced to Checkout</button>
+            <button type="button" class="btn btn-primary btn-md mr-1 mb-2" @click="checkout({{ $prod->id }})"><i></i> Proced to Checkout</button>
             @endif
             <button type="button" class="btn btn-light btn-success" @click='toggleActive($key)'><i
                     class="fa fa-shopping-basket pr-2"></i>Add to Basket</button>
@@ -245,8 +244,6 @@ $product_information = $prod->storage->plantation;
                                             class="text-primary">terms and conditions</a> </label>
                                 </div>
                             </div>
-
-
                         </div>
                 </div>
                 <div class="modal-footer">

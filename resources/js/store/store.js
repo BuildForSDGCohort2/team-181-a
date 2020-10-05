@@ -23,6 +23,7 @@ export default {
         broods: [],
         plantations: [],
         page_loader: false,
+        issues_show: [],
     },
     getters,
     mutations,
