@@ -19,9 +19,9 @@ class CreatePregnantsTable extends Migration
             $table->date('pregnancy_date')->nullable();
             $table->date('birth_date')->nullable();
             $table->unsignedBigInteger('animal_id');
-            $table->unsignedBigInteger('proffesional_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('animal_id')->references('id')->on('animals');
-            $table->foreign('proffesional_id')->references('id')->on('proffesionals');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

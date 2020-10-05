@@ -16,8 +16,8 @@ class OrdersController extends Controller
         $prods_on_sale = $sale->all()->filter(function($product){return $product->status !== 1;});
         return view('products_dash')->with('prods_on_sale',$prods_on_sale);
     }
-    
-    
+
+
     #view Prod befor buying
     public function view_prod(Request $request, Sales $sale )
     {
@@ -26,32 +26,31 @@ class OrdersController extends Controller
         return view('orders.buy_item')->with('prod',$prod);
     }
     #place order
-    
-    
-    
+
+
     public function place_order(Request $request,Sales $sale,Order $order,Isues $issue)
-    {   
+    {
         // return $request;
         $product_for_sale  = $sale->process_order($request);
         // return $product_for_sale['product'];
         $order_info = $order->create_order($product_for_sale);
-        
+
         $issue->order_alert($order_info);
         // return $order_info;
         return redirect('on_sale');
     }
-    #revoke Order 
+    #revoke Order
 
-    
-    
+
+
     #view personal orders
     public function my_orders(Order $order)
     {
-        
+
         $myorders = $order->get_orders();
         return view('orders.orders')->with('myorders',$myorders);
     }
-    
+
     #order pickup by drivers
     public function order_pick_up(Request $request,Order $order,Isues $issue)
     {
@@ -85,11 +84,11 @@ class OrdersController extends Controller
                 $issue->delivery_alert($loc_order->id);
             }
         }
-        
+
     }
 
     public function dispatch_orders(Order $order)
-    {   
+    {
         #here we wont use the all clause we will take up undelivered ones only
 
         $grouped_orders = $order->all()->groupBy(function($order){
@@ -105,7 +104,7 @@ class OrdersController extends Controller
         $order->order_succesfull($request);
         return redirect('orders');
     }
-    
+
     #view professionals
     public function available_proffesionals(User $user)
     {

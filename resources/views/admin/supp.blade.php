@@ -108,7 +108,7 @@
         <div class="modal-header">
           <h4 class="modal-title" style="color: black"> Register as a <span style="color: rgb(255, 179, 0)">proffessional</span></h4>
           <small  class="form-text text-muted">Successful Applicants will Recieve confirmatory email</small>
-  
+
         </div>
         <div class="modal-body">
         <form action="{{route('profesionals_enrole')}}" method="POST">
@@ -119,7 +119,7 @@
                 <input type="text" class="form-control" name='name'id="name" aria-describedby="name" placeholder="Enter Your Full names" required>
                 <small id="type" class="form-text text-muted">As they appear on the id.</small>
               </div>
-                                     
+
                <div class="form-group">
                 <label for="strain">Id number</label>
                 <input type="text" name ='id_number'class="form-control" id="id_number" aria-describedby="idnumber" placeholder="XXX-XXX" required>
@@ -130,20 +130,20 @@
                 <input type="text" name ='phone_number'class="form-control" id="phone_number" aria-describedby="phonenumber" placeholder="07XX-XXX-XXX" required>
                 <small id="phonenumber" class="form-text text-muted">Enter Id number</small>
               </div>
-              <fieldset>                
-                <label>Specialty:</label><br>            
+              <fieldset>
+                <label>Specialty:</label><br>
                 <input type = "radio"
                        name = "specialty"
                        id = "vet"
                        value = "vet" />
                 <label for = "vet">Vet</label>
-              
+
                 <input type = "radio"
                        name = "specialty"
                        id = "feo"
                        value = "feo" />
                 <label for = "feo">Feild Extension Officer</label>
-              
+
                 <input type = "radio"
                        name = "specialty"
                        id = "other"
@@ -160,61 +160,61 @@
               <input type="text" name ='location'class="form-control" id="location" aria-describedby="loc" placeholder="eg. Nakuru.." required>
               <small id="loc" class="form-text text-muted">Enter Location</small>
             </div>
-  
-  
+
+
             </div>
-           
+
             <div class="second-column" style='width:45%; float: right;'>
-  
+
             {{-- this input shoulf be inactive if the specialty selected is not other --}}
-  
+
               <div class="form-group">
                 <label for="strain">Id number</label>
                 <input type="text" name ='id_number'class="form-control" id="id_number" aria-describedby="idnumber" placeholder="XXX-XXX" required>
                 <small id="idnnumber" class="form-text text-muted">Enter Id number</small>
               </div>
-  
+
               <div class="form-group">
                 <label for="size">Email</label>
                 <input type="email" name ='email'class="form-control" id="email" aria-describedby="mail" placeholder="abc@xyz.com" required>
                 <small id="mail" class="form-text text-muted">Enter Email</small>
               </div>
-              
-  
+
+
               <div class="form-group">
                 <label for="exp">Years Of Expirience</label>
                 <input type="text" class="form-control" name='exp' id="exp" aria-describedby="expirience" placeholder="0">
                 <small id="expirience" class="form-text text-muted">Please indicate the Number of years of Experience .</small>
               </div>
-              
+
               {{-- file uploader --}}
               <div class="custom-file">
                 <input type="file" class="custom-file-input"  name="file" id="file" required>
                 <label class="custom-file-label" for="file">Upload <span class="text-danger">CV</span> </label>
                 <div class="invalid-feedback">Invalid File</div>
-              </div>                    
-              
+              </div>
+
               <div class="form-group">
                 <div class="custom-control custom-checkbox">
                   <input type="checkbox" class="custom-control-input" id="agre" name="agre"  required>
                   <label class="custom-control-label" for="agre"> Agree to <a href="#" class="text-primary">terms and conditions</a> </label>
-                </div>                   
-              </div>              
-            
+                </div>
+              </div>
+
             </div>
-          
-          
-          
+
+
+
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-info" value="Submit">Submit</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
         </div>
-        <input type="hidden" id="reg_type" name="reg_type" value="proffessional"> 
-  
+        <input type="hidden" id="reg_type" name="reg_type" value="proffessional">
+
       </form>
       </div>
-  
+
     </div>
   </div>
 @endsection

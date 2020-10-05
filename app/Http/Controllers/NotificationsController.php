@@ -7,7 +7,7 @@ use App\Isues;
 use App\Proffesional;
 use App\Supplier;
 use App\Order;
-use DB;
+
 
 class NotificationsController extends Controller
 {

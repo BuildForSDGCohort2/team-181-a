@@ -15,6 +15,9 @@ class DatabaseSeeder extends Seeder
         $this->call([UsersTableSeeder::class]);
         $this->call([AnimalFactsheet_Seeder::class]);
         $this->call([PlantFactsheet_Seeder::class]);
+        $this->call([PlantDevRegSeeder::class]);
+        $this->call([AgeRegimentSeeder::class]);
+
 
     }
 }

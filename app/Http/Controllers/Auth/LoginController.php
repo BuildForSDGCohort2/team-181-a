@@ -60,7 +60,7 @@ class LoginController extends Controller
             $user = User::create([
                 'email' => $userSocial->getEmail(),
                 'name' => $userSocial->getName(),
-                'location' => 'Nairobi',
+                'location' => 'nairobi',
                 'password' => Hash::make('password')
             ]);
             Auth::login($user);

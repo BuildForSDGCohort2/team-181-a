@@ -125,7 +125,6 @@
                 </thead>
                 <tbody>
 
-
                   @forelse ($plantations as $plantation)
 
                   <tr>

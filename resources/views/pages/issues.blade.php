@@ -75,7 +75,6 @@
                 @forelse ($issues as $issue)
                 <tr>
                   <td>
-
                     @if (in_array('PLT',explode('-',$issue->identifier)))
                       <i class="fa fa-pagelines "></i>
                     @elseif(in_array('ANML',explode('-',$issue->identifier)))
@@ -117,7 +116,6 @@
                     <span class="text-primary"> No Requests</span>
                   </td>
                 </tr>
-
                 @endforelse
                 </tbody>
               </table>

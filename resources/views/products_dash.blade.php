@@ -8,7 +8,6 @@
     @else
        <div class="container-fluid">
     @endif
-
       <div class="row justify-content-center">
         @forelse ($prods_on_sale as $prod)
           @php

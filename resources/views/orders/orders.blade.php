@@ -168,7 +168,6 @@
         <div class="modal-header">
           <h4 class="modal-title" style="color: black"> Register as a <span style="color: rgb(255, 179, 0)">proffessional</span></h4>
           <small  class="form-text text-muted">Successful Applicants will Recieve confirmatory email</small>
-
         </div>
         <div class="modal-body">
         <form action="{{route('profesionals_enrole')}}" method="POST">
@@ -179,7 +178,6 @@
                 <input type="text" class="form-control" name='name'id="name" aria-describedby="name" placeholder="Enter Your Full names" required>
                 <small id="type" class="form-text text-muted">As they appear on the id.</small>
               </div>
-
                <div class="form-group">
                 <label for="strain">Id number</label>
                 <input type="text" name ='id_number'class="form-control" id="id_number" aria-describedby="idnumber" placeholder="XXX-XXX" required>
@@ -197,13 +195,11 @@
                        id = "vet"
                        value = "vet" />
                 <label for = "vet">Vet</label>
-
                 <input type = "radio"
                        name = "specialty"
                        id = "feo"
                        value = "feo" />
                 <label for = "feo">Feild Extension Officer</label>
-
                 <input type = "radio"
                        name = "specialty"
                        id = "other"
@@ -233,7 +229,6 @@
                 <input type="text" name ='id_number'class="form-control" id="id_number" aria-describedby="idnumber" placeholder="XXX-XXX" required>
                 <small id="idnnumber" class="form-text text-muted">Enter Id number</small>
               </div>
-
               <div class="form-group">
                 <label for="size">Email</label>
                 <input type="email" name ='email'class="form-control" id="email" aria-describedby="mail" placeholder="abc@xyz.com" required>
@@ -246,7 +241,6 @@
                 <input type="text" class="form-control" name='exp' id="exp" aria-describedby="expirience" placeholder="0">
                 <small id="expirience" class="form-text text-muted">Please indicate the Number of years of Experience .</small>
               </div>
-
               {{-- file uploader --}}
               <div class="custom-file">
                 <input type="file" class="custom-file-input"  name="file" id="file" required>
