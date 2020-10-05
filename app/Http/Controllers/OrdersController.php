@@ -53,8 +53,10 @@ class OrdersController extends Controller
     }
     
     #order pickup by drivers
-    public function order_pick_up($request,Order $order,Isues $issue)
+    public function order_pick_up(Request $request,Order $order,Isues $issue)
     {
+
+        // return $request;
         #change the order statust to in  transit.. only the admin and sellers do see this the customer only sees i progress etc...
         foreach ($request as $location) {
             foreach ($location as $loc_order) {
@@ -71,6 +73,7 @@ class OrdersController extends Controller
     }
     public function order_delivery($request,Order $order,Isues $issue)
     {
+        return $request;
         foreach ($request as $location) {
             foreach ($location as $loc_order) {
                 $order->deliver($loc_order->id);
@@ -92,6 +95,7 @@ class OrdersController extends Controller
         $grouped_orders = $order->all()->groupBy(function($order){
             return $order->get_seller($order->seller_id)->location;
         });
+        // return $grouped_orders;
         return view('orders.dispatch')->with('grouped_orders',$grouped_orders);
     }
 

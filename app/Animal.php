@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Animal_Fact_sheet;
 use App\Isues;
+use App\Pregnant;
 
 
 class Animal extends Model
@@ -23,21 +24,29 @@ class Animal extends Model
         ? Animal::date_of_birth_calculator($validated) 
         :  Animal::date_formatter(Animal::date_of_birth_calculator($validated)); 
        
-        Animal::create([
-            'name'=>$validated['name'],
-            'species'=> $validated['species'],
-            'gender'=>$validated['gender'],
-            'birthday'=>$date ,
-            'weight'=>$validated['weight'],
-            'mother_id'=>$validated['mothers_name'],
-            'breed_id'=>$validated['breed_id'],
-            'user_id'=>auth()->user()->id,
-            'sale_status'=>0,
-            'reproductive_status'=> Animal::reproductivity_checker($validated),
-            'health_status'=> Animal::health_checker($validated),
-            'father_id'=> 1,
-            
-        ]);
+            $animal= new Animal;
+            $animal->name= $validated['name'];
+            $animal->species = $validated['species'];
+            $animal->gender= $validated['gender'];
+            $animal->birthday= $date ;
+            $animal->weight= $validated['weight'];
+            $animal->mother_id= $validated['mothers_name'];
+            $animal->breed_id= $validated['breed_id'];
+            $animal->user_id= auth()->user()->id;
+            $animal->sale_status= 0;
+            $animal->reproductive_status=  Animal::reproductivity_checker($validated);
+            $animal->health_status=  Animal::health_checker($validated);
+            $animal->father_id= 1;
+            $animal->save();
+
+        if ( $validated['gender'] =='female'&& array_key_exists('pregnancy_status',$validated)) {
+            $pregnancy = new Pregnant;
+                $pregnancy->pregnancy_status=0;
+                $pregnancy->animal_id= $animal->id;
+                $pregnancy->save();
+    
+            Isues::confirm_pregnancy($pregnancy);
+        }
     }
 
     private function date_of_birth_calculator(array $validated)
