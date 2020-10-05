@@ -125,8 +125,14 @@ const app = new Vue({
                 this.cart_count -= 1
             }
         },
-        addCart() {
-            this.cart_count += 1
+        addCart(id, qty) {
+
+            if (qty > this.cart_count) {
+                this.cart_count += 1
+            } else{
+                this.snackbar = true
+                this.text = 'No more in stock'
+            }
         },
 
         get_items(model, update) {

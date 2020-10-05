@@ -109,7 +109,6 @@ $product_information = $prod->storage->plantation;
                         <tr>
                             <td class="pl-0">
                                 <div class="def-number-input number-input safari_only mb-0">
-
                                     <div class="row">
                                         <div class="col-md-4 mb-4 mb-md-0">
                                             <v-btn icon color="primary" @click="reduceCart({{ $prod->id }})" style="margin-top: -5px;">
@@ -120,7 +119,7 @@ $product_information = $prod->storage->plantation;
                                             <input class="quantity" min="1" max="{{ $prod->amount }}" name="quantity" :value="cart_count" type="number" style="width: 40px;">
                                         </div>
                                         <div class="col-md-4 mb-4 mb-md-0">
-                                            <v-btn text icon color="primary" @click="addCart({{ $prod->id }})" style="margin-top: -5px;">
+                                            <v-btn text icon color="primary" @click="addCart({{ $prod->id }}, {{ $prod->amount }})" style="margin-top: -5px;">
                                                 <v-icon>mdi-plus</v-icon>
                                             </v-btn>
                                         </div>
@@ -251,7 +250,7 @@ $product_information = $prod->storage->plantation;
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <button @click="save_items" class="btn btn-info" value="Submit">Submit</button>
+                    <button @click="save_item" class="btn btn-info" value="Submit">Submit</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                 </div>
                 <input type="hidden" id="reg_type" name="reg_type" value="farmer">

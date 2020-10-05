@@ -9,7 +9,7 @@ use App\User;
 use App\Animal;
 use App\Storage;
 use App\Sales;
-
+use App\Sms;
 
 class HomeController extends Controller
 {
@@ -30,6 +30,7 @@ class HomeController extends Controller
      */
     public function index(Isues $issue, Proffesional $proffesional,Supplier $supplier,Order $order,User $user, Storage $store,Sales $sales )
     {
+
 
         if (auth()->user()->hasRole('admin')) {
             // load all necesarry data
