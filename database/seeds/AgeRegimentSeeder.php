@@ -13,7 +13,7 @@ class AgeRegimentSeeder extends Seeder
     {
         DB::table('age_regiments')->insert([
             'category' =>'unknown',
-            'breed_id' =>0,
+            'breed_id' =>1,
             'age_limits' =>0,
             'suppliment' =>'unknown',
             'tips' =>0,

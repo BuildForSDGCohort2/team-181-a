@@ -16,7 +16,7 @@ class CreateAgeRegimentsTable extends Migration
         Schema::create('age_regiments', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('category');
+            $table->string('category');
             $table->unsignedBigInteger('breed_id');
             #when an animal or plantaion is between these ages it will be automatically suggested to the farmer to aply the suppliment
             $table->string('age_limits');

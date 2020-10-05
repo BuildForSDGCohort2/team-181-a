@@ -84,7 +84,7 @@
                       KSH {{array_sum(array_column($items->toArray(),'price'))}}
                     </td>
                     <td>
-                      <button class="btn btn-small btn-primary"> Dispatch </button>
+                      <a href="{{route('transit',$group)}}" class="btn btn-primary">Transit</a>
                     </td>
                   </tr> 
                 @empty
