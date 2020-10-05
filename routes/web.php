@@ -122,3 +122,12 @@ Route::get('on_sale/{id}/view','OrdersController@view_prod')->name('viewprod');
 
 
 Route::get('search_brood/{search}','BroodsController@search_brood')->name('search_brood');
+
+
+
+Route::get('/login/{social}','Auth\LoginController@socialLogin')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
+Route::get('/login/{social}/callback','Auth\LoginController@handleProviderCallback')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
+
+Route::get('login/instagram', 'Auth\LoginController@redirectToInstagramProvider')->name('instagram.login');
+
+Route::get('login/instagram/callback', 'Auth\LoginController@instagramProviderCallback')->name('instagram.login.callback');
