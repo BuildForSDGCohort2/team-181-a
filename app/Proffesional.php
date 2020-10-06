@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use DB;
+use App\Image;
 
 
 class Proffesional extends Model
@@ -28,6 +29,22 @@ class Proffesional extends Model
         $prof->exp=$validated['exp'];
         $prof->save();
     }
+    
+    public function upload_image(Proffessional $proffessional)
+    {
+        return $imge_url;
+
+    }
+
+    public function get_image($url)
+    {
+        # code... kama hakuna revert to defaut.. 
+        
+        return $image;
+
+    }
+    
+    
     public function pending_requests()
     {
         return DB::table('proffesionals')

@@ -186,7 +186,7 @@
 
       </div>
       <div class="modal-body">
-      <form action="{{route('profesionals_enrole')}}" method="POST">
+      <form action="{{route('profesionals_enrole')}}" method="POST" enctype="multipart/form-data">
         @csrf
           <div class="first-column" style='width:45%; float: left;'>
             <div class="form-group">

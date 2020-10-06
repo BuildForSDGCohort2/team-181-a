@@ -10,15 +10,17 @@
     "require": {
         "php": "^7.2.5",
         "doctrine/dbal": "^2.10",
+        "facebook/graph-sdk": "^5.7",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.1",
         "laravel-frontend-presets/material-dashboard": "^1.1",
         "laravel/framework": "^7.24",
         "laravel/socialite": "^5.0",
-        "socialiteproviders/instagram": "^3.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.2",
+        "league/flysystem-aws-s3-v3": "^1.0",
+        "socialiteproviders/instagram": "^3.0",
         "spatie/laravel-permission": "^3.16",
         "twilio/sdk": "^6.10"
     },
