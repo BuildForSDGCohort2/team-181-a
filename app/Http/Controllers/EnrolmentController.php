@@ -25,6 +25,9 @@ class EnrolmentController extends Controller
     public function suppliers_enrole(SuppliersEnrol $request , Supplier $sup )
     {   
         $validated = $request->validated();
+        // return ($validated['kra']);
+        // return $request;
+        
         $sup->new_enrolement($validated);
 
         return 'Sucess!' ;

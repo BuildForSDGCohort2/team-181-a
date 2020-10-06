@@ -24,8 +24,11 @@ class CustomerStore extends FormRequest
     public function rules()
     {
         return [
-            'name'=> ['string','required']
-            
+            'name'=> ['string','required'],
+            'location'=>['string','required'],
+            'phone_number'=>['required'],
+            'name'=>['required'],
+            'email'=>['required'],        
         ];
     }
 }

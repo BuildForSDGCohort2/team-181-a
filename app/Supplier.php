@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use App\Image;
 
 class Supplier extends Model
 {
@@ -26,6 +27,8 @@ class Supplier extends Model
         }        
         $sup->transport =(array_key_exists('transport',$validated) ? 'able' : 'unable') ;
         $sup->ratings = 0;
+        $path = $validated['kra']->store('kra','s3');
+        $sup->image_url = $path;
         $sup->save();
     }
     public function pending_suplier_requests()

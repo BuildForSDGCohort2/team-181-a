@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Animal_Fact_sheet;
 use App\Isues;
 use App\Pregnant;
+use App\Image;
+
 
 
 class Animal extends Model
@@ -153,11 +155,6 @@ class Animal extends Model
     public function put_up_for_sale($request)
     {        
         $animal  = $this->find($request->id);
-        // if (property_exists('call_vet', $request)) {
-            
-        // }else {
-
-        // }
         $animal->sale_status = 1;
         $animal->save();
 
@@ -167,6 +164,7 @@ class Animal extends Model
     {
         if ($data['animal']->sales !==null ) {
             #get the sales record
+            #add del & replace the image with the ew one that the user will so kindly provide
             $sale_record = $data['animal']->sales;
             $sale_record->amount = ($data['animal']->weight);
             $sale_record->price = $data['price'];
@@ -179,7 +177,17 @@ class Animal extends Model
                 'animal_id'=>$data['animal']->id,
             ]);
         }
+        if ($data['picture'] !== null) {
+            $path = $data['picture']->store('animals','s3');
+            $this->image_url = $path;
+            $this->save();
+        }
     }
+    public function view_picture()
+    {
+        return Image::get_image($this);
+    }
+
     private function health_checker(array $validated)
     {
         if (array_key_exists('health_status',$validated)) {
@@ -188,6 +196,7 @@ class Animal extends Model
             return 0;
         }
     }
+
     
     public function farmer(){
         return $this->belongsTo('App\User','user_id');

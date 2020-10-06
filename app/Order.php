@@ -41,9 +41,10 @@ class Order extends Model
     public function get_orders()
     {   
         if (auth()->user()->hasRole('admin')) {
-            return $this->all();           
+            return $this->orderBy('created_at','desc');           
         } else {
-            return $this->where('user_id','=',auth()->user()->id)
+            return $this->orderBy('created_at','desc')
+                        ->where('user_id','=',auth()->user()->id)
                         ->orWhere('seller_id','=',auth()->user()->id)
                         ->get();
         }

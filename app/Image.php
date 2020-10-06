@@ -1,19 +1,15 @@
 <?php
-
 namespace App;
 
+use  PictureStorage;
 use Illuminate\Database\Eloquent\Model;
 
 class Image extends Model
 {
-    protected $guarded = [];
 
-    public function upload()
+    public static function get_image($object )
     {
-        return $url;
-    }
-    public function get_image($url)
-    {
-        # code...
+        return  PictureStorage::disk('s3')->response($object->image_url); 
+
     }
 }

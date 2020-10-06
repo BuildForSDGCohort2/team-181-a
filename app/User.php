@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','location','last_login','location'
+        'name', 'email', 'password','location','last_login','location','phone_number'
     ];
 
     /**
@@ -41,7 +41,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
+    
     public static function  get_available($role,$location)
     {
         User::all()->filter(function($user) use ($location,$role) {return $user->hasRole($role) && $user->location=== $location; });
@@ -51,6 +51,17 @@ class User extends Authenticatable
     {
         return User::orderBy('last_login','desc');
 
+    }
+    public function my_profile()
+    {   $user = auth()->user();
+        if ($user->hasRole('vet') ||$user->hasRole('feo') ) {
+            return $user->proffesional;
+        } elseif($user->hasRole('farmer')) {
+            return $user->farmer;
+        }else{
+            return ;
+        }
+        
     }
 
     public function animal(){

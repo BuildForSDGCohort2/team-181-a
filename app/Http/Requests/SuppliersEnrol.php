@@ -35,6 +35,7 @@ class SuppliersEnrol extends FormRequest
             'hardware'=>[],
             'agrovet'=>[],
             'transport'=>[]
+            
         ];
     }
 }

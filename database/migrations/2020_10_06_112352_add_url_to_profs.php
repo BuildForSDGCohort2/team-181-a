@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddImageUrlOnAnimal extends Migration
+class AddUrlToProfs extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddImageUrlOnAnimal extends Migration
      */
     public function up()
     {
-        Schema::table('animals', function (Blueprint $table) {
-            $table->string('image_url')->nullable();
+        Schema::table('proffesionals', function (Blueprint $table) {
+            $table->string('image_url');
         });
     }
 
@@ -25,7 +25,7 @@ class AddImageUrlOnAnimal extends Migration
      */
     public function down()
     {
-        Schema::table('animals', function (Blueprint $table) {
+        Schema::table('proffesionals', function (Blueprint $table) {
             $table->dropColumn('image_url');
         });
     }

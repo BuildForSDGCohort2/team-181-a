@@ -27,22 +27,13 @@ class Proffesional extends Model
         $prof->ratings= 0;
         $prof->specialty = $validated['specialty'];
         $prof->exp=$validated['exp'];
+        $path = $validated['file']->store('cvs' , 's3');
+        $prof->image_url = $path;
         $prof->save();
+        echo($path);
     }
     
-    public function upload_image(Proffessional $proffessional)
-    {
-        return $imge_url;
-
-    }
-
-    public function get_image($url)
-    {
-        # code... kama hakuna revert to defaut.. 
-        
-        return $image;
-
-    }
+   
     
     
     public function pending_requests()
