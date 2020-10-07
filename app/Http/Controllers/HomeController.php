@@ -31,7 +31,6 @@ class HomeController extends Controller
     public function index(Isues $issue, Proffesional $proffesional,Supplier $supplier,Order $order,User $user, Storage $store,Sales $sales )
     {
         // return $notifications =  $proffesional->pending_requests();
-        $notifications  = $issue->get_unsolved_issues();
 
 
         if (auth()->user()->hasRole('admin')) {
@@ -43,14 +42,13 @@ class HomeController extends Controller
             return view('admin.dash')->with('suppliers',$suppliers)
                     ->with('orders',$orders)
                     ->with('latest_logins',$latest_logins)
-                    ->with('proffesionals',$proffesionals)
-                    ->with('notifications',$notifications);
+                    ->with('proffesionals',$proffesionals);
 
         }elseif (auth()->user()->hasRole('vet')||auth()->user()->hasRole('feo')||auth()->user()->hasRole('supplier')) {
             return redirect('orders');
         }elseif(auth()->user()->hasRole('farmer')){
             $issues = $issue->get_unsolved_issues();
-            return view('dashboard')->with('notifications',$notifications)->with('issues',$issues);
+            return view('dashboard')->with('issues',$issues);
         }else {
             return redirect('on_sale');
         }

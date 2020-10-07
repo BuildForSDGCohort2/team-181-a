@@ -294,9 +294,9 @@ const app = new Vue({
         },
     },
     mounted() {
-        this.get_items('get_animal', 'updateAnimalsList')
+        this.get_items('get_notifications', 'updateNotification')
     },
     computed: {
-        ...mapState(['errors', 'loading', 'animals', 'issues_show']),
+        ...mapState(['errors', 'loading', 'animals', 'issues_show', 'notifications']),
     },
 });

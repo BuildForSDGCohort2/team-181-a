@@ -111,6 +111,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('get_animal','AnimalsController@get_animal')->name('get_animal');
 
+	Route::get('get_notifications','NotificationsController@get_notifications')->name('get_notifications');
 
 });
 
