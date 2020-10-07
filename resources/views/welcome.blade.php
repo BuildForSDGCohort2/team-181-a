@@ -23,7 +23,7 @@
           <h3>Agricultural Services</h3>
           <hr style="height: 1px;background-color: white; border: none;">
           <i class="material-icons" style="font-size:42px;">biotech</i>
-          <a href="/">
+          <a href="/professionals">
             <button class="btn btn-outline" style="border: 1px solid white; color: white; white-space: normal; "><i class="fa fa-search" aria-hidden="true"></i> Hire A <span style="color: rgb(255, 179, 0)">proffessional</span> </button>
           </a>
           <p style="padding-top: 20%">
@@ -59,7 +59,7 @@
         <h3>Agricultural Supplies</h3>
         <hr style="height: 1px;background-color: white; border: none;">
         <i class="fa fa-truck" style="font-size:42px;" aria-hidden="true"></i>
-        <a href="{{ route('register') }}">
+        <a href="/suppliers">
           <button class="btn btn-outline" style="border: 1px solid white; color: white;white-space: normal; "> <i class="material-icons" >sync</i> Browse for <span style="color: rgb(243, 162, 12)">Suppliers</span> </button>         <p style="padding-top: 20%">
         </a>
 

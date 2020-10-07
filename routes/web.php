@@ -128,6 +128,8 @@ Route::get('on_sale/{id}/view','OrdersController@view_prod')->name('viewprod');
 
 Route::get('search_brood/{search}','BroodsController@search_brood')->name('search_brood');
 
+Route::get('professionals','BrowseController@professionals')->name('professionals');
+Route::get('suppliers','BrowseController@suppliers')->name('suppliers');
 
 
 Route::get('/login/{social}','Auth\LoginController@socialLogin')->where('social','twitter|facebook|linkedin|google|github|bitbucket');

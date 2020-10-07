@@ -35,8 +35,8 @@ Vue.use(ElementUI, { locale });
 // import myHeader from './components/include/Header'
 // import myApp from './components/app.vue'
 // import myHome from './components/register'
-// import mySupplier from './components/browse/supplier'
-// import myProfessional from './components/browse/professional'
+import mySupplier from './components/browse/supplier'
+import myProfessional from './components/browse/professional'
 
 
 // import myRegsupply from './components/register/supplier'
@@ -48,7 +48,6 @@ Vue.use(ElementUI, { locale });
 // import myPlantation from "./components/plantation";
 
 // import myBrood from "./components/brood";
-Vue.prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute('content');
 
 import moment from 'vue-moment'
 
@@ -60,8 +59,9 @@ const app = new Vue({
     store,
     vuetify,
     components: {
-        // myHeader, myApp,
-        // mySupplier, myHome, myProfessional,
+        // myHeader, myHome,myApp,
+        mySupplier,
+        myProfessional
         // myCharts, myAnimal, myPlantation, myRegsupply, myBrood
     },
 
