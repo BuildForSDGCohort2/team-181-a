@@ -166,7 +166,7 @@ $product_information = $prod->storage->plantation;
                     class="fa fa-shopping-basket pr-2"></i>Add to Basket</button>
         </div>
     </div>
-
+ 
         @guest()
 
     <div id="register" class="modal fade " role="dialog" style="margin-top: 10%; ">
