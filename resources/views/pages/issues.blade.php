@@ -137,8 +137,8 @@
         </div>
         <div class="modal-body">
             <ul class="list-group">
-                <li class="list-group-item"><b>Information:</b> <span style="margin-left: 30px">@{{ issues_show.information }}</span></li>
                 <li class="list-group-item"><b>Reason:</b> <span style="margin-left: 30px">@{{ issues_show.reason }}</span></li>
+                <li class="list-group-item"><b>Information:</b> <span style="margin-left: 30px">@{{ issues_show.information }}</span></li>
               </ul>
       </div>
       <div class="modal-footer">

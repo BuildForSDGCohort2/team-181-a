@@ -48,6 +48,7 @@ Vue.use(ElementUI, { locale });
 // import myPlantation from "./components/plantation";
 
 // import myBrood from "./components/brood";
+Vue.prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute('content');
 
 import moment from 'vue-moment'
 
@@ -82,8 +83,11 @@ const app = new Vue({
                 lable: 'Merino',
                 value: '2',
             }],
+        order: null,
         edit_form: {},
-        load_data: false
+        load_data: false,
+        show_busket: false,
+        userid: document.querySelector("meta[name='user-id']").getAttribute('content')
     },
     methods: {
         toggleActive(i) {
@@ -185,6 +189,20 @@ const app = new Vue({
                     window.location.reload()
                 });
         },
+        register_customer(model) {
+            var payload = {
+                model: model,
+                data: this.form
+            }
+            console.log(payload);
+
+            this.$store.dispatch('postItems', payload)
+                .then(response => {
+                    this.success('Created')
+                    eventBus.$emit("pushEvent", response)
+                    window.location.href = "/login";
+                });
+        },
         update_item(model) {
             var payload = {
                 model: model,
@@ -252,7 +270,7 @@ const app = new Vue({
                 });
 
         },
-        open_issue(id){
+        open_issue(id) {
             console.log(id);
 
             var payload = {
@@ -266,7 +284,15 @@ const app = new Vue({
                     // this.success('Updated')
                     // eventBus.$emit("pushEvent", response)
                 });
-        }
+        },
+        oder_info(order) {
+            console.log(order);
+            // return
+            this.order = order
+        },
+    },
+    mounted() {
+        this.get_items('get_animal', 'updateAnimalsList')
     },
     computed: {
         ...mapState(['errors', 'loading', 'animals', 'issues_show']),

@@ -334,6 +334,7 @@
                     @endforelse
                 </tbody>
               </table>
+              {{-- {{ $broods->links() }} --}}
         </div>
       </div>
 

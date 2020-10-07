@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Order;
 use App\Sms;
 use App\User;
+use Illuminate\Support\Facades\Log;
 
 class OrderObserver
 {
@@ -17,7 +18,10 @@ class OrderObserver
     public function created(Order $order)
     {
 
+        // Log::debug($order);
+/*
         $sms = new Sms;
+        $phone = '+254768187628';
         // $phone = '+254731090832';
         $message = 'Test sms';
         //    return $sms = $sms->send($message, $phone);
@@ -25,12 +29,12 @@ class OrderObserver
         $user = User::find($order->seller_id);
         if ($user) {
             $sms = new Sms;
-            $phone = $user->phone;
+            // $phone = $user->phone;
             if ($phone) {
-                $message = 'Dear' . $user->name . 'you have a new order';
+                $message = 'Dear ' . $user->name . ' you have a new order';
                 $sms = $sms->send($phone, $message);
             }
-        }
+        }*/
     }
 
     /**

@@ -187,7 +187,7 @@ $product_information = $prod->storage->plantation;
                         </button>
                         <hr>
 
-                    <form action="" method="POST">
+                    <form action="{{route('farmers_enrole')}}" method="POST">
                         @csrf
                         <div class="first-column" style='width:45%; float: left;margin-right:1%'>
                             <div class="form-group">
@@ -195,7 +195,8 @@ $product_information = $prod->storage->plantation;
                                 <input type="text" class="form-control" v-model='form.name' id="name" aria-describedby="name"
                                     placeholder="Enter Your Full names" required>
                                 <small id="type" class="form-text text-muted">As they appear on the id.</small>
-                            </div>
+                      <small class="has-text-danger" v-if="errors.name">@{{ errors.name[0] }}</small>
+                    </div>
 
 
                             <div class="form-group">
@@ -203,13 +204,15 @@ $product_information = $prod->storage->plantation;
                                 <input type="text" v-model='form.phone_number' class="form-control" id="phone_number"
                                     aria-describedby="phonenumber" placeholder="07XX-XXX-XXX" required>
                                 <small id="phonenumber" class="form-text text-muted">Enter Phone number</small>
-                            </div>
+                      <small class="has-text-danger" v-if="errors.phone_number">@{{ errors.phone_number[0] }}</small>
+                    </div>
                             <div class="form-group">
                                 <label for="location">Location</label>
                                 <input type="text" v-model='form.location' class="form-control" id="location"
                                     aria-describedby="loc" placeholder="eg. Nakuru.." required>
                                 <small id="loc" class="form-text text-muted">Enter Location</small>
-                            </div>
+                      <small class="has-text-danger" v-if="errors.location">@{{ errors.location[0] }}</small>
+                    </div>
                         </div>
 
 
@@ -219,7 +222,8 @@ $product_information = $prod->storage->plantation;
                                 <input type="email" v-model='form.email' class="form-control" id="email" aria-describedby="mail"
                                     placeholder="abc@xyz.com" required>
                                 <small id="mail" class="form-text text-muted">Enter Email</small>
-                            </div>
+                      <small class="has-text-danger" v-if="errors.email">@{{ errors.email[0] }}</small>
+                    </div>
 
 
                             <div class="form-group">
@@ -227,7 +231,8 @@ $product_information = $prod->storage->plantation;
                                 <input type="password" class="form-control" v-model='form.password' id="password"
                                     aria-describedby="password" placeholder="password" required>
                                 <small id="expirience" class="form-text text-muted">Password</small>
-                            </div>
+                      <small class="has-text-danger" v-if="errors.password">@{{ errors.password[0] }}</small>
+                    </div>
 
                             {{-- file uploader --}}
                             <div class="form-group">
@@ -235,7 +240,7 @@ $product_information = $prod->storage->plantation;
                                 <input type="password" class="form-control" v-model='form.conf_password' id="conf_password"
                                     aria-describedby="conf_password" placeholder="password" required>
                                 <small id="password" class="form-text text-muted"> Confirm Password</small>
-                            </div>
+                    </div>
 
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
@@ -247,7 +252,7 @@ $product_information = $prod->storage->plantation;
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <button @click="save_item" class="btn btn-info" value="Submit">Submit</button>
+                    <button @click="register_customer('/customer_enrole')" class="btn btn-info" value="Submit">Submit</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                 </div>
                 <input type="hidden" id="reg_type" name="reg_type" value="farmer">
