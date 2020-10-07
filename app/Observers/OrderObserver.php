@@ -19,7 +19,7 @@ class OrderObserver
     {
 
         // Log::debug($order);
-/*
+
         $sms = new Sms;
         $phone = '+254768187628';
         // $phone = '+254731090832';
@@ -34,7 +34,7 @@ class OrderObserver
                 $message = 'Dear ' . $user->name . ' you have a new order';
                 $sms = $sms->send($phone, $message);
             }
-        }*/
+        
     }
 
     /**
