@@ -38,11 +38,15 @@
             </p>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">{{ __('Mike John responded to your email') }}</a>
-            <a class="dropdown-item" href="#">{{ __('You have 5 new tasks') }}</a>
+            @foreach ($notifications as $notification)
+            <a class="dropdown-item" href="#">
+                {{ $notification->information }}
+            </a>
+            @endforeach
+            {{-- <a class="dropdown-item" href="#">{{ __('You have 5 new tasks') }}</a>
             <a class="dropdown-item" href="#">{{ __('You\'re now friend with Andrew') }}</a>
             <a class="dropdown-item" href="#">{{ __('Another Notification') }}</a>
-            <a class="dropdown-item" href="#">{{ __('Another One') }}</a>
+            <a class="dropdown-item" href="#">{{ __('Another One') }}</a> --}}
           </div>
         </li>
         {{-- shopping Basket.... --}}
