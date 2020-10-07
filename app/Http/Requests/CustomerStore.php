@@ -24,8 +24,12 @@ class CustomerStore extends FormRequest
     public function rules()
     {
         return [
-            'name'=> ['string','required']
-            
+            'name'=> ['string','required'],
+            'phone_number' => ['required', 'string', 'max:10'],
+            'email' => ['required', 'string', 'max:30','unique:App\Farmer,email'],
+            'location'=>['string','required'],
+            'password'=>['required'],
+            'conf_password'=>['required','same:password']
         ];
     }
 }

@@ -34,7 +34,8 @@ class OrderObserver
                 $message = 'Dear ' . $user->name . ' you have a new order';
                 $sms = $sms->send($phone, $message);
             }
-        
+        }
+
     }
 
     /**

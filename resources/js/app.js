@@ -84,6 +84,7 @@ const app = new Vue({
                 value: '2',
             }],
         order: null,
+        register_form: [],
         edit_form: {},
         load_data: false,
         form_dialog: false,
@@ -129,10 +130,15 @@ const app = new Vue({
                 this.cart_count -= 1
             }
         },
+        form_d() {
+            alert('test')
+            this.form_dialog = true
+        },
         addCart(id, qty) {
             console.log(id, qty);
-            this.form_dialog = false
+            // this.form_dialog = false
 
+            // this.cart_count += 1
             if (qty > this.cart_count) {
                 this.cart_count += 1
             } else {
@@ -194,13 +200,13 @@ const app = new Vue({
         register_customer(model) {
             var payload = {
                 model: model,
-                data: this.form
+                data: this.register_form
             }
             console.log(payload);
 
             this.$store.dispatch('postItems', payload)
                 .then(response => {
-                    this.success('Updated')
+                    this.success('Account Created')
                     eventBus.$emit("pushEvent", response)
                     window.location.href = "/login";
                 });
