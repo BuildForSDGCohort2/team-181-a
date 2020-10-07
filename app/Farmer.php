@@ -33,7 +33,7 @@ class Farmer extends Model
         } else {
             $size = $validated['size'];
         }
-        
+
         Farmer::create([
             'farm_size'=> $size,
             'location'=>$validated['location'],
@@ -55,7 +55,7 @@ class Farmer extends Model
                 $identifier='POLTR-01';
                 $reason = 'Please Register Your Poultry Broods';
             }
-            
+
 
             // move to a new model and will be called after successful email verification
             Isues::create([
@@ -66,7 +66,7 @@ class Farmer extends Model
                 'status'=>0,
             ]);
         }
-        
+
     }
     public function user()
     {

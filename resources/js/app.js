@@ -35,8 +35,8 @@ Vue.use(ElementUI, { locale });
 // import myHeader from './components/include/Header'
 // import myApp from './components/app.vue'
 // import myHome from './components/register'
-// import mySupplier from './components/browse/supplier'
-// import myProfessional from './components/browse/professional'
+import mySupplier from './components/browse/supplier'
+import myProfessional from './components/browse/professional'
 
 
 // import myRegsupply from './components/register/supplier'
@@ -59,8 +59,9 @@ const app = new Vue({
     store,
     vuetify,
     components: {
-        // myHeader, myApp,
-        // mySupplier, myHome, myProfessional,
+        // myHeader, myHome,myApp,
+        mySupplier,
+        myProfessional
         // myCharts, myAnimal, myPlantation, myRegsupply, myBrood
     },
 
@@ -82,8 +83,13 @@ const app = new Vue({
                 lable: 'Merino',
                 value: '2',
             }],
+        order: null,
+        register_form: [],
         edit_form: {},
-        load_data: false
+        load_data: false,
+        form_dialog: false,
+        show_busket: false,
+        userid: document.querySelector("meta[name='user-id']").getAttribute('content')
     },
     methods: {
         toggleActive(i) {
@@ -117,7 +123,6 @@ const app = new Vue({
                     // this.cart_count += 1
                     // eventBus.$emit("broodEvent")
                 });
-
         },
 
         reduceCart() {
@@ -125,8 +130,15 @@ const app = new Vue({
                 this.cart_count -= 1
             }
         },
+        form_d() {
+            alert('test')
+            this.form_dialog = true
+        },
         addCart(id, qty) {
+            console.log(id, qty);
+            // this.form_dialog = false
 
+            // this.cart_count += 1
             if (qty > this.cart_count) {
                 this.cart_count += 1
             } else {
@@ -183,6 +195,20 @@ const app = new Vue({
                     this.success('Created')
                     eventBus.$emit("pushEvent", response)
                     window.location.reload()
+                });
+        },
+        register_customer(model) {
+            var payload = {
+                model: model,
+                data: this.register_form
+            }
+            console.log(payload);
+
+            this.$store.dispatch('postItems', payload)
+                .then(response => {
+                    this.success('Account Created')
+                    eventBus.$emit("pushEvent", response)
+                    window.location.href = "/login";
                 });
         },
         update_item(model) {
@@ -252,7 +278,7 @@ const app = new Vue({
                 });
 
         },
-        open_issue(id){
+        open_issue(id) {
             console.log(id);
 
             var payload = {
@@ -266,9 +292,17 @@ const app = new Vue({
                     // this.success('Updated')
                     // eventBus.$emit("pushEvent", response)
                 });
-        }
+        },
+        oder_info(order) {
+            console.log(order);
+            // return
+            this.order = order
+        },
+    },
+    mounted() {
+        this.get_items('get_notifications', 'updateNotification')
     },
     computed: {
-        ...mapState(['errors', 'loading', 'animals', 'issues_show']),
+        ...mapState(['errors', 'loading', 'animals', 'issues_show', 'notifications']),
     },
 });

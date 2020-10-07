@@ -22,24 +22,17 @@
           </div>
           {{--                Add Animal modal                          --}}
           <div id="animal_r_modal" class="modal fade " role="dialog">
-<<<<<<< HEAD
             <div class="modal-dialog">
-=======
-            <div class="modal-dialog">
->>>>>>> 019e3231f890891122002a44776c7dd98e10a121
               <!-- Modal content-->
               <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Register Animal</h4>
                 </div>
                 <div class="modal-body">
-<<<<<<< HEAD
-=======
 
                 <form action="{{route('animal.store')}}" method="POST">
                 {{-- <form id="add_animal">> --}}
                   @csrf
->>>>>>> 019e3231f890891122002a44776c7dd98e10a121
                     <div class="first-column" style='width:45%; float: left;'>
                         <div class="form-group">
                             <label for="name">Name Of Animal</label>
@@ -395,7 +388,7 @@
                                   </button>
                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                   <a class="dropdown-item" href="#" data-toggle="modal" data-target="#sell_animal" @click="open_edit({{ $animal }})">Sell</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet">Summon Vet</a>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet" @click="save_item('summon_vet')">Summon Vet</a>
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#death">Dead / <span class="text-success">Slaughter</span></a>
                                   </div>
                                 </div>
@@ -571,6 +564,7 @@
                     @endforelse
                 </tbody>
               </table>
+              {{ $animals->links() }}
             </div>
           </div>
         </div>
