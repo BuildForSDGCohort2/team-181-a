@@ -44,10 +44,9 @@ class HomeController extends Controller
                     ->with('proffesionals',$proffesionals);
 
         }elseif (auth()->user()->hasRole('vet')||auth()->user()->hasRole('feo')||auth()->user()->hasRole('supplier')) {
-            return view('prof.dash')->with('issues',$issues);
-
+            return redirect('orders');
         }elseif(auth()->user()->hasRole('farmer')){
-            // $issues = $issue->get_unsolved_issues();
+            $issues = $issue->get_unsolved_issues();
             return view('dashboard')->with('issues',$issues);
         }else {
             return redirect('on_sale');
