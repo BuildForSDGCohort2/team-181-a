@@ -213,7 +213,7 @@
                               @csrf
 
                                 <div class="first-column" style='width:45%; float: left;'>
-                                  <div class="form-group">
+                                  <div class="form-group" v-if="!form.sell_all">
                                     <label for="birds_for_sell">Number of Birds</label>
                                   <input type="number" class="form-control" v-model='form.birds_for_sell'id="birds_for_sell" aria-describedby="birds_for_sell" placeholder="{{$brood->number}} is the max" min='1' max="{{$brood->number}}">
                                     <small id="birds_for_sell" class="form-text text-muted">{{$brood->number}} Birds Remaining.</small>
@@ -340,6 +340,8 @@
 
     </div>
   </div>
+</div>
+</div>
 </div>
 
 <!-- Modal -->
