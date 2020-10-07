@@ -86,6 +86,7 @@ const app = new Vue({
         order: null,
         edit_form: {},
         load_data: false,
+        form_dialog: false,
         show_busket: false,
         userid: document.querySelector("meta[name='user-id']").getAttribute('content')
     },
@@ -121,7 +122,6 @@ const app = new Vue({
                     // this.cart_count += 1
                     // eventBus.$emit("broodEvent")
                 });
-
         },
 
         reduceCart() {
@@ -130,6 +130,8 @@ const app = new Vue({
             }
         },
         addCart(id, qty) {
+            console.log(id, qty);
+            this.form_dialog = false
 
             if (qty > this.cart_count) {
                 this.cart_count += 1
@@ -198,7 +200,7 @@ const app = new Vue({
 
             this.$store.dispatch('postItems', payload)
                 .then(response => {
-                    this.success('Created')
+                    this.success('Updated')
                     eventBus.$emit("pushEvent", response)
                     window.location.href = "/login";
                 });

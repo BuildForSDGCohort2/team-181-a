@@ -27,6 +27,9 @@
             <a class="nav-link active" style="background-color: blueviolet" href="#">Orders</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="{{route('dispatch')}}">Dispatch</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link "  href="{{route('issues')}}">User Requests</a>
           </li>
         @else
@@ -160,7 +163,6 @@
       </div>
     </div>
   </div>
-</div>
 <div id="professional_modal" class="modal fade" role="dialog" style="margin-top: 10%">
     <div class="modal-dialog">
       <!-- Modal content-->
@@ -194,11 +196,11 @@
                 <li class="list-group-item"><b>Customer name:</b> <span style="float: right">@{{ order.user.name }}</span></li>
                 <li class="list-group-item"><b>location:</b> <span style="float: right">@{{ order.user.location }}</span></li>
                 <li class="list-group-item"><b>email:</b> <span style="float: right">@{{ order.user.email }}</span></li>
-
-
               </ul>
       </div>
 
     </div>
-  </div>
+</div>
+</div>
+</div>
 @endsection

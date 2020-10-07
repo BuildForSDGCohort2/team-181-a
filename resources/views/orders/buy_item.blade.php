@@ -157,7 +157,7 @@ $product_information = $prod->storage->plantation;
             </div>
             @endif
             @if (auth()->user() === null)
-            <button type="button" class="btn btn-primary btn-md mr-1 mb-2" data-toggle="modal"
+            <button type="button" class="btn btn-primary btn-md mr-1 mb-2" data-toggle="modal" @click="form_dialog = true"
                 data-target="#register">Proced to Checkout</button>
             @else
             <button type="button" class="btn btn-primary btn-md mr-1 mb-2" @click="checkout({{ $prod->id }})"><i></i> Proced to Checkout</button>
@@ -187,7 +187,7 @@ $product_information = $prod->storage->plantation;
                         </button>
                         <hr>
 
-                    <form action="{{route('farmers_enrole')}}" method="POST">
+                    <form action="{{route('farmers_enrole')}}" method="POST" v-if="form_dialog">
                         @csrf
                         <div class="first-column" style='width:45%; float: left;margin-right:1%'>
                             <div class="form-group">

@@ -29,7 +29,8 @@ class HomeController extends Controller
      * @return \Illuminate\View\View
      */
     public function index(Isues $issue, Proffesional $proffesional,Supplier $supplier,Order $order,User $user, Storage $store,Sales $sales )
-    {   
+    {
+        $issues = $issue->get_unsolved_issues();
 
         if (auth()->user()->hasRole('admin')) {
             // load all necesarry data
@@ -43,15 +44,14 @@ class HomeController extends Controller
                     ->with('proffesionals',$proffesionals);
 
         }elseif (auth()->user()->hasRole('vet')||auth()->user()->hasRole('feo')||auth()->user()->hasRole('supplier')) {
-            return view('prof.dash');
-        
+            return view('prof.dash')->with('issues',$issues);
+
         }elseif(auth()->user()->hasRole('farmer')){
-            $issues = $issue->get_unsolved_issues();
+            // $issues = $issue->get_unsolved_issues();
             return view('dashboard')->with('issues',$issues);
-        
         }else {
             return redirect('on_sale');
-        }   
-        
+        }
+
     }
 }
