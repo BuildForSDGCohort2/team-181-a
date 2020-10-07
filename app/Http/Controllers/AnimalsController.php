@@ -16,7 +16,7 @@ class AnimalsController extends Controller
      */
     public function index(Request $request , Animal $animal)
     {
-        $animals = $animal->paginate(3);
+        $animals = $animal->paginate();
         // return $animals;
         return view('animals.index')->with('animals',$animals);
     }

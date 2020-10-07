@@ -119,6 +119,8 @@
                 @endforelse
                 </tbody>
               </table>
+
+              {{ $issues->links() }}
             </div>
           </div>
         </div>
