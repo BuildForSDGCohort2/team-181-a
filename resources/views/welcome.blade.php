@@ -71,8 +71,6 @@
 
     </div>
   </div>
-
-
 {{-- supplier --}}
 <div id="supplier_modal" class="modal fade" role="dialog" style="margin-top: 10%">
   <div class="modal-dialog">
