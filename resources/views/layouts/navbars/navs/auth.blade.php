@@ -32,14 +32,14 @@
         <li class="nav-item dropdown">
           <a class="nav-link" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="material-icons">notifications</i>
-            <span class="notification" v-if="notifications.data">@{{ notifications.data.length }}</span>
+            <span class="notification" v-if="notifications.data" v-html="notifications.data.length"></span>
             <p class="d-lg-none d-md-block">
               {{ __('Some Actions') }}
             </p>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" href="#" v-for="notification in notifications.data">
-                @{{ notification.information }}
+                <div v-html="notification.information"></div>
             </a>
             {{-- <a class="dropdown-item" href="#">{{ __('You have 5 new tasks') }}</a>
             <a class="dropdown-item" href="#">{{ __('You\'re now friend with Andrew') }}</a>
@@ -51,7 +51,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-if="cart_count  > 0">
             <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-              <span class="notification">@{{ cart_count }}</span>
+              <span class="notification" v-html="cart_count"></span>
             <p class="d-lg-none d-md-block">
               {{ __('Some Actions') }}
             </p>
@@ -78,8 +78,8 @@
         </li>
       </ul>
     </div>
-  <v-snackbar v-model="snackbar">
-    @{{ text }}
+  <v-snackbar v-model="snackbar" v-html="text">
+    {{-- @{{ text }} --}}
     <template v-slot:action="{ attrs }">
         <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
             Close

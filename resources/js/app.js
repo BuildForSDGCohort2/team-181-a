@@ -67,6 +67,7 @@ const app = new Vue({
 
     data: {
         cart_count: 0,
+        loading: true,
         snackbar: false,
         text: '',
         form: {
@@ -300,9 +301,13 @@ const app = new Vue({
         },
     },
     mounted() {
+
+        setTimeout(() => {
+            this.loading = false
+        }, 1500);
         this.get_items('get_notifications', 'updateNotification')
     },
     computed: {
-        ...mapState(['errors', 'loading', 'animals', 'issues_show', 'notifications']),
+        ...mapState(['errors', 'animals', 'issues_show', 'notifications']),
     },
 });
