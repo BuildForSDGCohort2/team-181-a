@@ -17,12 +17,11 @@ class CreateAgeRegimentsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('category');
-            $table->unsignedBigInteger('breed_id');
+            $table->string('species');
             #when an animal or plantaion is between these ages it will be automatically suggested to the farmer to aply the suppliment
             $table->string('age_limits');
             $table->string('suppliment');
             $table->text('tips');
-            $table->foreign('breed_id')->references('id')->on('animal_fact_sheets');
         });
     }
 

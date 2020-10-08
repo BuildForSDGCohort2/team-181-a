@@ -210,7 +210,11 @@ class Animal extends Model
     }
     public function pregnant()
     {
-        return $this->hasMany('App\Pregnant');
+        return $this->hasMany('App\Pregnant','animal_id');
+    }
+    public function sick()
+    {
+        return $this->hasMany('App\Animal_Ailments','animal_id');
     }
 
 

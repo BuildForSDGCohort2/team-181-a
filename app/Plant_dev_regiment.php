@@ -12,8 +12,8 @@ class Plant_dev_regiment extends Model
     public static function check()
     {
         foreach (Plant_dev_regiment::all() as $regiment) {
-            $plant_id = $regiment->plant_id;
-            $plantations = Plantation::where('type_id',$plant_id)->where('status',0)->get();
+            $plant_id = $regiment->species;
+            $plantations = Plantation::where('species',$species)->where('status',0)->get();
 
             foreach ($plantations as $plantation) {               
                 #The age is got in days since soome regiments will be given even to plantation

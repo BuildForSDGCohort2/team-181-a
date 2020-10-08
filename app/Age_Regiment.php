@@ -14,14 +14,14 @@ class Age_Regiment extends Model
     public static function check()
     {
         foreach (Age_Regiment::all() as $regiment) {
-            $breed_id = $regiment->breed_id;
+            $species = $regiment->species;
             $animals = DB::table('animals')
-                        ->where('breed_id','=',$breed_id)
+                        ->where('species','=',$species)
                         ->where('sale_status','=',0)->get();
             foreach ($animals as $animal) {               
                 #The age is got in days since soome regiments will be given even to calf
                 $age_in_days = abs(now()->diff(date_create($animal->birthday))->format('%R%a'));
-                $lower_age_limit = $regiment->age_limits - 100;
+                $lower_age_limit = $regiment->age_limits - 100;#this is for testing purpoes
                 $upper_age_limit =$regiment->age_limits + 1000000;
                 if (($lower_age_limit <= $age_in_days) && ($age_in_days <= $upper_age_limit)) {
 

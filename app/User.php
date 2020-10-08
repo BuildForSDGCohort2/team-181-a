@@ -94,5 +94,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Pregnant');
     }
+    public function patients()
+    {
+     return $this->hasMany('App\Animal_Ailments','vet_id');
+    }
 
 }

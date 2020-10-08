@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a951e823957d39421a900b6e3271f9ba",
+    "content-hash": "0b7227040260154621a0af55034d249c",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -800,7 +800,6 @@
                 "validator"
             ],
             "time": "2020-09-26T15:48:38+00:00"
-<<<<<<< Updated upstream
         },
         {
             "name": "facebook/graph-sdk",
@@ -859,8 +858,6 @@
                 "sdk"
             ],
             "time": "2018-12-11T22:56:31+00:00"
-=======
->>>>>>> Stashed changes
         },
         {
             "name": "fideloper/proxy",
@@ -988,6 +985,56 @@
                 }
             ],
             "time": "2020-09-07T11:48:52+00:00"
+        },
+        {
+            "name": "fzaninotto/faker",
+            "version": "v1.9.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fzaninotto/Faker.git",
+                "reference": "fc10d778e4b84d5bd315dad194661e091d307c6f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/fc10d778e4b84d5bd315dad194661e091d307c6f",
+                "reference": "fc10d778e4b84d5bd315dad194661e091d307c6f",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3.3 || ^7.0"
+            },
+            "require-dev": {
+                "ext-intl": "*",
+                "phpunit/phpunit": "^4.8.35 || ^5.7",
+                "squizlabs/php_codesniffer": "^2.9.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.9-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Faker\\": "src/Faker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Zaninotto"
+                }
+            ],
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "data",
+                "faker",
+                "fixtures"
+            ],
+            "time": "2019-12-12T13:22:17+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -1391,7 +1438,6 @@
                 "laravel"
             ],
             "time": "2020-09-17T14:23:26+00:00"
-<<<<<<< Updated upstream
         },
         {
             "name": "laravel/socialite",
@@ -1457,8 +1503,6 @@
                 "oauth"
             ],
             "time": "2020-09-12T14:40:16+00:00"
-=======
->>>>>>> Stashed changes
         },
         {
             "name": "laravel/tinker",
@@ -1862,7 +1906,6 @@
                 }
             ],
             "time": "2020-09-21T18:10:53+00:00"
-<<<<<<< Updated upstream
         },
         {
             "name": "league/oauth1-client",
@@ -1934,8 +1977,6 @@
                 "twitter"
             ],
             "time": "2020-09-28T09:39:08+00:00"
-=======
->>>>>>> Stashed changes
         },
         {
             "name": "monolog/monolog",
@@ -2087,7 +2128,6 @@
         },
         {
             "name": "nesbot/carbon",
-<<<<<<< Updated upstream
             "version": "2.41.0",
             "source": {
                 "type": "git",
@@ -2098,18 +2138,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/8690b13ad4da6d54d692afea15aab30b36fee52e",
                 "reference": "8690b13ad4da6d54d692afea15aab30b36fee52e",
-=======
-            "version": "2.40.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "d9a76d8b7eb0f97cf3a82529393245212f40ba3b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/d9a76d8b7eb0f97cf3a82529393245212f40ba3b",
-                "reference": "d9a76d8b7eb0f97cf3a82529393245212f40ba3b",
->>>>>>> Stashed changes
                 "shasum": ""
             },
             "require": {
@@ -2185,11 +2213,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< Updated upstream
             "time": "2020-10-04T09:11:05+00:00"
-=======
-            "time": "2020-09-23T08:17:37+00:00"
->>>>>>> Stashed changes
         },
         {
             "name": "nikic/php-parser",
@@ -5980,56 +6004,6 @@
                 "whoops"
             ],
             "time": "2020-06-14T09:00:00+00:00"
-        },
-        {
-            "name": "fzaninotto/faker",
-            "version": "v1.9.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "fc10d778e4b84d5bd315dad194661e091d307c6f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/fc10d778e4b84d5bd315dad194661e091d307c6f",
-                "reference": "fc10d778e4b84d5bd315dad194661e091d307c6f",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.3.3 || ^7.0"
-            },
-            "require-dev": {
-                "ext-intl": "*",
-                "phpunit/phpunit": "^4.8.35 || ^5.7",
-                "squizlabs/php_codesniffer": "^2.9.2"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Faker\\": "src/Faker/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "François Zaninotto"
-                }
-            ],
-            "description": "Faker is a PHP library that generates fake data for you.",
-            "keywords": [
-                "data",
-                "faker",
-                "fixtures"
-            ],
-            "time": "2019-12-12T13:22:17+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
