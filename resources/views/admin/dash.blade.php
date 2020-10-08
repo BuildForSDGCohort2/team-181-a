@@ -80,8 +80,8 @@
       <div class="row">
         <div class="col-md-4">
           {{-- this chart eill display :
-            Daily dairy sales for the farmer , 
-            Monlthly Births for the vet, 
+            Daily dairy sales for the farmer ,
+            Monlthly Births for the vet,
             Suggest something for the Field extention oficer,
             And maybe the daily orders from farmers a supplier has recieved
               --}}
@@ -180,16 +180,16 @@
               <div class="tab-content">
                 <div class="tab-pane active" id="vets">
                   <table class="table">
-                    <tbody>                        
+                    <tbody>
                         @forelse ($proffesionals as $proffesional)
-                        
+
                             @if ($proffesional->specialty == 'vet')
                             <tr>
-                              <td>      
+                              <td>
                                 {{'Dr :'}}
                               </td>
-                                <td>        
-                                  {{$proffesional->name.'  From '.$proffesional->location}} 
+                                <td>
+                                  {{$proffesional->name.'  From '.$proffesional->location}}
                                 </td>
                                 <td class="td-actions text-right">
                                   <button type="button" rel="tooltip" title="Expirience" class="btn btn-primary btn-link btn-sm">
@@ -209,23 +209,23 @@
                                 @continue
                               @endif
                             @empty
-                              {{__('No reqyests')}}                     
+                              {{__('No requests')}}
                           @endforelse
                     </tbody>
                   </table>
                 </div>
                 <div class="tab-pane" id="feo">
                   <table class="table">
-                    <tbody>                        
+                    <tbody>
                         @forelse ($proffesionals as $proffesional)
-                        
+
                             @if ($proffesional->specialty == 'feo')
                             <tr>
-                              <td>      
+                              <td>
                                 {{'Officer :'}}
                               </td>
-                                <td>        
-                                  {{$proffesional->name.'  From '.$proffesional->location}} 
+                                <td>
+                                  {{$proffesional->name.'  From '.$proffesional->location}}
                                 </td>
                                 <td class="td-actions text-right">
                                   <button type="button" rel="tooltip" title="Expirience" class="btn btn-primary btn-link btn-sm">
@@ -245,21 +245,21 @@
                                 @continue
                               @endif
                             @empty
-                              {{__('No reqyests')}}                     
+                              {{__('No requests')}}
                           @endforelse
                     </tbody>
                   </table>
                 </div>
                 <div class="tab-pane" id="supplier">
                   <table class="table">
-                    <tbody>                        
+                    <tbody>
                         @forelse ($suppliers as $supplier)
                             <tr>
-                              <td>      
+                              <td>
                                 {{$supplier->id}}
                               </td>
-                                <td>        
-                                  {{$supplier->name.'  From '.$supplier->location}} 
+                                <td>
+                                  {{$supplier->name.'  From '.$supplier->location}}
                                 </td>
                                 <td class="td-actions text-right">
                                   <button type="button" rel="tooltip" title="Expirience" class="btn btn-primary btn-link btn-sm">
@@ -272,7 +272,7 @@
                             </tr>
 
                             @empty
-                              {{__('No reqyests')}}                     
+                              {{__('No requests')}}
                           @endforelse
                     </tbody>
                   </table>
@@ -326,9 +326,9 @@
                     </thead>
                     <tbody>
                       @forelse ($latest_logins as $user)
-                      
+
                       @if ($user->hasRole('vet'))
-                          
+
                       <tr>
                         <td>{{$user->id}}</td>
                         <td>{{ucfirst($user->name)}}</td>
@@ -341,14 +341,14 @@
                     </tr>
 
                       @endif
-  
+
                       @empty
                       <tr>
                         <td>--</td>
                         <td>No</td>
                         <td>Priveous</td>
                         <td>logins</td>
-                      </tr>                          
+                      </tr>
                       @endforelse
                     </tbody>
                   </table>
@@ -363,9 +363,9 @@
                     </thead>
                     <tbody>
                       @forelse ($latest_logins as $user)
-                      
+
                       @if ($user->hasRole('feo'))
-                          
+
                       <tr>
                         <td>{{$user->id}}</td>
                         <td>{{ucfirst($user->name)}}</td>
@@ -378,14 +378,14 @@
                     </tr>
 
                       @endif
-  
+
                       @empty
                       <tr>
                         <td>--</td>
                         <td>No</td>
                         <td>Priveous</td>
                         <td>logins</td>
-                      </tr>                          
+                      </tr>
                       @endforelse
                     </tbody>
                   </table>
@@ -400,9 +400,9 @@
                     </thead>
                     <tbody>
                       @forelse ($latest_logins as $user)
-                      
+
                       @if ($user->hasRole('farmer'))
-                          
+
                       <tr>
                           <td>{{$user->id}}</td>
                           <td>{{ucfirst($user->name)}}</td>
@@ -415,20 +415,20 @@
                       </tr>
 
                       @endif
-  
+
                       @empty
                       <tr>
                         <td>--</td>
                         <td>No</td>
                         <td>Priveous</td>
                         <td>logins</td>
-                      </tr>                          
+                      </tr>
                       @endforelse
                     </tbody>
                   </table>
                 </div>
               </div>
-            </div>          
+            </div>
           </div>
         </div>
       </div>
