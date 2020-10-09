@@ -67,4 +67,7 @@ export default {
     updateIssue(state, payload) {
         state.issues_show = payload
     },
+    updateNotification(state, payload) {
+        state.notifications = payload
+    },
 }

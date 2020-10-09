@@ -19,6 +19,9 @@
             <a class="nav-link" href="{{route('orders')}}">Orders</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="{{route('dispatch')}}">Dispatch</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link active" style="background-color: blueviolet" href="#">User Requests</a>
           </li>
         </ul>
@@ -119,6 +122,8 @@
                 @endforelse
                 </tbody>
               </table>
+
+              {{ $issues->links() }}
             </div>
           </div>
         </div>
@@ -137,12 +142,12 @@
         </div>
         <div class="modal-body">
             <ul class="list-group">
-                <li class="list-group-item"><b>Information:</b> <span style="margin-left: 30px">@{{ issues_show.information }}</span></li>
                 <li class="list-group-item"><b>Reason:</b> <span style="margin-left: 30px">@{{ issues_show.reason }}</span></li>
+                <li class="list-group-item"><b>Information:</b> <span style="margin-left: 30px">@{{ issues_show.information }}</span></li>
               </ul>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-outline-info">Mark as read</button>
+        <button type="button" class="btn btn-sm btn-outline-info" @click="save_item('mark_as_read')">Mark as read</button>
       </div>
 
     </div>

@@ -388,7 +388,7 @@
                                   </button>
                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                   <a class="dropdown-item" href="#" data-toggle="modal" data-target="#sell_animal" @click="open_edit({{ $animal }})">Sell</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet">Summon Vet</a>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet" @click="save_item('summon_vet')">Summon Vet</a>
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#death">Dead / <span class="text-success">Slaughter</span></a>
                                   </div>
                                 </div>
@@ -564,6 +564,7 @@
                     @endforelse
                 </tbody>
               </table>
+              {{ $animals->links() }}
             </div>
           </div>
         </div>

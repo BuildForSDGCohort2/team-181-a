@@ -43,6 +43,17 @@
                   </div>
                 </div>
                 <div class="row">
+                  <label class="col-sm-2 col-form-label">{{ __('Phone Number') }}</label>
+                  <div class="col-sm-7">
+                    <div class="form-group{{ $errors->has('phone_number') ? ' has-danger' : '' }}">
+                      <input class="form-control{{ $errors->has('phone_number') ? ' is-invalid' : '' }}" name="phone_number" id="input-name" type="text" placeholder="{{ __('Phone number') }}" value="{{ old('phone_number') }}" required="true" aria-required="true"/>
+                      @if ($errors->has('phone_number'))
+                        <span id="name-error" class="error text-danger" for="input-name">{{ $errors->first('phone_number') }}</span>
+                      @endif
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
                   <label class="col-sm-2 col-form-label" for="input-password">{{ __(' Password') }}</label>
                   <div class="col-sm-7">
                     <div class="form-group{{ $errors->has('password') ? ' has-danger' : '' }}">
@@ -89,9 +100,9 @@
                         <option value=""> Select location</option>
                         <option value="Admin"> Admin</option>
                        @foreach ($locations as $location)
-                       <option value="{{ $location}}">{{$location}}</option> 
-                       @endforeach 
-                    </select>               
+                       <option value="{{ $location}}">{{$location}}</option>
+                       @endforeach
+                    </select>
                   </div>
                   </div>
                 </div>
@@ -101,8 +112,8 @@
                     </div>
                   </div>
               </div>
-             
-              
+
+
             </div>
           </form>
         </div>

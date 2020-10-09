@@ -25,10 +25,11 @@ class CustomerStore extends FormRequest
     {
         return [
             'name'=> ['string','required'],
+            'phone_number' => ['required', 'string', 'max:10'],
+            'email' => ['required', 'string', 'max:30','unique:App\Farmer,email'],
             'location'=>['string','required'],
-            'phone_number'=>['required'],
-            'name'=>['required'],
-            'email'=>['required'],        
+            'password'=>['required'],
+            'conf_password'=>['required','same:password']
         ];
     }
 }

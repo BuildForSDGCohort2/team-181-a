@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 class Customer extends Model
 {
-    public function new_enrolement($re)
+    public function new_enrolement($validated)
     {
         $user = User::create([
             'name' => $validated['name'],

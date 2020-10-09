@@ -18,10 +18,10 @@ class PlantsController extends Controller
      */
     public function index( Plantation $plantation)
     {
-        
+
             $plantations = auth()->user()->plantations->filter(function($plantation){ return $plantation->status < 2 ;});
             return view('plants.index')->with('plantations',$plantations);
-        
+
     }
 
     /**
@@ -42,7 +42,7 @@ class PlantsController extends Controller
      */
     public function store(PlantationRequest $request,Plantation $plantation)
     {
-       
+
         $validated = $request->validated();
         $plantation->new_plantation($validated);
         return redirect('plant')->with('success','Plant Records recorded Succesfully');

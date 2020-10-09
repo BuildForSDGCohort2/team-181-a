@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Customer;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProfEnrols;
 use App\Http\Requests\SuppliersEnrol;
@@ -12,7 +13,7 @@ use  App\Mail\RejectMail;
 use App\Proffesional;
 use App\Supplier;
 use App\Farmer;
-
+use App\Http\Requests\CustomerStore;
 
 class EnrolmentController extends Controller
 {
@@ -26,7 +27,7 @@ class EnrolmentController extends Controller
 
     }
     public function suppliers_enrole(SuppliersEnrol $request , Supplier $sup )
-    {   
+    {
         $validated = $request->validated();
         // return ($validated['kra']);
         // return $request;
@@ -37,18 +38,17 @@ class EnrolmentController extends Controller
 
     }
     public function farmers_enrole(FarmersRequest $request ,Farmer $farmer )
-    {   
+    {
         $validated = $request->validated();
         $farmer->new_enrolement($validated);
         return redirect('login')->with('info','Enter You login Details');
-
     }
-    public function customer_enrole(FarmersRequest $request ,Customer $customer )
-    {   
+    public function customer_enrole(CustomerStore $request ,Customer $customer )
+    {
+        // return $request->all();
         $validated = $request->validated();
         $customer->new_enrolement($validated);
-        return 'Sucess!' ;
-
+        return 'Sucess!';
     }
     public function confirmation($request,Proffesional $proffesional)
     {
@@ -60,4 +60,3 @@ class EnrolmentController extends Controller
     }
     
 }
- 

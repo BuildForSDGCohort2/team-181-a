@@ -11,13 +11,15 @@
   </div>
   <div class="sidebar-wrapper">
     <ul class="nav">
-      <li class="nav-item{{ $activePage == 'dashboard' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('home') }}">
-          <i class="material-icons">dashboard</i>
-            <p>{{ __('Dashboard') }}</p>
-        </a>
-      </li>
-      <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
+        @if (!auth()->user()->hasRole('vet')&&!auth()->user()->hasRole('feo')&&!auth()->user()->hasRole('supplier'))
+        <li class="nav-item{{ $activePage == 'dashboard' ? ' active' : '' }}">
+            <a class="nav-link" href="{{ route('home') }}">
+            <i class="material-icons">dashboard</i>
+                <p>{{ __('Dashboard') }}</p>
+            </a>
+        </li>
+        @endif
+        <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#user_management" aria-expanded="true">
           <i><img style="width:25px" src="{{ asset('material') }}/img/user.svg"></i>
           <p>{{ __('User Operations') }}
@@ -62,7 +64,7 @@
       <li class="nav-item{{ $activePage == 'plants-table'||$activePage == 'plants-info' ||$activePage == 'plants-show' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('plant.index') }}">
           <i class="fa fa-pagelines "></i>
-          <p>{{ __('My Plantations') }}</p>          
+          <p>{{ __('My Plantations') }}</p>
 
         </a>
       </li>

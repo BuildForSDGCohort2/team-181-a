@@ -136,6 +136,36 @@ $product_information = $prod->storage->plantation;
                             <th class="pl-0 w-25" scope="row"><small>Free Delivery Available</small></th>
                             @else
                             <th class="pl-0 w-25" scope="row"><small>Free Delivery not Available</small> <br>
+                                <input type="radio" v-model="register_form.choice" id="pick" value="pick" />
+                                <label for="pick">Pick At your local Station </label> &nbsp;
+
+                                <input type="radio" v-model="register_form.choice" id="transport" value="transport" />
+                                <label for="transport">Home Delivery</label>
+                            </th>
+                            @endif
+                            @else
+                            <th class="pl-0 w-25" scope="row"><small>Free Delivery in</small></th>
+                            {{-- here.... --}}
+
+                            <td>{{ucfirst($product_information->farmer->location)}}</td>
+                            @endif
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            @else
+            <div class="table-responsive mb-2">
+                <table class="table table-sm table-borderless">
+                    <tbody>
+                        <tr>
+                            @if (auth()->user() !== null)
+                            @if (auth()->user()->location === $product_information->farmer->location)
+                            <th class="pl-0 w-25" scope="row"><small>Free Delivery Available</small></th>
+                                <input type="radio" v-model="form.choice" id="pick" value="free" />
+                                @else
+                            <th class="pl-0 w-25" scope="row"><small>Free Delivery not Available</small> <br>
                                 <input type="radio" v-model="form.choice" id="pick" value="pick" />
                                 <label for="pick">Pick At your local Station </label> &nbsp;
 
@@ -157,7 +187,7 @@ $product_information = $prod->storage->plantation;
             </div>
             @endif
             @if (auth()->user() === null)
-            <button type="button" class="btn btn-primary btn-md mr-1 mb-2" data-toggle="modal"
+            <button type="button" class="btn btn-primary btn-md mr-1 mb-2" data-toggle="modal" @click="form_d"
                 data-target="#register">Proced to Checkout</button>
             @else
             <button type="button" class="btn btn-primary btn-md mr-1 mb-2" @click="checkout({{ $prod->id }})"><i></i> Proced to Checkout</button>
@@ -166,6 +196,8 @@ $product_information = $prod->storage->plantation;
                     class="fa fa-shopping-basket pr-2"></i>Add to Basket</button>
         </div>
     </div>
+
+        @guest()
 
     <div id="register" class="modal fade " role="dialog" style="margin-top: 10%; ">
         <div class="modal-dialog">
@@ -187,56 +219,58 @@ $product_information = $prod->storage->plantation;
                         </button>
                         <hr>
 
-                    <form action="" method="POST">
-                        @csrf
                         <div class="first-column" style='width:45%; float: left;margin-right:1%'>
                             <div class="form-group">
                                 <label for="type">Full Names</label>
-                                <input type="text" class="form-control" v-model='form.name' id="name" aria-describedby="name"
+                                <input type="text" class="form-control" v-model='register_form.name' id="name" aria-describedby="name"
                                     placeholder="Enter Your Full names" required>
                                 <small id="type" class="form-text text-muted">As they appear on the id.</small>
-                            </div>
+                      <small class="has-text-danger" v-if="errors.name">@{{ errors.name[0] }}</small>
+                    </div>
 
 
                             <div class="form-group">
                                 <label for="strain">Phone number</label>
-                                <input type="text" v-model='form.phone_number' class="form-control" id="phone_number"
+                                <input type="text" v-model='register_form.phone_number' class="form-control" id="phone_number"
                                     aria-describedby="phonenumber" placeholder="07XX-XXX-XXX" required>
                                 <small id="phonenumber" class="form-text text-muted">Enter Phone number</small>
-                            </div>
+                      <small class="has-text-danger" v-if="errors.phone_number">@{{ errors.phone_number[0] }}</small>
+                    </div>
                             <div class="form-group">
                                 <label for="location">Location</label>
-                                <input type="text" v-model='form.location' class="form-control" id="location"
+                                <input type="text" v-model='register_form.location' class="form-control" id="location"
                                     aria-describedby="loc" placeholder="eg. Nakuru.." required>
                                 <small id="loc" class="form-text text-muted">Enter Location</small>
-                            </div>
+                      <small class="has-text-danger" v-if="errors.location">@{{ errors.location[0] }}</small>
+                    </div>
                         </div>
 
 
                         <div class="second-column" style='width:45%; float: right;margin-right:1%'>
                             <div class="form-group">
                                 <label for="size">Email</label>
-                                <input type="email" v-model='form.email' class="form-control" id="email" aria-describedby="mail"
+                                <input type="email" v-model='register_form.email' class="form-control" id="email" aria-describedby="mail"
                                     placeholder="abc@xyz.com" required>
                                 <small id="mail" class="form-text text-muted">Enter Email</small>
-                            </div>
+                      <small class="has-text-danger" v-if="errors.email">@{{ errors.email[0] }}</small>
+                    </div>
 
 
                             <div class="form-group">
                                 <label for="exp">Password..</label>
-                                <input type="password" class="form-control" v-model='form.password' id="password"
+                                <input type="password" class="form-control" v-model='register_form.password' id="password"
                                     aria-describedby="password" placeholder="password" required>
                                 <small id="expirience" class="form-text text-muted">Password</small>
-                            </div>
+                      <small class="has-text-danger" v-if="errors.password">@{{ errors.password[0] }}</small>
+                    </div>
 
                             {{-- file uploader --}}
                             <div class="form-group">
                                 <label for="password">Confirm Password..</label>
-                                <input type="password" class="form-control" v-model='form.conf_password' id="conf_password"
+                                <input type="password" class="form-control" v-model='register_form.conf_password' id="conf_password"
                                     aria-describedby="conf_password" placeholder="password" required>
                                 <small id="password" class="form-text text-muted"> Confirm Password</small>
-                            </div>
-
+                    </div>
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="agr" name="agr" required>
@@ -247,14 +281,14 @@ $product_information = $prod->storage->plantation;
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <button @click="save_item" class="btn btn-info" value="Submit">Submit</button>
+                    <button @click="register_customer('/customer_enrole')" class="btn btn-info" value="Submit">Submit</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                 </div>
                 <input type="hidden" id="reg_type" name="reg_type" value="farmer">
-                </form>
             </div>
         </div>
     </div>
+    @endauth
 
     <div id="pay" class="modal fade" role="dialog">
         <div class="modal-dialog">
