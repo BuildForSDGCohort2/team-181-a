@@ -63,6 +63,7 @@ class LoginController extends Controller
                 'location' => 'nairobi',
                 'password' => Hash::make('password')
             ]);
+            User::latest()->first()->assignRole('farmer');
             Auth::login($user);
             return redirect()->action('HomeController@index');
             // return view('auth.register', ['name' => $userSocial->getName(), 'email' => $userSocial->getEmail()]);

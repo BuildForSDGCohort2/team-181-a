@@ -22,6 +22,13 @@ class NotificationsController extends Controller
 
 
     }
+
+    public function get_notifications(Isues $issue)
+    {
+        return $issue->get_unsolved_issues();
+    }
+
+
     public function get_suppliers(Supplier $suppliers)
     {
         $pending_suppliers = $suppliers->pending_suplier_requests();

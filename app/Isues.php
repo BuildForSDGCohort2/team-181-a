@@ -34,7 +34,7 @@ class Isues extends Model
                 ->where('user_id','=',auth()->user()->id)
                 ->where('status','=',0)
                 ->orWhere('user_id','=',null)
-                ->get();
+                ->paginate();
         // return Isues::where(['user_id','=',auth()->user()->id],['status','=',0]);
     }
     public function make_harvest_reminder( $data)

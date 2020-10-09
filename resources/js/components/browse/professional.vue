@@ -1,20 +1,19 @@
 <template>
-<div style="background: linear-gradient(0deg, rgb(0, 0, 0), rgba(12, 12, 12, 0.55)), url(/material/img/login.jpg);color: #fff !important;padding: 0;background-size: cover; background-position: top center;align-items: center;height: 100vh">
+<div>
     <div class="container">
         <div class="row justify-content-center" style="margin-top: 100px;">
-            <v-card style="width: 80%">
+            <v-card style="width: 800px">
                 <v-card-title>
                     Professionals
                     <v-spacer></v-spacer>
                     <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details></v-text-field>
                 </v-card-title>
-                <v-data-table :headers="headers" :items="supplier_data" :search="search">
+                <v-data-table :headers="headers" :items="users" :search="search">
                     <template v-slot:item.name="{ item }">
                             <v-btn @click="openShow(item)" text :color="color">{{ item.name }}</v-btn>
                         </template>
                     <template v-slot:item.rating="{ item }">
                             <v-rating v-model="item.rating" readonly half-increments :color="color"></v-rating>
-
                         </template>
                 </v-data-table>
             </v-card>
@@ -41,6 +40,7 @@
 
 <script>
 export default {
+    props: ['users'],
     components: {},
     data() {
         return {
@@ -61,7 +61,7 @@ export default {
                 },
                 {
                     text: 'Address',
-                    value: 'address'
+                    value: 'location'
                 },
                 {
                     text: 'Rating',

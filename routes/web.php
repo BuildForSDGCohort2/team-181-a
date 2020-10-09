@@ -56,6 +56,13 @@ Route::group(['middleware' => 'auth'], function () {
 	
 	Route::any('summon_proffesional','Amimal_controller@summon_proffesional')->name('summon_proffesional');
 	
+
+
+
+	Route::get('get_animal','AnimalsController@get_animal')->name('get_animal');
+
+	Route::get('get_notifications','NotificationsController@get_notifications')->name('get_notifications');
+
 });
 
 
@@ -66,12 +73,16 @@ Route::post('suppliers_enrole','EnrolmentController@suppliers_enrole')->name('su
 Route::post('farmers_enrole','EnrolmentController@farmers_enrole')->name('farmers_enrole');
 Route::post('customers_enrole','EnrolmentContoller@customers_enrole')->name('customer_enrole');
 
+Route::post('customer_enrole','EnrolmentController@customer_enrole')->name('customer_enrole');
+
 Route::get('on_sale','OrdersController@for_sale')->name('on_sale');
 Route::get('on_sale/{id}/view','OrdersController@view_prod')->name('viewprod');
 
 
 Route::get('search_brood/{search}','BroodsController@search_brood')->name('search_brood');
 
+Route::get('professionals','BrowseController@professionals')->name('professionals');
+Route::get('suppliers','BrowseController@suppliers')->name('suppliers');
 
 
 Route::get('/login/{social}','Auth\LoginController@socialLogin')->where('social','twitter|facebook|linkedin|google|github|bitbucket');

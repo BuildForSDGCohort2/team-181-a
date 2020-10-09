@@ -24,6 +24,7 @@ export default {
         plantations: [],
         page_loader: false,
         issues_show: [],
+        notifications: [],
     },
     getters,
     mutations,
