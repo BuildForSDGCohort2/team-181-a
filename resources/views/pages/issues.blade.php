@@ -147,7 +147,7 @@
               </ul>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-outline-info">Mark as read</button>
+        <button type="button" class="btn btn-sm btn-outline-info" @click="save_item('mark_as_read')">Mark as read</button>
       </div>
 
     </div>

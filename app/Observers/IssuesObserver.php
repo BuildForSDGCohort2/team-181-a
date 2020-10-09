@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Issues;
+use App\Isues;
 use App\Sms;
 use App\User;
 
@@ -14,12 +14,11 @@ class IssuesObserver
      * @param  \App\Issues  $issues
      * @return void
      */
-    public function created(Issues $issues)
+    public function created(Isues $isues)
     {
+        $user = User::find($isues->user_id);
 
-        $user = User::find($issues->user_id);
-
-        // Log::debug($issues);
+        // Log::debug($isues);
 
         $sms = new Sms;
         // $phone = '+254768187628';
@@ -31,7 +30,7 @@ class IssuesObserver
             $sms = new Sms;
             // $phone = $user->phone;
             if ($phone) {
-                $message = 'Dear ' . $user->name . ' ' . $issues->information;
+                $message = 'Dear ' . $user->name . ' ' . $isues->information;
                 $sms = $sms->send($phone, $message);
             }
         }

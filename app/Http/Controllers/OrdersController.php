@@ -30,7 +30,7 @@ class OrdersController extends Controller
 
     public function place_order(Request $request,Sales $sale,Order $order,Isues $issue)
     {
-        // return $request;
+        // return $request->all();
         $product_for_sale  = $sale->process_order($request);
         // return $product_for_sale['product'];
         $order_info = $order->create_order($product_for_sale);

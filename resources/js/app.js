@@ -85,7 +85,7 @@ const app = new Vue({
                 value: '2',
             }],
         order: null,
-        register_form: [],
+        register_form: {},
         edit_form: {},
         load_data: false,
         form_dialog: false,
@@ -180,7 +180,7 @@ const app = new Vue({
 
             this.$store.dispatch('searchItems', payload)
                 .then(response => {
-                    this.success('Created')
+                    // this.success('Created')
                     eventBus.$emit("pushEvent", response)
                 });
         },
@@ -193,7 +193,7 @@ const app = new Vue({
 
             this.$store.dispatch('postItems', payload)
                 .then(response => {
-                    this.success('Created')
+                    this.success('Updated')
                     eventBus.$emit("pushEvent", response)
                     window.location.reload()
                 });
