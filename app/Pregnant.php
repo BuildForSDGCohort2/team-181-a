@@ -5,11 +5,13 @@ use DB;
 use App\Animal_Fact_sheet;
 use App\Animal;
 use App\Isues;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 class Pregnant extends Model
-{
+
+{   
+    use SofDeletes;
     public function pregnancy_watcher()
     {
         $gestation  = Animal_Fact_sheet::find($this->animal_id)->gestation_period;

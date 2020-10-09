@@ -24,7 +24,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('runcheckers')->everyMinute();# since herokus scheduler runs every 10 minutes/ or midnight
+        
     }
 
     /**

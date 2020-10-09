@@ -98,10 +98,16 @@ class OrdersController extends Controller
         return view('orders.dispatch')->with('grouped_orders',$grouped_orders);
     }
 
-    #delivered Close the deal
-    public function close_order(Request $request,Order $order)
+    public function pick_order(Request $request,Order $order)
     {
-        $order->order_succesfull($request);
+        $order->transit($request->id);
+        return redirect('orders');
+    }
+    #delivered Close the deal
+    public function close_order(Request $request,Order $order,Isues $issue)
+    {
+       $completed_order =  $order->order_succesfull($request);
+       $issue->delivery_alert($completed_order);
         return redirect('orders');
     }
 

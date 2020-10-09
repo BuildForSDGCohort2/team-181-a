@@ -16,12 +16,11 @@ class CreatePlantDevRegimentsTable extends Migration
         Schema::create('plant_dev_regiments', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger('plant_id');
+            $table->string('species');
             #when an animal or plantaion is between these ages it will be automatically suggested to the farmer to aply the suppliment
             $table->string('age_limits');
             $table->string('suppliment');
             $table->text('tips');
-            $table->foreign('plant_id')->references('id')->on('plant_fact_sheets');
 
         });
     }
