@@ -56,12 +56,17 @@ Route::group(['middleware' => 'auth'], function () {
 	
 	Route::any('summon_proffesional','Amimal_controller@summon_proffesional')->name('summon_proffesional');
 	
+	Route::any('request_regiment','PlantsController@request_regiment')->name('request_regiment');
+	
 
 
 
 	Route::get('get_animal','AnimalsController@get_animal')->name('get_animal');
 
 	Route::get('get_notifications','NotificationsController@get_notifications')->name('get_notifications');
+	
+	#to read info
+	Route::post('isue/{id}/read','IssueController@mark_as_read')->name('read_issue');
 
 });
 

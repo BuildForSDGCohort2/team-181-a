@@ -250,5 +250,11 @@ class Isues extends Model
     public function get_issue($id) {
         return Isues::where('id','=',$id)->first();
     }
+    public function read($request)
+    {
+        $issue = $this->find($request->id);
+        $issue->status = 1;
+        $issue->save();
+    }
 
 }
