@@ -174,7 +174,6 @@ Assistant.')])
 
                         {{-- file uploader --}}
 
-
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" name="transport" id="transport">
@@ -193,19 +192,15 @@ Assistant.')])
                                         class="text-primary">terms and conditions</a> </label>
                             </div>
                         </div>
-
-
-
-
+                    </div>
+                    <input type="hidden" id="reg_type" name="reg_type" value="suplier">
+                    <div class="modal-footer" style='width:55%; float: right;'>
+                        <button type="submit" class="btn btn-info" value="Submit">Submit</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
             </div>
-            <input type="hidden" id="reg_type" name="reg_type" value="suplier">
-            <div class="modal-footer" style='width:55%; float: right;'>
-                <button type="submit" class="btn btn-info" value="Submit">Submit</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            </div>
-            </form>
         </div>
-    </div>
 
     </div>
 </div>
@@ -313,18 +308,15 @@ Assistant.')])
                                         class="text-primary">terms and conditions</a> </label>
                             </div>
                         </div>
-
                     </div>
 
+                    <div class="modal-footer" style='width:55%; float: right;'>
+                        <button type="submit" class="btn btn-info" value="Submit">Submit</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
+                    <input type="hidden" id="reg_type" name="reg_type" value="proffessional">
 
-
-            <div class="modal-footer" style='width:55%; float: right;'>
-                <button type="submit" class="btn btn-info" value="Submit">Submit</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            </div>
-            <input type="hidden" id="reg_type" name="reg_type" value="proffessional">
-
-            </form>
+                </form>
             </div>
         </div>
 
