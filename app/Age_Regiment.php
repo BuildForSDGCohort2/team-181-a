@@ -13,6 +13,7 @@ class Age_Regiment extends Model
 
     public static function check()
     {
+        echo ('running over  kshhht!');
         foreach (Age_Regiment::all() as $regiment) {
             $species = $regiment->species;
             $animals = DB::table('animals')

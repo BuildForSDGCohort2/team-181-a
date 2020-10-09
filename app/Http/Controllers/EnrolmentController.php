@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreProfEnrols;
 use App\Http\Requests\SuppliersEnrol;
 use App\Http\Requests\FarmersRequest;
+
+use  App\Mail\RejectMail;
+
 use App\Proffesional;
 use App\Supplier;
 use App\Farmer;
@@ -46,6 +49,14 @@ class EnrolmentController extends Controller
         $customer->new_enrolement($validated);
         return 'Sucess!' ;
 
+    }
+    public function confirmation($request,Proffesional $proffesional)
+    {
+        $proffesional->confirm($request->id);        
+    }
+    public function rejection($request,Proffesional $proffesional)
+    {
+        $proffesional->reject($request->id);        
     }
     
 }

@@ -11,8 +11,9 @@ class Plant_dev_regiment extends Model
 {
     public static function check()
     {
+        echo ('running');
         foreach (Plant_dev_regiment::all() as $regiment) {
-            $plant_id = $regiment->species;
+            $species = $regiment->species;
             $plantations = Plantation::where('species',$species)->where('status',0)->get();
 
             foreach ($plantations as $plantation) {               

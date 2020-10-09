@@ -4,6 +4,7 @@ namespace App;
 use App\User;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
 
 class Customer extends Model
 {
