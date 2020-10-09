@@ -31,7 +31,7 @@ class EnrolmentController extends Controller
         $validated = $request->validated();
         // return ($validated['kra']);
         // return $request;
-        
+
         $sup->new_enrolement($validated);
 
         return 'Sucess!' ;
@@ -52,11 +52,11 @@ class EnrolmentController extends Controller
     }
     public function confirmation($request,Proffesional $proffesional)
     {
-        $proffesional->confirm($request->id);        
+        $proffesional->confirm($request->id);
     }
     public function rejection($request,Proffesional $proffesional)
     {
-        $proffesional->reject($request->id);        
+        $proffesional->reject($request->id);
     }
-    
+
 }
