@@ -94,6 +94,7 @@ const app = new Vue({
     },
     methods: {
         toggleActive(qty) {
+
             // alert('dwdwdddw');
             // this.activeKey = this.isActive(i) ? null : i;
             var payload = {
@@ -126,6 +127,7 @@ const app = new Vue({
                     this.text = 'Checkout complete'
                     this.snackbar = true
                     this.cart_count = 0
+                    window.location.href = "/login";
                     // this.cart_count += 1
                     // eventBus.$emit("broodEvent")
                 });
@@ -141,6 +143,7 @@ const app = new Vue({
             this.form_dialog = true
         },
         addCart(id, qty) {
+
             // console.log(id, qty);
             // this.form_dialog = false
 
@@ -232,6 +235,7 @@ const app = new Vue({
                 });
         },
         open_edit(data) {
+            // alert('owoow')
             console.log(data);
             this.edit_form = data
 
@@ -265,8 +269,14 @@ const app = new Vue({
             // var year=last.getFullYear();
         },
         success(text) {
-            this.text = text
-            this.snackbar = true
+            // this.text = text
+            // this.snackbar = true
+
+        this.$message({
+            message: text,
+            type: 'success'
+          });
+
         },
         parse_data(update, data) {
             console.log(data);

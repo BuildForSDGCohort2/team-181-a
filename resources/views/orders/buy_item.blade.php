@@ -164,6 +164,7 @@ $product_information = $prod->storage->plantation;
                             @if (auth()->user()->location === $product_information->farmer->location)
                             <th class="pl-0 w-25" scope="row"><small>Free Delivery Available</small></th>
                                 <input type="radio" v-model="form.choice" id="pick" value="free" />
+                                <label for="pick">Free Delivery Available </label> &nbsp;
                                 @else
                             <th class="pl-0 w-25" scope="row"><small>Free Delivery not Available</small> <br>
                                 <input type="radio" v-model="form.choice" id="pick" value="pick" />
