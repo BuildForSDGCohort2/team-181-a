@@ -53,6 +53,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('order/{id}/product','OrdersController@place_order')->name('place_order');
 	Route::get('order/dispatch','OrdersController@dispatch_orders')->name('dispatch');
 	Route::get('order/{orders}/dispatch','OrdersController@order_pick_up')->name('transit');
+	
+	Route::any('summon_proffesional','Amimal_controller@summon_proffesional')->name('summon_proffesional');
+	
+
 
 
 	Route::get('get_animal','AnimalsController@get_animal')->name('get_animal');
@@ -67,6 +71,8 @@ Route::group(['middleware' => 'auth'], function () {
 Route::post('profesionals_enrole','EnrolmentController@profesionals_enrole')->name('profesionals_enrole');
 Route::post('suppliers_enrole','EnrolmentController@suppliers_enrole')->name('suppliers_enrole');
 Route::post('farmers_enrole','EnrolmentController@farmers_enrole')->name('farmers_enrole');
+Route::post('customers_enrole','EnrolmentContoller@customers_enrole')->name('customer_enrole');
+
 Route::post('customer_enrole','EnrolmentController@customer_enrole')->name('customer_enrole');
 
 Route::get('on_sale','OrdersController@for_sale')->name('on_sale');
