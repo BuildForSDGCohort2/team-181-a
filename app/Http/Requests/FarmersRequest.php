@@ -25,8 +25,8 @@ class FarmersRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'phone_number' => ['required', 'string', 'max:10'],
-            'id_number' => ['required', 'string', 'max:10'],
+            'phone_number' => ['required', 'string', 'max:10','unique:App\Farmer,phone'],
+            'id_number' => ['required', 'string', 'max:10','unique:App\Farmer,id_number'],
             // 'specialty' => ['required'],
             'email' => ['required', 'string', 'max:30','unique:App\Farmer,email'],
             'agr' => ['required'],

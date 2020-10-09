@@ -14,20 +14,17 @@ class CreateAnimalAilmentsTable extends Migration
     public function up()
     {
         Schema::create('animal_ailments', function (Blueprint $table) {
+            $table->softDeletes();
             $table->id();
             $table->timestamps();
             #this wil be used to differentiate between the plant and animak ailments
-            $table->integer('category');
-            $table->string('name');
+            $table->unsignedBigInteger('animal_id'); 
             // the scale will tell the severity of the infection
             $table->integer('scale');
             $table->string('cause');
-            $table->string('symptoms');
-            $table->string('prevention');
-            #this wil be in the format 04 -- 09 
-            #reprenting the months
-            $table->string('peak_times');
-            $table->text('counter_measure');
+            $table->unsignedBigInteger('vet_id');
+            $table->foreign('animal_id')->references('id')->on('animals');
+            $table->foreign('vet_id')->references('id')->on('users');
 
         });
     }

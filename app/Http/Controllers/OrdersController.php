@@ -30,7 +30,7 @@ class OrdersController extends Controller
 
     public function place_order(Request $request,Sales $sale,Order $order,Isues $issue)
     {
-        // return $request;
+        // return $request->all();
         $product_for_sale  = $sale->process_order($request);
         // return $product_for_sale['product'];
         $order_info = $order->create_order($product_for_sale);
@@ -98,10 +98,16 @@ class OrdersController extends Controller
         return view('orders.dispatch')->with('grouped_orders',$grouped_orders);
     }
 
-    #delivered Close the deal
-    public function close_order(Request $request,Order $order)
+    public function pick_order(Request $request,Order $order)
     {
-        $order->order_succesfull($request);
+        $order->transit($request->id);
+        return redirect('orders');
+    }
+    #delivered Close the deal
+    public function close_order(Request $request,Order $order,Isues $issue)
+    {
+       $completed_order =  $order->order_succesfull($request);
+       $issue->delivery_alert($completed_order);
         return redirect('orders');
     }
 

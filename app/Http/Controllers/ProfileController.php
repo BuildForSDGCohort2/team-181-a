@@ -14,8 +14,9 @@ class ProfileController extends Controller
      * @return \Illuminate\View\View
      */
     public function edit()
-    {
-        return view('profile.edit');
+    {   
+        $profile = auth()->user()->my_profile();
+        return view('profile.edit')->with('profile' ,$profile); #admin and customer return a null since all their information is stored in the users table;
     }
 
     /**

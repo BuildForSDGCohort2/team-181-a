@@ -71,10 +71,6 @@
 
     </div>
   </div>
-</div>
-
-
-@endsection
 {{-- supplier --}}
 <div id="supplier_modal" class="modal fade" role="dialog" style="margin-top: 10%">
   <div class="modal-dialog">
@@ -87,7 +83,7 @@
 
       </div>
       <div class="modal-body">
-      <form action="{{route('suppliers_enrole')}}" method="POST">
+      <form action="{{route('suppliers_enrole')}}" method="POST" enctype="multipart/form-data">
           @csrf
           <div class="first-column" style='width:45%; float: left;'>
             <div class="form-group">
@@ -186,7 +182,7 @@
 
       </div>
       <div class="modal-body">
-      <form action="{{route('profesionals_enrole')}}" method="POST">
+      <form action="{{route('profesionals_enrole')}}" method="POST" enctype="multipart/form-data">
         @csrf
           <div class="first-column" style='width:45%; float: left;'>
             <div class="form-group">
@@ -424,4 +420,5 @@
     </div>
   </div>
 </div>
-
+</div>
+@endsection

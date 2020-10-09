@@ -21,7 +21,8 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'last_login'=>null,
-            'location'=>'admin'
+            'location'=>'nairobi',
+            'phone_number'=>'+254768187628',
         ]);
         //farmer
         DB::table('users')->insert([
@@ -32,7 +33,9 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'last_login'=>null,
-            'location'=>'nakuru'
+            'location'=>'nakuru',
+            'phone_number'=>'+254768187628',
+
 
         ]);
         // vet
@@ -44,7 +47,9 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'last_login'=>null,
-            'location'=>'nakuru'
+            'location'=>'nakuru',
+            'phone_number'=>'+254768187628',
+
 
         ]);
         //feo
@@ -56,7 +61,9 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'last_login'=>null,
-            'location'=>'nakuru'
+            'location'=>'nakuru',
+            'phone_number'=>'+254768187628',
+
 
         ]);
         //supplier
@@ -68,7 +75,9 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'last_login'=>null,
-            'location'=>'nakuru'
+            'location'=>'nakuru',
+            'phone_number'=>'+254768187628',
+
         ]);
         //customer
         DB::table('users')->insert([
@@ -79,7 +88,9 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'last_login'=>null,
-            'location'=>'nakuru'
+            'location'=>'nakuru',
+            'phone_number'=>'+254768187628',
+
         ]);
         //admin
         DB::table('model_has_roles')->insert([

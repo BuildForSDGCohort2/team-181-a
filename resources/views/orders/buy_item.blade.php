@@ -155,6 +155,36 @@ $product_information = $prod->storage->plantation;
                     </tbody>
                 </table>
             </div>
+            @else
+            <div class="table-responsive mb-2">
+                <table class="table table-sm table-borderless">
+                    <tbody>
+                        <tr>
+                            @if (auth()->user() !== null)
+                            @if (auth()->user()->location === $product_information->farmer->location)
+                            <th class="pl-0 w-25" scope="row"><small>Free Delivery Available</small></th>
+                                <input type="radio" v-model="form.choice" id="pick" value="free" />
+                                @else
+                            <th class="pl-0 w-25" scope="row"><small>Free Delivery not Available</small> <br>
+                                <input type="radio" v-model="form.choice" id="pick" value="pick" />
+                                <label for="pick">Pick At your local Station </label> &nbsp;
+
+                                <input type="radio" v-model="form.choice" id="transport" value="transport" />
+                                <label for="transport">Home Delivery</label>
+                            </th>
+                            @endif
+                            @else
+                            <th class="pl-0 w-25" scope="row"><small>Free Delivery in</small></th>
+                            {{-- here.... --}}
+
+                            <td>{{ucfirst($product_information->farmer->location)}}</td>
+                            @endif
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
             @endif
             @if (auth()->user() === null)
             <button type="button" class="btn btn-primary btn-md mr-1 mb-2" data-toggle="modal" @click="form_d"
@@ -166,7 +196,7 @@ $product_information = $prod->storage->plantation;
                     class="fa fa-shopping-basket pr-2"></i>Add to Basket</button>
         </div>
     </div>
- 
+
         @guest()
 
     <div id="register" class="modal fade " role="dialog" style="margin-top: 10%; ">

@@ -25,7 +25,7 @@ class SuppliersEnrol extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'phone_number' => ['required', 'string', 'max:10'],
+            'phone_number' => ['required', 'string', 'max:10','unique:App\Supplier,phone'],
             // 'specialty' => ['required'],
             'email' => ['required', 'string', 'max:30','unique:App\Supplier,email'],
             'kra' => ['required'],
@@ -35,6 +35,7 @@ class SuppliersEnrol extends FormRequest
             'hardware'=>[],
             'agrovet'=>[],
             'transport'=>[]
+            
         ];
     }
 }

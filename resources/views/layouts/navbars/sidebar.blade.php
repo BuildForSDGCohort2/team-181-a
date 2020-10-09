@@ -78,7 +78,7 @@
       </li>
       @can('farmer_permisions')
       <li class="nav-item{{ $activePage == 'language' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('language') }}">
+        <a class="nav-link" href="">
           <i class="material-icons">Support</i>
           <p>{{ __('Support') }}</p>
         </a>

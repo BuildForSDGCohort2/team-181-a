@@ -22,13 +22,13 @@ class Sales extends Model
             # plants and sacks they are sold out then thay become unavailable (status 1)
             if ($prod->amount === 0) {
                 $prod->status= 1;
-            }       
-                        
+            }
+
         }else {
             #animals .. one animal one reciept
             $prod->status= 1;
         }
-        
+
         $prod->save();
         $order_data = ['quantity'=>$request['quantity'] , 'choice'=>$request['choice'],'product'=>$prod];
         return  $order_data;
