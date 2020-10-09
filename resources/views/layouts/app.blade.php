@@ -41,6 +41,16 @@
             @guest()
             @include('layouts.page_templates.guest')
             @endguest
+
+
+  <v-snackbar v-model="snackbar" v-html="text">
+    {{-- @{{ text }} --}}
+    <template v-slot:action="{ attrs }">
+        <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
+            Close
+        </v-btn>
+    </template>
+</v-snackbar>
     </div>
 
 

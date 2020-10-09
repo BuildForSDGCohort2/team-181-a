@@ -93,14 +93,19 @@ const app = new Vue({
         userid: document.querySelector("meta[name='user-id']").getAttribute('content')
     },
     methods: {
-        toggleActive(i) {
+        toggleActive(qty) {
             // alert('dwdwdddw');
             // this.activeKey = this.isActive(i) ? null : i;
             var payload = {
                 model: 'addCart',
                 data: this.form
             }
-            this.cart_count += 1
+
+            if (this.cart_count < 1 && qty ==-1) {
+                return
+            }
+
+            this.cart_count += qty
             this.text = 'Cart update'
             this.snackbar = true
             this.$store.dispatch('postItems', payload)
@@ -132,20 +137,20 @@ const app = new Vue({
             }
         },
         form_d() {
-            alert('test')
+            // alert('test')
             this.form_dialog = true
         },
         addCart(id, qty) {
-            console.log(id, qty);
+            // console.log(id, qty);
             // this.form_dialog = false
 
             // this.cart_count += 1
-            if (qty > this.cart_count) {
+            // if (qty > this.cart_count) {
                 this.cart_count += 1
-            } else {
-                this.snackbar = true
-                this.text = 'No more in stock'
-            }
+            // } else {
+            //     this.snackbar = true
+            //     this.text = 'No more in stock'
+            // }
         },
 
         get_items(model, update) {
