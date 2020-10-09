@@ -71,6 +71,7 @@
 
     </div>
   </div>
+</div>
 {{-- supplier --}}
 <div id="supplier_modal" class="modal fade" role="dialog" style="margin-top: 10%">
   <div class="modal-dialog">
@@ -171,6 +172,7 @@
 
   </div>
 </div>
+
  {{--proffesional  --}}
 <div id="professional_modal" class="modal fade" role="dialog" style="margin-top: 10%">
   <div class="modal-dialog">
@@ -289,6 +291,7 @@
   </div>
 </div>
 {{--  farmers Modal  --}}
+
 <div id="farmers_modal" class="modal fade " role="dialog" style="margin-top: 10%; ">
   <div class="modal-dialog">
     <!-- Modal content-->
@@ -419,6 +422,5 @@
     </form>
     </div>
   </div>
-</div>
 </div>
 @endsection
