@@ -64,6 +64,39 @@ class User extends Authenticatable
         
     }
 
+    public static function summon_proffesional($role,$location)
+    {
+        $wanted_profs = User::role($role)->where('location',$location)->pluck('id');
+        
+        if (count($wanted_profs) === null) {
+            $selected_prof = 0;
+        }
+        elseif (count($wanted_profs) > 1) {
+            $selected_prof = array_rand($wanted_profs->toArray());
+        } else {
+            $selected_prof = $wanted_profs->toArray()[0];
+        }
+        
+        return $selected_prof;
+    }
+    
+    public function request_regiment($request)
+    {
+        $wanted_supplier = User::role('supplier')->where('location',$location)->pluck('id');
+        
+        if (count($wanted_supplier) === null) {
+            $selected_supplier = 0;
+        }
+        elseif (count($wanted_profs) > 1) {
+            $selected_supplier = array_rand($wanted_supplier->toArray());
+        } else {
+            $selected_supplier = $wanted_supplier->toArray()[0];
+        }
+        
+        return $selected_supplier;
+    }
+
+
     public function animal(){
         return $this->hasMany('App\Animal');
     }

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Animal;
+use App\Isues;
 use DB;
 
 
@@ -54,7 +55,8 @@ class Order extends Model
     {
         $order = $this->find($order_id);
         $order->order_status = 1;
-        $order->save;
+        $order->save();
+        return $order;
     }
     public function deliver($order_id)
     {

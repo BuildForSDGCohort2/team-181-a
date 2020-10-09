@@ -73,7 +73,7 @@ class Proffesional extends Model
     
         // $user->delete();
    }
-    
+
     
     public function pending_requests()
     {

@@ -11,7 +11,7 @@ class AgeRegimentSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('plant_dev_regiments')->insert([
+        DB::table('age_regiments')->insert([
             'category' =>'vaccine',
             'species' =>'all',
             'age_limits' =>0,
@@ -20,7 +20,7 @@ class AgeRegimentSeeder extends Seeder
             
         ]);
 
-        DB::table('plant_dev_regiments')->insert([
+        DB::table('age_regiments')->insert([
             'category' =>'tag',
             'species' =>'cow',
             'age_limits' =>7,
@@ -28,7 +28,7 @@ class AgeRegimentSeeder extends Seeder
             'tips' =>'tag the animal, this will help in easy identification of the animal',
             
         ]);
-        DB::table('plant_dev_regiments')->insert([
+        DB::table('age_regiments')->insert([
             'category' =>'tag',
             'species' =>'goat',
             'age_limits' =>7,
@@ -36,7 +36,7 @@ class AgeRegimentSeeder extends Seeder
             'tips' =>'tag the animal, this will help in easy identification of the animal',
             
         ]);
-        DB::table('plant_dev_regiments')->insert([
+        DB::table('age_regiments')->insert([
             'category' =>'tag',
             'species' =>'sheep',
             'age_limits' =>7,
@@ -44,7 +44,7 @@ class AgeRegimentSeeder extends Seeder
             'tips' =>'tag the animal, this will help in easy identification of the animal',
             
         ]);
-        DB::table('plant_dev_regiments')->insert([
+        DB::table('age_regiments')->insert([
             'category' =>'castration',
             'species' =>'cow',
             'age_limits' =>7,
@@ -52,7 +52,7 @@ class AgeRegimentSeeder extends Seeder
             'tips' =>'if the animal is intended for beef produce , its adviscible to have the animal castrated for better results',
             
         ]);
-        DB::table('plant_dev_regiments')->insert([
+        DB::table('age_regiments')->insert([
             'category' =>'castration',
             'species' =>'goat',
             'age_limits' =>7,
@@ -60,7 +60,7 @@ class AgeRegimentSeeder extends Seeder
             'tips' =>'if the animal is intended for beef produce , its adviscible to have the animal castrated for better results',
             
         ]);
-        DB::table('plant_dev_regiments')->insert([
+        DB::table('age_regiments')->insert([
             'category' =>'castration',
             'species' =>'sheep',
             'age_limits' =>7,
@@ -68,7 +68,7 @@ class AgeRegimentSeeder extends Seeder
             'tips' =>'if the animal is intended for beef produce , its adviscible to have the animal castrated for better results',
             
         ]);
-        DB::table('plant_dev_regiments')->insert([
+        DB::table('age_regiments')->insert([
             'category' =>'vaccination',
             'species' =>'all',
             'age_limits' =>140,
@@ -76,7 +76,7 @@ class AgeRegimentSeeder extends Seeder
             'tips' =>'summon the vet do that he can adminster the much needed and important 5 minths vaccinations',
             
         ]);;
-        DB::table('plant_dev_regiments')->insert([
+        DB::table('age_regiments')->insert([
             'category' =>'weaning',
             'species' =>'cow',
             'age_limits' =>150,
@@ -84,7 +84,7 @@ class AgeRegimentSeeder extends Seeder
             'tips' =>'its advisable to start weaning the animal at this jumcture',
             
         ]);
-        DB::table('plant_dev_regiments')->insert([
+        DB::table('age_regiments')->insert([
             'category' =>'weaning',
             'species' =>'goat',
             'age_limits' =>60,
@@ -92,7 +92,7 @@ class AgeRegimentSeeder extends Seeder
             'tips' =>'its advisable to start weaning the animal at this jumcture',
             
         ]);
-        DB::table('plant_dev_regiments')->insert([
+        DB::table('age_regiments')->insert([
             'category' =>'weaning',
             'species' =>'sheep',
             'age_limits' =>60,
@@ -100,7 +100,7 @@ class AgeRegimentSeeder extends Seeder
             'tips' =>'its advisable to start weaning the animal at this jumcture',
             
         ]);
-        DB::table('plant_dev_regiments')->insert([
+        DB::table('age_regiments')->insert([
             'category' =>'feeds',
             'species' =>'chicken',
             'age_limits' =>0,
@@ -108,7 +108,7 @@ class AgeRegimentSeeder extends Seeder
             'tips' =>'feed the chiks with chick mash for the next 8 weeks',
             
         ]);
-        DB::table('plant_dev_regiments')->insert([
+        DB::table('age_regiments')->insert([
             'category' =>'feeds',
             'species' =>'turkey',
             'age_limits' =>0,
@@ -116,7 +116,7 @@ class AgeRegimentSeeder extends Seeder
             'tips' =>'feed the chiks with chick mash for the next 8 weeks',
             
         ]);
-        DB::table('plant_dev_regiments')->insert([
+        DB::table('age_regiments')->insert([
             'category' =>'feeds',
             'species' =>'duck',
             'age_limits' =>0,
@@ -124,7 +124,7 @@ class AgeRegimentSeeder extends Seeder
             'tips' =>'feed the chiks with chick mash for the next 8 weeks',
             
         ]);
-        DB::table('plant_dev_regiments')->insert([
+        DB::table('age_regiments')->insert([
             'category' =>'feeds',
             'species' =>'chicken',
             'age_limits' =>63,
@@ -132,7 +132,7 @@ class AgeRegimentSeeder extends Seeder
             'tips' =>'promote the little one to a better diet of growers mash, this will help in making their bodies stronger',
             
         ]);
-        DB::table('plant_dev_regiments')->insert([
+        DB::table('age_regiments')->insert([
             'category' =>'feeds',
             'species' =>'turkey',
             'age_limits' =>63,
@@ -140,7 +140,7 @@ class AgeRegimentSeeder extends Seeder
             'tips' =>'promote the little one to a better diet of growers mash, this will help in making their bodies stronger',
             
         ]);
-        DB::table('plant_dev_regiments')->insert([
+        DB::table('age_regiments')->insert([
             'category' =>'feeds',
             'species' =>'duck',
             'age_limits' =>63,
@@ -148,7 +148,7 @@ class AgeRegimentSeeder extends Seeder
             'tips' =>'promote the little one to a better diet of growers mash, this will help in making their bodies stronger',
             
         ]);
-        DB::table('plant_dev_regiments')->insert([
+        DB::table('age_regiments')->insert([
             'category' =>'feeds',
             'species' =>'chicken',
             'age_limits' =>126,
@@ -156,7 +156,7 @@ class AgeRegimentSeeder extends Seeder
             'tips' =>'fed them the final mash in the line , this will hel make them stronger and yield better',
             
         ]);
-        DB::table('plant_dev_regiments')->insert([
+        DB::table('age_regiments')->insert([
             'category' =>'feeds',
             'species' =>'turkey',
             'age_limits' =>126,
@@ -164,7 +164,7 @@ class AgeRegimentSeeder extends Seeder
             'tips' =>'fed them the final mash in the line , this will hel make them stronger and yield better',
             
         ]);
-        DB::table('plant_dev_regiments')->insert([
+        DB::table('age_regiments')->insert([
             'category' =>'feeds',
             'species' =>'duck',
             'age_limits' =>126,

@@ -168,7 +168,68 @@ class Isues extends Model
             'identifier'=>'PREG-CHCK'
         ]);
     }
+    public function alert_proffesional($id,$request)
+    {
+        if ($id === 0) {
+            Isues::create([
+                'reason'=>'Shortage',#rhe reason will carry the necesary data
+                'information'=>'There was a request for a '.strtoupper($request->role).'from'.ucfirst($request->location).' by '.auth()->user()->name.' '.auth()->user()->phone_number.'there werent any available please find on',
+                'status'=>0,
+                'user_id'=>1,
+                'identifier'=>'SHORTAGE'
+            ]);
 
+            Isues::create([
+                'reason'=>'Delay',#rhe reason will carry the necesary data
+                'information'=>"There were'nt any ".strtoupper($request->role).'found in your area, however one is being organised for you by the admin. Sit tight sorry for ant incoviniences encountered',
+                'status'=>0,
+                'user_id'=>auth()->user()->id,
+                'identifier'=>'REGRET'
+            ]);
+
+        } else {
+            Isues::create([
+                'reason'=>'Summon',#rhe reason will carry the necesary data
+                'information'=>$information['information'],
+                'status'=>0,
+                'user_id'=>$id,
+                'identifier'=>$information['identifier']
+            ]);
+        }
+        
+
+    }
+    public function alert_supplier($id,$request)
+    {
+        if ($id === 0) {
+            Isues::create([
+                'reason'=>'Shortage',#rhe reason will carry the necesary data
+                'information'=>'There was a request for  '.strtoupper($request->regiment).'from'.ucfirst(auth()->user()->location).' by '.auth()->user()->name.' '.auth()->user()->phone_number.'there werent any available please find on',
+                'status'=>0,
+                'user_id'=>1,
+                'identifier'=>'SHORTAGE'
+            ]);
+
+            Isues::create([
+                'reason'=>'Delay',#rhe reason will carry the necesary data
+                'information'=>"There were'nt any  suppliers selling ".strtoupper($request->regiment)." found in your area, however one is being organised for you by the admin. Sit tight sorry for ant incoviniences encountered",
+                'status'=>0,
+                'user_id'=>auth()->user()->id,
+                'identifier'=>'REGRET'
+            ]);
+
+        } else {
+            Isues::create([
+                'reason'=>'Regiment',#rhe reason will carry the necesary data
+                'information'=>ucfirst(auth()->user()->name).' '.ucfirst(auth()->user()->phone_number).' would like '.$request->regiment->suppliment.' contact an avail the necessary regiment',
+                'status'=>0,
+                'user_id'=>$id,
+                'identifier'=>$information['identifier']
+            ]);
+        }
+        
+
+    }
 
 
     public function delivery_alert($order)

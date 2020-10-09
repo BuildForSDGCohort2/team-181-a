@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\AnimalStore;
 use App\Animal;
-
+use App\Isues;
+use App\User;
 
 class AnimalsController extends Controller
 {
@@ -90,4 +91,11 @@ class AnimalsController extends Controller
         return redirect('animal');
 
     }  
+    public function summon_proffesional(Request $request, Isues $notification)
+    {
+        #the request should be structured as follws
+        # $requea['role'=> the role proffesional baeing summoned,'location'=>the loaction from witch the user summons the vet,'information'=> the information on the request eg vaccination etx ]
+        $selected_proffesional = User::summon_proffesional($request->role,$request->location);
+        $notification->alert_proffesional($selected_proffesional,$request);
+    }
 }

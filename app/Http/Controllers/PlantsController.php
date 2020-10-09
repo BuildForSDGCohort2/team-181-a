@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PlantationRequest;
 use App\Plantation;
 use App\Storage;
+use App\User;
 
 
 class PlantsController extends Controller
@@ -45,6 +46,12 @@ class PlantsController extends Controller
         $validated = $request->validated();
         $plantation->new_plantation($validated);
         return redirect('plant')->with('success','Plant Records recorded Succesfully');
+    }
+    public function order_regiment(Request $request, Isues $notification)
+    {
+        #the request should contain the regiment the user wants
+        $selected_supplier = User::request_regiment($request);
+        $notification->alert_supplier($selected_supplier,$request);
     }
 
 

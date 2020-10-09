@@ -54,6 +54,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('order/dispatch','OrdersController@dispatch_orders')->name('dispatch');
 	Route::get('order/{orders}/dispatch','OrdersController@order_pick_up')->name('transit');
 	
+	Route::any('summon_proffesional','Amimal_controller@summon_proffesional')->name('summon_proffesional');
+	
 });
 
 
