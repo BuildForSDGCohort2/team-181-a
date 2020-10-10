@@ -86,7 +86,7 @@
                       {{$prof->location}}
                     </td>
                     <td>
-                        <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#professional_modal">View info</button>
+                    <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#professional_modal,{{$prof}}">View info</button>
 
                     </td>
                 </tr>
@@ -128,22 +128,23 @@
           <small  class="form-text text-muted">Successful Applicants will Recieve confirmatory email</small>
         </div>
         <div class="modal-body">
-        <form action="{{route('profesionals_enrole')}}" method="POST">
+          {{-- proffesional_account_decision,$prof  is the route to follow... pa --}}
+        <form action="" method="POST">
           @csrf
             <div class="first-column" style='width:45%; float: left;'>
               <div class="form-group">
                 <label for="type">Full Names</label>
-                <input type="text" class="form-control" name='name'id="name" aria-describedby="name" placeholder="Enter Your Full names" required>
+                <input type="text" class="form-control" name='name'id="name" aria-describedby="name" value ="" required>
                 <small id="type" class="form-text text-muted">As they appear on the id.</small>
               </div>
                <div class="form-group">
                 <label for="strain">Id number</label>
-                <input type="text" name ='id_number'class="form-control" id="id_number" aria-describedby="idnumber" placeholder="XXX-XXX" required>
+                <input type="text" name ='id_number'class="form-control" id="id_number" aria-describedby="idnumber" value ="" required>
                 <small id="idnnumber" class="form-text text-muted">Enter Id number</small>
               </div>
               <div class="form-group">
                 <label for="strain">Phone number</label>
-                <input type="text" name ='phone_number'class="form-control" id="phone_number" aria-describedby="phonenumber" placeholder="07XX-XXX-XXX" required>
+                <input type="text" name ='phone_number'class="form-control" id="phone_number" aria-describedby="phonenumber" value ="" required>
                 <small id="phonenumber" class="form-text text-muted">Enter Id number</small>
               </div>
               <fieldset>
@@ -151,12 +152,14 @@
                 <input type = "radio"
                        name = "specialty"
                        id = "vet"
-                       value = "vet" />
+                       value = "vet" 
+                      />
                 <label for = "vet">Vet</label>
                 <input type = "radio"
                        name = "specialty"
                        id = "feo"
-                       value = "feo" />
+                       value = "feo" 
+                      />
                 <label for = "feo">Feild Extension Officer</label>
                 <input type = "radio"
                        name = "specialty"
@@ -171,7 +174,7 @@
             </div>
             <div class="form-group">
               <label for="location">Location</label>
-              <input type="text" name ='location'class="form-control" id="location" aria-describedby="loc" placeholder="eg. Nakuru.." required>
+            <input type="text" name ='location'class="form-control" id="location" aria-describedby="loc" value="" required>
               <small id="loc" class="form-text text-muted">Enter Location</small>
             </div>
 
@@ -206,12 +209,17 @@
                 <div class="invalid-feedback">Invalid File</div>
               </div>
 
-              <div class="form-group">
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="agre" name="agre"  required>
-                  <label class="custom-control-label" for="agre"> Agree to <a href="#" class="text-primary">terms and conditions</a> </label>
-                </div>
-              </div>
+              <label>Decision:</label><br>
+              <input type = "radio"
+                     name = "status"
+                     id = "accept"
+                     value = "accept" />
+              <label for = "accept">Approve Request</label>
+              <input type = "radio"
+                     name = "status"
+                     id = "decline"
+                     value = "decline" />
+              <label for = "decline">Decline Request</label>
 
             </div>
 

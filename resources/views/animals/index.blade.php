@@ -17,7 +17,7 @@
         <div class="card">
           <div class="card-header card-header-primary">
             <h4 class="card-title ">Animals List</h4>
-            <p class="card-category"> Here is a subtitle for this table</p>
+            <p class="card-category"> Here is a list of animals currently registered under Your name</p>
             <button type="button" class="btn btn-small btn-warning" data-toggle="modal" data-target="#animal_r_modal" style="float: right;" >Register Animal</button>
           </div>
           {{--                Add Animal modal                          --}}
