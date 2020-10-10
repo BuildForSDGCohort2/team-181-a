@@ -59,8 +59,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::any('request_regiment','PlantsController@request_regiment')->name('request_regiment');
 
 
-
-
 	Route::get('get_animal','AnimalsController@get_animal')->name('get_animal');
 
 	Route::get('get_notifications','NotificationsController@get_notifications')->name('get_notifications');

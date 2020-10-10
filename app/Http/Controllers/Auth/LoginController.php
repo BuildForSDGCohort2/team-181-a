@@ -61,6 +61,7 @@ class LoginController extends Controller
                 'email' => $userSocial->getEmail(),
                 'name' => $userSocial->getName(),
                 'location' => 'nairobi',
+                'phone_number' => '07',
                 'password' => Hash::make('password')
             ]);
             User::latest()->first()->assignRole('farmer');

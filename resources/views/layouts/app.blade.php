@@ -12,7 +12,6 @@
 
     <title>{{ __('The Farmers Assistant') }}</title>
     <link href="{{ asset('css/all.css') }}" rel="stylesheet">
-    <script src="{{ asset('js/app.js') }}" defer type="application/javascript"></script>
     {{-- <link href="{{ asset('material') }}/css/material-dashboard.css" rel="stylesheet" />
     <link href="{{ asset('material') }}/demo/demo.css" rel="stylesheet" />
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">--}}
@@ -26,6 +25,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- CSS Files -->
     <!-- CSS Just for demo purpose, don't include it in your project -->
+    <script src="{{ asset('js/app.js') }}" defer type="application/javascript"></script>
 
 </head>
 
@@ -41,6 +41,16 @@
             @guest()
             @include('layouts.page_templates.guest')
             @endguest
+
+
+  <v-snackbar v-model="snackbar" v-html="text">
+    {{-- @{{ text }} --}}
+    <template v-slot:action="{ attrs }">
+        <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
+            Close
+        </v-btn>
+    </template>
+</v-snackbar>
     </div>
 
 
