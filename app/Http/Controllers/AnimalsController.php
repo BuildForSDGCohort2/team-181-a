@@ -93,7 +93,7 @@ class AnimalsController extends Controller
     }
     public function summon_proffesional(Request $request, Isues $notification)
     {
-        return $request;
+        // return $request;
         #the request should be structured as follws
         # $requea['role'=> the role proffesional baeing summoned,'location'=>the loaction from witch the user summons the vet,'information'=> the information on the request eg vaccination etx ]
         $selected_proffesional = User::summon_proffesional($request->role,$request->location);
