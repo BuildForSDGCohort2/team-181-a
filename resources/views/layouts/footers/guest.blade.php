@@ -4,7 +4,7 @@
         <ul>
 
             <li>
-            <a href="https://creative-tim.com/presentation">
+            <a href="/about-us">
                 {{ __('About Us') }}
             </a>
             </li>

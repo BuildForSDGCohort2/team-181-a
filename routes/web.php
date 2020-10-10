@@ -95,3 +95,7 @@ Route::get('login/instagram', 'Auth\LoginController@redirectToInstagramProvider'
 
 Route::get('login/instagram/callback', 'Auth\LoginController@instagramProviderCallback')->name('instagram.login.callback');
 Route::get('show_issue/{id}','NotificationsController@show_issue')->name('show_issue');
+
+Route::get('about-us', function () {
+    return view('pages.about');
+});
