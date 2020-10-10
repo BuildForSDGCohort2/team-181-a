@@ -30,6 +30,7 @@ class Supplier extends Model
         $path = $validated['kra']->store('kra','s3');
         $sup->image_url = $path;
         $sup->save();
+        return $path;
     }
     public function confirm($id)
     {

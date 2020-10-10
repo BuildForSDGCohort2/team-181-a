@@ -36,7 +36,7 @@ class Proffesional extends Model
         $path = $validated['file']->store('cvs' , 's3');
         $prof->image_url = $path;
         $prof->save();
-        echo($path);
+        return $path;
     }
     
    public function confirm($id)

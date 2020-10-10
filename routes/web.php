@@ -75,6 +75,7 @@ Route::group(['middleware' => 'auth'], function () {
 	#to read info
 	Route::post('isue/{id}/read','IssueController@mark_as_read')->name('read_issue');
 
+	Route::post('account/{id}/decison','EnrolmentController@account_decision')->name('proffesional_account_decision');
 });
 
 

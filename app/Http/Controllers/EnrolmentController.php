@@ -14,6 +14,7 @@ use App\Proffesional;
 use App\Supplier;
 use App\Farmer;
 use App\Http\Requests\CustomerStore;
+use App\Image;
 
 class EnrolmentController extends Controller
 {
@@ -21,9 +22,9 @@ class EnrolmentController extends Controller
     public function profesionals_enrole(StoreProfEnrols $request,Proffesional $prof)
     {
         $validated = $request->validated();
-        $prof->new_enrolement($validated);
+       $prof->new_enrolement($validated);
 
-        return 'success';
+        return back()->withStatus(__('Your Request Has Been succesfull submitted.')); 
 
     }
     public function suppliers_enrole(SuppliersEnrol $request , Supplier $sup )
@@ -32,9 +33,9 @@ class EnrolmentController extends Controller
         // return ($validated['kra']);
         // return $request;
 
-        $sup->new_enrolement($validated);
+      $sup->new_enrolement($validated);
 
-        return 'Sucess!' ;
+      return back()->withStatus(__('Your Request Has Been succesfull submitted.')); 
 
     }
     public function farmers_enrole(FarmersRequest $request ,Farmer $farmer )
@@ -48,17 +49,20 @@ class EnrolmentController extends Controller
         // return $request->all();
         $validated = $request->validated();
         $customer->new_enrolement($validated);
-        return 'Sucess!';
+        return  back()->withStatus(__('Welcome!.')); 
     }
     #this is the route for acoount confirmation
-    public function confirmation($request,Proffesional $proffesional)
-    {
-        $proffesional->confirm($request->id);
+    public function account_decision($request,Proffesional $proffesional)
+    {   
+        if ($request->status == 'accept') {
+            $proffesional->confirm($request->id);
+        } else {
+            $proffesional->reject($request->id);
+        }
+        
+        
     }
     #path for account rejection
-    public function rejection($request,Proffesional $proffesional)
-    {
-        $proffesional->reject($request->id);
-    }
+
 
 }
