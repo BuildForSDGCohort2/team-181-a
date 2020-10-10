@@ -93,8 +93,8 @@
                           ...
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#sell"  @click="open_edit({{ $animal }})"> Sell</a>
-                          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#take">Take</a>
+                          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#sell"  @click="open_edit({{ $item }})"> Sell</a>
+                          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#take" @click="open_edit({{ $item }})">Take</a>
                         </div>
                       </div>
                     </td>
@@ -151,7 +151,7 @@
 
                       </div>
                       <div class="modal-footer">
-                        <button @click="save_item('/sell/' + edit_form.id  + '/product" class="btn btn-info" value="Submit">Submit</button>
+                        <button @click="save_item('/sell/' + edit_form.id  + '/product')" class="btn btn-info" value="Submit">Submit</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                       </div>
                     </form>
@@ -188,7 +188,7 @@
 
                       </div>
                       <div class="modal-footer">
-                        <button  @click="save_item('/take/' + edit_form.id  + '/product" class="btn btn-info" value="Submit">Submit</button>
+                        <button  @click="save_item('/take/' + edit_form.id  + '/product')" class="btn btn-info" value="Submit">Submit</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                       </div>
                     </form>
