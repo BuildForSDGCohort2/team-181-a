@@ -9,7 +9,7 @@ class Image extends Model
 
     public static function get_image($object )
     {
-        return  PictureStorage::disk('s3')->response($object->image_url); 
+        return  PictureStorage::disk('s3')->response($object->image_url);
 
     }
 }

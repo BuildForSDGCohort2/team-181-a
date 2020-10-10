@@ -49,11 +49,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('sell/{id}/animal', 'AnimalsController@sell_animal')->name('sell_animal');
     Route::resource('animal', 'AnimalsController', ['except' => ['create']]);
 
-    Route::get('notifications', 'NotificationsController@notification_selector')->name('notifications');
-    Route::get('pending_suppliers', 'NotificationsController@get_suppliers')->name('pending_suppliers');
-    Route::get('issues', 'NotificationsController@get_issues')->name('issues');
-    Route::post('sell/{id}/product', 'StorageController@sell_from_storage')->name('sell_from_storage');
-    Route::post('take/{id}/product', 'StorageController@take_from_storage')->name('take_from_storage');
+	Route::post('order/{id}/product','OrdersController@place_order')->name('place_order');
+	Route::get('order/dispatch','OrdersController@dispatch_orders')->name('dispatch');
+	Route::get('order/{orders}/dispatch','OrdersController@order_pick_up')->name('transit');
+
+	Route::any('summon_proffesional','AnimalsController@summon_proffesional')->name('summon_proffesional');
+
+	Route::any('request_regiment','PlantsController@request_regiment')->name('request_regiment');
+
 
     Route::post('order/{id}/product', 'OrdersController@place_order')->name('place_order');
     Route::get('order/dispatch', 'OrdersController@dispatch_orders')->name('dispatch');
@@ -63,22 +66,21 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::any('request_regiment', 'PlantsController@request_regiment')->name('request_regiment');
 
-
-    Route::get('get_animal', 'AnimalsController@get_animal')->name('get_animal');
+	Route::get('get_animal','AnimalsController@get_animal')->name('get_animal');
+	Route::get('get_notifications','NotificationsController@get_notifications')->name('get_notifications');
 
     Route::get('get_notifications', 'NotificationsController@get_notifications')->name('get_notifications');
 
-    #to read info
-    Route::post('isue/{id}/read', 'IssueController@mark_as_read')->name('read_issue');
+	Route::post('account/{id}/decison','EnrolmentController@account_decision')->name('proffesional_account_decision');
 });
 
 
 
 // enrolement
-Route::post('profesionals_enrole', 'EnrolmentController@profesionals_enrole')->name('profesionals_enrole');
-Route::post('suppliers_enrole', 'EnrolmentController@suppliers_enrole')->name('suppliers_enrole');
-Route::post('farmers_enrole', 'EnrolmentController@farmers_enrole')->name('farmers_enrole');
-Route::post('customers_enrole', 'EnrolmentContoller@customers_enrole')->name('customer_enrole');
+Route::post('profesionals_enrole','EnrolmentController@profesionals_enrole')->name('profesionals_enrole');
+Route::post('suppliers_enrole','EnrolmentController@suppliers_enrole')->name('suppliers_enrole');
+Route::post('farmers_enrole','EnrolmentController@farmers_enrole')->name('farmers_enrole');
+Route::post('customers_enrole','EnrolmentController@customers_enrole')->name('customer_enrole');
 
 Route::post('customer_enrole', 'EnrolmentController@customer_enrole')->name('customer_enrole');
 

@@ -38,7 +38,7 @@ class Proffesional extends Model
         $prof->save();
         echo($path);
     }
-    
+
    public function confirm($id)
    {
        $new_user = $this->find($id);
@@ -51,7 +51,7 @@ class Proffesional extends Model
          $new_account->location = $new_user->location;
          $new_account->phone_number=$new_user->phone;
         //  $new_account->save();
-     
+
         // $new_account->assignRole($new_user->specialty);
         // $new_user->user_id = $new_account->id;
         // $new_user->save();
@@ -60,8 +60,8 @@ class Proffesional extends Model
         Mail::to($new_user->email)->send(new AcceptanceMail($new_user));
         }catch(\Throwable $error){
             #do nothing
-        }   
-    
+        }
+
 
         return $new_user;
    }
@@ -70,11 +70,11 @@ class Proffesional extends Model
        $user = $this->find($id);
         Mail::to($user->email)->send(new RejectMail($user));
         //throw $th;
-    
+
         // $user->delete();
    }
 
-    
+
     public function pending_requests()
     {
         return DB::table('proffesionals')

@@ -19,12 +19,12 @@ class Supplier extends Model
         $sup->status=0;
         $sup->phone= $validated['phone_number'];
         #supe the one being registerd has never been rated before...
-        $sup->ratings= 0;      
+        $sup->ratings= 0;
         if (array_key_exists('hardware',$validated) && array_key_exists('agrovet',$validated) ) {
             $sup->specialty = 'all';
         } else {
             $sup->specialty = (array_key_exists('hardware',$validated) ? 'hardware' : 'agrovet');
-        }        
+        }
         $sup->transport =(array_key_exists('transport',$validated) ? 'able' : 'unable') ;
         $sup->ratings = 0;
         $path = $validated['kra']->store('kra','s3');
