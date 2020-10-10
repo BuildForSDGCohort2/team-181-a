@@ -50,10 +50,12 @@ class EnrolmentController extends Controller
         $customer->new_enrolement($validated);
         return 'Sucess!';
     }
+    #this is the route for acoount confirmation
     public function confirmation($request,Proffesional $proffesional)
     {
         $proffesional->confirm($request->id);        
     }
+    #path for account rejection
     public function rejection($request,Proffesional $proffesional)
     {
         $proffesional->reject($request->id);        

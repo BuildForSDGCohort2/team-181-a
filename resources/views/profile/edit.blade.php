@@ -53,7 +53,7 @@
                   <label class="col-sm-2 col-form-label">{{ __('Phone') }}</label>
                   <div class="col-sm-7">
                     <div class="form-group{{ $errors->has('phone') ? ' has-danger' : '' }}">
-                      <input class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone_number" id="input-phone" type="text" placeholder="{{ __('phone') }}" value="{{ old('phone', auth()->user()->phone) }}" required />
+                      <input class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone_number" id="input-phone" type="text" placeholder="{{ __('phone') }}" value="{{ old('phone_number', auth()->user()->phone_number) }}" required />
                       @if ($errors->has('phone'))
                         <span id="phone-error" class="error text-danger" for="input-phone">{{ $errors->first('phone') }}</span>
                       @endif

@@ -50,12 +50,11 @@ class Proffesional extends Model
          $new_account->last_login= null;
          $new_account->location = $new_user->location;
          $new_account->phone_number=$new_user->phone;
-        //  $new_account->save();
+         $new_account->save();
      
-        // $new_account->assignRole($new_user->specialty);
-        // $new_user->user_id = $new_account->id;
-        // $new_user->save();
-        // dd($new_user);
+        $new_account->assignRole($new_user->specialty);
+        $new_user->user_id = $new_account->id;
+        $new_user->save();
         try{
         Mail::to($new_user->email)->send(new AcceptanceMail($new_user));
         }catch(\Throwable $error){
