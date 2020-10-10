@@ -36,48 +36,4 @@ class IssuesObserver
         }
 
     }
-
-    /**
-     * Handle the issues "updated" event.
-     *
-     * @param  \App\Issues  $issues
-     * @return void
-     */
-    public function updated(Issues $issues)
-    {
-        //
-    }
-
-    /**
-     * Handle the issues "deleted" event.
-     *
-     * @param  \App\Issues  $issues
-     * @return void
-     */
-    public function deleted(Issues $issues)
-    {
-        //
-    }
-
-    /**
-     * Handle the issues "restored" event.
-     *
-     * @param  \App\Issues  $issues
-     * @return void
-     */
-    public function restored(Issues $issues)
-    {
-        //
-    }
-
-    /**
-     * Handle the issues "force deleted" event.
-     *
-     * @param  \App\Issues  $issues
-     * @return void
-     */
-    public function forceDeleted(Issues $issues)
-    {
-        //
-    }
 }

@@ -90,7 +90,7 @@ class AnimalsController extends Controller
         $animal->sell_animal($data);
         return redirect('animal');
 
-    }  
+    }
     public function summon_proffesional(Request $request, Isues $notification)
     {
         #the request should be structured as follws

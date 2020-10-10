@@ -31,7 +31,7 @@ class EnrolmentController extends Controller
         $validated = $request->validated();
         // return ($validated['kra']);
         // return $request;
-        
+
         $sup->new_enrolement($validated);
 
         return 'Sucess!' ;
@@ -53,12 +53,12 @@ class EnrolmentController extends Controller
     #this is the route for acoount confirmation
     public function confirmation($request,Proffesional $proffesional)
     {
-        $proffesional->confirm($request->id);        
+        $proffesional->confirm($request->id);
     }
     #path for account rejection
     public function rejection($request,Proffesional $proffesional)
     {
-        $proffesional->reject($request->id);        
+        $proffesional->reject($request->id);
     }
-    
+
 }

@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pregnant extends Model
 
-{   
-    use SofDeletes;
+{
+    // use SofDelete;
     public function pregnancy_watcher()
     {
         $gestation  = Animal_Fact_sheet::find($this->animal_id)->gestation_period;
@@ -19,7 +19,7 @@ class Pregnant extends Model
             # call the vet to come confirm the birth or remind the farmer get a farmer com check the animal out
             #check if the animal has a vet assighned to it
             Isues::confirm_pregnancy($this);
-            
+
         } else {
             # now to check for the interquatile
 
@@ -36,17 +36,17 @@ class Pregnant extends Model
             }
             Isues::quatile_alert([$quatile_value,$this]);
         }
-         
+
     }
-    
+
     protected $guarded=[];
-    #Birth 
+    #Birth
     #regiments
     public static function new_pregnancy(Type $var = null)
     {
         # code...
     }
-    
+
     public function confirm_pregnancy($animal)
     {   #eloquent would be advisable
         $pregancy = DB::table('pregnants')
@@ -55,7 +55,7 @@ class Pregnant extends Model
                     ->get();
 
     }
-    
+
     public function animal()
     {
         return $this->belongsTo('App\Animal');

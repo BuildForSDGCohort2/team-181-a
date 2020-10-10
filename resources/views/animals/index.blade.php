@@ -371,10 +371,10 @@
                                       Action
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#sell_animal">Sell</a>
-                                      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#death">Dead </a>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#sell_animal" @click="open_edit({{ $animal }})">Sell</a>
+                                      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#death" @click="open_edit({{ $animal }})">Dead </a>
                                       @if ($animal->reproductive_status==1)
-                                      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet">Summon Vet For Ai Procedure</a>
+                                      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet" @click="save_item('summon_proffesional')">Summon Vet For Ai Procedure</a>
                                     @elseif($animal->reproductive_status==2)
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet">Summon Vet For Checkup</a>
                                     @endif
@@ -388,13 +388,13 @@
                                   </button>
                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                   <a class="dropdown-item" href="#" data-toggle="modal" data-target="#sell_animal" @click="open_edit({{ $animal }})">Sell</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet" @click="save_item('summon_vet')">Summon Vet</a>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet" @click="save_item('summon_proffesional')">Summon Vet</a>
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#death">Dead / <span class="text-success">Slaughter</span></a>
                                   </div>
                                 </div>
                                 @endif
                             @else
-                              <button type="button" class="btn btn-outline-danger btn-sm" style="whitespace:normal;">Summon Vet </button>
+                              <button type="button" class="btn btn-outline-danger btn-sm" style="whitespace:normal;" @click="save_item('summon_proffesional')">Summon Vet </button>
                           @endif
 
                       </td>

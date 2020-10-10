@@ -20,12 +20,12 @@ class Animal extends Model
     protected $guarded=[];
 
     public  function new_animal(array $validated,$date=null)
-    {   
-        #calling the functions that will  format the date of birth no matter 
-        $date = (array_key_exists('approx_Age' ,$validated)) 
-        ? Animal::date_of_birth_calculator($validated) 
-        :  Animal::date_formatter(Animal::date_of_birth_calculator($validated)); 
-       
+    {
+        #calling the functions that will  format the date of birth no matter
+        $date = (array_key_exists('approx_Age' ,$validated))
+        ? Animal::date_of_birth_calculator($validated)
+        :  Animal::date_formatter(Animal::date_of_birth_calculator($validated));
+
             $animal= new Animal;
             $animal->name= $validated['name'];
             $animal->species = $validated['species'];
@@ -46,13 +46,13 @@ class Animal extends Model
                 $pregnancy->pregnancy_status=0;
                 $pregnancy->animal_id= $animal->id;
                 $pregnancy->save();
-    
+
             Isues::confirm_pregnancy($pregnancy);
         }
     }
 
     private function date_of_birth_calculator(array $validated)
-    {    
+    {
          #now to exactly calculate the birthdate incase teh user approximatded
          if (! is_null($validated['approx_age']) && array_key_exists('approximation',$validated) && is_null($validated['birthday'])){
             #if the user approximated in months the months
@@ -75,16 +75,16 @@ class Animal extends Model
                 }elseif (date('m')-$validated['approx_age'] == 0) {
                     $birthday =  ('1'.'/'.date('d').'/'.date('Y'));
                 }else{
-                    $birthday =  (date('m')-$validated['approx_age']).'/'.date('d').'/'.(date('Y'));          
+                    $birthday =  (date('m')-$validated['approx_age']).'/'.date('d').'/'.(date('Y'));
                 }
             #if user approximated in years
             }else {
                 #just subtract the year directly
                 $birthday =  (date('m').'/'.date('d').'/'.(date('Y')-$validated['approx_age']));
-            }          
-        }else {      
+            }
+        }else {
             $birthday =  $validated['birthday'];
-        } 
+        }
         return $birthday;
     }
     // this will convert the Date from string format to a t=format that matches the ones already in the db
@@ -92,12 +92,12 @@ class Animal extends Model
     {
         return date('Y-m-d' ,strtotime($date));
     }
-    
+
     #What thus Guy Does is calculate the age of the animal.. From varios formats
     private function age_calculator(array $validated)
-    {   
+    {
         $birthDate = Animal::date_of_birth_calculator($validated) ;
-        if (! is_null($validated['approx_age']) && array_key_exists('approximation',$validated) 
+        if (! is_null($validated['approx_age']) && array_key_exists('approximation',$validated)
             && is_null($validated['birthday']))
             {
             //explode the date to get month, day and year
@@ -116,15 +116,15 @@ class Animal extends Model
                 : (date("Y") - $birthDate[0]));
             return $age;
         }
-        
+
 
 
     }
-    #from the animals age are we able to find out if  
+    #from the animals age are we able to find out if
     private function reproductivity_checker(array $validated) #there will be a change here .. age will be checked an d the pg table will be used hre
-    {    
+    {
         $age =Animal::age_calculator($validated);
-        
+
         if ( $validated['gender'] =='female'&& array_key_exists('pregnancy_status',$validated))  {
             return 2; #pregnant
         } elseif ($age > Animal_Fact_sheet::find($validated['breed_id'])->reproductive_age ) {
@@ -132,14 +132,14 @@ class Animal extends Model
         } else {
             return 0;#inactive
         }
-        
+
     }
     public function death_of_animal( $request)
     {
         $animal  = $this->find($request->id);
         // if (property_exists('call_vet', $request)) {
-            
-        //     Isues::summon_vet(['reason'=>'Death Of Animal']); #check for the animals previous medical records 
+
+        //     Isues::summon_vet(['reason'=>'Death Of Animal']); #check for the animals previous medical records
 
         // }else {
         //     $animal->delete();
@@ -147,13 +147,13 @@ class Animal extends Model
         $animal->delete();
     }
     public function summon_vet()
-    { 
+    {
         #make an alert to the vet
         #channgee the animals status to on sale .. awaiting vet
-        
+
     }
     public function put_up_for_sale($request)
-    {        
+    {
         $animal  = $this->find($request->id);
         $animal->sale_status = 1;
         $animal->save();
@@ -177,7 +177,8 @@ class Animal extends Model
                 'animal_id'=>$data['animal']->id,
             ]);
         }
-        if ($data['picture'] !== null) {
+        if ( array_key_exists('picture', $data)) {
+            // if ($data['picture'] !== null) {
             $path = $data['picture']->store('animals','s3');
             $this->image_url = $path;
             $this->save();
@@ -197,7 +198,7 @@ class Animal extends Model
         }
     }
 
-    
+
     public function farmer(){
         return $this->belongsTo('App\User','user_id');
     }
