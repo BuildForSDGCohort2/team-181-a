@@ -1,5 +1,6 @@
 <?php
 
+use App\Image;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,7 +60,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('order/dispatch','OrdersController@dispatch_orders')->name('dispatch');
 	Route::get('order/{orders}/dispatch','OrdersController@order_pick_up')->name('transit');
 
-	Route::any('summon_proffesional','AnimalsController@summon_proffesional')->name('summon_proffesional');
 
 	Route::any('request_regiment','PlantsController@request_regiment')->name('request_regiment');
 
@@ -81,8 +81,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('confirmation/{id}','EnrolmentController@confirmation')->name('confirmation');
     Route::post('rejection/{id}','EnrolmentController@rejection')->name('rejection');
 
+
+    Route::get('fact_sheet/{search}','BrowseController@fact_sheet')->name('fact_sheet');
+
 });
 
+Route::resource('addCart', 'CartController');
 
 
 // enrolement
@@ -113,4 +117,9 @@ Route::get('show_issue/{id}','NotificationsController@show_issue')->name('show_i
 
 Route::get('about-us', function () {
     return view('pages.about');
+});
+
+Route::get('image', function () {
+    $image = new Image();
+    $image->get_image('cvs/2blTHWkltdisqzw2rbodQclODEEhxZjpgwoKnO1j.pdf');
 });

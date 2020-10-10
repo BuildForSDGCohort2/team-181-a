@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Animal_Fact_sheet;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -29,5 +30,10 @@ class BrowseController extends Controller
             }
         }
         return view('browse.suppliers', compact('users'));
+    }
+
+    public function fact_sheet($search)
+    {
+        return Animal_Fact_sheet::where('species', $search)->get();
     }
 }

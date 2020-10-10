@@ -170,6 +170,7 @@ class Isues extends Model
     }
     public function alert_proffesional($id,$request)
     {
+
         if ($id === 0) {
             Isues::create([
                 'reason'=>'Shortage',#rhe reason will carry the necesary data
@@ -190,13 +191,13 @@ class Isues extends Model
         } else {
             Isues::create([
                 'reason'=>'Summon',#rhe reason will carry the necesary data
-                'information'=>$information['information'],
+                'information'=>$request->reason,
                 'status'=>0,
-                'user_id'=>$id,
-                'identifier'=>$information['identifier']
+                'user_id'=>auth()->user()->id,
+                'identifier'=>'PREG-CONF'
             ]);
         }
-        
+
 
     }
     public function alert_supplier($id,$request)
@@ -227,7 +228,7 @@ class Isues extends Model
                 'identifier'=>$information['identifier']
             ]);
         }
-        
+
 
     }
 

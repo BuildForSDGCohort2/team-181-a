@@ -111,15 +111,17 @@ $product_information = $prod->storage->plantation;
                                 <div class="def-number-input number-input safari_only mb-0">
                                     <div class="row">
                                         <div class="col-md-4 mb-4 mb-md-0">
-                                            <v-btn icon color="primary" @click="toggleActive(-1)" style="margin-top: -5px;">
+                                            <v-btn icon color="primary" @click="toggleActive({{ $prod }}, -1)" style="margin-top: -5px;">
                                                 <v-icon>mdi-minus</v-icon>
                                             </v-btn>
                                         </div>
                                         <div class="col-md-4 mb-4 mb-md-0">
-                                            <input class="quantity" min="1" max="{{ $prod->amount }}" name="quantity" :value="cart_count" type="number" style="width: 40px;">
+                                            {{-- <input class="quantity" min="1" max="{{ $prod->amount }}" name="quantity" :value="cart_count" type="number" style="width: 40px;"> --}}
+                                            <p v-html="cart_count"></p>
+
                                         </div>
                                         <div class="col-md-4 mb-4 mb-md-0">
-                                            <v-btn text icon color="primary" @click="toggleActive(1)" style="margin-top: -5px;">
+                                            <v-btn text icon color="primary" @click="toggleActive({{ $prod }}, 1)" style="margin-top: -5px;">
                                                 <v-icon>mdi-plus</v-icon>
                                             </v-btn>
                                         </div>
@@ -133,13 +135,15 @@ $product_information = $prod->storage->plantation;
                         <tr>
                             @if (auth()->user() !== null)
                             @if (auth()->user()->location === $product_information->farmer->location)
-                            <th class="pl-0 w-25" scope="row"><small>Free Delivery Available</small></th>
-                            @else
+                            {{-- <th class="pl-0 w-25" scope="row"><small>Free Delivery Available</small></th> --}}
+                                <input type="radio" v-model="form.choice" id="pick" value="pick" />
+                                <label for="pick">Free Delivery Available </label> &nbsp;
+                                @else
                             <th class="pl-0 w-25" scope="row"><small>Free Delivery not Available</small> <br>
-                                <input type="radio" v-model="register_form.choice" id="pick" value="pick" />
+                                <input type="radio" v-model="form.choice" id="pick" value="pick" />
                                 <label for="pick">Pick At your local Station </label> &nbsp;
 
-                                <input type="radio" v-model="register_form.choice" id="transport" value="transport" />
+                                <input type="radio" v-model="form.choice" id="transport" value="transport" />
                                 <label for="transport">Home Delivery</label>
                             </th>
                             @endif
@@ -193,7 +197,7 @@ $product_information = $prod->storage->plantation;
             @else
             <button type="button" class="btn btn-primary btn-md mr-1 mb-2" @click="checkout({{ $prod->id }})"><i></i> Proced to Checkout</button>
             @endif
-            <button type="button" class="btn btn-light btn-success" @click='toggleActive(1)'><i
+            <button type="button" class="btn btn-light btn-success" @click='toggleActive({{ $prod }}, 1)'><i
                     class="fa fa-shopping-basket pr-2"></i>Add to Basket</button>
         </div>
     </div>

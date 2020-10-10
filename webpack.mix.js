@@ -15,8 +15,8 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
 
 
-    mix.styles([
-        'public/material/css/material-dashboard.css',
-        'public/material/demo/demo.css',
-        'public/css/main.css',
-    ], 'public/css/all.css');
+    // mix.styles([
+    //     'public/material/css/material-dashboard.css',
+    //     'public/material/demo/demo.css',
+    //     'public/css/main.css',
+    // ], 'public/css/all.css');

@@ -11,14 +11,15 @@ class Sales extends Model
     {
         return $this->find($request->id);
     }
-    public function process_order($request)
+    public function process_order($request, $item)
     {
+        $quantity = $item['quantity'];
         #take into account the user could buy a specified amount
-        $prod = $this->find($request->id);
+        $prod = $this->find($item['item_id']);
 
         if ($prod->prod_id !== "ANML"){
             #get the product off the market
-            $prod->amount -= $request['quantity'];
+            $prod->amount -= $quantity;
             # plants and sacks they are sold out then thay become unavailable (status 1)
             if ($prod->amount === 0) {
                 $prod->status= 1;
@@ -30,7 +31,7 @@ class Sales extends Model
         }
 
         $prod->save();
-        $order_data = ['quantity'=>$request['quantity'] , 'choice'=>$request['choice'],'product'=>$prod];
+        $order_data = ['quantity'=>$quantity , 'choice'=>$request['choice'],'product'=>$prod];
         return  $order_data;
 
     }

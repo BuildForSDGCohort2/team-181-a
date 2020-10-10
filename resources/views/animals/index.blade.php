@@ -10,6 +10,7 @@
         </ul>
     </div>
 @endif
+
 <div class="content">
   <div class="container-fluid">
     <div class="row">
@@ -43,24 +44,20 @@
 
                         <fieldset>
                             <label>Gender:</label><br>
-                            <input type="radio" v-model="form.gender" id="male" value="male" />
-                            <label for="male">Male</label>
-
-                            <input type="radio" v-model="form.gender" id="female" value="female" />
-                            <label for="female">Female</label>
+                            <el-radio-group v-model="form.gender">
+                                <el-radio label="male">Male</el-radio>
+                                <el-radio label="female">Female</el-radio>
+                              </el-radio-group>
 
                         </fieldset>
 
                         <fieldset>
                             <label>Species:</label><br>
-                            <input type="radio" v-model="form.species" id="cow" value="cow" />
-                            <label for="cow">Cow</label>
-
-                            <input type="radio" v-model="form.species" id="goat" value="goat" />
-                            <label for="goat">Goat</label>
-
-                            <input type="radio" v-model="form.species" id="sheep" value="sheep" />
-                            <label for="sheep">Sheep</label>
+                            <el-radio-group v-model="form.species" @change="search_item">
+                                <el-radio label="cow">Cow</el-radio>
+                                <el-radio label="goat">Goat</el-radio>
+                                <el-radio label="sheep">Sheep</el-radio>
+                              </el-radio-group>
                         </fieldset>
 
                         <div class="form-group">
@@ -72,7 +69,7 @@
 
                             </select> --}}
                             <el-select v-model="form.breed_id" filterable placeholder="select a breed"  style="width: 100%;">
-                                <el-option v-for="(item, index) in options" :key="index" :label="item.lable" :value="item.value">
+                                <el-option v-for="(item, index) in options" :key="item.id" :label="item.breed" :value="item.id">
                                 </el-option>
                             </el-select>
                             <small id="momsname" class="form-text text-muted">Select the Breed</small>
@@ -374,9 +371,9 @@
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#sell_animal" @click="open_edit({{ $animal }})">Sell</a>
                                       <a class="dropdown-item" href="#" data-toggle="modal" data-target="#death" @click="open_edit({{ $animal }})">Dead </a>
                                       @if ($animal->reproductive_status==1)
-                                      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet" @click="save_item('summon_proffesional')">Summon Vet For Ai Procedure</a>
+                                      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet" @click="open_edit({{ $animal }})">Summon Vet For Ai Procedure</a>
                                     @elseif($animal->reproductive_status==2)
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet">Summon Vet For Checkup</a>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet" @click="open_edit({{ $animal }})">Summon Vet For Checkup</a>
                                     @endif
                                     </div>
                                   </div>
@@ -388,13 +385,15 @@
                                   </button>
                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                   <a class="dropdown-item" href="#" data-toggle="modal" data-target="#sell_animal" @click="open_edit({{ $animal }})">Sell</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet" @click="save_item('summon_proffesional')">Summon Vet</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#death">Dead / <span class="text-success">Slaughter</span></a>
+
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet" @click="open_edit({{ $animal }})">Summon Vet</a>
+                                    {{-- <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet" @click="save_item_data('summon_proffesional', {{ $animal }})">Summon Vet</a> --}}
+                                    <a class="dropdown-item" @click="open_edit({{ $animal }})" href="#" data-toggle="modal" data-target="#death">Dead / <span class="text-success">Slaughter</span></a>
                                   </div>
                                 </div>
                                 @endif
                             @else
-                              <button type="button" class="btn btn-outline-danger btn-sm" style="whitespace:normal;" @click="save_item('summon_proffesional')">Summon Vet </button>
+                              <button type="button" data-toggle="modal" data-target="#summon_vet" class="btn btn-outline-danger btn-sm" style="whitespace:normal;"  @click="open_edit({{ $animal }})">Summon Vet </button>
                           @endif
 
                       </td>
@@ -451,6 +450,43 @@
 
                       </div>
                     </div>
+
+
+                    <div id="summon_vet" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                          <!-- Modal content-->
+                          <div class="modal-content">
+                            <div class="modal-header">
+                            <h4 class="modal-title">Summon vet for {{ucfirst($animal->name)}}</h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="first-column">
+                                  <div class="form-group">
+                                    <label for="species" ><small>Reason</small> </label>
+                                    <textarea v-model="edit_form.reason" class="form-control" id="recomendations" rows="3" >
+                                    </textarea>
+                                  </div>
+
+                                  {{-- incremental... will depend on the remaining size of farm --}}
+
+
+                                </div>
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                              <button @click="save_item_data('summon_proffesional', edit_form)" class="btn btn-info" value="Submit">Submit</button>
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+
+
                     <div id="death" class="modal fade" role="dialog">
                       <div class="modal-dialog">
 

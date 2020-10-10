@@ -11,10 +11,10 @@
      name='viewport' />
 
     <title>{{ __('The Farmers Assistant') }}</title>
-    <link href="{{ asset('css/all.css') }}" rel="stylesheet">
-    {{-- <link href="{{ asset('material') }}/css/material-dashboard.css" rel="stylesheet" />
+    {{-- <link href="{{ asset('css/all.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('material') }}/css/material-dashboard.css" rel="stylesheet" />
     <link href="{{ asset('material') }}/demo/demo.css" rel="stylesheet" />
-    <link href="{{ asset('css/main.css') }}" rel="stylesheet">--}}
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     {{-- <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('material') }}/img/apple-icon.png"> --}}
