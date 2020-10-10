@@ -41,12 +41,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    
+
     public static function  get_available($role,$location)
     {
         User::all()->filter(function($user) use ($location,$role) {return $user->hasRole($role) && $user->location=== $location; });
     }
-    //to get the 
+    //to get the
     public function get_prev_logins()
     {
         return User::orderBy('last_login','desc');
@@ -61,13 +61,13 @@ class User extends Authenticatable
         }else{
             return ;
         }
-        
+
     }
 
     public static function summon_proffesional($role,$location)
     {
-        $wanted_profs = User::role($role)->where('location',$location)->pluck('id');
-        
+        $wanted_profs = User::role('vet')->where('location',$location)->pluck('id');
+
         if (count($wanted_profs) === null) {
             $selected_prof = 0;
         }
@@ -76,14 +76,14 @@ class User extends Authenticatable
         } else {
             $selected_prof = $wanted_profs->toArray()[0];
         }
-        
+
         return $selected_prof;
     }
-    
+
     public function request_regiment($request)
     {
         $wanted_supplier = User::role('supplier')->where('location',$location)->pluck('id');
-        
+
         if (count($wanted_supplier) === null) {
             $selected_supplier = 0;
         }
@@ -92,7 +92,7 @@ class User extends Authenticatable
         } else {
             $selected_supplier = $wanted_supplier->toArray()[0];
         }
-        
+
         return $selected_supplier;
     }
 

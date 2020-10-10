@@ -30,7 +30,10 @@
 </head>
 
 <body class="{{ $class ?? '' }}">
-        <div id="app">
+        <div id="app"  v-loading="loading"
+        element-loading-text="Loading..."
+        element-loading-spinner="el-icon-loading"
+        element-loading-background="rgba(0, 0, 0, 0.8)">
             @auth()
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf

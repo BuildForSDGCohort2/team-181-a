@@ -23,7 +23,8 @@ class EnrolmentController extends Controller
         $validated = $request->validated();
         $prof->new_enrolement($validated);
 
-        return 'success';
+        // return 'success';
+        return redirect('/login')->with('success','Your account will be reviewed');
 
     }
     public function suppliers_enrole(SuppliersEnrol $request , Supplier $sup )
@@ -34,7 +35,8 @@ class EnrolmentController extends Controller
 
         $sup->new_enrolement($validated);
 
-        return 'Sucess!' ;
+        return redirect('/login')->with('success','Your account will be reviewed');
+        // return 'Sucess!' ;
 
     }
     public function farmers_enrole(FarmersRequest $request ,Farmer $farmer )
@@ -50,13 +52,13 @@ class EnrolmentController extends Controller
         $customer->new_enrolement($validated);
         return 'Sucess!';
     }
-    public function confirmation($request,Proffesional $proffesional)
+    public function confirmation($id,Proffesional $proffesional)
     {
-        $proffesional->confirm($request->id);
+        $proffesional->confirm($id);
     }
-    public function rejection($request,Proffesional $proffesional)
+    public function rejection($id, Proffesional $proffesional)
     {
-        $proffesional->reject($request->id);
+        $proffesional->reject($id);
     }
 
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Http\Requests\UserRequest;
+use App\Proffesional;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -19,6 +20,11 @@ class UserController extends Controller
         return view('users.index', ['users' => $model->paginate(15)]);
     }
 
+    public function show(Proffesional $model, $id)
+    {
+        return $model->find($id);
+    }
+
     /**
      * Show the form for creating a new user
      *
@@ -27,7 +33,7 @@ class UserController extends Controller
     public function create()
     {
         $locations=\App\Farmer::all()->pluck('location')->toArray();
-        $locations = array_unique($locations); 
+        $locations = array_unique($locations);
         return view('users.create')->with('locations',$locations);
     }
 
@@ -39,13 +45,13 @@ class UserController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(UserRequest $request, User $model)
-    {   
+    {
         $role = $request->input('role');
         $model->create($request->merge(['password' => Hash::make($request->get('password'))])->all());
         $user= User::latest()->first();
         // $user->location=$request->input('location');
-        $user->assignRole($role); 
-        $user->save();       
+        $user->assignRole($role);
+        $user->save();
         return redirect()->route('user.index')->withStatus(__('User successfully created.'));
     }
 
@@ -56,9 +62,9 @@ class UserController extends Controller
      * @return \Illuminate\View\View
      */
     public function edit(User $user)
-    {   
+    {
         $locations=\App\Farmer::all()->pluck('location')->toArray();
-       $locations = array_unique($locations); 
+       $locations = array_unique($locations);
         return view('users.edit', compact(['user','locations']));
     }
 
@@ -70,7 +76,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UserRequest $request, User  $user)
-    {   
+    {
         //return $user();
         $role = $request->input('role');
     //    $new_loc = $request->location;
@@ -86,7 +92,7 @@ class UserController extends Controller
                 ->except([$hasPassword ? '' : 'password']
         ));
         // $user->location = $request->input('location');
-        
+
         $user->save();
         return redirect()->route('user.index')->withStatus(__('User successfully updated.'));
     }

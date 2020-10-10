@@ -50,6 +50,13 @@ class Proffesional extends Model
          $new_account->last_login= null;
          $new_account->location = $new_user->location;
          $new_account->phone_number=$new_user->phone;
+         $new_account->save();
+
+         $professional = Proffesional::find($id);
+         $professional->status = 1;
+         $professional->save();
+
+
         //  $new_account->save();
 
         // $new_account->assignRole($new_user->specialty);

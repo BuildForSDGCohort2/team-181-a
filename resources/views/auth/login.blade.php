@@ -2,6 +2,13 @@
 
 @section('content')
 <div class="container" style="height: auto;">
+
+
+@if ($message = Session::get('success'))
+<div class="alert alert-success">
+    <strong>{{ $message }}</strong>
+</div>
+@endif
   <div class="row align-items-center">
     <div class="col-md-9 ml-auto mr-auto mb-3 text-center">
       <h3>{{ __('Welcome To The Log In Page') }} </h3>

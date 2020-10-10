@@ -67,7 +67,7 @@ const app = new Vue({
 
     data: {
         cart_count: 0,
-        loading: true,
+        loading: false,
         snackbar: false,
         text: '',
         form: {
@@ -198,12 +198,17 @@ const app = new Vue({
                 data: this.form
             }
             console.log(payload);
-
+            this.loading = true
             this.$store.dispatch('postItems', payload)
                 .then(response => {
+                this.loading = false
+
                     this.success('Updated')
                     eventBus.$emit("pushEvent", response)
                     window.location.reload()
+                })
+                .catch((error) => {
+                this.loading = false
                 });
         },
         register_customer(model) {
@@ -212,12 +217,17 @@ const app = new Vue({
                 data: this.register_form
             }
             console.log(payload);
+            this.loading = true
 
             this.$store.dispatch('postItems', payload)
                 .then(response => {
-                    this.success('Account Created')
+                this.loading = false
+                this.success('Account Created')
                     eventBus.$emit("pushEvent", response)
                     window.location.href = "/login";
+                })
+                .catch((error) => {
+                this.loading = false
                 });
         },
         update_item(model) {
@@ -226,12 +236,17 @@ const app = new Vue({
                 data: this.edit_form,
                 id: this.edit_form.id,
             }
+            this.loading = true
             console.log(payload);
             this.$store.dispatch('patchItems', payload)
                 .then(response => {
-                    this.success('Updated')
+                this.loading = false
+                this.success('Updated')
                     eventBus.$emit("pushEvent", response)
                     window.location.reload()
+                })
+                .catch((error) => {
+                this.loading = false
                 });
         },
         open_edit(data) {
@@ -269,9 +284,6 @@ const app = new Vue({
             // var year=last.getFullYear();
         },
         success(text) {
-            // this.text = text
-            // this.snackbar = true
-
         this.$message({
             message: text,
             type: 'success'
@@ -309,6 +321,22 @@ const app = new Vue({
                     // eventBus.$emit("pushEvent", response)
                 });
         },
+
+        open_user(id) {
+            console.log(id);
+
+            var payload = {
+                update: 'updateUsersList',
+                id: id,
+                model: 'user'
+            }
+            console.log(payload);
+            this.$store.dispatch('showItem', payload)
+                .then(response => {
+                    // this.success('Updated')
+                    // eventBus.$emit("pushEvent", response)
+                });
+        },
         oder_info(order) {
             console.log(order);
             // return
@@ -317,12 +345,12 @@ const app = new Vue({
     },
     mounted() {
 
-        setTimeout(() => {
-            this.loading = false
-        }, 1500);
+        // setTimeout(() => {
+        //     this.loading = false
+        // }, 1500);
         this.get_items('get_notifications', 'updateNotification')
     },
     computed: {
-        ...mapState(['errors', 'animals', 'issues_show', 'notifications']),
+        ...mapState(['errors', 'animals', 'issues_show', 'notifications', 'users']),
     },
 });
