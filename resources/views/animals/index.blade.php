@@ -116,7 +116,7 @@
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="health_status" v-model="form.health_status">
-                                <label class="custom-control-label" for="health_status"> Is the animal <span class="text-danger">Healthy</span>?</label>
+                                <label class="custom-control-label" for="health_status"> Is the animal <span class="text-danger">Sick</span>?</label>
                             </div>
                         </div>
 

@@ -76,14 +76,7 @@ const app = new Vue({
             birthday: '',
         },
 
-        options: [
-            {
-                lable: 'Charolais',
-                value: '1',
-            }, {
-                lable: 'Merino',
-                value: '2',
-            }],
+        options: [],
         order: null,
         register_form: {},
         edit_form: {},
@@ -136,7 +129,7 @@ const app = new Vue({
                     this.text = 'Checkout complete'
                     this.snackbar = true
                     this.cart_count = 0
-                    // window.location.href = "/on_sale";
+                    window.location.href = "/on_sale";
                     // this.cart_count += 1
                     // eventBus.$emit("broodEvent")
                 });
