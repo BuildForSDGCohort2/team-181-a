@@ -200,6 +200,10 @@ class Isues extends Model
             ]);
 
         } else {
+            #here youll debug 
+            #the checkboxes should generate automatic maseages.
+            #checkboxes wuill be much easier for the user to input <queries class=""></queries>
+            #add a other | other reason input area..
             Isues::create([
                 'reason'=>'Summon',#rhe reason will carry the necesary data
                 'information'=>$request->reason,
