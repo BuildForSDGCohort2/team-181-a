@@ -19,7 +19,7 @@ class CreateWaitingsTable extends Migration
             $table->unsignedBigInteger('animal_id')->nullable();
             $table->foreign('animal_id')->references('id')->on('animals');
             $table->unsignedBigInteger('proffesional_id')->nullable();
-            $table->foreign('proffessonal_id')->references('id')->on('users');
+            $table->foreign('proffesional_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
