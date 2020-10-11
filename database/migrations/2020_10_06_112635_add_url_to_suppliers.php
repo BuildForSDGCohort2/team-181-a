@@ -14,7 +14,7 @@ class AddUrlToSuppliers extends Migration
     public function up()
     {
         Schema::table('suppliers', function (Blueprint $table) {
-            $table->string('image_url');
+            $table->string('kra_url');
 
 
         });

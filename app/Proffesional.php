@@ -36,9 +36,9 @@ class Proffesional extends Model
         $path = $validated['file']->store('cvs' , 's3');
         $prof->image_url = $path;
         $prof->save();
-        return $path;
+        echo($path);
     }
-    
+
    public function confirm($id)
    {
        $new_user = $this->find($id);
@@ -51,7 +51,14 @@ class Proffesional extends Model
          $new_account->location = $new_user->location;
          $new_account->phone_number=$new_user->phone;
          $new_account->save();
-     
+
+         $professional = Proffesional::find($id);
+         $professional->status = 1;
+         $professional->save();
+
+
+         $new_account->save();
+
         $new_account->assignRole($new_user->specialty);
         $new_user->user_id = $new_account->id;
         $new_user->save();
@@ -59,21 +66,23 @@ class Proffesional extends Model
         Mail::to($new_user->email)->send(new AcceptanceMail($new_user));
         }catch(\Throwable $error){
             #do nothing
-        }   
-    
+        }
+
 
         return $new_user;
    }
    public function reject($id)
    {
        $user = $this->find($id);
+       try{
         Mail::to($user->email)->send(new RejectMail($user));
-        //throw $th;
-    
+       }catch(\Throwable $error){
+            // throw $th;
+       }
         $user->delete();
    }
 
-    
+
     public function pending_requests()
     {
         return DB::table('proffesionals')

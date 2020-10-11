@@ -10,11 +10,11 @@ use DB;
 
 
 class Order extends Model
-{   
+{
     protected $guarded = [];
     #cant wait to bite into this one
     public function create_order($data)
-    {   
+    {
 
         if ($data['product']->prod_id== "ANML") {
             $product_information = $data['product']->animal;
@@ -35,14 +35,14 @@ class Order extends Model
         #animal bug expected
         $order->quantity= $data['quantity'] ?? 1 ;
         $order ->save();
- 
-        return ['quantity'=>$data['quantity'],'order'=>$order]; 
+
+        return ['quantity'=>$data['quantity'],'order'=>$order];
     }
 
     public function get_orders()
-    {   
+    {
         if (auth()->user()->hasRole('admin')) {
-            return $this->orderBy('created_at','desc');           
+            return $this->orderBy('created_at','desc')->get();
         } else {
             return $this->orderBy('created_at','desc')
                         ->where('user_id','=',auth()->user()->id)

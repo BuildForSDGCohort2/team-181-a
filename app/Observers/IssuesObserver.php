@@ -16,6 +16,7 @@ class IssuesObserver
      */
     public function created(Isues $isues)
     {
+        return ;
         $user = User::find($isues->user_id);
 
         // Log::debug($isues);
