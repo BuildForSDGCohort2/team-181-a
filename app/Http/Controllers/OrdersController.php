@@ -64,42 +64,26 @@ class OrdersController extends Controller
     public function order_pick_up(Request $request, Order $order, Isues $issue)
     {
 
-        // return $request;
-        #change the order statust to in  transit.. only the admin and sellers do see this the customer only sees i progress etc...
-        foreach ($request as $location) {
-            foreach ($location as $loc_order) {
-                $order->transit($loc_order->id);
-            }
-        }
-        #now alert the customer
-        foreach ($request as $location) {
-            foreach ($location as $loc_order) {
-                $issue->in_transit_alert($loc_order->id);
-            }
-        }
+    //    return gettype($request->orders);
+        #this fuction will fetch all the orders    
+        $order->dispatch_orders($request->orders);
+        return redirect('dispatch')->with('succes','Dispatch successfully All the Goods Are in Transit');
+      
+
     }
     public function order_delivery($request, Order $order, Isues $issue)
     {
-        return $request;
-        foreach ($request as $location) {
-            foreach ($location as $loc_order) {
-                $order->deliver($loc_order->id);
-            }
-        }
-        #now alert the customer
-        foreach ($request as $location) {
-            foreach ($location as $loc_order) {
-                $issue->delivery_alert($loc_order->id);
-            }
-        }
+        $order->deliver($request->orders);
+        $issue->delivery_alert($order);
+        return redirect('dispatch')->with('succes','Dispatch successfully All the Goods Are in Transit');
     }
 
     public function dispatch_orders(Order $order)
     {
         #here we wont use the all clause we will take up undelivered ones only
 
-        $grouped_orders = $order->all()->groupBy(function ($order) {
-            return $order->get_seller($order->seller_id)->location;
+        $grouped_orders = $order->where('order_status',0)->get()->groupBy(function ($order) {
+            return $order->user->location;
         });
         // return $grouped_orders;
         return view('orders.dispatch')->with('grouped_orders', $grouped_orders);
@@ -128,5 +112,18 @@ class OrdersController extends Controller
     {
         $suppliers = $user->suppliers();
         return view('suppliers')->with('suppliers' . $suppliers);
+    }
+
+    public function recievers_dash(Order $order)
+    {
+       $transit_orders= $order->get_transit_orders();
+    //    return $transit_orders;
+        return view('recievers_dash')->with('transit_orders',$transit_orders);
+    }
+    public function ready_for_pickup(Order $order)
+    {
+       $ready_orders= $order->get_deliverd_orders();
+    //    return $transit_orders;
+        return view('ready')->with('ready_orders',$ready_orders);
     }
 }

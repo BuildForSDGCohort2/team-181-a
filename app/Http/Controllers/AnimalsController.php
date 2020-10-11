@@ -94,7 +94,7 @@ class AnimalsController extends Controller
     }
     public function summon_proffesional(Request $request, Isues $notification)
     {
-        // return $request->all();
+        dd($request->all());
 
         $location = Auth::user()->location;
         #the request should be structured as follws

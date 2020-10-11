@@ -24,7 +24,7 @@ class EnrolmentController extends Controller
         $prof->new_enrolement($validated);
 
         // return 'success';
-        return redirect('/login')->with('success','Your account will be reviewed');
+        return redirect('/')->with('success','Your account will be reviewed');
 
     }
     public function suppliers_enrole(SuppliersEnrol $request , Supplier $sup )

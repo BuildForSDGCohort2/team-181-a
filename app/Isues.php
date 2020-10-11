@@ -12,6 +12,13 @@ class Isues extends Model
 
     protected $guarded=[];
     // make an isue
+    public function origin($order)
+    {
+       return $origin =($order->sales->prod_id=== 'ANML'?$order->sales->animal:
+        ($order->sales->prod_id === 'POULT'? $order->sales->brood:
+        ($order->sales->storage->plantation)));
+    }
+
     public function generate_issue(array $isues)
     {
         $new_issue = new Issues;
@@ -107,9 +114,13 @@ class Isues extends Model
 
 
     }
-    public function in_transit_alert($order)
+    public static function in_transit_alert($order)
     {
-        $this->create([
+        $origin =($order->sales->prod_id=== 'ANML'?$order->sales->animal:
+        ($order->sales->prod_id === 'POULT'? $order->sales->brood:
+        ($order->sales->storage->plantation)));
+
+       Isues::create([
             'reason' => 'Order Transit',
 
             'information' => 'Your Order  Of '.($order->sales->prod_id=== 'ANML'?$origin->name.'( The '. $origin->species.')':
@@ -174,7 +185,7 @@ class Isues extends Model
         if ($id === 0) {
             Isues::create([
                 'reason'=>'Shortage',#rhe reason will carry the necesary data
-                'information'=>'There was a request for a '.strtoupper($request->role).'from'.ucfirst($request->location).' by '.auth()->user()->name.' '.auth()->user()->phone_number.'there werent any available please find on',
+                'information'=>'There was a request for a Veterinary Officer from'.ucfirst(auth()->user()->location).' by '.auth()->user()->name.' '.auth()->user()->phone_number.' there werent any available please find one and get Back To The Farmer.',
                 'status'=>0,
                 'user_id'=>1,
                 'identifier'=>'SHORTAGE'
@@ -182,7 +193,7 @@ class Isues extends Model
 
             Isues::create([
                 'reason'=>'Delay',#rhe reason will carry the necesary data
-                'information'=>"There were'nt any ".strtoupper($request->role).'found in your area, however one is being organised for you by the admin. Sit tight sorry for ant incoviniences encountered',
+                'information'=>"There were'nt any Verinary Officers found in your area, however one is being organised for you by the admin. Sit tight, sorry for ant incoviniences encountered",
                 'status'=>0,
                 'user_id'=>auth()->user()->id,
                 'identifier'=>'REGRET'
@@ -194,7 +205,7 @@ class Isues extends Model
                 'information'=>$request->reason,
                 'status'=>0,
                 'user_id'=>$id,
-                'identifier'=>'PREG-CONF'
+                'identifier'=>'SUMMON'
             ]);
         }
 
@@ -232,9 +243,15 @@ class Isues extends Model
 
     }
 
+    
+
 
     public function delivery_alert($order)
     {
+        $origin =($order->sales->prod_id=== 'ANML'?$order->sales->animal:
+                ($order->sales->prod_id === 'POULT'? $order->sales->brood:
+                ($order->sales->storage->plantation)));
+
         $this->create([
             'reason' => 'Order Delivered',
 

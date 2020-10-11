@@ -82,7 +82,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('rejection/{id}','EnrolmentController@rejection')->name('rejection');
 
 
-    Route::get('fact_sheet/{search}','BrowseController@fact_sheet')->name('fact_sheet');
+	Route::get('fact_sheet/{search}','BrowseController@fact_sheet')->name('fact_sheet');
+	
+	Route::get('recievers_dash','OrdersController@recievers_dash')->name('receivers_dash');
+	Route::get('ready_for_pickup','OrdersController@ready_for_pickup')->name('ready_for_pickup');
+
 
 });
 
@@ -119,6 +123,7 @@ Route::get('about-us', function () {
     return view('pages.about');
 });
 
+#wtf is this????
 Route::get('image', function () {
     $image = new Image();
     $image->get_image('cvs/2blTHWkltdisqzw2rbodQclODEEhxZjpgwoKnO1j.pdf');

@@ -6,12 +6,7 @@
 <div class="content">
 
   <div class="container-fluid">
-    @if (auth()->user()->hasRole('customer'))
-    <div class="row text-primary ">
-      <h3 style="margin-left:20px">Order <span style="color: "> History</span></h3>
-    </div>
 
-    @else
 
     <nav>
       <ul class="nav nav-pills">
@@ -51,7 +46,7 @@
     </ul>
   </nav>
 
-    @endif
+ 
 
 
     <div class="row">

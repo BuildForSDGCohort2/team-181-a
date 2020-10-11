@@ -42,9 +42,9 @@ class User extends Authenticatable
     ];
 
 
-    public static function  get_available($role,$location)
+    public static function  get_available($location)
     {
-        User::all()->filter(function($user) use ($location,$role) {return $user->hasRole($role) && $user->location=== $location; });
+        User::all()->filter(function($user) use ($location,$role) {return $user->hasRole('vet') && $user->location=== $location; });
     }
     //to get the
     public function get_prev_logins()
@@ -105,7 +105,7 @@ class User extends Authenticatable
     }
     public function order()
     {
-        return $this->hasMany('App\Order');
+        return $this->hasMany('App\Order','user_id');
     }
     public function proffesional()
     {

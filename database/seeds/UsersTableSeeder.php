@@ -79,6 +79,19 @@ class UsersTableSeeder extends Seeder
             'phone_number'=>'+254768187628',
 
         ]);
+        //reciever
+        DB::table('users')->insert([
+            'name' => 'Reciever',
+            'email' => 'reciever@farmers.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('secret'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'last_login'=>null,
+            'location'=>'nakuru',
+            'phone_number'=>'+254768187628',
+
+        ]);
         //customer
         DB::table('users')->insert([
             'name' => 'Customer',
@@ -125,6 +138,11 @@ class UsersTableSeeder extends Seeder
         //Customer
         DB::table('model_has_roles')->insert([
             'role_id'=>6,
+            'model_type'=>'App\User',
+            'model_id'=>7,
+        ]);
+        DB::table('model_has_roles')->insert([
+            'role_id'=>7,
             'model_type'=>'App\User',
             'model_id'=>6,
         ]);
