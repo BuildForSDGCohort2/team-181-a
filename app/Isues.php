@@ -193,7 +193,7 @@ class Isues extends Model
                 'reason'=>'Summon',#rhe reason will carry the necesary data
                 'information'=>$request->reason,
                 'status'=>0,
-                'user_id'=>auth()->user()->id,
+                'user_id'=>$id,
                 'identifier'=>'PREG-CONF'
             ]);
         }

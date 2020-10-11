@@ -99,7 +99,7 @@ class AnimalsController extends Controller
         $location = Auth::user()->location;
         #the request should be structured as follws
         # $requea['role'=> the role proffesional baeing summoned,'location'=>the loaction from witch the user summons the vet,'information'=> the information on the request eg vaccination etx ]
-        $selected_proffesional = User::summon_proffesional($request->role,$location);
+        $selected_proffesional = User::summon_proffesional($location);
         $notification->alert_proffesional($selected_proffesional,$request, );
     }
 }
