@@ -70,7 +70,7 @@ class Proffesional extends Model
         Mail::to($user->email)->send(new RejectMail($user));
         //throw $th;
     
-        // $user->delete();
+        $user->delete();
    }
 
     

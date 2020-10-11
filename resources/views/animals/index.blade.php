@@ -374,8 +374,11 @@
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#sell_animal" @click="open_edit({{ $animal }})">Sell</a>
                                       <a class="dropdown-item" href="#" data-toggle="modal" data-target="#death" @click="open_edit({{ $animal }})">Dead </a>
                                       @if ($animal->reproductive_status==1)
+                                      
+                                      <form action="" method="post">
                                       <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet" @click="save_item('summon_proffesional')">Summon Vet For Ai Procedure</a>
-                                    @elseif($animal->reproductive_status==2)
+                                    </form>
+                                      @elseif($animal->reproductive_status==2)
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet">Summon Vet For Checkup</a>
                                     @endif
                                     </div>

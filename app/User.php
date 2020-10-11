@@ -64,9 +64,9 @@ class User extends Authenticatable
         
     }
 
-    public static function summon_proffesional($role,$location)
+    public static function summon_proffesional($request)
     {
-        $wanted_profs = User::role($role)->where('location',$location)->pluck('id');
+        $wanted_profs = User::role('vet')->where('location',$request->location)->pluck('id');
         
         if (count($wanted_profs) === null) {
             $selected_prof = 0;

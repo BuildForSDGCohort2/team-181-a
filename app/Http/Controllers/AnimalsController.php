@@ -86,16 +86,17 @@ class AnimalsController extends Controller
     public function sell_animal(Request $request,Animal $animal){
 
         // return $request;
-        $data =$animal->put_up_for_sale($request);
+        $data =$animal->put_up_for_sale($request);                      
         $animal->sell_animal($data);
         return redirect('animal');
 
     }
     public function summon_proffesional(Request $request, Isues $notification)
     {
+        return $request;
         #the request should be structured as follws
         # $requea['role'=> the role proffesional baeing summoned,'location'=>the loaction from witch the user summons the vet,'information'=> the information on the request eg vaccination etx ]
-        $selected_proffesional = User::summon_proffesional($request->role,$request->location);
+        $selected_proffesional = User::summon_proffesional($request);
         $notification->alert_proffesional($selected_proffesional,$request);
     }
 }

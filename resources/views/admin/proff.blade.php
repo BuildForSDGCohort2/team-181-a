@@ -86,7 +86,7 @@
                       {{$prof->location}}
                     </td>
                     <td>
-                    <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#professional_modal,{{$prof}}">View info</button>
+                    <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#professional_modal">View info</button>
 
                     </td>
                 </tr>

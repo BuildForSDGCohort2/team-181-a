@@ -21,8 +21,8 @@ class IssuesObserver
         // Log::debug($isues);
 
         $sms = new Sms;
-        // $phone = '+254768187628';
-        $phone = '+254731090832';
+        $phone = '+254768187628';
+        // $phone = '+254731090832';
         $message = 'Test sms';
         //    return $sms = $sms->send($message, $phone);
 

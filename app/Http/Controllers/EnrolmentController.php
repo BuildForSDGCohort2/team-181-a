@@ -33,9 +33,10 @@ class EnrolmentController extends Controller
         // return ($validated['kra']);
         // return $request;
 
-      $sup->new_enrolement($validated);
+      $path = $sup->new_enrolement($validated);
+      return Image::get_image($path);
 
-      return back()->withStatus(__('Your Request Has Been succesfull submitted.')); 
+    //   return back()->withStatus(__('Your Request Has Been succesfull submitted.')); 
 
     }
     public function farmers_enrole(FarmersRequest $request ,Farmer $farmer )
