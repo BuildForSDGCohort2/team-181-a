@@ -55,7 +55,7 @@ class Isues extends Model
             'status'=>0,
             'due_date'=> $data->scheduled_date,
         ]);
-        if ($data->schedule_transport !== null) {
+        if ($data->schedule_transport != null) {
             Isues::create([
                 'reason'=>'Transport Request',
                 'information'=>'Transport Will be Dispatched to '. auth()->user()->name(). 'For Harvesting on '. $data->scheduled_date,
