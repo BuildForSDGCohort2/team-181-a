@@ -25,6 +25,8 @@ export default {
         page_loader: false,
         issues_show: [],
         notifications: [],
+        cart: [],
+
     },
     getters,
     mutations,

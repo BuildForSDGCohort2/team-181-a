@@ -16,13 +16,14 @@ class IssuesObserver
      */
     public function created(Isues $isues)
     {
+        return;
         $user = User::find($isues->user_id);
 
         // Log::debug($isues);
 
         $sms = new Sms;
-        // $phone = '+254768187628';
-        $phone = '+254731090832';
+        $phone = '+254768187628';
+        // $phone = '+254731090832';
         $message = 'Test sms';
         //    return $sms = $sms->send($message, $phone);
 

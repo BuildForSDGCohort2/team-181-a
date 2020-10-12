@@ -33,9 +33,7 @@
                   @csrf
                 <div class="first-column" style='width:45%; float: left;'>
 
-                  <fieldset>
-
-                    {{-- We coulld use a Dropdown or the user couold input if the brood is not in the list --}}
+                  {{-- <fieldset>
                     <label>Species:</label><br>
                     <input type = "radio"
                            v-model = "form.species"
@@ -62,7 +60,24 @@
                       <small id="others" class="form-text text-muted">Please indicate</small>
                       <small class="has-text-danger" v-if="errors.others">@{{ errors.others[0] }}</small>
                     </div>
-                </fieldset>
+                </fieldset> --}}
+
+
+                    <fieldset>
+                        <label>Species:</label><br>
+                        <el-radio-group v-model="form.species" @change="search_item">
+                            <el-radio label="turkey">turkey</el-radio>
+                            <el-radio label="chicken">chicken</el-radio>
+                            <el-radio label="duck">duck</el-radio>
+                        </el-radio-group>
+
+                        <div class="form-group" v-if="!form.species">
+                          <label for="others">Others</label>
+                          <input type="text" v-model ='form.others'class="form-control" id="others" aria-describedby="others" placeholder="Please indicate">
+                          <small id="others" class="form-text text-muted">Please indicate</small>
+                          <small class="has-text-danger" v-if="errors.others">@{{ errors.others[0] }}</small>
+                        </div>
+                    </fieldset>
                       <fieldset required>
                         <label>Gender:</label><br>
                         <input type = "radio"
@@ -81,12 +96,18 @@
 
 
 
-                       <div class="form-group">
+                       {{-- <div class="form-group">
                         <label for="breed">Breed</label>
                         <input type="text" v-model ='form.breed'class="form-control" id="breed" aria-describedby="breedname" placeholder="Select Breed">
                         <small id="momsname" class="form-text text-muted">Select the Breed</small>
                         <small class="has-text-danger" v-if="errors.breed">@{{ errors.breed[0] }}</small>
-                    </div>
+                    </div> --}}
+
+                    <el-select v-model="form.breed" filterable placeholder="select a breed"  style="width: 100%;">
+                        <el-option v-for="(item, index) in options" :key="item.id" :label="item.breed" :value="item.id">
+                        </el-option>
+                    </el-select>
+                        <small class="has-text-danger" v-if="errors.breed">@{{ errors.breed[0] }}</small>
                     </div>
                     <div class="second-column" style='width:45%; float: right;'>
 

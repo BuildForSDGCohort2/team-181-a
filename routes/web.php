@@ -1,5 +1,6 @@
 <?php
 
+use App\Image;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +20,7 @@ Route::get('/', function () {
 	}else {
 		return redirect('home');
 	}
-    
+
 });
 
 Auth::routes();
@@ -31,7 +32,7 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 
 Route::group(['middleware' => 'auth'], function () {
-	Route::resource('user', 'UserController', ['except' => ['show']]);
+	Route::resource('user', 'UserController');
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
@@ -58,11 +59,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('order/{id}/product','OrdersController@place_order')->name('place_order');
 	Route::get('order/dispatch','OrdersController@dispatch_orders')->name('dispatch');
 	Route::get('order/{orders}/dispatch','OrdersController@order_pick_up')->name('transit');
-	
-	Route::any('summon_proffesional','AnimalsController@summon_proffesional')->name('summon_proffesional');
-	
+
+
 	Route::any('request_regiment','PlantsController@request_regiment')->name('request_regiment');
-	
+
 
 	Route::any('summon_proffesional','AnimalsController@summon_proffesional')->name('summon_proffesional');
 
@@ -75,9 +75,22 @@ Route::group(['middleware' => 'auth'], function () {
 	#to read info
 	Route::post('isue/{id}/read','IssueController@mark_as_read')->name('read_issue');
 
-	Route::post('account/{id}/decison','EnrolmentController@account_decision')->name('proffesional_account_decision');
+    Route::post('account/{id}/decison','EnrolmentController@account_decision')->name('proffesional_account_decision');
+
+
+    Route::post('confirmation/{id}','EnrolmentController@confirmation')->name('confirmation');
+    Route::post('rejection/{id}','EnrolmentController@rejection')->name('rejection');
+
+
+	Route::get('fact_sheet/{search}','BrowseController@fact_sheet')->name('fact_sheet');
+
+	Route::get('recievers_dash','OrdersController@recievers_dash')->name('receivers_dash');
+	Route::get('ready_for_pickup','OrdersController@ready_for_pickup')->name('ready_for_pickup');
+
+
 });
 
+Route::resource('cart', 'CartController');
 
 
 // enrolement
@@ -109,3 +122,11 @@ Route::get('show_issue/{id}','NotificationsController@show_issue')->name('show_i
 Route::get('about-us', function () {
     return view('pages.about');
 });
+
+Route::any('/ussd', 'UssdController@ussdRequestHandler');
+
+#wtf is this????
+// Route::get('image', function () {
+//     $image = new Image();
+//     $image->get_image('cvs/2blTHWkltdisqzw2rbodQclODEEhxZjpgwoKnO1j.pdf');
+// });

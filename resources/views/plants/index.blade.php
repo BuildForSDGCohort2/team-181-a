@@ -157,8 +157,8 @@
                           Access {{substr($time,1).'Days overdue'}}
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#scheduleHarvest">{{($plantation->status==1?'Reschedule':'Schedule Harvest' )}} </a>
-                          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#harvest">Harvest</a>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#scheduleHarvest" @click="open_edit( {{ $plantation }} )">{{($plantation->status==1?'Reschedule':'Schedule Harvest' )}} </a>
+                          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#harvest" @click="open_edit( {{ $plantation }} )">Harvest</a>
                         </div>
                       </div>
 
@@ -217,7 +217,7 @@
 
                         </div>
                         <div class="modal-footer">
-                          <button @click="save_item('plantation/{{$plantation->id}}/schedule_harvest')" class="btn btn-info" value="Submit">Submit</button>
+                          <button @click="save_item('plantation/'+edit_form.id+'/schedule_harvest')" class="btn btn-info" value="Submit">Submit</button>
                           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                         </div>
                       {{-- </form> --}}
@@ -268,6 +268,7 @@
                                 <small id="price" class="form-text text-muted">The price Per sack.</small>
                             <small class="has-text-danger" v-if="errors.price">@{{ errors.price[0] }}</small>
                         </div>
+                        <div v-if="!form.sell">
 
                               <div class="form-group">
                                 <div class="custom-control custom-checkbox">
@@ -282,6 +283,7 @@
                                 <small id="amount" class="form-text text-muted">How many sacks Would You like to sell?</small>
                             <small class="has-text-danger" v-if="errors.amount">@{{ errors.amount[0] }}</small>
                         </div>
+                    </div>
 
                               <div class="form-group">
                                 <div class="custom-control custom-checkbox">
@@ -292,7 +294,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                          <button @click="save_item('/plantation/{{$plantation->id}}/harvest')" class="btn btn-info" value="Submit">Submit</button>
+                          <button @click="save_item('/plantation/'+edit_form.id +'/harvest')" class="btn btn-info" value="Submit">Submit</button>
                           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                         </div>
                       {{-- </form> --}}

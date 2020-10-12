@@ -29,7 +29,8 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'feo_permissions']);
         # Admin permission.
         Permission::create(['name' => 'admin']);
-
+        #reciever
+        Permission::create(['name' => 'reciever_permissions']);
 
 
 
@@ -54,6 +55,9 @@ class RolesAndPermissionsSeeder extends Seeder
         #customer
         $role = Role::create(['name' => 'customer']);
         $role->givePermissionTo(['customer_permissions']);
+        #reciever
+        $role = Role::create(['name' => 'reciever']);
+        $role->givePermissionTo(['reciever_permissions']);
 ;
 
 

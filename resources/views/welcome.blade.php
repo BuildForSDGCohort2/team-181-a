@@ -12,16 +12,9 @@ Assistant.')])
     </ul>
 </div>
 @endif
-@if (session('status'))
-<div class="row">
-  <div class="col-sm-12">
-    <div class="alert alert-success">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <i class="material-icons">close</i>
-      </button>
-      <span>{{ session('status') }}</span>
-    </div>
-  </div>
+@if ($message = Session::get('success'))
+<div class="alert alert-success">
+    <strong>{{ $message }}</strong>
 </div>
 @endif
 <div class="container" style="background: rgb(28, 22, 22) !important,height: auto;">
@@ -36,7 +29,7 @@ Assistant.')])
                 style="border:1px solid white; border-radius: 25px; margin:0.1px; ">
                 <h3>Agricultural Services</h3>
                 <hr style="height: 1px;background-color: white; border: none;">
-                <i class="material-icons" style="font-size:42px;">biotech</i>
+                <i class="material-icons" style="font-size:42px;    margin-left: 10px;">biotech</i>
                 <a href="/professionals">
                     <button class="btn btn-outline"
                         style="border: 1px solid white; color: white; white-space: normal; "><i class="fa fa-search"

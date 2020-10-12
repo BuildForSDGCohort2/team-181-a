@@ -127,7 +127,7 @@ class Animal extends Model
 
         if ( $validated['gender'] =='female'&& array_key_exists('pregnancy_status',$validated))  {
             return 2; #pregnant
-        } elseif ($age > Animal_Fact_sheet::find($validated['breed_id'])->reproductive_age ) {
+        } elseif ($age > floor(Animal_Fact_sheet::find($validated['breed_id'])->reproductive_age/30) ) {
             return 1;#active
         } else {
             return 0;#inactive
@@ -216,6 +216,10 @@ class Animal extends Model
     public function sick()
     {
         return $this->hasMany('App\Animal_Ailments','animal_id');
+    }
+    public function waaiting(Type $var = null)
+    {
+        return $this->hasMany('App\Waiting');
     }
 
 

@@ -2,6 +2,13 @@
 
 @section('content')
 <div class="container" style="height: auto;">
+
+
+@if ($message = Session::get('success'))
+<div class="alert alert-success">
+    <strong>{{ $message }}</strong>
+</div>
+@endif
   <div class="row align-items-center">
     <div class="col-md-9 ml-auto mr-auto mb-3 text-center">
       <h3>{{ __('Welcome To The Log In Page') }} </h3>
@@ -72,18 +79,13 @@
           </div>
         </div>
       </form>
-      <div class="row">
-        <div class="col-6">
+      <div class="row  justify-content-center" >
+        <div class="col-6" >
             @if (Route::has('password.request'))
                 <a href="{{ route('password.request') }}" class="text-light">
                     <small>{{ __('Forgot password?') }}</small>
                 </a>
             @endif
-        </div>
-        <div class="col-6 text-right">
-            <a href="{{ route('register') }}" class="text-light">
-                <small>{{ __('Create new account') }}</small>
-            </a>
         </div>
       </div>
     </div>

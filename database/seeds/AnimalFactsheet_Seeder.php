@@ -67,7 +67,7 @@ class AnimalFactsheet_Seeder extends Seeder
             }
 
  
-
+            $pointer = 0;
             while ($pointer < 7) {
                 DB::table('animal_fact_sheets')->insert([
                     'species' =>'sheep',

@@ -18947,3 +18947,6 @@ Copyright (c) 2015 Daniel Eden
 .has-text-danger {
     color: red;
 }
+.el-radio__inner {
+    border: 1px solid #9fa3ac !important;
+}
