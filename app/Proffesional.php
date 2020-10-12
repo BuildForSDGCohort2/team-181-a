@@ -57,12 +57,11 @@ class Proffesional extends Model
          $professional->save();
 
 
-        //  $new_account->save();
+         $new_account->save();
 
-        // $new_account->assignRole($new_user->specialty);
-        // $new_user->user_id = $new_account->id;
-        // $new_user->save();
-        // dd($new_user);
+        $new_account->assignRole($new_user->specialty);
+        $new_user->user_id = $new_account->id;
+        $new_user->save();
         try{
         Mail::to($new_user->email)->send(new AcceptanceMail($new_user));
         }catch(\Throwable $error){
@@ -75,10 +74,12 @@ class Proffesional extends Model
    public function reject($id)
    {
        $user = $this->find($id);
+       try{
         Mail::to($user->email)->send(new RejectMail($user));
-        //throw $th;
-
-        // $user->delete();
+       }catch(\Throwable $error){
+            // throw $th;
+       }
+        $user->delete();
    }
 
 
