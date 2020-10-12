@@ -87,14 +87,14 @@ class AnimalsController extends Controller
     public function sell_animal(Request $request,Animal $animal){
 
         // return $request;
-        $data =$animal->put_up_for_sale($request);                      
+        $data =$animal->put_up_for_sale($request);
         $animal->sell_animal($data);
         return redirect('animal');
 
     }
     public function summon_proffesional(Request $request, Isues $notification)
     {
-        dd($request->all());
+        // return ($request->all());
 
         $location = Auth::user()->location;
         #the request should be structured as follws

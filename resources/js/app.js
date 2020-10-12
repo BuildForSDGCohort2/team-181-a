@@ -52,6 +52,7 @@ import myProfessional from './components/browse/professional'
 import moment from 'vue-moment'
 
 import { mapState } from "vuex";
+// const reasons = ['Check-up ?', 'Sale Verification ?', 'A-Insemination ?', 'Injury ?'];
 
 const app = new Vue({
     el: '#app',
@@ -83,6 +84,7 @@ const app = new Vue({
         load_data: false,
         form_dialog: false,
         show_busket: false,
+        reasons: ['Check-up ?', 'Sale Verification ?', 'A-Insemination ?', 'Injury ?'],
         userid: document.querySelector("meta[name='user-id']").getAttribute('content')
     },
     methods: {
@@ -227,7 +229,7 @@ const app = new Vue({
 
                     this.success('Updated')
                     eventBus.$emit("pushEvent", response)
-                    window.location.reload()
+                    // window.location.reload()
                 })
                 .catch((error) => {
                     this.loading = false
@@ -364,6 +366,33 @@ const app = new Vue({
             // return
             this.order = order
         },
+        summon_vet(model, data) {
+            var payload = {
+                model: model,
+                data: data
+            }
+            var reason = ''
+            if (this.edit_form.sell) {
+                reason = reason + ', Sale velification'
+            }if (this.edit_form.checkup) {
+                reason = reason + ', Checkup'
+            }if (this.edit_form.ainsemination) {
+                reason = reason + ', A insemination'
+            }if (this.edit_form.injury) {
+                reason = reason + ', Injury'
+            }
+
+            this.edit_form.reason = reason
+
+            console.log('******************');
+            console.log(reason);
+            console.log('******************');
+            this.$store.dispatch('postItems', payload)
+                .then(response => {
+                    this.success('Updated')
+                    // eventBus.$emit("pushEvent", response)
+                });
+        }
     },
     mounted() {
 

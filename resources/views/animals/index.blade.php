@@ -469,57 +469,57 @@
                                     <div class="" style="width: 45%; float:right;">
                                       <div class="form-group">
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" name="sell" id="sell">
+                                            <input type="checkbox" class="custom-control-input" v-model="edit_form.sell" id="sell">
                                             <label class="custom-control-label" for="sell">Sale<span class="text-warning"> Verification</span> ? </label>
                                         </div>
-                                      </div> 
+                                      </div>
                                       <div class="form-group">
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" name="injury" id="injury">
+                                            <input type="checkbox" class="custom-control-input" v-model="edit_form.injury" id="injury">
                                             <label class="custom-control-label" for="injury"> <span class="text-danger">Injury</span> ? </label>
                                         </div>
-                                      </div> 
+                                      </div>
                                     </div>
                                     <div class="vl"></div>
                                     <div class="" style="width: 45%; float:left;">
                                       <div class="form-group">
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" name="checkup" id="checkup">
+                                            <input type="checkbox" class="custom-control-input" v-model="edit_form.checkup" id="checkup">
                                             <label class="custom-control-label" for="checkup"> <span class="text-warning">Check-up</span> ? </label>
                                         </div>
-                                      </div>               
+                                      </div>
                                       <div class="form-group">
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" name="ainsemination" id="ainsemination">
+                                            <input type="checkbox" class="custom-control-input" v-model="edit_form.ainsemination" id="ainsemination">
                                             <label class="custom-control-label" for="ainsemination"> <span class="text-success">A-Insemination</span> ? </label>
                                         </div>
                                       </div>
                                     </div>
-
-
                                   </div>
 
-
+                                  {{-- <el-checkbox-group
+                                  v-model="reasons"
+                                  :min="1"
+                                  :max="2">
+                                  <el-checkbox v-for="reason in reasons" :label="reason" :key="reason">@{{reason}}</el-checkbox>
+                                </el-checkbox-group> --}}
 
                                   {{-- incremental... will depend on the remaining size of farm --}}
 
-
                                 </div>
-
 
                             </div>
 
                             </div>
 
                             <div class="modal-footer">
-                              <button @click="save_item_data('summon_proffesional', edit_form)" class="btn btn-info" value="Submit">Submit</button>
+                              <button @click="summon_vet('summon_proffesional', edit_form)" class="btn btn-info" value="Submit">Submit</button>
                               <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                             </div>
                           </div>
 
                         </div>
                       </div>
-
 
                     <div id="death" class="modal fade" role="dialog">
                       <div class="modal-dialog">
