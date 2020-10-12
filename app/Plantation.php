@@ -7,6 +7,9 @@ use App\Storage;
 use DateTime;
 use DatePeriod;
 use DateInterval;
+use App\User;
+use App\ScheduleHarvest;
+
 
 
 class Plantation extends Model
@@ -43,6 +46,7 @@ class Plantation extends Model
     {
         $this->status= 1;# to be harvested
         $this->save();
+        return $this->id;
     }
     public function harvest_plantation($request)
     {
@@ -62,5 +66,9 @@ class Plantation extends Model
     public function storage()
     {
         return $this->hasOne('App\Storage','plantation_id');
+    }
+    public function schedule()
+    {
+        return $this->hasOne('App\ScheduledHarvest','plantation_id');
     }
 }

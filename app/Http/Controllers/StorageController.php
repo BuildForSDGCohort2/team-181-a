@@ -10,14 +10,16 @@ use App\Http\Requests\StorageRequest;
 use App\Storage;
 use App\Plantation;
 use App\Isues;
+use App\ScheduleHarvest;
 
 class StorageController extends Controller
 {   #h_scheduler is the class resposnible for handling  requests to schedule harests
     public function schedule_harvest(H_SchedulerRequest $request, Isues $isue,Plantation $plant)
     {
         // return ($request);
-        $isue->make_harvest_reminder($request);
-        $produce =  $plant->find($request->id)->book_harvest();;
+        $transporter = User::find_transporter();
+        $produce =  $plant->find($request->id)->book_harvest();
+        $isue->alert_transporter($transporter);
         return $produce;
 
 

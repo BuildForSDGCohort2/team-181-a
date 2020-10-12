@@ -63,6 +63,17 @@ class User extends Authenticatable
         }
 
     }
+    public function profile($user)
+    {
+
+        if ($user->hasRole('vet') ||$user->hasRole('feo') ) {
+            return $user->proffesional;
+        } elseif($user->hasRole('farmer')) {
+            return $user->farmer;
+        }else{
+            return ;
+        }
+    }
 
     public static function summon_proffesional($location)
     {
@@ -80,9 +91,24 @@ class User extends Authenticatable
         return $selected_prof;
     }
 
-    public function request_regiment($request)
+    public function request_regiment($location)
     {
         $wanted_supplier = User::role('supplier')->where('location',$location)->pluck('id');
+
+        if (count($wanted_supplier) === null) {
+            $selected_supplier = 0;
+        }
+        elseif (count($wanted_profs) > 1) {
+            $selected_supplier = array_rand($wanted_supplier->toArray());
+        } else {
+            $selected_supplier = $wanted_supplier->toArray()[0];
+        }
+
+        return $selected_supplier;
+    }
+    public function get_transporter()
+    {
+        $wanted_supplier = User::role('supplier')->where('location',auth()->user()->location)->filter(function($user){return $user->profile->transport = 'able';})->pluck('id');
 
         if (count($wanted_supplier) === null) {
             $selected_supplier = 0;
@@ -129,7 +155,12 @@ class User extends Authenticatable
     }
     public function patients()
     {
-     return $this->hasMany('App\Animal_Ailments','vet_id');
+        return $this->hasMany('App\Animal_Ailments','vet_id');
+    }
+    
+    public function transporter()
+    {
+        return $this->hasMany('App\ScheduledHarvest','transporter_id');
     }
 
 }

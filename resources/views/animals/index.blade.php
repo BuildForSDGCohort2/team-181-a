@@ -368,7 +368,9 @@
                                       Action
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#sell_animal" @click="open_edit({{ $animal }})">Sell</a>
+                                      @if ($animal->sale_status === 1  )
+                                      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#sell_animal" @click="open_edit({{ $animal }})">{{$animal}} Sell</a>
+                                      @endif
                                       <a class="dropdown-item" href="#" data-toggle="modal" data-target="#death" @click="open_edit({{ $animal }})">Dead </a>
                                       @if ($animal->reproductive_status==1)
                                       <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet" @click="open_edit({{ $animal }})">Summon Vet For Ai Procedure</a>
