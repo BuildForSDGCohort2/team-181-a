@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Brood;
 use App\Cart;
+use App\Plantation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +17,17 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $carts = Cart::where('user_id', Auth::id())->get();
+        $carts->transform(function($cart) {
+            if ($cart->item_type =='PLT') {
+            $item = Plantation::find($cart->item_id);
+            } elseif ($cart->item_type =='POULT') {
+                $item = Brood::find($cart->item_id);
+            } elseif ($cart->item_type =='ANML') {}
+                $cart->item = $item;
+            return $cart;
+        });
+        return $carts;
     }
 
     /**
@@ -39,7 +51,7 @@ class CartController extends Controller
         // return $request->all();
         $cart = new Cart();
 
-        $cart = Cart::where('user_id', Auth::id())->where('item_id', $request->item_id)->first();
+        $cart = Cart::where('user_id', Auth::id())->where('item_type', $request->item_type)->first();
 
         if ($cart) {
             $cart->quantity += 1;

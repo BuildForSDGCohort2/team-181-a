@@ -458,7 +458,7 @@
                           <!-- Modal content-->
                           <div class="modal-content">
                             <div class="modal-header">
-                            <h4 class="modal-title">Summon vet for {{ucfirst($animal->name)}}</h4>
+                            <h4 class="modal-title">Summon vet for @{{edit_form.name}}</h4>
                             </div>
                             <div class="modal-body">
 

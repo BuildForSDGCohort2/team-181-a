@@ -86,7 +86,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
-Route::resource('addCart', 'CartController');
+Route::resource('cart', 'CartController');
 
 
 // enrolement
