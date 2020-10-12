@@ -91,9 +91,18 @@ const app = new Vue({
         toggleActive(item, qty) {
             console.log(item);
 
+            if (item.prod_id == "PLT") {
+                var item_id = item.storage.plantation.id
+            } else if (item.prod_id == "POULT") {
+                var item_id = item.brood.id
+            } else if (item.prod_id == "ANML") {
+                var item_id = item.animal.id
+            }
+
+
             var data = {
                 "quantity": qty,
-                "item_id": item.id,
+                "item_id": item_id,
                 "item_type": item.prod_id
             }
             console.log(data);
@@ -102,7 +111,7 @@ const app = new Vue({
             // alert('dwdwdddw');
             // this.activeKey = this.isActive(i) ? null : i;
             var payload = {
-                model: '/addCart',
+                model: '/cart',
                 data: data
             }
 
@@ -225,6 +234,10 @@ const app = new Vue({
             this.loading = true
             this.$store.dispatch('postItems', payload)
                 .then(response => {
+                    console.log('**********************');
+
+            console.log(response);
+                    console.log('**********************');
                     this.loading = false
 
                     this.success('Updated')
@@ -400,8 +413,9 @@ const app = new Vue({
         //     this.loading = false
         // }, 1500);
         this.get_items('get_notifications', 'updateNotification')
+        this.get_items('/cart', 'updateCart')
     },
     computed: {
-        ...mapState(['errors', 'animals', 'issues_show', 'notifications', 'users']),
+        ...mapState(['errors', 'animals', 'issues_show', 'notifications', 'users', 'cart']),
     },
 });

@@ -49,15 +49,19 @@
         </li>
         {{-- shopping Basket.... --}}
         <li class="nav-item dropdown">
-          <a class="nav-link" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-if="cart_count  > 0">
+          <a class="nav-link" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-if="cart.length  > 0">
             <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-              <span class="notification" v-html="cart_count"></span>
+              <span class="notification" v-html="cart.length"></span>
             <p class="d-lg-none d-md-block">
               {{ __('Some Actions') }}
             </p>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">{{ __('Your Shopping Basket is empty') }}</a>
+            {{-- <a class="dropdown-item" href="#">{{ __('Your Shopping Basket is empty') }}</a> --}}
+
+            <div class="dropdown-item" v-for="item in cart" :key="item.id">
+                @{{ item.item.species }}
+            </div>
           </div>
         </li>
         <li class="nav-item dropdown">

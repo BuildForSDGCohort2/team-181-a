@@ -42,7 +42,11 @@ class OrdersController extends Controller
             $product_for_sale  = $sale->process_order($request, $item);
             // return $product_for_sale['product'];
             $order_info = $order->create_order($product_for_sale);
-        $issue->order_alert($order_info);
+            $issue->order_alert($order_info);
+        }
+
+        foreach ($cart as $value) {
+            $value->delete();
         }
 
         // return $order_info;

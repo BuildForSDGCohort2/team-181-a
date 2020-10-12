@@ -70,4 +70,7 @@ export default {
     updateNotification(state, payload) {
         state.notifications = payload
     },
+    updateCart(state, payload) {
+        state.cart = payload
+    },
 }

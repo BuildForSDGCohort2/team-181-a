@@ -29,7 +29,7 @@ Assistant.')])
                 style="border:1px solid white; border-radius: 25px; margin:0.1px; ">
                 <h3>Agricultural Services</h3>
                 <hr style="height: 1px;background-color: white; border: none;">
-                <i class="material-icons" style="font-size:42px;">biotech</i>
+                <i class="material-icons" style="font-size:42px;    margin-left: 10px;">biotech</i>
                 <a href="/professionals">
                     <button class="btn btn-outline"
                         style="border: 1px solid white; color: white; white-space: normal; "><i class="fa fa-search"
