@@ -123,6 +123,8 @@ Route::get('about-us', function () {
     return view('pages.about');
 });
 
+Route::any('/ussd', 'UssdController@ussdRequestHandler');
+
 #wtf is this????
 Route::get('image', function () {
     $image = new Image();
