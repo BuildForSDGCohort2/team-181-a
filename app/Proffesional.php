@@ -13,7 +13,7 @@ use Mail;
 
 use DB;
 use App\Image;
-
+use Illuminate\Support\Facades\Storage;
 
 class Proffesional extends Model
 {
@@ -33,7 +33,13 @@ class Proffesional extends Model
         $prof->ratings= 0;
         $prof->specialty = $validated['specialty'];
         $prof->exp=$validated['exp'];
+
         $path = $validated['file']->store('cvs' , 's3');
+        $url = Storage::disk()->url($path);
+
+        dd($url);
+
+
         $prof->image_url = $path;
         $prof->save();
         echo($path);

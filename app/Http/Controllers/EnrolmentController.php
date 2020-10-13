@@ -14,12 +14,24 @@ use App\Proffesional;
 use App\Supplier;
 use App\Farmer;
 use App\Http\Requests\CustomerStore;
+use Illuminate\Support\Facades\Storage;
 
 class EnrolmentController extends Controller
 {
     //
     public function profesionals_enrole(StoreProfEnrols $request,Proffesional $prof)
     {
+
+        // dd($request->all());
+
+
+        $path = $request->file('file')->store('cvs' , 's3');
+        $url = Storage::disk('s3')->url($path);
+
+        dd($path, $url);
+
+
+
         $validated = $request->validated();
         $prof->new_enrolement($validated);
 

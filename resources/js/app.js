@@ -17,6 +17,9 @@ import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/en'
 import 'element-ui/lib/theme-chalk/index.css';
 
+
+import VueLazyLoad from 'vue-lazyload'
+Vue.use(VueLazyLoad)
 // import VueGoodTablePlugin from 'vue-good-table';
 
 // import the styles
@@ -84,7 +87,11 @@ const app = new Vue({
         load_data: false,
         form_dialog: false,
         show_busket: false,
+<<<<<<< HEAD
+        show_image: false,
+=======
         reasons: ['Check-up ?', 'Sale Verification ?', 'A-Insemination ?', 'Injury ?'],
+>>>>>>> cd11ac9f277bdbbb580e56bec2868b1525de495d
         userid: document.querySelector("meta[name='user-id']").getAttribute('content')
     },
     methods: {
@@ -236,7 +243,7 @@ const app = new Vue({
                 .then(response => {
                     console.log('**********************');
 
-            console.log(response);
+                    console.log(response);
                     console.log('**********************');
                     this.loading = false
 
@@ -379,6 +386,11 @@ const app = new Vue({
             // return
             this.order = order
         },
+<<<<<<< HEAD
+
+        imgClick(item) {
+            this.show_image = true
+=======
         summon_vet(model, data) {
             var payload = {
                 model: model,
@@ -405,6 +417,7 @@ const app = new Vue({
                     this.success('Updated')
                     // eventBus.$emit("pushEvent", response)
                 });
+>>>>>>> cd11ac9f277bdbbb580e56bec2868b1525de495d
         }
     },
     mounted() {

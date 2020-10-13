@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Requests\UserRequest;
 use App\Image;
 use App\Proffesional;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -25,7 +26,18 @@ class UserController extends Controller
     {
         $user = $model->find($id);
         $image = new Image();
+        // $ext = pathinfo(storage_path().'/uploads/categories/featured_image.jpg', PATHINFO_EXTENSION);
+        // $file_type =
         $user->image = $image->get_image($user);
+        $file_ext = File::extension($user->image);
+
+        if (in_array($file_ext, ['jpeg', 'jpg', 'png'])) {
+            $user->ext = 'image';
+        } else {
+            $user->ext = 'pdf';
+        }
+
+        // dd();
         return $user;
     }
 
