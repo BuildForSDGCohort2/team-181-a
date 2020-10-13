@@ -58,6 +58,7 @@ class LoginController extends Controller
             return redirect()->action('HomeController@index');
         } else {
             return redirect('/')->with('error', 'you must create an account first');
+            // return redirect('/')->with('error', 'you must create an account first');
             $user = User::create([
                 'email' => $userSocial->getEmail(),
                 'name' => $userSocial->getName(),
