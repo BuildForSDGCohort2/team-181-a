@@ -17,6 +17,12 @@ Assistant.')])
     <strong>{{ $message }}</strong>
 </div>
 @endif
+@if ($message = Session::get('error'))
+    <div class="alert alert-danger">
+    <strong>{{ $message }}</strong>
+</div>
+@endif
+
 <div class="container" style="background: rgb(28, 22, 22) !important,height: auto;">
     <div class="row c">
         <div class="col-lg-7 col-md-8 text-center">

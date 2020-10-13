@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Http\Requests\UserRequest;
+use App\Image;
 use App\Proffesional;
 use Illuminate\Support\Facades\Hash;
 
@@ -22,7 +23,10 @@ class UserController extends Controller
 
     public function show(Proffesional $model, $id)
     {
-        return $model->find($id);
+        $user = $model->find($id);
+        $image = new Image();
+        $user->image = $image->get_image($user);
+        return $user;
     }
 
     /**
