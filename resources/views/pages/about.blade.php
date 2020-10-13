@@ -84,9 +84,9 @@
                     <i class="material-icons">emojischool</i>
                   </div>
                   <div class="description">
-                    <h4 class="info-title">Proffesionals</h4>
+                    <h4 class="info-title"> <span class="text-primary">Proffesionals</span> </h4>
                     <p>
-                      For a Supplier to be Part of this Great case, he or she must avail the necessary <span class="text-primary">Documents</span> For Qualification reasons. if the suppliers papers check out , an account is created. The account will enable the Vet to get request alerts and sms from farmers and also provide <span class="text-info">advice</span> to <span class="text-success">farmers</span> .
+                      For a Supplier to be Part of this Great case, he or she must avail the necessary <span class="text-primary">Documents</span> For Qualification reasons. if the proffessional papers check out , an account is created. The account will enable the Vet to get request alerts and sms from farmers and also provide <span class="text-info">advice</span> to <span class="text-success">farmers</span> .
                     </p>
 
                   </div>
@@ -96,7 +96,7 @@
                     <i class="material-icons">emojiapartment</i>
                   </div>
                   <div class="description">
-                    <h4 class="info-title">Suppliers</h4>
+                    <h4 class="info-title"><span class="text-primary">Suppliers</span> </h4>
                     <p>
                       For a Supplier to be Part of this Great case, he or she must avail the necessary <span class="text-primary">Documents</span> For legality reasons. if the suppliers papers check out , an account is created. The account will enable the supplier to get request alerts and sms from farmers  be it for farm inputs or transport requests.
                     </p>
@@ -110,7 +110,7 @@
                     <i class="material-icons"> emojiadd_shopping_cart</i>
                   </div>
                   <div class="description">
-                    <h4 class="info-title">3. Customers</h4>
+                    <h4 class="info-title"><span class="text-warning">Customers</span> </h4>
                     <p>
                       The customer can now Buy <span class="text-primary">Tested </span> and <span class="text-warning">Verified</span> Animals and Crop Produce and have them delivered to them at <span class="text-info">Home</span> or pick them at a local station
                     </p>
