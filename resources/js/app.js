@@ -17,9 +17,9 @@ import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/en'
 import 'element-ui/lib/theme-chalk/index.css';
 
-// import VueEasyLightbox from 'vue-easy-lightbox'
 
-// Vue.use(VueEasyLightbox)
+import VueLazyLoad from 'vue-lazyload'
+Vue.use(VueLazyLoad)
 // import VueGoodTablePlugin from 'vue-good-table';
 
 // import the styles
@@ -86,6 +86,7 @@ const app = new Vue({
         load_data: false,
         form_dialog: false,
         show_busket: false,
+        show_image: false,
         userid: document.querySelector("meta[name='user-id']").getAttribute('content')
     },
     methods: {
@@ -237,7 +238,7 @@ const app = new Vue({
                 .then(response => {
                     console.log('**********************');
 
-            console.log(response);
+                    console.log(response);
                     console.log('**********************');
                     this.loading = false
 
@@ -380,6 +381,10 @@ const app = new Vue({
             // return
             this.order = order
         },
+
+        imgClick(item) {
+            this.show_image = true
+        }
     },
     mounted() {
 

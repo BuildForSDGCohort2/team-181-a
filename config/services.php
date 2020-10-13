@@ -31,9 +31,9 @@ return [
     ],
 
     'twitter' => [
-        'client_id' => env('TWITTER_CLIENT_ID'),
-        'client_secret' => env('TWITTER_CLIENT_SECRET'),
-        'redirect' => env('TWITTER_REDIRECT_URL'),
+        'client_id' => 'MEFtLsl8e4ZnNW5mCuBtDGel3',
+        'client_secret' => 'UmgCOCj39I8i7zgPR6frVj0mzpWf5RdoL2DF59GguiFb0YzZcQ',
+        'redirect' => 'https://jimmy.dev/login/twitter/callback',
      ],
 
      'instagram' => [

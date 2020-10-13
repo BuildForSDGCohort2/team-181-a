@@ -26,6 +26,7 @@
     <!-- CSS Files -->
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <script src="{{ asset('js/app.js') }}" defer type="application/javascript"></script>
+    @yield('assets')
 
 </head>
 

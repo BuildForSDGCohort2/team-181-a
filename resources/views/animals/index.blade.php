@@ -501,7 +501,7 @@
                                 <div style="float: left ;width:45%;">
                                   <div class="form-group">
                                     <div class="custom-control custom-checkbox">
-                                      <input type="checkbox" class="custom-control-input" id="slaughter" v-model="form.all"  >
+                                      <input type="checkbox" class="custom-control-input" id="slaughter" v-model="form.personal_uses"  >
                                       <label class="custom-control-label" for="slaughter"><span class="text-"> Personal  <span class="text-success">uses</span> </span>?</label> <br>
                                       <small class="text-info"> Check this option if you want to use the animal for personal uses.</small>
 
@@ -510,7 +510,7 @@
                                 </div>
                                 <div style="float: right; width:45%;">
                                   <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="summon_vet" v-model="form.all"  >
+                                    <input type="checkbox" class="custom-control-input" id="summon_vet" v-model="form.sickkness"  >
                                     <label class="custom-control-label" for="summon_vet"><span class="text-success"><span class="text-warning">Sickkness / Accident</span> </span>?</label><br>
                                     <small class="text-info"> A Local Vet will be automatically be summoned...</small>
                                   </div>
@@ -524,14 +524,9 @@
                                 {{-- incremental... will depend on the remaining size of farm --}}
 
 
-
-
-
-
-
                           </div>
                           <div class="modal-footer">
-                            <button  @click="save_item('death_of_animal')" class="btn btn-info" value="Submit">Submit</button>
+                            <button  @click="save_item('death/'+ edit_form.id+ '/animal')" class="btn btn-info" value="Submit">Submit</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                           </div>
                         </div>
