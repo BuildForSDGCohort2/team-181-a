@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Animal_Fact_sheet;
+use App\Plant_fact_sheet;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -35,5 +36,11 @@ class BrowseController extends Controller
     public function fact_sheet($search)
     {
         return Animal_Fact_sheet::where('species', $search)->get();
+    }
+
+
+    public function plant_fact_sheet($search)
+    {
+        return Plant_fact_sheet::where('species', 'LIKE' , "%{$search}%")->get();
     }
 }

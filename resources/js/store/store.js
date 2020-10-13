@@ -26,6 +26,7 @@ export default {
         issues_show: [],
         notifications: [],
         cart: [],
+        plant_fact: [],
 
     },
     getters,

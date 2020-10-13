@@ -209,6 +209,25 @@ const app = new Vue({
                     eventBus.$emit("pushEvent", response)
                 });
         },
+        fact_sheet(data) {
+            // console.log(data);
+
+            // if (this.form.species > 2) {
+
+            var payload = {
+                model: 'plant_fact_sheet',
+                update: 'updatePlantFactList',
+                search: this.form.species
+            }
+            this.$store.dispatch('searchItems', payload)
+                .then(response => {
+                    console.log(response.data);
+                    this.options = response.data
+                    // this.success('Created')
+                    eventBus.$emit("pushEvent", response)
+                });
+            // }
+        },
         save_item(model) {
             var payload = {
                 model: model,
