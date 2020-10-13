@@ -42,9 +42,18 @@ class Waiting extends Model
         $animal->save();
 
     }
+
     public function well()
     {
         $this->delete();
     }
 
+    public function proffesional()
+    {
+        return $this->belongsTo('App\User','proffesional_id');
+    }
+    public function animal()
+    {
+        return $this->belongsTo('App\Animal','animal_id');
+    }
 }

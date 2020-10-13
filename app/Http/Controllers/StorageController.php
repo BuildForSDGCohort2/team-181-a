@@ -16,8 +16,8 @@ class StorageController extends Controller
 {   #h_scheduler is the class resposnible for handling  requests to schedule harests
     public function schedule_harvest(H_SchedulerRequest $request, Isues $isue,Plantation $plant)
     {
-        // return ($request);
-        $transporter = User::find_transporter();
+        dd($request);
+        $transporter = User::get_transporter();
         $produce =  $plant->find($request->id)->book_harvest();
         $isue->alert_transporter($transporter);
         return $produce;
