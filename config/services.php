@@ -33,7 +33,7 @@ return [
     'twitter' => [
         'client_id' => 'MEFtLsl8e4ZnNW5mCuBtDGel3',
         'client_secret' => 'UmgCOCj39I8i7zgPR6frVj0mzpWf5RdoL2DF59GguiFb0YzZcQ',
-        'redirect' => 'https://jimmy.dev/login/twitter/callback',
+        'redirect' => 'https://farmersassistant.herokuapp.com/login/twitter/callback',
      ],
 
      'instagram' => [
