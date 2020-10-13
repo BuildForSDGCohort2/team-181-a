@@ -10,38 +10,15 @@
 
     <nav>
       <ul class="nav nav-pills">
-      @if (auth()->user()->hasRole('admin'))
-
-          <li class="nav-item">
-            <a class="nav-link " href="{{ route('notifications') }}">Proffesionals</a>
-          </li>
-          <li class="nav-item">
-          <a class="nav-link" href="{{route('pending_suppliers')}}">Suppliers</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" style="background-color: blueviolet" href="#">Orders</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{route('dispatch')}}">Dispatch</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link "  href="{{route('issues')}}">User Requests</a>
-          </li>
-        @else
-          <li class="nav-item">
-            <a class="nav-link "  href="{{route('issues')}}">issues</a>
-          </li>
-          @if (auth()->user()->hasRole('farmer'))
-            <li class="nav-item">
-             <a class="nav-link "  href="{{route('storage')}}">Store</a>
-            </li>
-          @endif
 
         <li class="nav-item">
-          <a class="nav-link active" style="background-color: blueviolet" href="#">Orders</a>
+          <a class="nav-link active" style="background-color: blueviolet" href="#">Orders in Transit</a>
         </li>
+        <li class="nav-item">
+        <a class="nav-link "  href="{{route('ready_for_pickup')}}">Ready For Pickup</a>
+          </li>
 
-        @endif
+      
 
     </ul>
   </nav>
@@ -64,7 +41,7 @@
                     Id
                   </th>
 
-                    @hasanyrole('admin|farmer|supplier|vet|feo')
+                    @hasanyrole('admin|farmer|supplier|vet|feo|reciever')
                     <th>
                       Customer Name
                     </th>
@@ -86,12 +63,12 @@
                 </thead>
                 <tbody>
 
-                @forelse ($myorders as $order)
+                @forelse ($transit_orders as $order)
                 <tr>
                     <td>
                      {{$order->id}}
                     </td>
-                    @hasanyrole('admin|farmer|supplier|vet|feo')
+                    @hasanyrole('admin|farmer|supplier|vet|feo|reciever')
                     <td>
                      {{(auth()->user()->id === $order->user_id? 'Me' : ucfirst($order->user->name))}}
                     </td>
@@ -130,23 +107,23 @@
                 <tr>
                   @hasanyrole('admin|farmer|supplier|vet|feo')
                   <td>
-                    <span class="text-primary"> No Orders placed</span>
+                    <span class="text-primary"> No Orders In Transit</span>
                   </td>
                   @endhasanyrole
                   <td>
-                    <span class="text-primary"> No Orders placed</span>
+                    <span class="text-primary"> No Orders In Transit</span>
                   </td>
                   <td>
-                    <span class="text-primary"> No Orders placed</span>
+                    <span class="text-primary"> No Orders In Transit</span>
                   </td>
                   <td>
-                    <span class="text-primary"> No Orders placed</span>
+                    <span class="text-primary"> No Orders In Transit</span>
                   </td>
                   <td>
-                    <span class="text-primary"> No orders placed</span>
+                    <span class="text-primary"> No orders In Transit</span>
                   </td>
                   <td>
-                    <span class="text-primary"> No Orders placed</span>
+                    <span class="text-primary"> No Orders In Transit</span>
                   </td>
                 </tr>
                 @endforelse

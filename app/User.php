@@ -42,9 +42,9 @@ class User extends Authenticatable
     ];
 
 
-    public static function  get_available($role,$location)
+    public static function  get_available($location)
     {
-        User::all()->filter(function($user) use ($location,$role) {return $user->hasRole($role) && $user->location=== $location; });
+        User::all()->filter(function($user) use ($location,$role) {return $user->hasRole('vet') && $user->location=== $location; });
     }
     //to get the
     public function get_prev_logins()
@@ -63,12 +63,23 @@ class User extends Authenticatable
         }
 
     }
+    public function profile($user)
+    {
 
-    public static function summon_proffesional($role,$location)
+        if ($user->hasRole('vet') ||$user->hasRole('feo') ) {
+            return $user->proffesional;
+        } elseif($user->hasRole('farmer')) {
+            return $user->farmer;
+        }else{
+            return ;
+        }
+    }
+
+    public static function summon_proffesional($location)
     {
         $wanted_profs = User::role('vet')->where('location',$location)->pluck('id');
 
-        if (count($wanted_profs) === null) {
+        if (count($wanted_profs) == null) {
             $selected_prof = 0;
         }
         elseif (count($wanted_profs) > 1) {
@@ -80,9 +91,24 @@ class User extends Authenticatable
         return $selected_prof;
     }
 
-    public function request_regiment($request)
+    public function request_regiment($location)
     {
         $wanted_supplier = User::role('supplier')->where('location',$location)->pluck('id');
+
+        if (count($wanted_supplier) === null) {
+            $selected_supplier = 0;
+        }
+        elseif (count($wanted_profs) > 1) {
+            $selected_supplier = array_rand($wanted_supplier->toArray());
+        } else {
+            $selected_supplier = $wanted_supplier->toArray()[0];
+        }
+
+        return $selected_supplier;
+    }
+    public function get_transporter()
+    {
+        $wanted_supplier = User::role('supplier')->where('location',auth()->user()->location)->filter(function($user){return $user->profile->transport = 'able';})->pluck('id');
 
         if (count($wanted_supplier) === null) {
             $selected_supplier = 0;
@@ -105,7 +131,7 @@ class User extends Authenticatable
     }
     public function order()
     {
-        return $this->hasMany('App\Order');
+        return $this->hasMany('App\Order','user_id');
     }
     public function proffesional()
     {
@@ -129,7 +155,12 @@ class User extends Authenticatable
     }
     public function patients()
     {
-     return $this->hasMany('App\Animal_Ailments','vet_id');
+        return $this->hasMany('App\Animal_Ailments','vet_id');
+    }
+    
+    public function transporter()
+    {
+        return $this->hasMany('App\ScheduledHarvest','transporter_id');
     }
 
 }

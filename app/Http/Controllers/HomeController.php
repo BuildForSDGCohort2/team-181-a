@@ -49,6 +49,8 @@ class HomeController extends Controller
         }elseif(auth()->user()->hasRole('farmer')){
             $issues = $issue->get_unsolved_issues();
             return view('dashboard')->with('issues',$issues);
+        }elseif(auth()->user()->hasRole('reciever')){
+            return redirect('recievers_dash');
         }else {
             return redirect('on_sale');
         }

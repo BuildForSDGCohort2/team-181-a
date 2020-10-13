@@ -37,8 +37,7 @@ class Plant_dev_regiment extends Model
                         'identifier' => 'PLT-REG',   
                     ]);
                 }
-                echo($facts->months_to_maturity);
-                $plant_final_quatile = floor(($facts->months_to_maturity*28)*0.85);
+                $plant_final_quatile = floor(($facts->months_to_maturity*28)*0.85);#when 85 percent to maturity alert the farmer
                 if ( $plant_final_quatile-2 <= $age_in_days && $age_in_days  <= $plant_final_quatile+ 7) { #these values are used so as to successflly test
                     Isues::plants_last_quatile_alert($plantation);
                 }

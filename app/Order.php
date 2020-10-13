@@ -51,19 +51,51 @@ class Order extends Model
         }
 
     }
+
+    public function dispatch_orders($location)
+    {
+        
+        $orders =Order::where('order_status',0)->get()->filter(function($order) use($location){
+            return $order->user->location == $location;
+        });
+
+        foreach ($orders as $order) {
+            $this->transit($order->id);
+            Isues::in_transit_alert($order);
+
+        }
+    }
+
     public function transit($order_id)
     {
         $order = $this->find($order_id);
         $order->order_status = 1;
         $order->save();
-        return $order;
     }
+
+    public function get_transit_orders()
+    {
+        $orders =Order::where('order_status',1)->get()->filter(function($order) {
+            return $order->user->location == auth()->user()->location;
+        });
+        return $orders;
+    }
+
+
     public function deliver($order_id)
     {
         $order = $this->find($order_id);
         #OR we could use soft delete
         $order->order_status = 2;
         $order->save;
+    }
+
+    public function get_deliverd_orders()
+    {
+        $orders =Order::where('order_status',2)->get()->filter(function($order) {
+            return $order->user->location == auth()->user()->location;
+        });
+        return $orders;
     }
 
     public function user()

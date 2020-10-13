@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Animal_Ailments extends Model
 {   
     use SoftDeletes;
+    protected $guarded = [];
     public function animal()
     {
         return $this->belongsTo('App\Animal');

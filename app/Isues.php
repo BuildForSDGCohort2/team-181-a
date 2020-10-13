@@ -6,12 +6,20 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 use App\User;
+use App\Waiting;
 class Isues extends Model
 
 {
 
     protected $guarded=[];
     // make an isue
+    public function origin($order)
+    {
+       return $origin =($order->sales->prod_id=== 'ANML'?$order->sales->animal:
+        ($order->sales->prod_id === 'POULT'? $order->sales->brood:
+        ($order->sales->storage->plantation)));
+    }
+
     public function generate_issue(array $isues)
     {
         $new_issue = new Issues;
@@ -34,6 +42,7 @@ class Isues extends Model
                 ->where('user_id','=',auth()->user()->id)
                 ->where('status','=',0)
                 ->orWhere('user_id','=',null)
+                ->orderBy('created_at','DESC')
                 ->paginate();
         // return Isues::where(['user_id','=',auth()->user()->id],['status','=',0]);
     }
@@ -48,7 +57,8 @@ class Isues extends Model
             'status'=>0,
             'due_date'=> $data->scheduled_date,
         ]);
-        if ($data->schedule_transport !== null) {
+        if ($data->schedule_transport != null) {
+
             Isues::create([
                 'reason'=>'Transport Request',
                 'information'=>'Transport Will be Dispatched to '. auth()->user()->name(). 'For Harvesting on '. $data->scheduled_date,
@@ -107,9 +117,13 @@ class Isues extends Model
 
 
     }
-    public function in_transit_alert($order)
+    public static function in_transit_alert($order)
     {
-        $this->create([
+        $origin =($order->sales->prod_id=== 'ANML'?$order->sales->animal:
+        ($order->sales->prod_id === 'POULT'? $order->sales->brood:
+        ($order->sales->storage->plantation)));
+
+       Isues::create([
             'reason' => 'Order Transit',
 
             'information' => 'Your Order  Of '.($order->sales->prod_id=== 'ANML'?$origin->name.'( The '. $origin->species.')':
@@ -174,7 +188,7 @@ class Isues extends Model
         if ($id === 0) {
             Isues::create([
                 'reason'=>'Shortage',#rhe reason will carry the necesary data
-                'information'=>'There was a request for a '.strtoupper($request->role).'from'.ucfirst($request->location).' by '.auth()->user()->name.' '.auth()->user()->phone_number.'there werent any available please find on',
+                'information'=>'There was a request for a Veterinary Officer from'.ucfirst(auth()->user()->location).' by '.auth()->user()->name.' '.auth()->user()->phone_number.' there werent any available please find one and get Back To The Farmer.',
                 'status'=>0,
                 'user_id'=>1,
                 'identifier'=>'SHORTAGE'
@@ -182,19 +196,63 @@ class Isues extends Model
 
             Isues::create([
                 'reason'=>'Delay',#rhe reason will carry the necesary data
-                'information'=>"There were'nt any ".strtoupper($request->role).'found in your area, however one is being organised for you by the admin. Sit tight sorry for ant incoviniences encountered',
+                'information'=>"There were'nt any Verinary Officers found in your area, however one is being organised for you by the admin. Sit tight, sorry for ant incoviniences encountered",
                 'status'=>0,
                 'user_id'=>auth()->user()->id,
                 'identifier'=>'REGRET'
             ]);
 
         } else {
+            #here youll debug 
+            #the checkboxes should generate automatic maseages.
+            #checkboxes wuill be much easier for the user to input <queries class=""></queries>
+            #add a other | other reason input area..
+            $proffesional = User::find($id);
+            $reason = 'Dear '.ucfirst($proffesional->name).' your attention is required By '.ucfirst (auth()->user()->name).' Phone number '.(auth()->user()->phone_number).' to: '; 
+                #checked Reasons
+                $checks = '';
+                #code to store in the waiting table , the code that will help the system know how to handle the record
+                $code  = null;
+                if ($request->checkup == 'true') {
+                    $checks.=' A Health Checkup';
+                    $code ='chkup';
+
+                } 
+                if ($request->sell=='true') {
+                    $checks.=' A Sales Check';
+                    $code =$code==null? 'sale': $code.'-sale';
+                }
+                if ($request->injury=='true') {
+                    $checks.=' An injury Checkup ';
+                    $code =$code==null? 'ij': $code.'-ij';
+                }
+                if ($request->ainsemination=='true') {
+                    $checks.=' An Artificial insemination Procedure ';
+                    $code =$code==null? 'ai': $code.'-ai';
+                }
+                
+
+            
             Isues::create([
                 'reason'=>'Summon',#rhe reason will carry the necesary data
-                'information'=>$request->reason,
+                'information'=>$reason.$checks.' on a ' .ucfirst($request->gender).' '.ucfirst($request->species) ,
                 'status'=>0,
+                'user_id'=>$id,
+                'identifier'=>'SUMMON'
+            ]);
+
+            Waiting::create([
+                'service'=>$code,
+                'proffesional_id'=>$id,
+                'animal_id'=>$request->id,
+            ]);
+            
+            Isues::create([
+                'reason'=>'Success',#rhe reason will carry the necesary data
+                'information'=>"Your Reqest For a Vet was Successfull and Dr. ".ucfirst(User::find($id)->name).' phone number '.User::find($id)->phone_number.' will Get it Contact with You.' ,
+                'status'=>0, 
                 'user_id'=>auth()->user()->id,
-                'identifier'=>'PREG-CONF'
+                'identifier'=>'Vet Enroute'
             ]);
         }
 
@@ -227,14 +285,84 @@ class Isues extends Model
                 'user_id'=>$id,
                 'identifier'=>$information['identifier']
             ]);
+            Isues::create([
+                'reason'=>'Success',#rhe reason will carry the necesary data
+                'information'=>"Your Request Was Successfully Submitted to Supplier : ".User::find($id)->name. 'Phone number '.User::find($id)->phone_number ,
+                'status'=>0,
+                'user_id'=>auth()->user()->id,
+                'identifier'=>'SUCCESS'
+            ]);
+        }
+
+
+    }
+    public function alert_transporter($id,$request)
+    {
+
+        if ($id === 0) {
+            Isues::create([
+                'reason'=>'Shortage',#rhe reason will carry the necesary data
+                'information'=>'There was a request for Transport  from'.ucfirst(auth()->user()->location).' by '.auth()->user()->name.' '.auth()->user()->phone_number.' transporters available please find one and get Back To The Farmer.',
+                'status'=>0,
+                'user_id'=>1,
+                'identifier'=>'SHORTAGE'
+            ]);
+
+            Isues::create([
+                'reason'=>'Delay',#rhe reason will carry the necesary data
+                'information'=>"There were'nt any Transporterss found in your area, however one is being organised for you by the admin. Sit tight, sorry for ant incoviniences encountered",
+                'status'=>0,
+                'user_id'=>auth()->user()->id,
+                'identifier'=>'REGRET'
+            ]);
+
+        } else {
+            #here youll debug 
+            #the checkboxes should generate automatic maseages.
+            #checkboxes wuill be much easier for the user to input <queries class=""></queries>
+            #add a other | other reason input area..
+            $transporter = User::find($id);
+            $reason = 'Dear '.ucfirst($transporter->name).' your Transport Services are needed By '.ucfirst (auth()->user()->name).' Phone number '.(auth()->user()->phone_number).' to: '; 
+                #checked Reasons
+                #need the plantstion data
+               
+
+            
+            Isues::create([
+                'reason'=>'Summon',#rhe reason will carry the necesary data
+                'information'=>$reason.$checks.' on a ' .ucfirst($request->gender).' '.ucfirst($request->species) ,
+                'status'=>0,
+                'user_id'=>$id,
+                'identifier'=>'Transport'
+            ]);
+
+            ScheduledHarvest::create([
+                'date'=>'',
+                'plantation_id'=>'',
+                'transporter'=>'',
+            ]);
+            
+            Isues::create([
+                'reason'=>'Success',#rhe reason will carry the necesary data
+                'information'=>"Your Reqest For a Vet was Successfull and Dr. ".ucfirst(User::find($id)->name).' phone number '.User::find($id)->phone_number.' will Get it Contact with You.' ,
+                'status'=>0, 
+                'user_id'=>auth()->user()->id,
+                'identifier'=>'Vet Enroute'
+            ]);
         }
 
 
     }
 
+    
+
 
     public function delivery_alert($order)
     {
+        $origin =($order->sales->prod_id=== 'ANML'?$order->sales->animal:
+                ($order->sales->prod_id === 'POULT'? $order->sales->brood:
+                ($order->sales->storage->plantation)));
+
         $this->create([
             'reason' => 'Order Delivered',
 

@@ -36,7 +36,7 @@ class EnrolmentController extends Controller
         $prof->new_enrolement($validated);
 
         // return 'success';
-        return redirect('/login')->with('success','Your account will be reviewed');
+        return redirect('/')->with('success','Your account will be reviewed');
 
     }
     public function suppliers_enrole(SuppliersEnrol $request , Supplier $sup )
@@ -45,10 +45,10 @@ class EnrolmentController extends Controller
         // return ($validated['kra']);
         // return $request;
 
-        $sup->new_enrolement($validated);
+      $path = $sup->new_enrolement($validated);
+      return Image::get_image($path);
 
-        return redirect('/login')->with('success','Your account will be reviewed');
-        // return 'Sucess!' ;
+    //   return back()->withStatus(__('Your Request Has Been succesfull submitted.')); 
 
     }
     public function farmers_enrole(FarmersRequest $request ,Farmer $farmer )

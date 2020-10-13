@@ -10,10 +10,10 @@ use App\Plantation;
 class Storage extends Model
 {
     protected $guarded=[];
-    
+
     public function store($data)
-    {   
-        
+    {
+
         $new_prod = $this->create([
             'sacks'=>$data->sacks-$data->amount,
             'plantation_id'=>$data->id,
@@ -41,7 +41,7 @@ class Storage extends Model
             $stored->sacks = 0;
             $stored->save();
         }else {
-            # code...        
+            # code...
             $stored->sacks = ($stored->sacks)-$request['sacks_for_sale']; #should return errror if number of sacks to sell is more than the ones to be deducted
             $stored->save();
       }
@@ -71,12 +71,12 @@ class Storage extends Model
 
     }
 
-    
+
     public function for_sale()
     {
         return $this->where('status','=',2);
     }
-    
+
     public function plantation()
     {
         return $this->belongsTo('App\Plantation');

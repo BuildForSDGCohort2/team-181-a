@@ -12,6 +12,7 @@ class Pregnant extends Model
 
 {
     // use SofDelete;
+    protected $guarded=[];
     public function pregnancy_watcher()
     {
         $gestation  = Animal_Fact_sheet::find($this->animal_id)->gestation_period;
@@ -39,7 +40,6 @@ class Pregnant extends Model
 
     }
 
-    protected $guarded=[];
     #Birth
     #regiments
     public static function new_pregnancy(Type $var = null)

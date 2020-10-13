@@ -18,7 +18,7 @@ class AnimalsController extends Controller
      */
     public function index(Request $request , Animal $animal)
     {
-        $animals = $animal->paginate();
+        $animals = auth()->user()->animal;
         // return $animals;
         return view('animals.index')->with('animals',$animals);
     }
@@ -94,12 +94,12 @@ class AnimalsController extends Controller
     }
     public function summon_proffesional(Request $request, Isues $notification)
     {
-        // return $request->all();
+        // dd($request->all());
 
         $location = Auth::user()->location;
         #the request should be structured as follws
         # $requea['role'=> the role proffesional baeing summoned,'location'=>the loaction from witch the user summons the vet,'information'=> the information on the request eg vaccination etx ]
-        $selected_proffesional = User::summon_proffesional($request->role,$location);
+        $selected_proffesional = User::summon_proffesional($location);
         $notification->alert_proffesional($selected_proffesional,$request, );
     }
 }

@@ -368,7 +368,9 @@
                                       Action
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#sell_animal" @click="open_edit({{ $animal }})">Sell</a>
+                                      @if ($animal->sale_status === 1  )
+                                      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#sell_animal" @click="open_edit({{ $animal }})">{{$animal}} Sell</a>
+                                      @endif
                                       <a class="dropdown-item" href="#" data-toggle="modal" data-target="#death" @click="open_edit({{ $animal }})">Dead </a>
                                       @if ($animal->reproductive_status==1)
                                       <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet" @click="open_edit({{ $animal }})">Summon Vet For Ai Procedure</a>
@@ -461,31 +463,65 @@
                             <h4 class="modal-title">Summon vet for @{{edit_form.name}}</h4>
                             </div>
                             <div class="modal-body">
-
+                              <div>
+                              <label for="species" ><small>Reason</small> </label>
                                 <div class="first-column">
                                   <div class="form-group">
-                                    <label for="species" ><small>Reason</small> </label>
-                                    <textarea v-model="edit_form.reason" class="form-control" id="recomendations" rows="3" >
-                                    </textarea>
+
+                                    <div class="" style="width: 45%; float:right;">
+                                      <div class="form-group">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" v-model="edit_form.sell" id="sell">
+                                            <label class="custom-control-label" for="sell">Sale<span class="text-warning"> Verification</span> ? </label>
+                                        </div>
+                                      </div>
+                                      <div class="form-group">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" v-model="edit_form.injury" id="injury">
+                                            <label class="custom-control-label" for="injury"> <span class="text-danger">Injury</span> ? </label>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="vl"></div>
+                                    <div class="" style="width: 45%; float:left;">
+                                      <div class="form-group">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" v-model="edit_form.checkup" id="checkup">
+                                            <label class="custom-control-label" for="checkup"> <span class="text-warning">Check-up</span> ? </label>
+                                        </div>
+                                      </div>
+                                      <div class="form-group">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" v-model="edit_form.ainsemination" id="ainsemination">
+                                            <label class="custom-control-label" for="ainsemination"> <span class="text-success">A-Insemination</span> ? </label>
+                                        </div>
+                                      </div>
+                                    </div>
                                   </div>
+
+                                  {{-- <el-checkbox-group
+                                  v-model="reasons"
+                                  :min="1"
+                                  :max="2">
+                                  <el-checkbox v-for="reason in reasons" :label="reason" :key="reason">@{{reason}}</el-checkbox>
+                                </el-checkbox-group> --}}
 
                                   {{-- incremental... will depend on the remaining size of farm --}}
 
-
                                 </div>
 
-
+                            </div>
 
                             </div>
+
                             <div class="modal-footer">
-                              <button @click="save_item_data('summon_proffesional', edit_form)" class="btn btn-info" value="Submit">Submit</button>
+                              <button @click="summon_vet('summon_proffesional', edit_form)" class="btn btn-info" value="Submit">Submit</button>
                               <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                             </div>
                           </div>
 
                         </div>
                       </div>
-
 
                     <div id="death" class="modal fade" role="dialog">
                       <div class="modal-dialog">
@@ -595,7 +631,8 @@
                     @endforelse
                 </tbody>
               </table>
-              {{ $animals->links() }}
+              {{-- check this bug out --}}
+              {{-- {{ $animals->links() }} --}}
             </div>
           </div>
         </div>
