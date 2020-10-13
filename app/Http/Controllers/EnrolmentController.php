@@ -14,6 +14,7 @@ use App\Proffesional;
 use App\Supplier;
 use App\Farmer;
 use App\Http\Requests\CustomerStore;
+use App\Image;
 use Illuminate\Support\Facades\Storage;
 
 class EnrolmentController extends Controller
@@ -46,9 +47,10 @@ class EnrolmentController extends Controller
         // return $request;
 
       $path = $sup->new_enrolement($validated);
-      return Image::get_image($path);
+    //   return Image::get_image($path);
+        return redirect('/')->with('success','Your account will be reviewed');
 
-    //   return back()->withStatus(__('Your Request Has Been succesfull submitted.')); 
+    //   return back()->withStatus(__('Your Request Has Been succesfull submitted.'));
 
     }
     public function farmers_enrole(FarmersRequest $request ,Farmer $farmer )
