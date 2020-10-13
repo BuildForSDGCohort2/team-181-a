@@ -636,7 +636,7 @@
                     @endforelse
                 </tbody>
               </table>
-              {{ $animals->links() }}
+              {{-- {{ $animals->links() }} --}}
             </div>
           </div>
         </div>
