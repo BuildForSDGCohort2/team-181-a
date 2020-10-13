@@ -86,7 +86,7 @@
                   <div class="description">
                     <h4 class="info-title">Proffesionals</h4>
                     <p>
-                      For a Supplier to be Part of this Great case, he or she must avail the necessary <span class="text-primary">Documents</span> For Qualification reasons. if the suppliers papers check out , an account is created. The account will enable the Vet to get request alerts and sms from farmers and also provide <span class="text-info">advice</span> to <span class="text-success">farmers</span> .
+                      For a Supplier to be Part of this Great case, he or she must avail the necessary <span class="text-primary">Documents</span> For Qualification reasons. if the proffessional papers check out , an account is created. The account will enable the Vet to get request alerts and sms from farmers and also provide <span class="text-info">advice</span> to <span class="text-success">farmers</span> .
                     </p>
 
                   </div>
