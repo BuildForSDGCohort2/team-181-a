@@ -202,7 +202,7 @@
               {{-- file uploader --}}
               <div class="form-group">
                 <div class="custom-control custom-checkbox">
-                    <a href="@{{ user.image_url }}" target="_blank" rel="noopener noreferrer">View Cv</a>
+                    <a :href="users.image_url" target="_blank" rel="noopener noreferrer">View Cv</a>
                 </div>
               </div>
               <fieldset>
