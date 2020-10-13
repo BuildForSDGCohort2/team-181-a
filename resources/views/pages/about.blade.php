@@ -32,13 +32,13 @@
 <body class="{{ $class ?? '' }}">
 
 
-    <div class="page-header header-filter header-small" data-parallax="true" style="background: linear-gradient(0deg, rgba(0, 0, 0, 0.52), rgba(0, 0, 0, 0.34)), url(https://jimmy.dev/material/img/wheat.jpg);;background-repeat-x: repeat;min-height: 100px;">
+    <div class="page-header header-filter header-small" data-parallax="true" style="background: linear-gradient(0deg, rgba(42, 147, 31, 0.859), rgba(15, 148, 8, 0.804)), url(https://jimmy.dev/material/img/wheat.jpg);;background-repeat-x: repeat;min-height: 100px;">
         <div class="container">
           <div class="row">
             <div class="col-md-8 ml-auto mr-auto text-center">
               <h1 class="title" style="
               color: #fff;">About Us</h1>
-              <h4>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h4>
+              <h4>The Farmers Assistant.</h4>
             </div>
           </div>
         </div>
@@ -48,26 +48,58 @@
           <div class="about-description text-center">
             <div class="row">
               <div class="col-md-8 ml-auto mr-auto">
-                <h5 class="description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum, at hic! Tenetur harum, ab commodi rerum ut voluptatum</h5>
+                <h5 class="description text-primary">The Platform thats is all about the African <span class="text-success">Farmer</span> For the African People.</h5>
               </div>
             </div>
           </div>
           <div class="about-services features-2">
             <div class="row">
               <div class="col-md-8 ml-auto mr-auto text-center">
-                <h2 class="title">We build awesome products</h2>
-                <h5 class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed velit, adipisci blanditiis illum, beatae doloremque ratione, reprehenderit dignissimos animi nostrum aliquid iure veritatis inventore laborum accusantium error magnam officia vitae!</h5>
+                <h2 class="title">What We Have To Offer</h2>
+                <h5 class="description">The platform will connect the <span class="text-success">Farmer</span> , to the proffesionals, suppliers and Customers</h5>
               </div>
             </div>
             <div class="row">
               <div class="col-md-4">
                 <div class="info info-horizontal">
                   <div class="icon icon-rose">
-                    <i class="material-icons">gesture</i>
+                    <i class="material-icons">emojipeople</i>
                   </div>
                   <div class="description">
-                    <h4 class="info-title">1. Farmers</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime odio tempore corrupti, eos ipsum iste provident quisquam quibusdam sed perferendis porro repudiandae illo exercitationem quasi aut numquam consectetur distinctio officia.</p>
+                    <h4 class="info-title"> The <span class="text-success">Farmers</span></h4>
+                    <p>A <span class="text-success">Farmer</span>, registered or not will be able to gain from this platform in the following ways .
+                      <h5> Unregistered <span class="text-success">Farmers</span>.</h5>
+                      <strong>Unregistered</strong> <span class="text-success">Farmer</span>s will can <span class="text-warning">Query </span> the system and or the  <span class="text-primary">proffesionals</span> via the <span class="text-success">USSD</span> services and a <strong class="text-info">SMS<span></span></strong> Reply will be availed conatining the queried data.
+                      <br>
+                      <h5> Registered <span class="text-success">Farmer</span>s.</h5>
+                      Apart Form the USSD querring ability , The <span class="text-success">Farmer</span> will recieve prompts and alerts , that will advice him or her according to the <span class="tesxt-succes"><span class="text-success">Plants</span></span>  or <span class="text-primary">Animals</span>  he or she is rearing.
+                    </p>
+
+                  </div>
+                </div>
+              </div> 
+              <div class="col-md-4">
+                <div class="info info-horizontal">
+                  <div class="icon icon-rose">
+                    <i class="material-icons">emojischool</i>
+                  </div>
+                  <div class="description">
+                    <h4 class="info-title">Proffesionals</h4>
+                    <p>
+                      For a Supplier to be Part of this Great case, he or she must avail the necessary <span class="text-primary">Documents</span> For Qualification reasons. if the suppliers papers check out , an account is created. The account will enable the Vet to get request alerts and sms from farmers and also provide <span class="text-info">advice</span> to <span class="text-success">farmers</span> .
+                    </p>
+
+                  </div>
+                </div>
+                <div class="info info-horizontal">
+                  <div class="icon icon-rose">
+                    <i class="material-icons">emojiapartment</i>
+                  </div>
+                  <div class="description">
+                    <h4 class="info-title">Suppliers</h4>
+                    <p>
+                      For a Supplier to be Part of this Great case, he or she must avail the necessary <span class="text-primary">Documents</span> For legality reasons. if the suppliers papers check out , an account is created. The account will enable the supplier to get request alerts and sms from farmers  be it for farm inputs or transport requests.
+                    </p>
 
                   </div>
                 </div>
@@ -75,23 +107,13 @@
               <div class="col-md-4">
                 <div class="info info-horizontal">
                   <div class="icon icon-rose">
-                    <i class="material-icons">build</i>
-                  </div>
-                  <div class="description">
-                    <h4 class="info-title">2. Suppliers</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo similique sit, libero, modi quae praesentium quisquam repellat id maxime doloremque iusto. Deserunt debitis totam magnam ratione. Repellat velit ipsa consequatur?</p>
-
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="info info-horizontal">
-                  <div class="icon icon-rose">
-                    <i class="material-icons">mode_edit</i>
+                    <i class="material-icons"> emojiadd_shopping_cart</i>
                   </div>
                   <div class="description">
                     <h4 class="info-title">3. Customers</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo similique sit, libero, modi quae praesentium quisquam repellat id maxime doloremque iusto. Deserunt debitis totam magnam ratione. Repellat velit ipsa consequatur?</p>
+                    <p>
+                      The customer can now Buy <span class="text-primary">Tested </span> and <span class="text-warning">Verified</span> Animals and Crop Produce and have them delivered to them at <span class="text-info">Home</span> or pick them at a local station
+                    </p>
 
                   </div>
                 </div>
@@ -101,15 +123,14 @@
         </div>
       </div>
 
-    {{-- @include('layouts.footers.guest') --}}
     <footer class="footer">
         <div class="container">
             <nav class="float-left">
             <ul>
 
                 <li>
-                <a href="/about-us">
-                    {{ __('About Us') }}
+                <a href="/">
+                    {{ __('Back') }}
                 </a>
                 </li>
 
@@ -120,7 +141,7 @@
             <script type="application/javascript">
                 document.write(new Date().getFullYear())
             </script>, Made with <i class="material-icons">favorite</i> ,For A Happier
-            <a href="/" style="color: green">Farmer</a> and A Happier Better Africa.
+            <a href="/" style="color: green"><span class="text-success">Farmer</span></a> and A Happier Better Africa.
             </div>
         </div>
     </footer>
