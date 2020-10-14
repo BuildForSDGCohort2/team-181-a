@@ -20,7 +20,8 @@
             <h4 class="card-title ">Animals List</h4>
             <p class="card-category"> Here is a subtitle for this table</p>
             <button type="button" class="btn btn-small btn-warning" data-toggle="modal" data-target="#animal_r_modal" style="float: right;" >Register Animal</button>
-          </div>
+            <button type="button" class="btn btn-small btn-warning" data-toggle="modal" data-target="#animal_child_modal" style="float: right;" @click="get_parent">Register Child</button>
+        </div>
           {{--                Add Animal modal                          --}}
           <div id="animal_r_modal" class="modal fade " role="dialog">
             <div class="modal-dialog">
@@ -79,6 +80,128 @@
                         <div class="form-group">
                             <label for="mothers_name">Mothers Name/id</label>
                             <input type="text" class="form-control" v-model='form.mothers_name' id="mothers_name" aria-describedby="momsname" placeholder="Enter Name">
+                            <small id="momsname" class="form-text text-muted">Enter The Mothers Name or id</small>
+                            <small class="has-text-danger" v-if="errors.mothers_name">@{{ errors.mothers_name[0] }}</small>
+                        </div>
+
+                    </div>
+                    <div class="second-column" style='width:45%; float: right;'>
+
+                        <div class="form-group">
+                            <label for="name">Birth-day</label>
+                            <input type="date" class="form-control" v-model='form.birthday' id="birthday" aria-describedby="birthday" @input="birth_day('')">
+                            <small id="age" class="form-text text-muted">Enter date of birth.</small>
+                            <small class="has-text-danger" v-if="errors.birthday">@{{ errors.birthday[0] }}</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="weight">If Not Sure?... </label>
+                            <input type="text" class="form-control" v-model='form.approx_age' id="approx_age" aria-describedby="approx_age" placeholder="Approximate Age" @input="birth_calc">
+                            <small id="approx_age " class="form-text text-muted">Enter Approximate Age</small>
+                            <small class="has-text-danger" v-if="errors.approx_age">@{{ errors.approx_age[0] }}</small>
+                        </div>
+                        <label>Approximatin in:</label><br>
+                        <input type="radio" v-model="form.approximation" id="months" value="months"  @input="birth_day('months')" />
+                        <label for="months">Months</label>
+
+                        <input type="radio" v-model="form.approximation" id="years" value="years"  @input="birth_day('years')"/>
+                        <label for="years">Years</label>
+
+                        <div class="form-group">
+                            <label for="weight">Weight</label>
+                            <input type="text" class="form-control" v-model='form.weight' id="weight" aria-describedby="animals_weight" placeholder="Enter Weight" required>
+                            <small id="animals_weight " class="form-text text-muted">Enter the animals Weight</small>
+                            <small class="has-text-danger" v-if="errors.weight">@{{ errors.weight[0] }}</small>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="health_status" v-model="form.health_status">
+                                <label class="custom-control-label" for="health_status"> Is the animal <span class="text-danger">Sick</span>?</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox" v-if="form.gender == 'female'">
+                                <input type="checkbox" class="custom-control-input" id="pregnancy_status" v-model="form.pregnancy_status">
+                                <label class="custom-control-label" for="pregnancy_status"> Is the animal <span class="text-success">Pregnant</span>?</label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button @click="save_item('animal')" class="btn btn-info" value="Submit" :disabled="loading">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+            </div>
+          </div>
+
+
+
+
+
+          <div id="animal_child_modal" class="modal fade " role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Register Animal</h4>
+                </div>
+                <div class="modal-body">
+
+                <form action="{{route('animal.store')}}" method="POST">
+                {{-- <form id="add_animal">> --}}
+                  @csrf
+                    <div class="first-column" style='width:45%; float: left;'>
+                        <div class="form-group">
+                            <label for="name">Name Of Animal</label>
+                            <input type="text" class="form-control" v-model='form.name' id="name" aria-describedby="name" placeholder="Enter Name">
+                            <small id="name" class="form-text text-muted">Enter Disired name of animal.</small>
+                            <small class="has-text-danger" v-if="errors.name">@{{ errors.name[0] }}</small>
+                        </div>
+
+                        <fieldset>
+                            <label>Gender:</label><br>
+                            <el-radio-group v-model="form.gender">
+                                <el-radio label="male">Male</el-radio>
+                                <el-radio label="female">Female</el-radio>
+                              </el-radio-group>
+
+                        </fieldset>
+
+                        <fieldset>
+                            <label>Species:</label><br>
+                            <el-radio-group v-model="form.species" @change="search_item">
+                                <el-radio label="cow">Cow</el-radio>
+                                <el-radio label="goat">Goat</el-radio>
+                                <el-radio label="sheep">Sheep</el-radio>
+                              </el-radio-group>
+                        </fieldset>
+
+                        <div class="form-group">
+                            <label for="breed">Breed</label>
+                            <br>
+                            {{-- <select class="form-control form-control-sm" v-model="form.breed_id" required>
+                                <option value="1">Charolais</option>
+                                <option value="2">Merino</option>
+
+                            </select> --}}
+                            <el-select v-model="form.breed_id" clearable filterable placeholder="select a breed"  style="width: 100%;">
+                                <el-option v-for="(item, index) in options" :key="item.id" :label="item.breed" :value="item.id">
+                                </el-option>
+                            </el-select>
+                            <small id="momsname" class="form-text text-muted">Select the Breed</small>
+                            <small class="has-text-danger" v-if="errors.breed_id">@{{ errors.breed_id[0] }}</small>
+                        </div>
+
+                        <div class="form-group">
+                            <el-select v-model="form.mother_id" filterable clearable placeholder="select a breed"  style="width: 100%;">
+                                <el-option v-for="(item, index) in parents" :key="item.id" :label="item.animal.name" :value="item.animal.id">
+                                </el-option>
+                            </el-select>
                             <small id="momsname" class="form-text text-muted">Enter The Mothers Name or id</small>
                             <small class="has-text-danger" v-if="errors.mothers_name">@{{ errors.mothers_name[0] }}</small>
                         </div>
@@ -369,7 +492,7 @@
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                       @if ($animal->sale_status === 1  )
-                                      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#sell_animal" @click="open_edit({{ $animal }})">{{$animal}} Sell</a>
+                                      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#sell_animal" @click="open_edit({{ $animal }})">Sell</a>
                                       @endif
                                       <a class="dropdown-item" href="#" data-toggle="modal" data-target="#death" @click="open_edit({{ $animal }})">Dead </a>
                                       @if ($animal->reproductive_status==1)
@@ -386,7 +509,9 @@
                                     Action
                                   </button>
                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#sell_animal" @click="open_edit({{ $animal }})">Sell</a>
+                                      @if ($animal->sale_status === 1  )
+                                      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#sell_animal" @click="open_edit({{ $animal }})">Sell</a>
+                                      @endif
 
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet" @click="open_edit({{ $animal }})">Summon Vet</a>
                                     {{-- <a class="dropdown-item" href="#" data-toggle="modal" data-target="#summon_vet" @click="save_item_data('summon_proffesional', {{ $animal }})">Summon Vet</a> --}}

@@ -458,6 +458,19 @@ const app = new Vue({
                     this.success('Updated')
                     // eventBus.$emit("pushEvent", response)
                 });
+        },
+        get_parent(){
+
+            var payload = {
+                model: 'parent',
+                update: 'updateParentList',
+            }
+            this.$store.dispatch('getItems', payload)
+                .then(response => {
+                    console.log(response.data);
+                    // this.success('Created')
+                    // eventBus.$emit("pushEvent", response)
+                });
         }
     },
     mounted() {
@@ -467,8 +480,9 @@ const app = new Vue({
         // }, 1500);
         this.get_items('get_notifications', 'updateNotification')
         this.get_items('/cart', 'updateCart')
+        this.get_parent()
     },
     computed: {
-        ...mapState(['errors', 'animals', 'issues_show', 'notifications', 'users', 'cart']),
+        ...mapState(['errors', 'animals', 'issues_show', 'notifications', 'users', 'cart', 'parents']),
     },
 });

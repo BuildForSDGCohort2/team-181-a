@@ -67,7 +67,7 @@ class Pregnant extends Model
 
     public function animal()
     {
-        return $this->belongsTo('App\Animal');
+        return $this->belongsTo('App\Animal', 'animal_id');
     }
     public function proffesional()
     {
