@@ -87,7 +87,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('recievers_dash','OrdersController@recievers_dash')->name('receivers_dash');
 	Route::get('ready_for_pickup','OrdersController@ready_for_pickup')->name('ready_for_pickup');
-
+	Route::get('waiting_user_requests','HomeController@waiting_user_requests')->name('waiting_user_requests');
 
 });
 

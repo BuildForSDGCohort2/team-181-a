@@ -7,50 +7,20 @@
 
   <div class="container-fluid">
     <nav >
-        @if (auth()->user()->hasRole('admin'))
-        <ul class="nav nav-pills">
-          <li class="nav-item">
-          <a class="nav-link " href="{{route('notifications')}}">Proffesionals</a>
-          </li>
-          <li class="nav-item">
-          <a class="nav-link" href="{{route('pending_suppliers')}}">Suppliers</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{route('orders')}}">Orders</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{route('dispatch')}}">Dispatch</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" style="background-color: blueviolet" href="#">User Requests</a>
-          </li>
-        </ul>
-        @else
+
         <ul class="nav nav-pills">
 
-
           <li class="nav-item">
-            <a class="nav-link active" style="background-color: blueviolet" href="#">Issues</a>
+            <a class="nav-link " href="{{route('issues')}}">Issues</a>
+          </li>
+          <a class="nav-link active" style="background-color: blueviolet" href="#">Farmer Requests</a>
+          
           </li>
 
-          @if (auth()->user()->hasRole('farmer'))
-           <li class="nav-item">
-              <a class="nav-link "  href="{{route('storage')}}">Store</a>
-            </li>
-         @endif
-          @if (auth()->user()->hasRole(['vet','feo']))
-          <li class="nav-item">
-          <a class="nav-link" href="{{route('waiting_user_requests')}}">Farmer Requests.</a>
-          </li>
-          @else
-          <li class="nav-item">
-            <a class="nav-link" href="{{route('orders')}}">Orders</a>
-          </li>
-          @endif
+          
          
         </ul>
 
-        @endif
 
       </nav>
 
@@ -58,8 +28,8 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-info">
-            <h4 class="card-title ">Pending Professional Requests</h4>
-            <p class="card-category"> Approve or decline Professionals</p>
+            <h4 class="card-title ">Pending Farmers Requests</h4>
+            <p class="card-category"> Requests Subitted from Farmers</p>
           </div>
           <div class="card-body">
             <div class="table-responsive">
@@ -69,10 +39,10 @@
                     ID
                   </th>
                   <th>
-                    Reason
+                    Service
                   </th>
                   <th>
-                    Information
+                    Patient
                   </th>
 
                   <th>
@@ -81,30 +51,27 @@
                 </thead>
                 <tbody>
 
-                @forelse ($issues as $issue)
+                @forelse ($requests as $request)
                 <tr>
                   <td>
-                    @if (in_array('PLT',explode('-',$issue->identifier)))
-                      <i class="fa fa-pagelines "></i>
-                    @elseif(in_array('ANML',explode('-',$issue->identifier)))
-                      <i class="material-icons">pets</i>
-                    @elseif(in_array('POLTR',explode('-',$issue->identifier)))
-                      <i class="fa fa-bold" aria-hidden="true"></i>
-                    @else
-                      <i class="material-icons">api</i>
-                    @endif
+                    {{ucfirst($request->id)}}
                     </td>
 
                     <td>
-                     {{ucfirst($issue->reason)}}
+                    @php
+                        $services = explode('-',$request->service)
+                    @endphp
+                     {{in_array('ai',$services)?'Airtificial Isemination':''.
+                        (in_array('ij',$services)?' Look into Injury ':'').
+                        (in_array('chkup',$services)?'Checkup':'')
+                        }}
                     </td>
 
                     <td>
-
-                      {{$issue->information.(in_array('RMNDR',explode('-',$issue->identifier))?now()->diff(date_create($issue->due_date))->d.'days from now':null )}}
+                        {{' A '.$request->animal->gender.' '.ucfirst($request->animal->breed->breed).' '.$request->animal->species }}
                     </td>
                     <td>
-                        <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#professional_modal" @click="open_issue({{ $issue->id }})">View info</button>
+                        <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#professional_modal" @click="open_issue({{ $request->id }})">View info</button>
                     </td>
                 </tr>
                 @empty
@@ -129,7 +96,7 @@
                 </tbody>
               </table>
 
-              {{ $issues->links() }}
+              {{-- {{ $issues->links() }} --}}
             </div>
           </div>
         </div>
