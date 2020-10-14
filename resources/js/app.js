@@ -404,6 +404,9 @@ const app = new Vue({
 
         imgClick(item) {
             this.show_image = true
+        },
+        summon_vet() {
+            
         }
     },
     mounted() {
