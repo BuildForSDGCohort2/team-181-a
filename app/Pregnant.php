@@ -7,6 +7,7 @@ use App\Animal;
 use App\Isues;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Pregnant extends Model
 
@@ -42,9 +43,17 @@ class Pregnant extends Model
 
     #Birth
     #regiments
-    public static function new_pregnancy(Type $var = null)
+    public static function new_pregnancy($animal_id)
     {
-        # code...
+        $pregancy = new Pregnant;
+        $pregancy->animal_id = $animal_id;
+        $pregancy->pregnancy_date = now();
+        $pregancy->user_id = Auth::id();
+        $pregancy->pregnancy_status = 0;
+        $pregancy->save();
+
+        return $pregancy;
+
     }
 
     public function confirm_pregnancy($animal)

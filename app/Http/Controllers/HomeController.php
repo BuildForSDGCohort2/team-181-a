@@ -50,9 +50,9 @@ class HomeController extends Controller
             }else {
                 return redirect('waiting_user_requests');
 
-            }     
-            
-       
+            }
+
+
         }elseif(auth()->user()->hasRole('farmer')){
             $issues = $issue->get_unsolved_issues();
             return view('dashboard')->with('issues',$issues);

@@ -14,11 +14,8 @@
             <a class="nav-link " href="{{route('issues')}}">Issues</a>
           </li>
           <a class="nav-link active" style="background-color: blueviolet" href="#">Farmer Requests</a>
-          
-          </li>
 
-          
-         
+          </li>
         </ul>
 
 
@@ -71,7 +68,7 @@
                         {{' A '.$request->animal->gender.' '.ucfirst($request->animal->breed->breed).' '.$request->animal->species }}
                     </td>
                     <td>
-                        <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#professional_modal" @click="open_issue({{ $request->id }})">View info</button>
+                        <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#professional_modal" @click="open_issue({{ $request->id }}, 'summon_request')">View </button>
                     </td>
                 </tr>
                 @empty
@@ -115,12 +112,16 @@
         </div>
         <div class="modal-body">
             <ul class="list-group">
-                <li class="list-group-item"><b>Reason:</b> <span style="margin-left: 30px">@{{ issues_show.reason }}</span></li>
-                <li class="list-group-item"><b>Information:</b> <span style="margin-left: 30px">@{{ issues_show.information }}</span></li>
+                <li class="list-group-item" v-for="(issue, index) in issues_show.service_arr" :key="issue.id"><b>Reason:</b>
+                    <span style="margin-left: 30px" v-if="issue == 'sale'">Sale   <el-button style="float: right" type="primary" :loading="false"  @click="issue_update('issue_req/' + issues_show.id + '/' + issue)">@{{ req.sale_text }}</el-button></span>
+                    <span style="margin-left: 30px" v-if="issue == 'ij'">Injury  <el-button style="float: right" type="primary" :loading="false"  @click="issue_update('issue_req/' + issues_show.id + '/' + issue)">@{{ req.ij_text }}</el-button></span>
+                    <span style="margin-left: 30px" v-if="issue == 'ai'">Ai samination  <el-button style="float: right" type="primary" :loading="false"  @click="issue_update('issue_req/' + issues_show.id + '/' + issue)">@{{ req.ai_text }}</el-button></span>
+            </li>
+                {{-- <li class="list-group-item"><b>Reason:</b> <span style="margin-left: 30px">@{{ issues_show.reason }}</span></li> --}}
               </ul>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-outline-info" @click="save_item('isue/' + issues_show.id + '/read')">Mark as read</button>
+        <button type="button" class="btn btn-sm btn-outline-info" @click="issue_update('issue_req/' + issues_show.id + '/well')">Animal is well</button>
       </div>
 
     </div>

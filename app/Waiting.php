@@ -22,25 +22,36 @@ class Waiting extends Model
         ]);
 
     }
-    public function sick()
+    public function sick($id)
     {
-        
-       $waiting_animal = $this->find($id)->get();
+
+       $waiting_animal = $this->find($id);
        Animal_Ailments::create([
            'animal_id'=>$waiting_animal->animal_id ,#this is an unconfirmed pregnancy
            'scale'=>0,
            'cause'=>$waiting_animal->animal_id,
            'vet_id'=>$waiting_animal->proffesional_id,
        ]);
- 
+
     }
-    public function cofirm_sale()
+    public function cofirm_sale($id)
     {
-        $waiting_animal = $this->find($id)->get();
+        $waiting_animal = $this->find($id);
         $animal = Animal::find($waiting_animal->animal_id);
         $animal->sale_status= 1;
         $animal->save();
 
+    }
+
+    public function waiting($id)
+    {
+        $waiting = Waiting::where('id', $id)->get();
+
+        $waiting->transform(function($item) {
+            $item->service_arr = explode('-', $item->service);
+            return $item;
+        });
+        return $waiting;
     }
 
     public function well()
