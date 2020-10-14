@@ -73,4 +73,7 @@ export default {
     updateCart(state, payload) {
         state.cart = payload
     },
+    updatePlantFactList(state, payload) {
+        state.plant_fact = payload
+    },
 }

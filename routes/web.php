@@ -83,6 +83,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 	Route::get('fact_sheet/{search}','BrowseController@fact_sheet')->name('fact_sheet');
+	Route::get('plant_fact_sheet/{search}','BrowseController@plant_fact_sheet')->name('plant_fact_sheet');
 
 	Route::get('recievers_dash','OrdersController@recievers_dash')->name('receivers_dash');
 	Route::get('ready_for_pickup','OrdersController@ready_for_pickup')->name('ready_for_pickup');

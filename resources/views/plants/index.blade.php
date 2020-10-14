@@ -32,18 +32,24 @@
                 <div class="modal-body">
                 <form action="{{route('plant.store')}}" method="POST">
                   @csrf
-
                     <div class="first-column" style='width:45%; float: left;'>
                       <div class="form-group">
                         <label for="species">Type Of Plant</label>
-                        <input type="text" class="form-control" v-model='form.species'id="species" aria-describedby="species" placeholder="Enter plant type">
+                        <input type="text" class="form-control" v-model='form.species'id="species" aria-describedby="species" placeholder="Enter plant type" @change="fact_sheet">
                         <small id="species" class="form-text text-muted">Select the Appropriate plant or Enter name.</small>
                         <small class="has-text-danger" v-if="errors.species">@{{ errors.species[0] }}</small>
                     </div>
 
                        <div class="form-group">
                         <label for="type_id">Number / Strain</label>
-                        <input type="text" v-model ='form.type_id'class="form-control" id="type_id" aria-describedby="type_id" placeholder="Select Strain">
+                        {{-- <input type="text" v-model ='form.type_id'class="form-control" id="type_id" aria-describedby="type_id" placeholder="Select Strain"> --}}
+
+                        <el-select v-model="form.type_id" filterable placeholder="select a breed"  style="width: 100%;">
+                            <el-option v-for="(item, index) in options" :key="item.id" :label="item.type" :value="item.id">
+                            </el-option>
+                        </el-select>
+
+
                         <small id="type_id" class="form-text text-muted">Select the type..</small>
                         <small class="has-text-danger" v-if="errors.type_id">@{{ errors.type_id[0] }}</small>
                     </div>

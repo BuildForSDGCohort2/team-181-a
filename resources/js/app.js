@@ -87,11 +87,7 @@ const app = new Vue({
         load_data: false,
         form_dialog: false,
         show_busket: false,
-<<<<<<< HEAD
         show_image: false,
-=======
-        reasons: ['Check-up ?', 'Sale Verification ?', 'A-Insemination ?', 'Injury ?'],
->>>>>>> cd11ac9f277bdbbb580e56bec2868b1525de495d
         userid: document.querySelector("meta[name='user-id']").getAttribute('content')
     },
     methods: {
@@ -212,6 +208,25 @@ const app = new Vue({
                     // this.success('Created')
                     eventBus.$emit("pushEvent", response)
                 });
+        },
+        fact_sheet(data) {
+            // console.log(data);
+
+            // if (this.form.species > 2) {
+
+            var payload = {
+                model: 'plant_fact_sheet',
+                update: 'updatePlantFactList',
+                search: this.form.species
+            }
+            this.$store.dispatch('searchItems', payload)
+                .then(response => {
+                    console.log(response.data);
+                    this.options = response.data
+                    // this.success('Created')
+                    eventBus.$emit("pushEvent", response)
+                });
+            // }
         },
         save_item(model) {
             var payload = {
@@ -386,38 +401,9 @@ const app = new Vue({
             // return
             this.order = order
         },
-<<<<<<< HEAD
 
         imgClick(item) {
             this.show_image = true
-=======
-        summon_vet(model, data) {
-            var payload = {
-                model: model,
-                data: data
-            }
-            var reason = ''
-            if (this.edit_form.sell) {
-                reason = reason + ', Sale velification'
-            }if (this.edit_form.checkup) {
-                reason = reason + ', Checkup'
-            }if (this.edit_form.ainsemination) {
-                reason = reason + ', A insemination'
-            }if (this.edit_form.injury) {
-                reason = reason + ', Injury'
-            }
-
-            this.edit_form.reason = reason
-
-            console.log('******************');
-            console.log(reason);
-            console.log('******************');
-            this.$store.dispatch('postItems', payload)
-                .then(response => {
-                    this.success('Updated')
-                    // eventBus.$emit("pushEvent", response)
-                });
->>>>>>> cd11ac9f277bdbbb580e56bec2868b1525de495d
         }
     },
     mounted() {
