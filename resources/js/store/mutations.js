@@ -76,4 +76,7 @@ export default {
     updatePlantFactList(state, payload) {
         state.plant_fact = payload
     },
+    updateParentList(state, payload) {
+        state.parents = payload
+    },
 }

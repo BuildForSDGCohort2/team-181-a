@@ -88,7 +88,12 @@ const app = new Vue({
         form_dialog: false,
         show_busket: false,
         show_image: false,
-        userid: document.querySelector("meta[name='user-id']").getAttribute('content')
+        userid: document.querySelector("meta[name='user-id']").getAttribute('content'),
+        req: {
+            sale_text: 'Confirm sale',
+            ij_text: 'Injured',
+            ai_text: 'Success'
+        }
     },
     methods: {
         toggleActive(item, qty) {
@@ -132,7 +137,6 @@ const app = new Vue({
                 });
         },
         checkout(data) {
-
             var payload = {
                 model: '/order/' + data + '/product',
                 data: this.form
@@ -237,11 +241,37 @@ const app = new Vue({
             this.loading = true
             this.$store.dispatch('postItems', payload)
                 .then(response => {
+
+                    console.log(response.data);
+
                     this.loading = false
 
                     this.success('Updated')
                     eventBus.$emit("pushEvent", response)
-                    window.location.reload()
+                    // window.location.reload()
+                })
+                .catch((error) => {
+                    this.loading = false
+                });
+        },
+        issue_update(model) {
+            var payload = {
+                model: model,
+                data: this.form
+            }
+            console.log(payload);
+            this.loading = true
+            this.$store.dispatch('postItems', payload)
+                .then(response => {
+
+                    this.open_issue(response.data.id, 'summon_request')
+
+                    console.log(response.data);
+
+                    this.loading = false
+
+                    this.success('Updated')
+                    // window.location.reload()
                 })
                 .catch((error) => {
                     this.loading = false
@@ -256,10 +286,6 @@ const app = new Vue({
             this.loading = true
             this.$store.dispatch('postItems', payload)
                 .then(response => {
-                    console.log('**********************');
-
-                    console.log(response);
-                    console.log('**********************');
                     this.loading = false
 
                     this.success('Updated')
@@ -365,13 +391,13 @@ const app = new Vue({
                 });
 
         },
-        open_issue(id) {
+        open_issue(id, model) {
             console.log(id);
 
             var payload = {
                 update: 'updateIssue',
                 id: id,
-                model: 'show_issue'
+                model: model
             }
             console.log(payload);
             this.$store.dispatch('showItem', payload)
@@ -404,6 +430,47 @@ const app = new Vue({
 
         imgClick(item) {
             this.show_image = true
+        },
+
+        summon_vet(model, data) {
+            var payload = {
+                model: model,
+                data: data
+            }
+            var reason = ''
+            if (this.edit_form.sell) {
+                reason = reason + ', Sale velification'
+            }if (this.edit_form.checkup) {
+                reason = reason + ', Checkup'
+            }if (this.edit_form.ainsemination) {
+                reason = reason + ', A insemination'
+            }if (this.edit_form.injury) {
+                reason = reason + ', Injury'
+            }
+
+            this.edit_form.reason = reason
+
+            console.log('******************');
+            console.log(reason);
+            console.log('******************');
+            this.$store.dispatch('postItems', payload)
+                .then(response => {
+                    this.success('Updated')
+                    // eventBus.$emit("pushEvent", response)
+                });
+        },
+        get_parent(){
+
+            var payload = {
+                model: 'parent',
+                update: 'updateParentList',
+            }
+            this.$store.dispatch('getItems', payload)
+                .then(response => {
+                    console.log(response.data);
+                    // this.success('Created')
+                    // eventBus.$emit("pushEvent", response)
+                });
         }
     },
     mounted() {
@@ -413,8 +480,9 @@ const app = new Vue({
         // }, 1500);
         this.get_items('get_notifications', 'updateNotification')
         this.get_items('/cart', 'updateCart')
+        this.get_parent()
     },
     computed: {
-        ...mapState(['errors', 'animals', 'issues_show', 'notifications', 'users', 'cart']),
+        ...mapState(['errors', 'animals', 'issues_show', 'notifications', 'users', 'cart', 'parents']),
     },
 });
