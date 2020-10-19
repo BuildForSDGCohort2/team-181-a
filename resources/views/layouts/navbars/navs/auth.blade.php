@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
   <div class="container-fluid">
     <div class="navbar-wrapper">
-      <a class="navbar-brand" href="#">The Farmers Assistant.</a>
+    <a class="navbar-brand" href="#">Welcome {{ucfirst(auth()->user()->name)}}</a>
     </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
     <span class="sr-only">Toggle navigation</span>
@@ -30,19 +30,38 @@
           </a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="material-icons">notifications</i>
-            <span class="notification">5</span>
+            <span class="notification" v-if="notifications.data" v-html="notifications.data.length"></span>
             <p class="d-lg-none d-md-block">
               {{ __('Some Actions') }}
             </p>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">{{ __('Mike John responded to your email') }}</a>
-            <a class="dropdown-item" href="#">{{ __('You have 5 new tasks') }}</a>
+            <a class="dropdown-item" href="#" v-for="notification in notifications.data">
+                <div v-html="notification.information"></div>
+            </a>
+            {{-- <a class="dropdown-item" href="#">{{ __('You have 5 new tasks') }}</a>
             <a class="dropdown-item" href="#">{{ __('You\'re now friend with Andrew') }}</a>
             <a class="dropdown-item" href="#">{{ __('Another Notification') }}</a>
-            <a class="dropdown-item" href="#">{{ __('Another One') }}</a>
+            <a class="dropdown-item" href="#">{{ __('Another One') }}</a> --}}
+          </div>
+        </li>
+        {{-- shopping Basket.... --}}
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-if="cart.length  > 0">
+            <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+              <span class="notification" v-html="cart.length"></span>
+            <p class="d-lg-none d-md-block">
+              {{ __('Some Actions') }}
+            </p>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+            {{-- <a class="dropdown-item" href="#">{{ __('Your Shopping Basket is empty') }}</a> --}}
+
+            <div class="dropdown-item" v-for="item in cart" :key="item.id">
+                @{{ item.item.species }}
+            </div>
           </div>
         </li>
         <li class="nav-item dropdown">
@@ -54,7 +73,9 @@
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
             <a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Profile') }}</a>
-            <a class="dropdown-item" href="#">{{ __('Settings') }}</a>
+            @if (auth()->user()->hasRole('customer'))
+              <a class="dropdown-item" href="{{route('orders')}}">{{ __('Order History') }}</a>
+            @endif
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Log out') }}</a>
           </div>

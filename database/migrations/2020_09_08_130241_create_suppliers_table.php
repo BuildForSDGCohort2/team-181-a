@@ -15,7 +15,7 @@ class CreateSuppliersTable extends Migration
     {
         Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+        
             $table->string('name');
             $table->string('location');
             #used to check the supppliers availability
@@ -24,7 +24,7 @@ class CreateSuppliersTable extends Migration
             #wll reate the supplies servicees..
             # they wil appear on the drop down according to the rating
             $table->integer('ratings');
-
+            $table->timestamps();
         });
     }
 

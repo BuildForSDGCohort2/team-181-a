@@ -2,6 +2,13 @@
 
 @section('content')
 <div class="container" style="height: auto;">
+
+
+@if ($message = Session::get('success'))
+<div class="alert alert-success">
+    <strong>{{ $message }}</strong>
+</div>
+@endif
   <div class="row align-items-center">
     <div class="col-md-9 ml-auto mr-auto mb-3 text-center">
       <h3>{{ __('Welcome To The Log In Page') }} </h3>
@@ -15,13 +22,13 @@
             <h4 class="card-title"><strong>{{ __('Login') }}</strong></h4>
             <div class="social-line">
               {{-- make these Buttons Work --}}
-              <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
+              <a href="/login/facebook" class="btn btn-just-icon btn-link btn-white">
                 <i class="fa fa-facebook-square"></i>
               </a>
-              <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
+              <a href="/login/twitter" class="btn btn-just-icon btn-link btn-white">
                 <i class="fa fa-twitter"></i>
               </a>
-              <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
+              <a href="/login/google" class="btn btn-just-icon btn-link btn-white">
                 <i class="fa fa-google-plus"></i>
               </a>
             </div>
@@ -35,7 +42,7 @@
                     <i class="material-icons">email</i>
                   </span>
                 </div>
-                <input type="email" name="email" class="form-control" placeholder="{{ __('Email...') }}" value="{{ old('email', 'admin@material.com') }}" required>
+                <input type="email" name="email" class="form-control" placeholder="{{ __('Email...') }}"  required>
               </div>
               @if ($errors->has('email'))
                 <div id="email-error" class="error text-danger pl-3" for="email" style="display: block;">
@@ -50,7 +57,7 @@
                     <i class="material-icons">lock_outline</i>
                   </span>
                 </div>
-                <input type="password" name="password" id="password" class="form-control" placeholder="{{ __('Password...') }}" value="{{ !$errors->has('password') ? "secret" : "" }}" required>
+                <input type="password" name="password" id="password" class="form-control" placeholder="{{ __('Password...') }}"  required>
               </div>
               @if ($errors->has('password'))
                 <div id="password-error" class="error text-danger pl-3" for="password" style="display: block;">
@@ -72,18 +79,13 @@
           </div>
         </div>
       </form>
-      <div class="row">
-        <div class="col-6">
+      <div class="row  justify-content-center" >
+        <div class="col-6" >
             @if (Route::has('password.request'))
                 <a href="{{ route('password.request') }}" class="text-light">
                     <small>{{ __('Forgot password?') }}</small>
                 </a>
             @endif
-        </div>
-        <div class="col-6 text-right">
-            <a href="{{ route('register') }}" class="text-light">
-                <small>{{ __('Create new account') }}</small>
-            </a>
         </div>
       </div>
     </div>

@@ -19,12 +19,12 @@ class CreatePlantationsTable extends Migration
             $table->timestamps();
             // eg maize
             $table->string('species');
-            // eg maize number 560
-            $table->integer('type_id');
             $table->dateTime('planting_date');
-            $table->unsignedBigInteger('farmer_id');
+            $table->unsignedBigInteger('user_id');
             $table->integer('size_of_plantation');
-            $table->foreign('farmer_id')->references('id')->on('farmers');
+            $table->unsignedBigInteger('type_id');
+            $table->foreign('type_id')->references('id')->on('plant_fact_sheets');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

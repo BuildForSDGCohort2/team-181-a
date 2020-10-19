@@ -79,8 +79,8 @@
       <div class="row">
         <div class="col-md-4">
           {{-- this chart eill display :
-            Daily dairy sales for the farmer , 
-            Monlthly Births for the vet, 
+            Daily dairy sales for the farmer ,
+            Monlthly Births for the vet,
             Suggest something for the Field extention oficer,
             And maybe the daily orders from farmers a supplier has recieved
               --}}
@@ -178,6 +178,28 @@
                 <div class="tab-pane active" id="profile">
                   <table class="table">
                     <tbody>
+                      @forelse ($issues as $issue)
+                      @if (in_array('ANML' ,explode('-', $issue->identifier))||in_array('POLTR' ,explode('-', $issue->identifier)))
+                        <tr>
+                          <td>
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" value="" checked>
+                                <span class="form-check-sign">
+                                  <span class="check"></span>
+                                </span>
+                              </label>
+                            </div>
+                          </td>
+                          <td>{{$issue->reason}}</td>
+                          <td class="td-actions text-right">
+                            <button type="button" rel="tooltip" title="View Info" class="btn btn-primary btn-link btn-sm">
+                              <i class="material-icons">visibility</i>
+                            </button>
+                          </td>
+                        </tr>
+                      @endif
+                      @empty
                       <tr>
                         <td>
                           <div class="form-check">
@@ -189,7 +211,7 @@
                             </label>
                           </div>
                         </td>
-                        <td>Sign contract for "What are conference organizers afraid of?"</td>
+                        <td>No issues at hand</td>
                         <td class="td-actions text-right">
                           <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
                             <i class="material-icons">edit</i>
@@ -199,76 +221,30 @@
                           </button>
                         </td>
                       </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                        </td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="" checked>
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Create 4 Invisible User Experiences you Never Knew About</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
+                      @endforelse
                     </tbody>
                   </table>
                 </div>
                 <div class="tab-pane" id="messages">
                   <table class="table">
                     <tbody>
+                      @forelse ($issues as $issue)
+                      @if (in_array('PLT' ,explode('-', $issue->identifier)))
+                        <tr>
+                          <td>
+                            <div class="form-check">
+                              <i class="fa fa-pagelines "></i>
+                            </div>
+                          </td>
+                          <td>{{$issue->reason}}</td>
+                          <td class="td-actions text-right">
+                            <button type="button" rel="tooltip" title="View Info" class="btn btn-primary btn-link btn-sm">
+                              <i class="material-icons">visibility</i>
+                            </button>
+                          </td>
+                        </tr>
+                      @endif
+                      @empty
                       <tr>
                         <td>
                           <div class="form-check">
@@ -280,8 +256,7 @@
                             </label>
                           </div>
                         </td>
-                        <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                        </td>
+                        <td>No issues at hand</td>
                         <td class="td-actions text-right">
                           <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
                             <i class="material-icons">edit</i>
@@ -291,27 +266,7 @@
                           </button>
                         </td>
                       </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Sign contract for "What are conference organizers afraid of?"</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
+                      @endforelse
                     </tbody>
                   </table>
                 </div>
@@ -532,7 +487,7 @@
                   </table>
                 </div>
               </div>
-            </div>          
+            </div>
           </div>
         </div>
       </div>
@@ -541,10 +496,23 @@
 @endsection
 
 @push('js')
-  <script>
+<script>
+    var chart_1_label = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
+    var chart_1_series = [
+        [12, 17, 7, 17, 23, 18, 38]
+        ]
+
+    var chart_2_label = ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D']
+    var chart_2_series = [
+          [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
+        ]
+    var chart_3_label = ['12p', '3p', '6p', '9p', '12p', '3a', '6a', '9a']
+    var chart_3_series = [
+          [230, 750, 450, 300, 280, 240, 200, 190]
+        ]
     $(document).ready(function() {
       // Javascript method's body can be found in assets/js/demos.js
-      md.initDashboardPageCharts();
+      md.initDashboardPageCharts(chart_1_label,chart_1_series,chart_2_label,chart_2_series,chart_3_label,chart_3_series);
     });
-  </script>
+</script>
 @endpush
