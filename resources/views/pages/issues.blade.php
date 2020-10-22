@@ -47,7 +47,6 @@
             <a class="nav-link" href="{{route('orders')}}">Orders</a>
           </li>
           @endif
-
         </ul>
 
         @endif
