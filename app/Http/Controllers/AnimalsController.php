@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\AnimalStore;
 use App\Animal;
 use App\Isues;
+use App\Pregnant;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -101,5 +102,10 @@ class AnimalsController extends Controller
         # $requea['role'=> the role proffesional baeing summoned,'location'=>the loaction from witch the user summons the vet,'information'=> the information on the request eg vaccination etx ]
         $selected_proffesional = User::summon_proffesional($location);
         $notification->alert_proffesional($selected_proffesional,$request, );
+    }
+
+    public function parent()
+    {
+        return Pregnant::with('animal')->groupby('animal_id')->distinct()->get();
     }
 }

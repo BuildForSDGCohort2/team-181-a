@@ -7,7 +7,9 @@ use App\Isues;
 use App\Proffesional;
 use App\Supplier;
 use App\Order;
-
+use App\Pregnant;
+use App\Waiting;
+use Illuminate\Support\Arr;
 
 class NotificationsController extends Controller
 {
@@ -51,6 +53,62 @@ class NotificationsController extends Controller
     {
         return $issue->get_issue($id);
     }
+
+    public function summon_request(Isues $issue, $id)
+    {
+        $waiting = new Waiting;
+
+        $waiting = $waiting->waiting($id);
+
+        return $waiting[0];
+    }
+
+    public function issue_req($id, $text)
+    {
+        // return $text;
+        // $waiting = Waiting::find($id);
+
+        $waiting = Waiting::find($id);
+        $service_arr = explode('-', $waiting->service);
+
+        if (($key = array_search($text, $service_arr)) !== false) {
+            unset($service_arr[$key]);
+        }
+        $waiting->service = collect($service_arr)->implode('-');
+
+        $waiting->save();
+
+        // return $text_str;
+
+        if ($text == 'ai') {
+            $waiting->insemination($id);
+        } elseif ($text == 'sale') {
+            $waiting->cofirm_sale($id);
+        } elseif ($text == 'ij') {
+            $waiting->sick($id);
+        } elseif ($text == 'well') {
+            $waiting->well($id);
+
+            return [];
+        }
+
+
+        $waiting = new Waiting;
+
+        $waiting = $waiting->waiting($id);
+        // $waiting->transform(function($item) {
+        //     $item->service_arr = explode('-', $item->service);
+        //     return $item;
+        // });
+        return $waiting[0];
+        // return $waiting;
+
+
+        // return $id;
+        // return $request->all();
+    }
+
+
 }
 
 

@@ -45,7 +45,14 @@ class HomeController extends Controller
                     ->with('proffesionals',$proffesionals);
 
         }elseif (auth()->user()->hasRole('vet')||auth()->user()->hasRole('feo')||auth()->user()->hasRole('supplier')) {
-            return redirect('orders');
+            if (auth()->user()->hasRole('supplier')) {
+                return redirect('orders');
+            }else {
+                return redirect('waiting_user_requests');
+
+            }
+
+
         }elseif(auth()->user()->hasRole('farmer')){
             $issues = $issue->get_unsolved_issues();
             return view('dashboard')->with('issues',$issues);
@@ -54,6 +61,12 @@ class HomeController extends Controller
         }else {
             return redirect('on_sale');
         }
+
+    }
+    public function waiting_user_requests()
+    {
+        $requests  = auth()->user()->my_waiting_requests;
+        return view('waiting')->with('requests',$requests);
 
     }
 }

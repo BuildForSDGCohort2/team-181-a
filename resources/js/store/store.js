@@ -27,6 +27,7 @@ export default {
         notifications: [],
         cart: [],
         plant_fact: [],
+        parents: [],
 
     },
     getters,

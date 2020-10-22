@@ -91,7 +91,7 @@ class User extends Authenticatable
         return $selected_prof;
     }
 
-    public function request_regiment($location)
+    public static function request_regiment($location)
     {
         $wanted_supplier = User::role('supplier')->where('location',$location)->pluck('id');
 
@@ -106,7 +106,7 @@ class User extends Authenticatable
 
         return $selected_supplier;
     }
-    public function get_transporter()
+    public static function get_transporter()
     {
         $wanted_supplier = User::role('supplier')->where('location',auth()->user()->location)->filter(function($user){return $user->profile->transport = 'able';})->pluck('id');
 
@@ -122,6 +122,10 @@ class User extends Authenticatable
         return $selected_supplier;
     }
 
+    public function my_waiting_requests()
+    {
+        return $this->hasmany('App\Waiting','proffesional_id');
+    }
 
     public function animal(){
         return $this->hasMany('App\Animal');

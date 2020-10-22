@@ -2,8 +2,9 @@
 namespace App\Http\Controllers;
 
 use AfricasTalking\SDK\AfricasTalking;
+use Exception;
 
-trait SmsTrait 
+trait SmsTrait
 {
     public function sendText($message, $phone)
     {
@@ -11,15 +12,15 @@ trait SmsTrait
         $apiKey = config("africastalking.api_key_sandbox");
 
         $AT = new AfricasTalking($username, $apiKey);
-        
+
         $sms = $AT->sms();
-    
+
         try {
             $result = $sms->send([
                 'to'      => $phone,
                 'message' => $message
             ]);
-                
+
             print_r($result);
         } catch (Exception $e) {
             echo "Error: ".$e.getMessage();

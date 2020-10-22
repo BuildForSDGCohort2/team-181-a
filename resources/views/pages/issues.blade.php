@@ -38,10 +38,16 @@
               <a class="nav-link "  href="{{route('storage')}}">Store</a>
             </li>
          @endif
-
+          @if (auth()->user()->hasRole(['vet','feo']))
+          <li class="nav-item">
+          <a class="nav-link" href="{{route('waiting_user_requests')}}">Farmer Requests.</a>
+          </li>
+          @else
           <li class="nav-item">
             <a class="nav-link" href="{{route('orders')}}">Orders</a>
           </li>
+          @endif
+
         </ul>
 
         @endif
@@ -98,7 +104,7 @@
                       {{$issue->information.(in_array('RMNDR',explode('-',$issue->identifier))?now()->diff(date_create($issue->due_date))->d.'days from now':null )}}
                     </td>
                     <td>
-                        <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#professional_modal" @click="open_issue({{ $issue->id }})">View info</button>
+                        <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#professional_modal" @click="open_issue({{ $issue->id }}, 'show_issue')">View info</button>
                     </td>
                 </tr>
                 @empty

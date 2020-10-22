@@ -69,6 +69,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::any('request_regiment','PlantsController@request_regiment')->name('request_regiment');
 
 
+	Route::get('parent','AnimalsController@parent')->name('parent');
 	Route::get('get_animal','AnimalsController@get_animal')->name('get_animal');
 	Route::get('get_notifications','NotificationsController@get_notifications')->name('get_notifications');
 
@@ -87,7 +88,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('recievers_dash','OrdersController@recievers_dash')->name('receivers_dash');
 	Route::get('ready_for_pickup','OrdersController@ready_for_pickup')->name('ready_for_pickup');
-
+	Route::get('waiting_user_requests','HomeController@waiting_user_requests')->name('waiting_user_requests');
 
 });
 
@@ -119,6 +120,9 @@ Route::get('login/instagram', 'Auth\LoginController@redirectToInstagramProvider'
 
 Route::get('login/instagram/callback', 'Auth\LoginController@instagramProviderCallback')->name('instagram.login.callback');
 Route::get('show_issue/{id}','NotificationsController@show_issue')->name('show_issue');
+Route::get('summon_request/{id}','NotificationsController@summon_request')->name('summon_request');
+
+Route::post('issue_req/{id}/{text}','NotificationsController@issue_req')->name('issue_req');
 
 Route::get('about-us', function () {
     return view('pages.about');

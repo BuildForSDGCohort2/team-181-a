@@ -217,9 +217,9 @@ class Animal extends Model
     {
         return $this->hasMany('App\Animal_Ailments','animal_id');
     }
-    public function waaiting(Type $var = null)
+    public function waiting()
     {
-        return $this->hasMany('App\Waiting');
+        return $this->hasMany('App\Waiting','animal_id');
     }
 
 
