@@ -29,15 +29,14 @@ class EnrolmentController extends Controller
         $path = $request->file('file')->store('cvs' , 's3');
         $url = Storage::disk('s3')->url($path);
 
-        dd($path, $url);
+        // dd($path, $url);
 
 
 
         $validated = $request->validated();
         $prof->new_enrolement($validated);
 
-        // return 'success';
-        return redirect('/')->with('success','Your account will be reviewed');
+        return redirect('/')->with('success','Your Registration Request was successfully submitted.. check your mail in a few days For Updates');
 
     }
     public function suppliers_enrole(SuppliersEnrol $request , Supplier $sup )
@@ -48,7 +47,7 @@ class EnrolmentController extends Controller
 
       $path = $sup->new_enrolement($validated);
     //   return Image::get_image($path);
-        return redirect('/')->with('success','Your account will be reviewed');
+        return redirect('/')->with('success','Your Registration Request was successfully submitted.. check your mail in a few days For Updates');
 
     //   return back()->withStatus(__('Your Request Has Been succesfull submitted.'));
 

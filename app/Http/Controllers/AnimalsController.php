@@ -93,15 +93,15 @@ class AnimalsController extends Controller
         return redirect('animal');
 
     }
-    public function summon_proffesional(Request $request, Isues $notification)
+    public function summon_proffesional(Request $request,$location=null)
     {
-        // dd($request->all());
-
-        $location = Auth::user()->location;
+        if ($location==null) {
+            $location = Auth::user()->location;
+        }         
         #the request should be structured as follws
         # $requea['role'=> the role proffesional baeing summoned,'location'=>the loaction from witch the user summons the vet,'information'=> the information on the request eg vaccination etx ]
         $selected_proffesional = User::summon_proffesional($location);
-        $notification->alert_proffesional($selected_proffesional,$request, );
+        Isues::alert_proffesional($selected_proffesional,$request, );
     }
 
     public function parent()

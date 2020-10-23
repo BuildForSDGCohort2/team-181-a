@@ -26,9 +26,9 @@ class StoreProfEnrols extends FormRequest
         return [
                 'name' => ['required', 'string', 'max:255'],
                 'id_number' => ['required', 'string', 'max:6','unique:App\Proffesional,id_number'],
-                'phone_number' => ['required', 'string', 'max:10','unique:App\Proffesional,phone'],
+                'phone_number' => ['required', 'string', 'max:12','unique:App\Proffesional,phone','unique:App\User,phone_number'],
                 'specialty' => ['required'],
-                'email' => ['required', 'string', 'max:30','unique:App\Proffesional,email'],
+                'email' => ['required', 'string', 'max:30','unique:App\Proffesional,email','unique:App\User,email'],
                 'exp' => ['required', 'integer'],
                 'file' => ['required'],
                 'agre' => ['required'],

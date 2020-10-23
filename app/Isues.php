@@ -182,9 +182,9 @@ class Isues extends Model
             'identifier'=>'PREG-CHCK'
         ]);
     }
-    public function alert_proffesional($id,$request)
+    public static function alert_proffesional($id,$request)
     {
-
+        return [$id,$request];
         if ($id === 0) {
             Isues::create([
                 'reason'=>'Shortage',#rhe reason will carry the necesary data
