@@ -30,12 +30,12 @@ trait UssdFactFinder
                         ->orWhere('species','all')
                         ->where('age_limits','>=',$age_in_days)
                         ->get();
-            if (count($regiments)==0) {
-                return $this->custom_query_menu();
-            } else {
-                # code...
-            }
-            
+            // if (count($regiments)==0) {
+            //     return $this->custom_query_menu();
+            // } else {
+            //     # code...
+            // }
+            return $regiments;
         } else if($exploded_information[0] == 'plnt'){
             
             $plant_fact_sheet= Plant_fact_sheet::where('type',$exploded_information[2])->where('species',$exploded_information[1])->first();

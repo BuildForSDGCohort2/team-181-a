@@ -13,6 +13,8 @@ class UssdController extends Controller
     use UssdMenuTrait;
     use SmsTrait;
     use  UssdFactFinder;
+    use  RegimentsTrait;
+
 
     #this is the  master director
     public function ussdRequestHandler(Request $request)
@@ -69,13 +71,13 @@ class UssdController extends Controller
                     }
                 } else {
                     if ($ussd_string_exploded[1]==1) {
-                        $this->ussd_proceed('Please enter the Species,Breed,Gender,Birthday(Year-month-date) or Age Approximate in months, separated by commas eg: cow,fresian,female,2020-09-12');
+                        $this->ussd_proceed("Please enter the Species,Breed,Gender,Birthday(Year-month-date) or Age Approximate in months, separated by commas eg: cow,fresian,female,2020-09-12");
                     } else if($ussd_string_exploded[1]==2){
-                        $this->ussd_proceed('Please enter the Type,Strain,Area covered in Acres,Planting date(Year-month-date) or Plantation Age Approximate in months, separated by commas eg: maize,katumani,30,2020-09-12');
+                        $this->ussd_proceed("Please enter the Type,Strain,Area covered in Acres,Planting date(Year-month-date) or Plantation Age Approximate in months, separated by commas eg: maize,katumani,30,2020-09-12");
                     } else if($ussd_string_exploded[1]==3){
-                        $this->ussd_proceed('Please enter the Species,Breed,Gender(layers|broilers|mixed),Number,Hatching date,(Year-month-date) or Age Approximate in months, separated by commas eg: chicken,kienyeji,layers,2020-09-12');
+                        $this->ussd_proceed("Please enter the Species,Breed,Gender\n(layers|broilers|mixed),Number,Hatching date,(Year-month-date)\n or Age Approximate in months, separated by commas \neg: chicken,kienyeji,layers,2020-09-1");
                     } else if($ussd_string_exploded[1]==4){
-                        $this->ussd_proceed('Please enter your location  and country origin then the kind of professioal help yould wantt of  separated by commas eg ,nakuru,kenya,vet');
+                        $this->ussd_proceed("Please enter your location  and country \norigin then the kind of professioal help yould want \n separated by commas eg ,nakuru,kenya,vet");
                     }else{
                         $this->ussd_proceed("Invalid Input please check again : \n");
                         array_pop($ussd_string_exploded); #remove the  invalid input
@@ -87,16 +89,20 @@ class UssdController extends Controller
               case 3:
                 $info =  $ussd_string_exploded[2];
                 if ($ussd_string_exploded[1]==1) {
-                     $count = $this->fact_finder('anml,'.$info);
-                     $this->ussd_proceed('We Found '.$count.' Regiments ');
+                     $regiments = $this->fact_finder('anml,'.$info);
+                    $this->pass_regiments($regiments,'Animal');
+                    
                 } else if($ussd_string_exploded[1]==2){
                     $regiments = $this->fact_finder('plnt,'.$info);
+                    $this->pass_regiments($regiments,'Plantation');
                     
                 } else if($ussd_string_exploded[1]==3){
-                    $count = $this->fact_finder('brood,'.$info);
-                    $this->ussd_proceed('We Found '.$count.' Regiments ');
+                    $regiments = $this->fact_finder('brood,'.$info);
+                    $this->pass_regiments($regiments,'Brood');
+                
                 } else if($ussd_string_exploded[1]==4){
                     $this->fact_finder('prof,'.$info,$phone);
+                
                 }else{
                     $this->ussd_stop('Invalid Input :');
 
@@ -109,7 +115,8 @@ class UssdController extends Controller
               break;
               case 4:
                     #this will handle the querry submission . we will make a trait that  will handle the sms ah we alredy have one ... we will just pass the data
- 
+                    #now for the final and most epic part of the lakers shoow  !!!!!!! 
+                    echo('we herere niqa');
               break;
             
               // N/B: There are no more cases handled as the following requests will be handled by return user
