@@ -15,7 +15,7 @@ class AgeRegimentSeeder extends Seeder
             'category' =>'vaccine',
             'species' =>'all',
             'age_limits' =>0,
-            'suppliment' =>'at birth vaccinations',
+            'suppliment' =>'infant vaccinations',
             'tips' =>'invite the vet over to make some crucial vaccinations that if go unadministered could lead to death of the infant',
             
         ]);
@@ -71,8 +71,8 @@ class AgeRegimentSeeder extends Seeder
         DB::table('age_regiments')->insert([
             'category' =>'vaccination',
             'species' =>'all',
-            'age_limits' =>140,
-            'suppliment' =>'vaccine',
+            'age_limits' =>150,
+            'suppliment' =>'five months old vaccinations',
             'tips' =>'summon the vet do that he can adminster the much needed and important 5 minths vaccinations',
             
         ]);;

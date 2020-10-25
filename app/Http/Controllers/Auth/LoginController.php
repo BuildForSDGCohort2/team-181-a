@@ -57,18 +57,8 @@ class LoginController extends Controller
             Auth::login($user);
             return redirect()->action('HomeController@index');
         } else {
-            return redirect('/')->with('error', 'you must create an account first');
-            // return redirect('/')->with('error', 'you must create an account first');
-            $user = User::create([
-                'email' => $userSocial->getEmail(),
-                'name' => $userSocial->getName(),
-                'location' => 'nairobi',
-                'phone_number' => '07',
-                'password' => Hash::make('password')
-            ]);
-            User::latest()->first()->assignRole('farmer');
-            Auth::login($user);
-            return redirect()->action('HomeController@index');
+            return redirect('/')->with('error', 'Please Register As a Customer Or Farmer To Proceed');
+
             // return view('auth.register', ['name' => $userSocial->getName(), 'email' => $userSocial->getEmail()]);
         }
     }
