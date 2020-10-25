@@ -108,4 +108,9 @@ class AnimalsController extends Controller
     {
         return Pregnant::with('animal')->groupby('animal_id')->distinct()->get();
     }
+
+    public function parent()
+    {
+        return Pregnant::with('animal')->groupby('animal_id')->distinct()->get();
+    }
 }
