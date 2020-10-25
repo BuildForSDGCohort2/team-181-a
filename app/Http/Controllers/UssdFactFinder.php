@@ -30,11 +30,7 @@ trait UssdFactFinder
                         ->orWhere('species','all')
                         ->where('age_limits','>=',$age_in_days)
                         ->get();
-            // if (count($regiments)==0) {
-            //     return $this->custom_query_menu();
-            // } else {
-            //     # code...
-            // }
+
             return $regiments;
         } else if($exploded_information[0] == 'plnt'){
             
@@ -100,8 +96,38 @@ trait UssdFactFinder
         }
         
     }
-    public function regiment(Type $var = null)
+    public function custom_query($query_info)
+    # the  query contains the nimber and $question
     {
-        # code...
+        #this logic is to be replaced by th uper vet logic as soon as yu make that position avaailable
+        
+        $query_details = explode(',',$query_info[1]);
+        if (strtolower($query_details[0])=='vet') {
+            $prof = 3;
+        } else {
+            $prof = 2;
+        }
+        
+        $wanted_proffesional = $prof;
+        $query_message = $query_details[1];
+        $phone_number = $query_info[0];
+        if ($wanted_proffesional != null) {
+            Isues::create([
+                'reason'=>'customquery',#rhe reason will carry the necesary data
+                'information'=>'Query : '.$query_message. ' from Phone number  -'.$phone_number,#the hiphen will be used to retrieve the number for reply... 
+                'status'=>0,
+                #we hardcode over her to the default otherwise we change it to the supervet of a country
+                'user_id'=>$wanted_proffesional,
+                'identifier'=>'QUERY'
+            ]);
+            $this->ussd_stop('Your query was successfully submitted, Thenk You for visiting The Farmers Assistant');           
+        } else {
+            
+           
+
+        }
+        
     }
+    
+    
 }

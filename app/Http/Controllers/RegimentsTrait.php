@@ -1,12 +1,12 @@
 <?php
 namespace App\Http\Controllers;
 
-
 trait RegimentsTrait
 {
     public function pass_regiments($regiments,$type)
     {
-        if (count($regiments)==0) {
+        // dd( $regiments);
+        if ($regiments==null) {
             $this->ussd_proceed("We found no Regiment Specific to animal \n you can however live a Query and a proffesional will get into it: ");
         } else {
             // $this->ussd_proceed('We found '.count($regiments).'  Specific to the animal entered.');
@@ -14,6 +14,7 @@ trait RegimentsTrait
             // $this->sendText($message, $phone);
             $message = "The ".ucfirst($type)." is viable for : \n";
             $comma_puncuator = 0;
+           
             if (count($regiments )> 1) {
                 foreach ($regiments as $regiment) {
                     $message .= ucfirst($regiment->suppliment);
@@ -31,11 +32,13 @@ trait RegimentsTrait
                     
                 }
             }else {
-                $message .=  ucfirst($regiment->suppliment).'.';
+
+                $message .=  ucfirst($regiments[0]->suppliment).'.';
             }
             
             $message .= ' The Details have been sent Over to your phone.';
             $this->ussd_proceed($message);
         }
     }
+
 }

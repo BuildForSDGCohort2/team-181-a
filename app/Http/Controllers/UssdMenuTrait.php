@@ -5,7 +5,7 @@ trait UssdMenuTrait{
 
     public function newUserMenu(){
         $start  = "Welcome to The Farmers Assistant\n";
-        $start .= "1. Register\n";
+        $start .= "1. Register or Login\n";
         $start .= "2. Get Information\n";
         $start .= "3. Exit";
         $this->ussd_proceed($start);
@@ -24,14 +24,14 @@ trait UssdMenuTrait{
         $con .="2. Plantations or Crops\n";
         $con .="3. Broods or Poultry\n";
         $con .="4. Proffesionals in my area\n";
+        $con .="5. Custom Query";
         $this->ussd_proceed($con);
     }
     public function servicesMenu(){
         $serve = "What service are you looking for?\n";
-        $serve .= "1.Get Quick Facts\n";
-        $serve .= "2. Get My Animal/ Plantation biodata\n"; 
-        $serve .= "3. Summon Vet or FEO\n";      
-        $serve .= "4. Logout";
+        $serve .= "1. Get My Animal/ Plantation biodata\n"; 
+        $serve .= "2. Summon Vet or FEO\n";      
+        $serve .= "3. Logout";
         $this->ussd_proceed($serve);
     }
     public function custom_query_menu()

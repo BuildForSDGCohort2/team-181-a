@@ -14,6 +14,7 @@ class UssdController extends Controller
     use SmsTrait;
     use  UssdFactFinder;
     use  RegimentsTrait;
+    use FarmResourceFinderTrait;
 
 
     #this is the  master director
@@ -77,7 +78,9 @@ class UssdController extends Controller
                     } else if($ussd_string_exploded[1]==3){
                         $this->ussd_proceed("Please enter the Species,Breed,Gender\n(layers|broilers|mixed),Number,Hatching date,(Year-month-date)\n or Age Approximate in months, separated by commas \neg: chicken,kienyeji,layers,2020-09-1");
                     } else if($ussd_string_exploded[1]==4){
-                        $this->ussd_proceed("Please enter your location  and country \norigin then the kind of professioal help yould want \n separated by commas eg ,nakuru,kenya,vet");
+                        $this->ussd_proceed("Please enter the kind of service You need,\n followed by your location \n eg vet,nakuru");
+                    }else if($ussd_string_exploded[1]==5){
+                        $this->ussd_proceed("Enter The question ,\n if the animal concerns poultry or livestock \n sart with 'vet' \n if it concerns  crops \n start with 'officer'\n followed by the question \n eg vet,what is cows prime age?:");
                     }else{
                         $this->ussd_proceed("Invalid Input please check again : \n");
                         array_pop($ussd_string_exploded); #remove the  invalid input
@@ -103,23 +106,14 @@ class UssdController extends Controller
                 } else if($ussd_string_exploded[1]==4){
                     $this->fact_finder('prof,'.$info,$phone);
                 
+                }else if($ussd_string_exploded[1]==5){
+                    $this->custom_query([$phone,$ussd_string_exploded[2]]);
                 }else{
                     $this->ussd_stop('Invalid Input :');
 
                 }
-                    
-                    #animal selected
-                    #plantation selected
-                    #Brood or poultry
-                    #search my liocality for experts
-              break;
-              case 4:
-                    #this will handle the querry submission . we will make a trait that  will handle the sms ah we alredy have one ... we will just pass the data
-                    #now for the final and most epic part of the lakers shoow  !!!!!!! 
-                    echo('we herere niqa');
               break;
             
-              // N/B: There are no more cases handled as the following requests will be handled by return user
           }
       }
       public function handleReturnUser($ussd_string, $phone)
@@ -157,17 +151,36 @@ class UssdController extends Controller
 			break;
 			case 3:
 				if ($ussd_string_exploded[2] == "1") {                   
-					$this->ussd_stop("You will receive an sms shortly.");
-					$this->sendText("You have successfully subscribed to updates from SampleUSSD.",$phone);
+					$this->ussd_proceed("Enter the animal or Plantation id \n in the following format \n animal-008 ");
+					// $this->sendText("You have successfully subscribed to updates from SampleUSSD.",$phone);
 				} else if ($ussd_string_exploded[2] == "2") {
-					$this->ussd_stop("You will receive more information on SampleUSSD via sms shortly.");
-					$this->sendText("This is a subscription service from SampleUSSD.",$phone);
+					$this->ussd_proceed("Enter the animal or plantation id \n followed by the service you would like to recieve\n eg animal-1,castration or plantation-4,expansion");
 				} else if ($ussd_string_exploded[2] == "3") {
-					$this->ussd_stop("Thanks for reaching out to SampleUSSD.");              
+					$this->ussd_stop("Thanks for reaching out to The Farmers Assistant.");              
 				} else {
 					$this->ussd_stop("Invalid input!");
 				}
             break;
+            case 4:
+                if ($ussd_string_exploded[2]=="1") {
+                    $this->find_resource($phone,$ussd_string_exploded[3]);
+                } else if($ussd_string_exploded[2]=="2") {
+                     echo $ussd_string_exploded[3];
+                     $this->summon_proffesional($ussd_string_exploded[3],$phone);
+                }else{
+                    $this->ussd_stop("Invalid input!");
+                }
+                
+            break;
+            case 5:
+                if ($ussd_string_exploded[2]=="1") {
+                     $this->find_resource($phone,$ussd_string_exploded[3]);
+                } else {
+                    $this->ussd_proceed("Please enter the kind of proffesional You need,\n  The specific service you need\n The Resource that needs the service  \n eg vet,castration,dehorning..,animal-001");
+                }
+                
+            break;
+
 
 		}
     }
@@ -187,7 +200,7 @@ class UssdController extends Controller
         $user->password = Hash::make($pin);
         $user->assignRole('farmer');
         $user->save();
-        Auth::login($user);
+        // Auth::login($user);
         return 'success';
     }
  

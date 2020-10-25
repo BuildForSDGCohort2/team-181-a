@@ -150,6 +150,10 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Farmer');
     }
+    public function brood()
+    {
+        return $this->hasOne('App\Brood');
+    }
     public function stored_products()
     {
         return $this->hasManyThrough('App\Storage','App\Plantation','user_id','plantation_id');
