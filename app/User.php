@@ -42,6 +42,7 @@ class User extends Authenticatable
     ];
 
 
+    #grt available veterinarians in  the  ussers locality
     public static function  get_available($location)
     {
         User::all()->filter(function($user) use ($location,$role) {return $user->hasRole('vet') && $user->location=== $location; });
@@ -148,6 +149,10 @@ class User extends Authenticatable
     public function farmer()
     {
         return $this->hasOne('App\Farmer');
+    }
+    public function brood()
+    {
+        return $this->hasOne('App\Brood');
     }
     public function stored_products()
     {

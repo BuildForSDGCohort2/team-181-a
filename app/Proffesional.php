@@ -37,7 +37,7 @@ class Proffesional extends Model
         $path = $validated['file']->store('cvs' , 's3');
         $url = Storage::disk()->url($path);
 
-        dd($url);
+        // dd($url);
 
 
         $prof->image_url = $path;

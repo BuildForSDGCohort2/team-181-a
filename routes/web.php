@@ -130,8 +130,4 @@ Route::get('about-us', function () {
 
 Route::any('/ussd', 'UssdController@ussdRequestHandler');
 
-#wtf is this????
-// Route::get('image', function () {
-//     $image = new Image();
-//     $image->get_image('cvs/2blTHWkltdisqzw2rbodQclODEEhxZjpgwoKnO1j.pdf');
-// });
+
