@@ -8,7 +8,7 @@ trait SmsTrait
 {
     public function sendText($message, $phone)
     {
-        $username = config("nyasinga");
+        $username = config("sandbox");
         $apiKey = config("be04161719b4822b5c96d912bfa39e87f457e4f086f917a2c9ce31a9aa266545");
 
         $AT = new AfricasTalking($username, $apiKey);
