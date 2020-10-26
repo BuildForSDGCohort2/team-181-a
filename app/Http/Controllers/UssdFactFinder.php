@@ -53,6 +53,7 @@ trait UssdFactFinder
                 # code...
                 $expected_produce = $plant_fact_sheet->production_rate*$exploded_information[3]; 
             }
+            $this->sendText('successfull',$phone);
             return $regiments;
             
         }else if ($exploded_information[0] == 'prof') {

@@ -147,7 +147,9 @@ class UssdController extends Controller
 			case 2:
 				if ($this->ussdLogin($ussd_string_exploded[1], $phone) == "Success") {
 					$this->servicesMenu();
-				}
+				} else {
+                    // $this->servicesMenu();
+                }
 			break;
 			case 3:
 				if ($ussd_string_exploded[2] == "1") {                   
