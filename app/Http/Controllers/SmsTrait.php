@@ -17,7 +17,7 @@ trait SmsTrait
 
         try {
             $result = $sms->send([
-                'to'      => $phone,
+                'to'      => +254707777126,
                 'message' => $message,
                 'from'=> 'TF-ASISTANT'
             ]);
