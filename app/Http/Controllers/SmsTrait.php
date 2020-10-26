@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+require 'vendor/autoload.php';
 
 use AfricasTalking\SDK\AfricasTalking;
 use Exception;
@@ -8,8 +9,8 @@ trait SmsTrait
 {
     public function sendText($message, $phone)
     {
-        $username = config("sandbox");
-        $apiKey = config("be04161719b4822b5c96d912bfa39e87f457e4f086f917a2c9ce31a9aa266545");
+        $username = "sandbox";
+        $apiKey = "8369e29afcc85480172fee9c16a8267f3dab4e9bfaab01cb7565b092266c3fa7";
 
         $AT = new AfricasTalking($username, $apiKey);
 
@@ -25,6 +26,7 @@ trait SmsTrait
             print_r($result);
         } catch (Exception $e) {
             echo "Error: ".$e;
+            return ;
         }
 
         return "I am done";
