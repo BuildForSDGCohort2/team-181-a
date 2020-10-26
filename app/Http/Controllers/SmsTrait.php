@@ -18,12 +18,13 @@ trait SmsTrait
         try {
             $result = $sms->send([
                 'to'      => $phone,
-                'message' => $message
+                'message' => $message,
+                'from'=> 'TF-ASISTANT'
             ]);
 
             print_r($result);
         } catch (Exception $e) {
-            echo "Error: ".$e.getMessage();
+            // echo "Error: ".$e.getMessage();
         }
 
         return "I am done";
