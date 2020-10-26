@@ -24,7 +24,7 @@ trait SmsTrait
 
             print_r($result);
         } catch (Exception $e) {
-            // echo "Error: ".$e.getMessage();
+            echo "Error: ".$e;
         }
 
         return "I am done";
