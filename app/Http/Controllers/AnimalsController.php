@@ -40,46 +40,6 @@ class AnimalsController extends Controller
         return redirect('animal')->with('success','Animal Records recorded Succesfully');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function death(Request $request,Animal $animal)
     {
         $animal->death_of_animal($request);
@@ -109,8 +69,4 @@ class AnimalsController extends Controller
         return Pregnant::with('animal')->groupby('animal_id')->distinct()->get();
     }
 
-    public function parent()
-    {
-        return Pregnant::with('animal')->groupby('animal_id')->distinct()->get();
-    }
 }

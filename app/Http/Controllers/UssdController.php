@@ -145,45 +145,59 @@ class UssdController extends Controller
 				}
 			break;
 			case 2:
-				if ($this->ussdLogin($ussd_string_exploded[1], $phone) == "Success") {
-					$this->servicesMenu();
-				} else {
-                    // $this->servicesMenu();
+				if ($ussd_string_exploded[0]==2){
+                    $this->handleNewUser($ussd_string,$phone);
+				} else{ 
+                if($this->ussdLogin($ussd_string_exploded[1], $phone) == "Success") {
+                    $this->servicesMenu();
                 }
+            }
 			break;
-			case 3:
-				if ($ussd_string_exploded[2] == "1") {                   
-					$this->ussd_proceed("Enter the animal or Plantation id \n in the following format \n animal-008 ");
-					// $this->sendText("You have successfully subscribed to updates from SampleUSSD.",$phone);
-				} else if ($ussd_string_exploded[2] == "2") {
-					$this->ussd_proceed("Enter the animal or plantation id \n followed by the service you would like to recieve\n eg animal-1,castration or plantation-4,expansion");
-				} else if ($ussd_string_exploded[2] == "3") {
-					$this->ussd_stop("Thanks for reaching out to The Farmers Assistant.");              
-				} else {
-					$this->ussd_stop("Invalid input!");
-				}
+            case 3:
+                if ($ussd_string_exploded[0]==2){
+                    $this->handleNewUser($ussd_string,$phone);
+				} else{ 
+                    if ($ussd_string_exploded[2] == "1") {                   
+                        $this->ussd_proceed("Enter the animal or Plantation id \n in the following format \n animal-008 ");
+                        // $this->sendText("You have successfully subscribed to updates from SampleUSSD.",$phone);
+                    } else if ($ussd_string_exploded[2] == "2") {
+                        $this->ussd_proceed("Enter the animal or plantation id \n followed by the service you would like to recieve\n eg animal-1,castration or plantation-4,expansion");
+                    } else if ($ussd_string_exploded[2] == "3") {
+                        $this->ussd_stop("Thanks for reaching out to The Farmers Assistant.");              
+                    } else if($ussd_string_exploded[1] ){
+                        $this->ussd_stop("Invalid input!");
+                    }
+                }
+				
             break;
             case 4:
-                if ($ussd_string_exploded[2]=="1") {
-                    $this->find_resource($phone,$ussd_string_exploded[3]);
-                } else if($ussd_string_exploded[2]=="2") {
-                     echo $ussd_string_exploded[3];
-                     $this->summon_proffesional($ussd_string_exploded[3],$phone);
-                }else{
-                    $this->ussd_stop("Invalid input!");
-                }
+                if ($ussd_string_exploded[0]==2){
+                    $this->handleNewUser($ussd_string,$phone);
+				} else{ 
                 
+                    if ($ussd_string_exploded[2]=="1") {
+                        $this->find_resource($phone,$ussd_string_exploded[3]);
+                    } else if($ussd_string_exploded[2]=="2") {
+                         echo $ussd_string_exploded[3];
+                         $this->summon_proffesional($ussd_string_exploded[3],$phone);
+                    }else{
+                        $this->ussd_stop("Invalid input!");
+                    }
+
+                }                     
             break;
             case 5:
-                if ($ussd_string_exploded[2]=="1") {
-                     $this->find_resource($phone,$ussd_string_exploded[3]);
-                } else {
-                    $this->ussd_proceed("Please enter the kind of proffesional You need,\n  The specific service you need\n The Resource that needs the service  \n eg vet,castration,dehorning..,animal-001");
-                }
+                if ($ussd_string_exploded[0]==2){
+                    $this->handleNewUser($ussd_string,$phone);
+				} else{                 
+                    if ($ussd_string_exploded[2]=="1") {
+                        $this->find_resource($phone,$ussd_string_exploded[3]);
+                   } else {
+                       $this->ussd_proceed("Please enter the kind of proffesional You need,\n  The specific service you need\n The Resource that needs the service  \n eg vet,castration,dehorning..,animal-001");
+                   }
+                }              
                 
             break;
-
-
 		}
     }
     public function ussdRegister($details, $phone)
