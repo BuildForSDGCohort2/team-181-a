@@ -97,7 +97,7 @@ class AnimalsController extends Controller
     {
         if ($location==null) {
             $location = Auth::user()->location;
-        }         
+        }
         #the request should be structured as follws
         # $requea['role'=> the role proffesional baeing summoned,'location'=>the loaction from witch the user summons the vet,'information'=> the information on the request eg vaccination etx ]
         $selected_proffesional = User::summon_proffesional($location);
@@ -109,8 +109,8 @@ class AnimalsController extends Controller
         return Pregnant::with('animal')->groupby('animal_id')->distinct()->get();
     }
 
-    public function parent()
-    {
-        return Pregnant::with('animal')->groupby('animal_id')->distinct()->get();
-    }
+    // public function parent()
+    // {
+    //     return Pregnant::with('animal')->groupby('animal_id')->distinct()->get();
+    // }
 }

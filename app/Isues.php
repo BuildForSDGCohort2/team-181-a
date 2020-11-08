@@ -184,7 +184,7 @@ class Isues extends Model
     }
     public static function alert_proffesional($id,$request)
     {
-        return [$id,$request];
+        // return [$id,$request];
         if ($id === 0) {
             Isues::create([
                 'reason'=>'Shortage',#rhe reason will carry the necesary data
@@ -203,12 +203,12 @@ class Isues extends Model
             ]);
 
         } else {
-            #here youll debug 
+            #here youll debug
             #the checkboxes should generate automatic maseages.
             #checkboxes wuill be much easier for the user to input <queries class=""></queries>
             #add a other | other reason input area..
             $proffesional = User::find($id);
-            $reason = 'Dear '.ucfirst($proffesional->name).' your attention is required By '.ucfirst (auth()->user()->name).' Phone number '.(auth()->user()->phone_number).' to: '; 
+            $reason = 'Dear '.ucfirst($proffesional->name).' your attention is required By '.ucfirst (auth()->user()->name).' Phone number '.(auth()->user()->phone_number).' to: ';
                 #checked Reasons
                 $checks = '';
                 #code to store in the waiting table , the code that will help the system know how to handle the record
@@ -217,7 +217,7 @@ class Isues extends Model
                     $checks.=' A Health Checkup';
                     $code ='chkup';
 
-                } 
+                }
                 if ($request->sell=='true') {
                     $checks.=' A Sales Check';
                     $code =$code==null? 'sale': $code.'-sale';
@@ -230,9 +230,9 @@ class Isues extends Model
                     $checks.=' An Artificial insemination Procedure ';
                     $code =$code==null? 'ai': $code.'-ai';
                 }
-                
 
-            
+
+
             Isues::create([
                 'reason'=>'Summon',#rhe reason will carry the necesary data
                 'information'=>$reason.$checks.' on a ' .ucfirst($request->gender).' '.ucfirst($request->species) ,
@@ -246,11 +246,11 @@ class Isues extends Model
                 'proffesional_id'=>$id,
                 'animal_id'=>$request->id,
             ]);
-            
+
             Isues::create([
                 'reason'=>'Success',#rhe reason will carry the necesary data
                 'information'=>"Your Reqest For a Vet was Successfull and Dr. ".ucfirst(User::find($id)->name).' phone number '.User::find($id)->phone_number.' will Get it Contact with You.' ,
-                'status'=>0, 
+                'status'=>0,
                 'user_id'=>auth()->user()->id,
                 'identifier'=>'Vet Enroute'
             ]);
@@ -317,17 +317,17 @@ class Isues extends Model
             ]);
 
         } else {
-            #here youll debug 
+            #here youll debug
             #the checkboxes should generate automatic maseages.
             #checkboxes wuill be much easier for the user to input <queries class=""></queries>
             #add a other | other reason input area..
             $transporter = User::find($id);
-            $reason = 'Dear '.ucfirst($transporter->name).' your Transport Services are needed By '.ucfirst (auth()->user()->name).' Phone number '.(auth()->user()->phone_number).' to: '; 
+            $reason = 'Dear '.ucfirst($transporter->name).' your Transport Services are needed By '.ucfirst (auth()->user()->name).' Phone number '.(auth()->user()->phone_number).' to: ';
                 #checked Reasons
                 #need the plantstion data
-               
 
-            
+
+
             Isues::create([
                 'reason'=>'Summon',#rhe reason will carry the necesary data
                 'information'=>$reason.$checks.' on a ' .ucfirst($request->gender).' '.ucfirst($request->species) ,
@@ -341,11 +341,11 @@ class Isues extends Model
                 'plantation_id'=>'',
                 'transporter'=>'',
             ]);
-            
+
             Isues::create([
                 'reason'=>'Success',#rhe reason will carry the necesary data
                 'information'=>"Your Reqest For a Vet was Successfull and Dr. ".ucfirst(User::find($id)->name).' phone number '.User::find($id)->phone_number.' will Get it Contact with You.' ,
-                'status'=>0, 
+                'status'=>0,
                 'user_id'=>auth()->user()->id,
                 'identifier'=>'Vet Enroute'
             ]);
@@ -354,7 +354,7 @@ class Isues extends Model
 
     }
 
-    
+
 
 
     public function delivery_alert($order)
