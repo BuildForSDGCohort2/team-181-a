@@ -13,12 +13,13 @@ class Age_Regiment extends Model
 
     public static function check()
     {
-        echo ('running over  kshhht!');
+        // echo ('running over  kshhht!');
         foreach (Age_Regiment::all() as $regiment) {
             $species = $regiment->species;
             $animals = DB::table('animals')
                         ->where('species','=',$species)
                         ->where('sale_status','=',0)->get();
+            
             foreach ($animals as $animal) {               
                 #The age is got in days since soome regiments will be given even to calf
                 $age_in_days = (abs(now()->diff(date_create($animal->birthday))->format('%R%a')));
@@ -34,10 +35,10 @@ class Age_Regiment extends Model
                         'user_id' => $animal->user_id,
                         'identifier' => 'ANML-REG',   
                     ]);
-                }
-                
-                
-            } 
+                } 
+               
+            }
+
         }
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Isues;
 
+
 class Farmer extends Model
 {
     // $tgis table will be automatically fed byt the create user method.. if the user selected the role of a farmer

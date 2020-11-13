@@ -10,11 +10,11 @@ use DB;
 class UssdController extends Controller
 {
 
-    use UssdMenuTrait;
-    use SmsTrait;
+    use  UssdMenuTrait;
+    use  SmsTrait;
     use  UssdFactFinder;
     use  RegimentsTrait;
-    use FarmResourceFinderTrait;
+    use  FarmResourceFinderTrait;
 
 
     #this is the  master director
@@ -30,6 +30,7 @@ class UssdController extends Controller
 
         if(User::where('phone_number', $phone)->exists()){
             // Function to handle already registered users
+
             $this->handleReturnUser($text, $phone);
         }else {
              // Function to handle new users
@@ -66,9 +67,9 @@ class UssdController extends Controller
                 #check registration..
                 if ( $ussd_string_exploded[0] != 2) {
                     if ($this->ussdRegister($ussd_string_exploded[1], $phone) == "success") {
-                        $this->returnUserMenu();
+                        $this->servicesMenu();
                     }else{
-                        $this->ussd_stop('There Was a Technical Error, Please Try Again later.');
+                        $this->ussd_stop('There Was a Technical Error, Please Try Again later.Thanks for visiting The Farmers Assistant.');
                     }
                 } else {
                     if ($ussd_string_exploded[1]==1) {
@@ -89,6 +90,7 @@ class UssdController extends Controller
                     }
                 }                 
               break;
+              
               case 3:
                 $info =  $ussd_string_exploded[2];
                 if ($ussd_string_exploded[1]==1) {
@@ -145,43 +147,61 @@ class UssdController extends Controller
 				}
 			break;
 			case 2:
-				if ($this->ussdLogin($ussd_string_exploded[1], $phone) == "Success") {
-					$this->servicesMenu();
-				}
+				if ($ussd_string_exploded[0]==2){
+                    $this->handleNewUser($ussd_string,$phone);
+				} else if (count(explode(',',$ussd_string_exploded[1]))>1) {
+                    $this->servicesMenu();
+                } else{ 
+                if($this->ussdLogin($ussd_string_exploded[1], $phone) == "Success") {
+                    $this->servicesMenu();
+                }
+            }
 			break;
-			case 3:
-				if ($ussd_string_exploded[2] == "1") {                   
-					$this->ussd_proceed("Enter the animal or Plantation id \n in the following format \n animal-008 ");
-					// $this->sendText("You have successfully subscribed to updates from SampleUSSD.",$phone);
-				} else if ($ussd_string_exploded[2] == "2") {
-					$this->ussd_proceed("Enter the animal or plantation id \n followed by the service you would like to recieve\n eg animal-1,castration or plantation-4,expansion");
-				} else if ($ussd_string_exploded[2] == "3") {
-					$this->ussd_stop("Thanks for reaching out to The Farmers Assistant.");              
-				} else {
-					$this->ussd_stop("Invalid input!");
-				}
+            case 3:
+                if ($ussd_string_exploded[0]==2){
+                    $this->handleNewUser($ussd_string,$phone);
+				} else{ 
+                    if ($ussd_string_exploded[2] == "1") {                   
+                        $this->ussd_proceed("Enter the animal or Plantation id \n in the following format \n animal-008 ");
+                        // $this->sendText("You have successfully subscribed to updates from SampleUSSD.",$phone);
+                    } else if ($ussd_string_exploded[2] == "2") {
+                        $this->ussd_proceed("Enter the animal or plantation id \n followed by the service you would like to recieve\n eg animal-1,castration or plantation-4,expansion");
+                    } else if ($ussd_string_exploded[2] == "3") {
+                        $this->ussd_stop("Thanks for reaching out to The Farmers Assistant.");              
+                    } else if($ussd_string_exploded[1] ){
+                        $this->ussd_stop("Invalid input!");
+                    }
+                }
+				
             break;
             case 4:
-                if ($ussd_string_exploded[2]=="1") {
-                    $this->find_resource($phone,$ussd_string_exploded[3]);
-                } else if($ussd_string_exploded[2]=="2") {
-                     echo $ussd_string_exploded[3];
-                     $this->summon_proffesional($ussd_string_exploded[3],$phone);
-                }else{
-                    $this->ussd_stop("Invalid input!");
-                }
+                if ($ussd_string_exploded[0]==2){
+                    $this->handleNewUser($ussd_string,$phone);
+				} else{ 
                 
+                    if ($ussd_string_exploded[2]=="1") {
+                        $this->find_resource($phone,$ussd_string_exploded[3]);
+                    } else if($ussd_string_exploded[2]=="2") {
+                         echo $ussd_string_exploded[3];
+                         $this->summon_proffesional($ussd_string_exploded[3],$phone);
+                    }else{
+                        $this->ussd_stop("Invalid input!");
+                    }
+
+                }                     
             break;
             case 5:
-                if ($ussd_string_exploded[2]=="1") {
-                     $this->find_resource($phone,$ussd_string_exploded[3]);
-                } else {
-                    $this->ussd_proceed("Please enter the kind of proffesional You need,\n  The specific service you need\n The Resource that needs the service  \n eg vet,castration,dehorning..,animal-001");
-                }
+                if ($ussd_string_exploded[0]==2){
+                    $this->handleNewUser($ussd_string,$phone);
+				} else{                 
+                    if ($ussd_string_exploded[2]=="1") {
+                        $this->find_resource($phone,$ussd_string_exploded[3]);
+                   } else {
+                       $this->ussd_proceed("Please enter the kind of proffesional You need,\n  The specific service you need\n The Resource that needs the service  \n eg vet,castration,dehorning..,animal-001");
+                   }
+                }              
                 
             break;
-
-
 		}
     }
     public function ussdRegister($details, $phone)
@@ -208,13 +228,16 @@ class UssdController extends Controller
      * Handles Login Request
      */
     public function ussdLogin($details, $phone)
-    {
+    {   
+        $details_check = explode(',',$details);
+        $pin = (count($details_check)>1)? $details_check[1] : $details ;
+    
         $user = User::where('phone_number', $phone)->first();
 
-        if (Hash::check( $details, $user->password) ) {
+        if (Hash::check( $pin, $user->password) ) {
             return "Success";           
         } else {
-            return $this->ussd_stop("Login was unsuccessful!");
+            return $this->ussd_stop("Login was unsuccessful!. Thanks For Visiting the Farmers Assistant.");
         }
     }
     
