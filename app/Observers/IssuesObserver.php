@@ -29,7 +29,7 @@ class IssuesObserver
             $phone = $user->phone_number;
             if ($phone) {
                 $message = 'Dear ' . $user->name . ' ' . $isues->information;
-                $sms = $sms->send($message, $phone);
+                // $sms = $sms->send($message, $phone);
             }
         }
 

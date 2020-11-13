@@ -53,7 +53,7 @@ trait UssdFactFinder
                 # code...
                 $expected_produce = $plant_fact_sheet->production_rate*$exploded_information[3]; 
             }
-            $this->sendText('successfull',$phone);
+            // $this->sendText('successfull',$phone);
             return $regiments;
             
         }else if ($exploded_information[0] == 'prof') {
@@ -101,12 +101,11 @@ trait UssdFactFinder
     # the  query contains the nimber and $question
     {
         #this logic is to be replaced by th uper vet logic as soon as yu make that position avaailable
-        
         $query_details = explode(',',$query_info[1]);
         if (strtolower($query_details[0])=='vet') {
             $prof = 3;
         } else {
-            $prof = 2;
+            $prof = 4;
         }
         
         $wanted_proffesional = $prof;
@@ -115,7 +114,7 @@ trait UssdFactFinder
         if ($wanted_proffesional != null) {
             Isues::create([
                 'reason'=>'customquery',#rhe reason will carry the necesary data
-                'information'=>'Query : '.$query_message. ' from Phone number  -'.$phone_number,#the hiphen will be used to retrieve the number for reply... 
+                'information'=>'Query : '.$query_message. ' from Phone number  '.$phone_number,#the hiphen will be used to retrieve the number for reply... 
                 'status'=>0,
                 #we hardcode over her to the default otherwise we change it to the supervet of a country
                 'user_id'=>$wanted_proffesional,

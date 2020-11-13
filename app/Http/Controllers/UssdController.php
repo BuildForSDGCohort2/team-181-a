@@ -10,11 +10,11 @@ use DB;
 class UssdController extends Controller
 {
 
-    use UssdMenuTrait;
-    use SmsTrait;
+    use  UssdMenuTrait;
+    use  SmsTrait;
     use  UssdFactFinder;
     use  RegimentsTrait;
-    use FarmResourceFinderTrait;
+    use  FarmResourceFinderTrait;
 
 
     #this is the  master director
@@ -68,7 +68,7 @@ class UssdController extends Controller
                     if ($this->ussdRegister($ussd_string_exploded[1], $phone) == "success") {
                         $this->returnUserMenu();
                     }else{
-                        $this->ussd_stop('There Was a Technical Error, Please Try Again later.');
+                        $this->ussd_stop('There Was a Technical Error, Please Try Again later.Thanks for visiting The Farmers Assistant.');
                     }
                 } else {
                     if ($ussd_string_exploded[1]==1) {
@@ -89,6 +89,7 @@ class UssdController extends Controller
                     }
                 }                 
               break;
+              
               case 3:
                 $info =  $ussd_string_exploded[2];
                 if ($ussd_string_exploded[1]==1) {
@@ -224,10 +225,14 @@ class UssdController extends Controller
      * Handles Login Request
      */
     public function ussdLogin($details, $phone)
-    {
+    {   
+        echo $details_check;
+        $details_check = explode(',',$details);
+        $pin = (count($details_check)>0)? $details_check[1] : $details ;
+    
         $user = User::where('phone_number', $phone)->first();
 
-        if (Hash::check( $details, $user->password) ) {
+        if (Hash::check( $pin, $user->password) ) {
             return "Success";           
         } else {
             return $this->ussd_stop("Login was unsuccessful!");
