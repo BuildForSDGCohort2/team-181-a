@@ -30,6 +30,7 @@ class UssdController extends Controller
 
         if(User::where('phone_number', $phone)->exists()){
             // Function to handle already registered users
+
             $this->handleReturnUser($text, $phone);
         }else {
              // Function to handle new users
@@ -66,7 +67,7 @@ class UssdController extends Controller
                 #check registration..
                 if ( $ussd_string_exploded[0] != 2) {
                     if ($this->ussdRegister($ussd_string_exploded[1], $phone) == "success") {
-                        $this->returnUserMenu();
+                        $this->servicesMenu();
                     }else{
                         $this->ussd_stop('There Was a Technical Error, Please Try Again later.Thanks for visiting The Farmers Assistant.');
                     }
@@ -148,7 +149,9 @@ class UssdController extends Controller
 			case 2:
 				if ($ussd_string_exploded[0]==2){
                     $this->handleNewUser($ussd_string,$phone);
-				} else{ 
+				} else if (count(explode(',',$ussd_string_exploded[1]))>1) {
+                    $this->servicesMenu();
+                } else{ 
                 if($this->ussdLogin($ussd_string_exploded[1], $phone) == "Success") {
                     $this->servicesMenu();
                 }
@@ -226,16 +229,15 @@ class UssdController extends Controller
      */
     public function ussdLogin($details, $phone)
     {   
-        echo $details_check;
         $details_check = explode(',',$details);
-        $pin = (count($details_check)>0)? $details_check[1] : $details ;
+        $pin = (count($details_check)>1)? $details_check[1] : $details ;
     
         $user = User::where('phone_number', $phone)->first();
 
         if (Hash::check( $pin, $user->password) ) {
             return "Success";           
         } else {
-            return $this->ussd_stop("Login was unsuccessful!");
+            return $this->ussd_stop("Login was unsuccessful!. Thanks For Visiting the Farmers Assistant.");
         }
     }
     
