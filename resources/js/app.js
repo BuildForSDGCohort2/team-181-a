@@ -248,7 +248,7 @@ const app = new Vue({
 
                     this.success('Updated')
                     eventBus.$emit("pushEvent", response)
-                    // window.location.reload()
+                    window.location.reload()
                 })
                 .catch((error) => {
                     this.loading = false
@@ -271,7 +271,7 @@ const app = new Vue({
                     this.loading = false
 
                     this.success('Updated')
-                    // window.location.reload()
+                    window.location.reload()
                 })
                 .catch((error) => {
                     this.loading = false
@@ -290,7 +290,7 @@ const app = new Vue({
 
                     this.success('Updated')
                     eventBus.$emit("pushEvent", response)
-                    // window.location.reload()
+                    window.location.reload()
                 })
                 .catch((error) => {
                     this.loading = false

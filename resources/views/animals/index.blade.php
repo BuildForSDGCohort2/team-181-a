@@ -622,6 +622,10 @@
                                         </div>
                                       </div>
                                     </div>
+                                <div class="">
+                                    <label for="species"><small>Custom reason</small> </label>
+                                    <textarea class="form-control" v-model="edit_form.custom_reason" id="recomendations" rows="3"></textarea>
+                                </div>
                                   </div>
 
                                   {{-- <el-checkbox-group
@@ -632,6 +636,8 @@
                                 </el-checkbox-group> --}}
 
                                   {{-- incremental... will depend on the remaining size of farm --}}
+
+
 
                                 </div>
 

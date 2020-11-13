@@ -208,12 +208,12 @@
                                 <a :href="users.image" target="_blank" rel="noopener noreferrer" v-else>View Cv</a>
                             </div>
                         </div>
-                        <fieldset>
+                        {{-- <fieldset>
                             <input type="radio" v-model="users.decision" id="approve" value="approve" />
                             <label>Approve:</label><br>
                             <input type="radio" v-model="users.decision" id="decline" value="decline" />
                             <label for="vet">Decline</label>
-                        </fieldset>
+                        </fieldset> --}}
                     </div>
 
 
@@ -222,7 +222,10 @@
             <div class="modal-footer">
                 <button
                     @click="save_item((users.decision == 'approve') ? 'confirmation/' + users.id :  'rejection/' + users.id )"
-                    class="btn btn-info" value="Submit">Submit</button>
+                    class="btn btn-success" value="Submit">Approve</button>
+                    <button
+                        @click="save_item((users.decision == 'approve') ? 'confirmation/' + users.id :  'rejection/' + users.id )"
+                        class="btn btn-success" value="error">Reject</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
             </div>
             <input type="hidden" id="reg_type" v-model="users.reg_type" value="proffessional">
