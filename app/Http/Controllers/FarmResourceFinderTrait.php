@@ -30,9 +30,10 @@ trait FarmResourceFinderTrait
         }
         $resources = $user->$resource;
 
-        if ($resources==null) {
+        if (count($resources)==0) {
             // $this->sms('pass the various ids and animal breeds', phone)
-                $this->ussd_stop("There wasnt any ".ucfirst($resource)."s with that id registered under your name\n We have however sent over the Farm Resource ids registered under you \n cross-check and querry again.");
+            // should add more options for feedba
+                $this->ussd_stop("There wasnt any ".ucfirst($resource)."s with that id registered \n under your name\n We have however sent over \n the Farm Resource ids registered under you \n cross-check and querry again\n  The Farmers Assistant, Here for you , Always.");
             }
             
         else {
@@ -41,7 +42,7 @@ trait FarmResourceFinderTrait
                 });
             // dd($required_resource);
 
-            $this->ussd_stop("The Requested information about ".ucfirst($required_resource[0]->species.' Id number'.$required_resource[0]->id)." has been sent over, \n Always here For you, The Farmers Assistant. ");
+            $this->ussd_stop("The Requested information about ".ucfirst($required_resource[0]->species.' Id number'.$required_resource[0]->id)." has been sent over, \n The Farmers Assistant, Here for you , Always. ");
         }
             
         

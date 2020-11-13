@@ -152,7 +152,7 @@ class User extends Authenticatable
     }
     public function brood()
     {
-        return $this->hasOne('App\Brood');
+        return $this->hasMany('App\Brood','user_id');
     }
     public function stored_products()
     {

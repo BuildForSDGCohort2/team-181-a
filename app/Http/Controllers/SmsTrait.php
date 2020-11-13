@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Twilio\Rest\Client;
 
 // use AfricasTalking\SDK\AfricasTalking;
+//  now here we add the twillio sdk instead i=of this one
 use Exception;
 
 trait SmsTrait
