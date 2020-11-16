@@ -29,7 +29,7 @@
 
 </head>
 
-<body class="{{ $class ?? '' }}">
+<body class="{{ $class ?? '' }} ">
 
 
     <div class="page-header header-filter header-small" data-parallax="true" style="background: linear-gradient(0deg, rgba(42, 147, 31, 0.859), rgba(15, 148, 8, 0.804)), url(https://jimmy.dev/material/img/wheat.jpg);;background-repeat-x: repeat;min-height: 100px;">
@@ -43,7 +43,7 @@
           </div>
         </div>
       </div>
-      <div class="main main-raised">
+      <div class="main main-raised ">
         <div class="container">
           <div class="about-description text-center">
             <div class="row">
