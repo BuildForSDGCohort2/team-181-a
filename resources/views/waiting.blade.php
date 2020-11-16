@@ -66,7 +66,7 @@
                                         
                                         <td>
                                         {{$request}}
-                                            {{' A '.$request->animal->gender.' '.ucfirst($request->animal->breed->breed).' '.$request->animal->species }}
+                                            {{-- {{' A '.$request->animal->gender.' '.ucfirst($request->animal->breed->breed).' '.$request->animal->species }} --}}
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-outline-info"
