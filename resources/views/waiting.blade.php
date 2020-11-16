@@ -65,6 +65,7 @@
                                         </td>
                                         
                                         <td>
+                                        {{$request}}
                                             {{' A '.$request->animal->gender.' '.ucfirst($request->animal->breed->breed).' '.$request->animal->species }}
                                         </td>
                                         <td>
