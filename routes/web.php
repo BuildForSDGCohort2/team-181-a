@@ -101,6 +101,8 @@ Route::post('suppliers_enrole','EnrolmentController@suppliers_enrole')->name('su
 Route::post('farmers_enrole','EnrolmentController@farmers_enrole')->name('farmers_enrole');
 Route::post('customers_enrole','EnrolmentController@customers_enrole')->name('customer_enrole');
 
+Route::post('send_message/{id}','NotificationsController@send_message')->name('send_message');
+
 Route::post('customer_enrole','EnrolmentController@customer_enrole')->name('customer_enrole');
 
 Route::get('on_sale','OrdersController@for_sale')->name('on_sale');
