@@ -10,7 +10,7 @@ class Animal_Fact_sheet extends Model
     protected $table="animal_fact_sheets";
 
     public function animal(){
-        return $this->hasMany('App\Animal');
+        return $this->hasMany('App\Animal','breed_id');
     }
     public function brood(){
         return $this->hasMany('App\Brood');

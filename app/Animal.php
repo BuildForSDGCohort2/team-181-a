@@ -203,7 +203,7 @@ class Animal extends Model
         return $this->belongsTo('App\User','user_id');
     }
     public function breed(){
-        return $this->belongsTo('App\Animal_Fact_sheet');
+        return $this->belongsTo('App\Animal_Fact_sheet','breed_id');
     }
     public function sales()
     {
