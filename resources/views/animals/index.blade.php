@@ -20,7 +20,7 @@
             <h4 class="card-title ">Animals List</h4>
             <p class="card-category">Animals Registered Under You . </p>
             <button type="button" class="btn btn-small btn-warning" data-toggle="modal" data-target="#animal_r_modal" style="float: right;" >Register Animal</button>
-            <button type="button" class="btn btn-small btn-warning" data-toggle="modal" data-target="#animal_child_modal" style="float: right;" @click="get_parent">Register Child</button>
+            <button type="button" class="btn btn-small btn-warning" data-toggle="modal" data-target="#animal_child_modal" style="float: right;" @click="get_parent">Register Birth</button>
         </div>
           {{--                Add Animal modal                          --}}
           <div id="animal_r_modal" class="modal fade " role="dialog">

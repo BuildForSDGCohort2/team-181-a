@@ -56,16 +56,17 @@
 
                                         <td>
                                             @php
-                                            $services = explode('-',$request->service)
+                                            $services = explode('-',$request->service);
+                                            $animal = App\Animal::find($request->animal_id);
                                             @endphp
                                             {{in_array('ai',$services)?'Airtificial Isemination':''.
                         (in_array('ij',$services)?' Look into Injury ':'').
                         (in_array('chkup',$services)?'Checkup':'')
                         }}
                                         </td>
-
+                                        
                                         <td>
-                                            {{' A '.$request->animal->gender.' '.ucfirst($request->animal->breed->breed).' '.$request->animal->species }}
+                                            {{' A '.$animal->gender.' '.ucfirst($animal->breed->breed).' '.$animal->species }}
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-outline-info"
