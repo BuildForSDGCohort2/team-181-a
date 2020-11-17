@@ -57,8 +57,8 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-info">
-            <h4 class="card-title ">Pending Professional Requests</h4>
-            <p class="card-category"> Approve or decline Professionals</p>
+            <h4 class="card-title ">Notifications</h4>
+            <p class="card-category"> Matters that need Your attention.</p>
           </div>
           <div class="card-body">
             <div class="table-responsive">
