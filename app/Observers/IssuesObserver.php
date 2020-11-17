@@ -18,8 +18,8 @@ class IssuesObserver
     {
         
         $user = User::find($isues->user_id);
-        // $sms = new Sms;
-        // $phone = '+254768187628';
+        $sms = new Sms;
+        $phone = '+254768187628';
         // // $phone = '+254731090832';
         // $message = 'Test sms';
         // return $sms = $sms->send( $phone , $message);
@@ -29,7 +29,7 @@ class IssuesObserver
             $phone = $user->phone_number;
             if ($phone) {
                 $message = 'Dear ' . $user->name . ' ' . $isues->information;
-                // $sms = $sms->send($message, $phone);
+                $sms = $sms->send($message, $phone);
             }
         }
 
