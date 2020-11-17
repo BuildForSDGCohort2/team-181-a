@@ -49,8 +49,8 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-info">
-            <h4 class="card-title ">Pending Professional Requests</h4>
-            <p class="card-category"> Approve or decline Professionals</p>
+            <h4 class="card-title ">Resources in the Store</h4>
+            <p class="card-category">Sell or Take Farm Produce</p>
           </div>
           <div class="card-body">
             <div class="table-responsive">
