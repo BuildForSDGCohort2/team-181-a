@@ -175,7 +175,6 @@
 
                         {{($plantation->plant_fact_sheet->production_rate * $plantation->size_of_plantation)}} Sacks
                         {{-- @if ($age['days'] < 0 && $age['months'] < 0 && $age['years'] < 0) --}}
-                          <span class="text-danger">Overdue!</span>
                         {{-- @endif --}}
                     </td>
                   </tr>
