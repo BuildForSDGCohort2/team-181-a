@@ -68,11 +68,11 @@ class Proffesional extends Model
         $new_account->assignRole($new_user->specialty);
         $new_user->user_id = $new_account->id;
         $new_user->save();
-        try{
+        // try{
         Mail::to($new_user->email)->send(new AcceptanceMail($new_user));
-        }catch(\Throwable $error){
-            #do nothing
-        }
+        // }catch(\Throwable $error){
+            
+        // }
 
 
         return $new_user;
@@ -80,11 +80,11 @@ class Proffesional extends Model
    public function reject($id)
    {
        $user = $this->find($id);
-       try{
+    //    try{
         Mail::to($user->email)->send(new RejectMail($user));
-       }catch(\Throwable $error){
+    //    }catch(\Throwable $error){
             // throw $th;
-       }
+    //    }
         $user->delete();
    }
 
