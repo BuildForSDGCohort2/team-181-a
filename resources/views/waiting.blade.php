@@ -65,9 +65,11 @@
                         }}
                                         </td>
                                         
+                                        @if ($request->animal_id != null)
                                         <td>
-                                            {{$request }}                                           
-                                        </td>
+                                            {{' A '.$request->animal->gender.' '.ucfirst($request->animal->breed->breed).' '.$request->animal->species }}                                           
+                                        </td>  
+                                        @endif
                                         <td>
                                             <button type="button" class="btn btn-sm btn-outline-info"
                                                 data-toggle="modal" data-target="#professional_modal"
