@@ -65,7 +65,7 @@ class HomeController extends Controller
     }
     public function waiting_user_requests()
     {
-        $requests  = auth()->user()->my_waiting_requests->filter(function($request){return $request->service != null;});
+        $requests  = auth()->user()->my_waiting_requests->filter(function($request){return $request->animal_id != null;});
         return view('waiting')->with('requests',$requests);
 
     }
