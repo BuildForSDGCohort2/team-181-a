@@ -57,6 +57,7 @@
                                         <td>
                                             @php
                                             $services = explode('-',$request->service)
+                                            $animal = App\Animal::find($request['animal_id'];
                                             @endphp
                                             {{in_array('ai',$services)?'Airtificial Insemination':''.
                         (in_array('ij',$services)?' Look into Injury ':'').
@@ -65,8 +66,8 @@
                                         </td>
                                         
                                         <td>
-                                        {{$request}}
-                                            {{-- {{' A '.$request->animal->gender.' '.ucfirst($request->animal->breed->breed).' '.$request->animal->species }} --}}
+                                        
+                                            {{' A '.$request->animal->gender.' '.ucfirst($request->animal->breed->breed).' '.$request->animal->species }}
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-outline-info"
