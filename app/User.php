@@ -138,6 +138,10 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Order','user_id');
     }
+    public function sales()
+    {
+        return $this->hasMany('App\Order','seller_id');
+    }
     public function proffesional()
     {
         return $this->hasOne('App\Proffesional');

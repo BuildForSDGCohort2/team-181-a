@@ -10,16 +10,15 @@
               <div class="card-icon">
                 <i class="material-icons">content_copy</i>
               </div>
-              <p class="card-category">Used Allocations</p>
-              <h3 class="card-title">49/50
+              <p class="card-category">Used Farm Allocations</p>
+              <h3 class="card-title">{{count(auth()->user()->plantations)}}
                 <small>Partitions</small>
               </h3>
             </div>
             <div class="card-footer">
               {{-- enable the db to auto calculations --}}
               <div class="stats">
-                <i class="material-icons text-danger">warning</i>
-                <a href="#pablo">Get More Space...</a>
+                <a href="#pablo">Registered Plantations</a>
               </div>
             </div>
           </div>
@@ -31,7 +30,7 @@
                 <i class="material-icons">store</i>
               </div>
               <p class="card-category">Revenue</p>
-              <h3 class="card-title">$34,245</h3>
+            <h3 class="card-title">KSH.{{(auth()->user()->sales->filter(function($sale){return $sale->order_status == 1;}))->pluck('price')->sum()}}</h3>
             </div>
             <div class="card-footer">
               {{-- date of last harvest --}}
@@ -50,7 +49,7 @@
               {{-- done Tasks will be displayed here--}}
               <p class="card-category">Pending Orders</p>
               {{-- Will check be updated fromm the database --}}
-              <h3 class="card-title">75</h3>
+              <h3 class="card-title">{{count(auth()->user()->sales->filter(function($sale){return $sale->order_status == 0;}))}}</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
@@ -66,7 +65,7 @@
                 <i class="fa fa-handshake-o "></i>
               </div>
               <p class="card-category">Completed Orders</p>
-              <h3 class="card-title">+245</h3>
+              <h3 class="card-title">{{count(auth()->user()->sales->filter(function($sale){return $sale->order_status == 1;}))}}</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
@@ -206,7 +205,7 @@
                             <label class="form-check-label">
                               <input class="form-check-input" type="checkbox" value="" checked>
                               <span class="form-check-sign">
-                                <span class="check"></span>
+                                <span class="check"> </span>
                               </span>
                             </label>
                           </div>
@@ -284,7 +283,7 @@
                             </label>
                           </div>
                         </td>
-                        <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
+                        <td>No Orders So far</td>
                         <td class="td-actions text-right">
                           <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
                             <i class="material-icons">edit</i>
@@ -298,45 +297,17 @@
                         <td>
                           <div class="form-check">
                             <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="" checked>
-                              <span class="form-check-sign">
-                                <span class="check"></span>
                               </span>
                             </label>
                           </div>
                         </td>
-                        <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+
                         </td>
                         <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
+
                         </td>
                       </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="" checked>
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>Sign contract for "What are conference organizers afraid of?"</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                            <i class="material-icons">edit</i>
-                          </button>
-                          <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                            <i class="material-icons">close</i>
-                          </button>
-                        </td>
-                      </tr>
+
                     </tbody>
                   </table>
                 </div>
@@ -350,7 +321,7 @@
               <div class="nav-tabs-navigation">
                 <div class="nav-tabs-wrapper">
                   <ul class="nav nav-tabs" data-tabs="tabs">
-                    <span class="nav-tabs-title">Top Eaners ... : </span>
+                    <span class="nav-tabs-title">Top Earners ... : </span>
 
                     <li class="nav-item">
                       <a class="nav-link active" href="#animals" data-toggle="tab">
@@ -383,34 +354,25 @@
                     <thead class="text-warning">
                       <th>ID</th>
                       <th>Name</th>
-                      <th>Breed</th>
                       <th>Amount</th>
+                      <th>Delivery</th>
                     </thead>
                     <tbody>
+                      @forelse (auth()->user()->sales->filter(function($sale){return $sale->product_identifier=='ANML';}) as $item)
                       <tr>
-                        <td>1</td>
-                        <td>Dakota Rice</td>
-                        <td>$36,738</td>
-                        <td>Niger</td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>Minerva Hooper</td>
-                        <td>$23,789</td>
-                        <td>Curaçao</td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>Sage Rodriguez</td>
-                        <td>$56,142</td>
-                        <td>Netherlands</td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>Philip Chaney</td>
-                        <td>$38,735</td>
-                        <td>Korea, South</td>
-                      </tr>
+                      <td>{{$item->id}}</td>
+                      <td>{{'Animal'}}</td>
+                      <td>{{$item->price}}</td>
+                      <td>{{$item->type_of_delivery}}</td>
+                      </tr> 
+                      @empty
+                    <tr>
+                      <td>No</td>
+                      <td>Orders</td>
+                      <td>So Far</td>
+                      <td>...</td>
+                    </tr>   
+                      @endforelse
                     </tbody>
                   </table>
                 </div>
@@ -418,35 +380,26 @@
                   <table class="table table-hover">
                     <thead class="text-warning">
                       <th>ID</th>
-                      <th>Name/Year/Pereod</th>
-                      <th>Number/Type</th>
+                      <th>Name</th>
                       <th>Amount</th>
+                      <th>Delivery</th>
                     </thead>
                     <tbody>
+                      @forelse (auth()->user()->sales->filter(function($sale){return $sale->product_identifier=='PLT';}) as $item)
                       <tr>
-                        <td>1</td>
-                        <td>Maize (Jan-Sep-2020)</td>
-                        <td>560A</td>
-                        <td>Ksh. 10,000</td>
-                      </tr>
-                      <tr>
-                        <td>8</td>
-                        <td>Beans (Jan-Sep-2019)</td>
-                        <td>Rose Coco</td>
-                        <td>Ksh. 10,000</td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>Sage Rodriguez</td>
-                        <td>$56,142</td>
-                        <td>Netherlands</td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>Philip Chaney</td>
-                        <td>$38,735</td>
-                        <td>Korea, South</td>
-                      </tr>
+                      <td>{{$item->id}}</td>
+                      <td>{{'CROP PRODUCE'}}</td>
+                      <td>{{$item->price}}</td>
+                      <td>{{$item->type_of_delivery}}</td>
+                      </tr> 
+                      @empty
+                    <tr>
+                      <td>No</td>
+                      <td>Orders</td>
+                      <td>So Far</td>
+                      <td>...</td>
+                    </tr>   
+                      @endforelse
                     </tbody>
                   </table>
                 </div>
@@ -454,35 +407,26 @@
                   <table class="table table-hover">
                     <thead class="text-warning">
                       <th>ID</th>
-                      <th>Name Of Custmer</th>
+                      <th>Name</th>
                       <th>Amount</th>
-                      <th>Location.</th>
+                      <th>Delivery</th>
                     </thead>
                     <tbody>
+                      @forelse (auth()->user()->sales->filter(function($sale){return $sale->product_identifier=='brood';}) as $item)
                       <tr>
-                        <td>1</td>
-                        <td>Dakota Rice</td>
-                        <td>$36,738</td>
-                        <td>Niger</td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>Minerva Hooper</td>
-                        <td>$23,789</td>
-                        <td>Curaçao</td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>Sage Rodriguez</td>
-                        <td>$56,142</td>
-                        <td>Netherlands</td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>Philip Chaney</td>
-                        <td>$38,735</td>
-                        <td>Korea, South</td>
-                      </tr>
+                      <td>{{$item->id}}</td>
+                      <td>{{'CROP PRODUCE'}}</td>
+                      <td>{{$item->price}}</td>
+                      <td>{{$item->type_of_delivery}}</td>
+                      </tr> 
+                      @empty
+                    <tr>
+                      <td>No</td>
+                      <td>Orders</td>
+                      <td>So Far</td>
+                      <td>...</td>
+                    </tr>   
+                      @endforelse
                     </tbody>
                   </table>
                 </div>
@@ -499,16 +443,16 @@
 <script>
     var chart_1_label = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
     var chart_1_series = [
-        [12, 17, 7, 17, 23, 18, 38]
+        [0, 0, 0, 0, 0, 0, 0]
         ]
 
     var chart_2_label = ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D']
     var chart_2_series = [
-          [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         ]
-    var chart_3_label = ['12p', '3p', '6p', '9p', '12p', '3a', '6a', '9a']
+    var chart_3_label = ['0p', '0p', '0p', '0p', '0p', '0p', '0p', '0p']
     var chart_3_series = [
-          [230, 750, 450, 300, 280, 240, 200, 190]
+          [0, 0, 0, 0, 0, 0, 0, 0]
         ]
     $(document).ready(function() {
       // Javascript method's body can be found in assets/js/demos.js

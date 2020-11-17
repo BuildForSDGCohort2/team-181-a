@@ -18,8 +18,7 @@
             <div class="card-footer">
               {{-- enable the db to auto calculations --}}
               <div class="stats">
-                <i class="material-icons text-danger">warning</i>
-                <a href="#pablo">Get More Space...</a>
+                <a href="#pablo">Pending Requests</a>
               </div>
             </div>
           </div>
@@ -32,7 +31,7 @@
               </div>
               <p class="card-category">Revenue</p>
                {{-- would calculate the number from the confirmed orders --}}
-              <h3 class="card-title">Ksh 34,245</h3>
+            <h3 class="card-title">Ksh. {{(App\Order::all()->filter(function($order){return $order->order_status == 1;}))->pluck('price')->sum()}}</h3>
             </div>
             <div class="card-footer">
               {{-- date of last harvest --}}
@@ -51,7 +50,7 @@
               {{-- done Tasks will be displayed here--}}
               <p class="card-category">Pending Orders</p>
               {{-- Will check be updated fromm the database --}}
-              <h3 class="card-title">75</h3>
+              <h3 class="card-title">{{count(App\Order::all()->filter(function($order){return $order->order_status == 0;}))}}</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
@@ -66,7 +65,7 @@
               <div class="card-icon">
                 <i class="fa fa-handshake-o "></i>
               </div>
-              <p class="card-category">On Board</p>
+              <p class="card-category">On Board Users</p>
             <h3 class="card-title">+{{count($latest_logins)-1}}</h3>
             </div>
             <div class="card-footer">
