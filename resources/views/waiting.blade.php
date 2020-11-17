@@ -57,7 +57,7 @@
                                         <td>
                                             @php
                                             $services = explode('-',$request->service);
-                                            $animal = App\Animal::find($request['animal_id'];
+                                            $animal = App\Animal::find($request['animal_id']);
                                             @endphp
                                             {{in_array('ai',$services)?'Airtificial Insemination':''.
                         (in_array('ij',$services)?' Look into Injury ':'').
